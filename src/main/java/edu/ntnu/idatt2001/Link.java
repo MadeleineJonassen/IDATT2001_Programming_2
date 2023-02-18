@@ -35,4 +35,5 @@ public class Link {
   @Override
   public int hashCode() {
     return super.hashCode();
+  }
 }
