@@ -1,6 +1,8 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goal;
 
-public class HealthGoal implements Goal{
+import edu.ntnu.idatt2001.Player;
+
+public class HealthGoal implements Goal {
   private final int minimumHealth;
   
   public HealthGoal(int minimumHealth) {
