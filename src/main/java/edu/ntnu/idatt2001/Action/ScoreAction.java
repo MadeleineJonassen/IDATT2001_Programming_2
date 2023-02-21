@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Action;
+
+import edu.ntnu.idatt2001.Player;
 
 public class ScoreAction implements Action {
   private int points;
