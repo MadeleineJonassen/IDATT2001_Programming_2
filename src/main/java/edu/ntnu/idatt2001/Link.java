@@ -6,7 +6,7 @@ import java.util.List;
 public class Link {
   private String text;
   private String reference;
-  List<Action> actions = new ArrayList<Action>;
+  List<Action> actions = new ArrayList<Action>();
   
   public Link(String text, String reference){
     this.text = text;
@@ -22,7 +22,6 @@ public class Link {
     return reference;
   }
   
-  //method: addAction
   public void addAction(Action action){
     actions.add(action);
   }
