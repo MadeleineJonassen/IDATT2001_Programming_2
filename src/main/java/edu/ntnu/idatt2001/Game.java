@@ -1,16 +1,18 @@
 package edu.ntnu.idatt2001;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
   private Player player;
   private Story story;
-  //private List<Goal> goals;
+  private List<Goal> goals = new ArrayList<Goal>();
   
   
-  public Game(Player player, Story story) {
+  public Game(Player player, Story story, List<Goal> goals) {
     this.player = player;
     this.story = story;
+    this.goals = goals;
   }
   
   public Player getPlayer() {
@@ -21,7 +23,9 @@ public class Game {
     return story;
   }
   
-  //getGoals
+  public List<Goal> getGoals(){
+    return goals;
+  }
   
   public Passage begin(){
     return story.getOpeningPassage();
