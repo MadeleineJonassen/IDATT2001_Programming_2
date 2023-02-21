@@ -5,7 +5,7 @@ import java.util.Map;
 public class Story {
   private String title;
   private Map<Link, Passage> passages = new HashMap<Link,Passage>();
-  private Passage openingPassage;
+  private final Passage openingPassage;
   
   public Story(String title, Passage openingPassage) {
     this.title = title;

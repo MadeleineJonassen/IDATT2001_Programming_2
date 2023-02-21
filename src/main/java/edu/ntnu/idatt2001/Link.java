@@ -1,9 +1,12 @@
 package edu.ntnu.idatt2001;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Link {
   private String text;
   private String reference;
-  //class variable: List<Action> actions
+  List<Action> actions = new ArrayList<Action>;
   
   public Link(String text, String reference){
     this.text = text;
@@ -20,6 +23,9 @@ public class Link {
   }
   
   //method: addAction
+  public void addAction(Action action){
+    actions.add(action);
+  }
   
   
   @Override
