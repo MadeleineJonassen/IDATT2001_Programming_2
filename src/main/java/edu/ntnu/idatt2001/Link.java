@@ -31,12 +31,19 @@ public class Link {
   
   @Override
   public String toString() {
-    return super.toString();
+    return text + ", next: " + reference;
   }
   
   @Override
   public boolean equals(Object obj) {
-    return super.equals(obj);
+    if(this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    
+    Link compareTo = (Link) obj;
+    if(this.text.equals(compareTo.getText()) && this.reference.equals(compareTo.getReference())){
+      return true;
+    }
+    return false;
   }
   
   @Override
