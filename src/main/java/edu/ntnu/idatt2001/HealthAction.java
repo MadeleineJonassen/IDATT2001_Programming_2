@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001;
 
 public class HealthAction implements Action {
-  private int health;
+  private final int health;
   
-  public void HealthAction(int health) {
+  public HealthAction(int health) {
     this.health = health;
   }
   

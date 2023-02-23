@@ -28,6 +28,9 @@ public class Passage {
     return links;
   }
   
+  public boolean hasLinks(){
+    return !links.isEmpty();
+  }
   @Override
   public String toString() {
     return "Passage{" +

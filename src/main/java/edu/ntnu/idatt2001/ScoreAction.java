@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001;
 
 public class ScoreAction implements Action {
-  private int points;
+  private final int points;
   
-  public void ScoreAction(int points) {
+  public ScoreAction(int points) {
     this.points = points;
   }
   

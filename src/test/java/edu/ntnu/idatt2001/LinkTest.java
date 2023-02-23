@@ -21,12 +21,11 @@ class LinkTest {
   }
   
   @Test
-  void addAction() {
-  
+  void addActionTest() {
   }
   
   @Test
-  void testToString() {
+  void testToStringTest() {
   }
   
   @Test

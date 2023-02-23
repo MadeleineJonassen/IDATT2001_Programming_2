@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Link {
-  private String text;
-  private String reference;
-  List<Action> actions = new ArrayList<Action>();
+  private final String text;
+  private final String reference;
+  List<Action> actions = new ArrayList<>();
   
   public Link(String text, String reference){
     this.text = text;
     this.reference = reference;
   }
-  
   
   public String getText() {
     return text;
@@ -26,6 +25,9 @@ public class Link {
     actions.add(action);
   }
   
+  public List<Action> getActions() {
+    return actions;
+  }
   
   @Override
   public String toString() {

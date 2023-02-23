@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001;
 
 public class InventoryAction implements Action {
-  private String inventory;
+  private final String inventory;
   
-  public void GoldAction(String inventory) {
+  public InventoryAction(String inventory) {
     this.inventory = inventory;
   }
   
