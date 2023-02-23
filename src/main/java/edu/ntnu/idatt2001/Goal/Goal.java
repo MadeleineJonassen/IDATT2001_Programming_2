@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Goal;
+
+import edu.ntnu.idatt2001.Player;
 
 public interface Goal {
   public boolean isFulfilled(Player player);
