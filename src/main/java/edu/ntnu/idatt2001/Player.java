@@ -8,24 +8,13 @@ public class Player {
   private int health;
   private int score;
   private int gold;
-  private List<String> inventory = new ArrayList<String>();
-  private static List<Player> Player = new ArrayList<>();
-  public PlayerData() {
-    Player = new ArrayList<Player>();
-  }
+  private List<String> inventory = new ArrayList<>();
   
-  public Player(String name, int health, int score, int gold, List<String> inventory) {
+  public Player(String name, int health, int score, int gold) {
     this.name = name;
     this.health = health;
     this.score = score;
     this.gold = gold;
-    this.inventory = inventory;
-  }
-
-
-  public String newPlayer(String name, int health, int score, int gold, List<String> inventory) throws IllegalAccessException {
-    Player playerData = new Player(name, health, score, gold, inventory);
-    return playerData.toString();
   }
   
   public String getName(String name) {

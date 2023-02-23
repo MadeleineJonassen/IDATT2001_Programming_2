@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Action.Action;
+
 import java.util.ArrayList;
 import java.util.List;
 
