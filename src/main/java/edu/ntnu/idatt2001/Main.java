@@ -23,10 +23,9 @@ public class Main {
                 err.printStackTrace();
                 returnNewNameStatus = "Something happened to the application, please try again. ";
             }
-
-            System.out.println("");
-            System.out.println("Hello, " + player.getName(name));
-            System.out.println("Your health is " + player.getHealth() + "hp");
+            
+            System.out.println("\nHello, " + player.getName(name));
+            System.out.println("Your health is " + player.getHealth() + " hp");
             System.out.println("You have " + player.getGold() + " gold");
 
             System.out.println(player.toString());
