@@ -11,6 +11,12 @@ public class Link {
   List<Action> actions = new ArrayList<>();
   
   public Link(String text, String reference){
+    if(text.isEmpty()){
+      throw new IllegalArgumentException("Text cannot be empty");
+    }
+    if(reference.isEmpty()){
+      throw new IllegalArgumentException("Reference cannot be empty");
+    }
     this.text = text;
     this.reference = reference;
   }
@@ -24,7 +30,9 @@ public class Link {
   }
   
   public void addAction(Action action){
-    actions.add(action);
+    if(!actions.contains(action)){
+      actions.add(action);
+    }
   }
   
   public List<Action> getActions() {
