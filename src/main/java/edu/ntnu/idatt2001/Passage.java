@@ -9,6 +9,12 @@ public class Passage {
   private List<Link> links = new ArrayList<>();
   
   public Passage(String title, String content) {
+    if(title.isEmpty()){
+      throw new IllegalArgumentException("Title cannot be empty");
+    }
+    if(content.isEmpty()){
+      throw new IllegalArgumentException("Content cannot be empty");
+    }
     this.title = title;
     this.content = content;
   }

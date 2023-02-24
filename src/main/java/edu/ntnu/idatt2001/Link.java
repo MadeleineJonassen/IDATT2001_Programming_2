@@ -50,10 +50,7 @@ public class Link {
     if (obj == null || getClass() != obj.getClass()) return false;
     
     Link compareTo = (Link) obj;
-    if(this.text.equals(compareTo.getText()) && this.reference.equals(compareTo.getReference())){
-      return true;
-    }
-    return false;
+    return this.text.equals(compareTo.getText()) && this.reference.equals(compareTo.getReference());
   }
   
   @Override
