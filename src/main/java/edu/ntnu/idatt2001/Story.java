@@ -10,9 +10,12 @@ public class Story {
   private final Passage openingPassage;
   
   public Story(String title, Passage openingPassage) {
+    if(title.isEmpty()){
+      throw new IllegalArgumentException("Title cannot be empty");
+    }
     this.title = title;
     this.openingPassage = openingPassage;
-    Link openingLink = new Link(openingPassage.getTitle(), openingPassage.getTitle());
+    Link openingLink = new Link("Play story", openingPassage.getTitle());
     passages.put(openingLink, openingPassage);
   }
   
@@ -25,13 +28,13 @@ public class Story {
   }
   
   public void addPassage(Passage passage){
+    if(passages.containsValue(passage)){
+      throw new IllegalArgumentException("This passage had already been added to the story");
+    }
+    
     String passageTitle = passage.getTitle();
     
     for(Passage listedPassage : getPassages()){
-      if(!listedPassage.hasLinks()){
-        continue;
-      }
-      
       for(Link link : listedPassage.getLinks()){
         if(link.getReference().equals(passageTitle)){
           passages.put(link,passage);
@@ -41,6 +44,9 @@ public class Story {
   }
   
   public Passage getPassage(Link link){
+    if(!passages.containsKey(link)){
+      throw new IllegalArgumentException("No such link in the story.");
+    }
     return passages.get(link);
   }
   

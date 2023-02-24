@@ -54,7 +54,7 @@ public class Passage {
     
     Passage passage = (Passage) o;
     if (this.title.equals(((Passage) o).getTitle())) return true;
-    return Objects.equals(title, passage.title) && Objects.equals(content, passage.content) && Objects.equals(links, passage.links);
+    return false;
   }
   
   @Override
