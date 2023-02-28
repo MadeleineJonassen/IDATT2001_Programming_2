@@ -2,6 +2,8 @@ package edu.ntnu.idatt2001;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StoryTest {
@@ -53,6 +55,8 @@ class StoryTest {
     testStory.addPassage(testPassage1);
     testStory.addPassage(testPassage2);
     testStory.addPassage(testPassage3);
-    assertEquals(testPassage3, testStory.getPassage(testLink3));
+    ArrayList<Passage> passages = new ArrayList<>(testStory.getPassages());
+    assertEquals(testPassage3, passages.get(3));
   }
+  
 }
