@@ -54,7 +54,7 @@ public class Player {
   }
 
   public String toString() {
-    return "Name: " + name + " | " + health + " health | " + score + " score | " + gold + "gold || " + inventory;
+    return "Name: " + name + " | " + health + " HP | " + score + " score | " + gold + " Gold || Inventory: " + inventory;
   }
 }
 

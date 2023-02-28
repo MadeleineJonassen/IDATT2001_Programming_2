@@ -15,7 +15,8 @@ public class Main {
     public void menu(){
         while (true){
             String returnNewNameStatus;
-            System.out.println("Hello, Traveler! What is your name? ");
+            System.out.println("");
+            System.out.println("Hello, traveler! What is your name? ");
             String name = Confirm.stringConfirm("Your name: ", "\n ~ Sorry, I didn't quite catch that." );
             try {
                 returnNewNameStatus = player.getName(name);
@@ -23,12 +24,12 @@ public class Main {
                 err.printStackTrace();
                 returnNewNameStatus = "Something happened to the application, please try again. ";
             }
-            
-            System.out.println("\nHello, " + player.getName(name));
-            System.out.println("Your health is " + player.getHealth() + " hp");
-            System.out.println("You have " + player.getGold() + " gold");
 
+            System.out.println("\nHello, " + player.getName(name));
             System.out.println(player.toString());
+            System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println("");
+            System.out.println("\t# Something happened! #\n");
 
             break;
         }
