@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Story {
   private final String title;
@@ -56,6 +58,7 @@ public class Story {
   }
   
   public List<Link> getBrokenLinks(){
+    /*
     List<Link> brokenLinks = new ArrayList<>();
     //use streams
     for(Passage listedPassage : getPassages()){
@@ -64,9 +67,9 @@ public class Story {
           brokenLinks.add(link);
         }
       }
-    }
-    
-    return brokenLinks;
+    }*/
+  
+    return passages.values().stream().map(Passage::getLinks).flatMap(Collection::stream).toList();
   }
   
   public void removePassage(Link link){
