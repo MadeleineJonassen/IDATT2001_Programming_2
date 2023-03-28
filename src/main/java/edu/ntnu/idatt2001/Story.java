@@ -1,8 +1,5 @@
 package edu.ntnu.idatt2001;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class Story {
   private final String title;
@@ -56,5 +53,29 @@ public class Story {
       passageHashSet.add(passages.get(link));
     }
     return passageHashSet;
+  }
+  
+  public List<Link> getBrokenLinks(){
+    List<Link> brokenLinks = new ArrayList<>();
+    //use streams
+    for(Passage listedPassage : getPassages()){
+      for(Link link : listedPassage.getLinks()){
+        if (passages.containsKey(link)){
+          brokenLinks.add(link);
+        }
+      }
+    }
+    
+    return brokenLinks;
+  }
+  
+  public void removePassage(Link link){
+    if(!passages.containsKey(link)){
+      throw new IllegalArgumentException("No such link in the story.");
+    }
+    //not supposed to be able to remove passage if other passages contain a link leading to the passage.
+    //Should it instead be the other way around? If a passage links to other passages it would create
+    //passages that cannot be accessed
+    passages.remove(link);
   }
 }
