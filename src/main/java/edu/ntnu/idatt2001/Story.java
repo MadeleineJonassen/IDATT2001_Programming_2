@@ -68,8 +68,11 @@ public class Story {
         }
       }
     }*/
-  
-    return passages.values().stream().map(Passage::getLinks).flatMap(Collection::stream).toList();
+    
+    List<Link> brokenLinks = passages.values().stream().map(Passage::getLinks).flatMap(Collection::stream).filter(link -> passages.containsKey(link)).toList();
+    
+    
+    return brokenLinks;
   }
   
   public void removePassage(Link link){
