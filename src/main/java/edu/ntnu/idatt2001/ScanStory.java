@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class ScanStory {
   
+  //make method static?
   public Story scanStory(File file) throws FileNotFoundException {
     Scanner scan = new Scanner(file);
     String storyTitle = scan.nextLine();

@@ -25,7 +25,11 @@ public class Main {
       Story story = scanning.scanStory(stories);
   
       System.out.println(story.getPassages());
-  
+      
+      WriteStory write = new WriteStory();
+      File writeToFile = new File("src/main/resources/Write.txt");
+      write.write(story, writeToFile);
+      
       //Gets the files location and checks to see if the file is a valid .txt file or not
       if (stories.exists()) {
         System.out.println("\n\nThe story exist. Path: " + stories.getPath() + " || Absolute path: " + stories.getAbsolutePath() + " || Is a file: " + stories.isFile());
