@@ -71,7 +71,7 @@ public class MainMenu extends Application {
         TextField playerGoldInput = new TextField();
         playerGoldInput.setPromptText("Enter your gold supply");
         playerGoldInput.setStyle("-fx-background-color: FAEBD7;");
-        playerGoldInput.setOnAction(e -> System.out.println("Your gold is "playerGoldInput.getText()));
+        playerGoldInput.setOnAction(e -> System.out.println("Your gold is " + playerGoldInput.getText()));
     playerInfo.setAlignment(Pos.CENTER);
     playerInfo.setSpacing(10);
     playerInfo.getChildren().addAll(playerNameTitle, playerNameInput, playerHealth, playerHealthInput, playerGold, playerGoldInput);
