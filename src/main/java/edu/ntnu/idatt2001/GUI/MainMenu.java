@@ -32,43 +32,43 @@ public class MainMenu extends Application {
 
     //Title Menu
     VBox titleLayout = new VBox();
-    titleLayout.setPadding(new Insets(20));
-    titleLayout.setSpacing(10);
-    titleLayout.setAlignment(Pos.CENTER);
+      titleLayout.setPadding(new Insets(20));
+      titleLayout.setSpacing(10);
+      titleLayout.setAlignment(Pos.CENTER);
     Label menuTitle = new Label("Paths");
-    menuTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
+      menuTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
     Label underTitle = new Label("Welcome to a story based game");
     titleLayout.getChildren().addAll(menuTitle, underTitle);
 
     //Start Button
     HBox startButtonLayout = new HBox();
-    startButtonLayout.setAlignment(Pos.CENTER);
-    startButtonLayout.setPadding(new Insets(20));
+      startButtonLayout.setAlignment(Pos.CENTER);
+      startButtonLayout.setPadding(new Insets(20));
     Button startBtn = new Button("Start Game");
-    startBtn.setOnAction(e -> System.out.println("Start button pressed"));
-    startButtonLayout.getChildren().addAll(startBtn);
+      startBtn.setOnAction(e -> System.out.println("Start button pressed"));
+      startButtonLayout.getChildren().addAll(startBtn);
 
     //Info and photo menu
     HBox optionsLayout = new HBox();
-    optionsLayout.setAlignment(Pos.CENTER);
-    optionsLayout.setSpacing(20);
+      optionsLayout.setAlignment(Pos.CENTER);
+      optionsLayout.setSpacing(20);
     Image menuImage = new Image(new FileInputStream("src\\main\\resources\\photos\\pathsMenu.jpg"));
     ImageView viewMenuImage = new ImageView(menuImage);
-    viewMenuImage.setFitWidth(300);
-    viewMenuImage.setFitHeight(300);
+      viewMenuImage.setFitWidth(300);
+      viewMenuImage.setFitHeight(300);
     VBox playerInfo = new VBox();
       Label playerNameTitle = new Label("Player Name:");
-        TextField playerNameInput = new TextField();
+      TextField playerNameInput = new TextField();
         playerNameInput.setPromptText("Enter your name");
         playerNameInput.setStyle("-fx-background-color: FAEBD7;");
         playerNameInput.setOnAction(e -> System.out.println("Your name is " + playerNameInput.getText()));
-      Label playerHealth = new Label("Enter your Health:");
-        TextField playerHealthInput = new TextField();
+      Label playerHealth = new Label("Health:");
+      TextField playerHealthInput = new TextField();
         playerHealthInput.setPromptText("Enter your health");
         playerHealthInput.setStyle("-fx-background-color: FAEBD7;");
         playerHealthInput.setOnAction(e -> System.out.println("Your health is " + playerHealthInput.getText()));
-      Label playerGold = new Label("Gold supply");
-        TextField playerGoldInput = new TextField();
+      Label playerGold = new Label("Gold supply:");
+      TextField playerGoldInput = new TextField();
         playerGoldInput.setPromptText("Enter your gold supply");
         playerGoldInput.setStyle("-fx-background-color: FAEBD7;");
         playerGoldInput.setOnAction(e -> System.out.println("Your gold is " + playerGoldInput.getText()));
@@ -79,9 +79,9 @@ public class MainMenu extends Application {
 
     //Whole menu layout
     BorderPane menu = new BorderPane();
-    menu.setTop(titleLayout);
-    menu.setCenter(optionsLayout);
-    menu.setBottom(startButtonLayout);
+      menu.setTop(titleLayout);
+      menu.setCenter(optionsLayout);
+      menu.setBottom(startButtonLayout);
 
     window = menuStage;
     window.setTitle("Menu for Paths");
