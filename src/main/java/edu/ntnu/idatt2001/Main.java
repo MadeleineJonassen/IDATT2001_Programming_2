@@ -15,9 +15,8 @@ public class Main {
 
     public void menu() throws FileNotFoundException {
 
-            File beginning = new File("C:\\NTNU\\Programmering 2\\paths\\src\\main\\resources\\Beginnings.paths");
-            Scanner scan = new Scanner(beginning);
-
+            File stories = new File("C:\\NTNU\\Programmering 2\\paths\\src\\main\\resources\\Stories.txt");
+            Scanner scan = new Scanner(stories);
 
             //Prints only the first line in the text file
             System.out.println(scan.nextLine());
@@ -27,7 +26,6 @@ public class Main {
               System.out.println(scan.nextLine());
             }
 
-            /*
             //Gets the files location and checks to see if the file is a valid .txt file or not
             if (stories.exists()) {
               System.out.println("The story exist");
@@ -37,18 +35,5 @@ public class Main {
             } else {
               System.out.println("File not found");
             }
-            */
-
-            int input = in.nextInt();
-            if (input == 1) {
-              File anotherRoom = new File("C:\\NTNU\\Programmering 2\\paths\\src\\main\\resources\\Another_Room.paths");
-              Scanner scanAnotherRoom = new Scanner(anotherRoom);
-              System.out.println(scanAnotherRoom.nextLine());
-
-              while ((scanAnotherRoom.hasNextLine())){
-                System.out.println(scanAnotherRoom.nextLine());
-              }
-            }
-
     }
 }
