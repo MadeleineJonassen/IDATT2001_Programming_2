@@ -8,4 +8,3 @@ You are in a small, dimly lit room. There is a door in front of you.
 The door opens to another room. You see a desk with a large, dusty book.
 [Open the book](The book of spells)
 [Go back](Beginnings)
-

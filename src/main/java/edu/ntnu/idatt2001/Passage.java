@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public class Passage {
   private final String content;
   private List<Link> links = new ArrayList<>();
   
+  //Class constructor, parameters title and content
   public Passage(String title, String content) {
     if(title.isEmpty()){
       throw new IllegalArgumentException("Title cannot be empty");
@@ -19,6 +21,18 @@ public class Passage {
     this.content = content;
   }
   
+  //Class constructor, parameters title, content and one or more Link-objects
+  public Passage(String title, String content, Link ... links) {
+    this.title = title;
+    this.content = content;
+    for(Link l : links){
+      if(!this.links.contains(l)){
+        this.links.add(l);
+      }
+    }
+  }
+  
+  //
   public String getTitle() {
     return title;
   }
@@ -28,14 +42,17 @@ public class Passage {
   }
   
   public boolean addLink(Link link){
+    //diversion from task specification: return void
     if(links.contains(link)){
       return false;
+      //throw new IllegalArgumentException("Link has already been added to the passage");
     }
     links.add(link);
     return true;
   }
   
   public List<Link> getLinks() {
+    //Return deep copied list?
     return links;
   }
   
@@ -51,10 +68,8 @@ public class Passage {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    
-    Passage passage = (Passage) o;
-    if (this.title.equals(((Passage) o).getTitle())) return true;
-    return false;
+  
+    return this.title.equals(((Passage) o).getTitle());
   }
   
   @Override
