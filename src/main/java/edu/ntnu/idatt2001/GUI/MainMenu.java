@@ -72,10 +72,10 @@ public class MainMenu extends Application {
 
     //Start Button
     HBox startButtonLayout = new HBox();
-    startButtonLayout.setAlignment(Pos.CENTER);
-    startButtonLayout.setPadding(new Insets(20));
-    Button startBtn = new Button("Start Game");
-    startBtn.setOnAction(e -> window.setScene(gameScene));
+      startButtonLayout.setAlignment(Pos.CENTER);
+      startButtonLayout.setPadding(new Insets(20));
+      Button startBtn = new Button("Start Game");
+        startBtn.setOnAction(e -> window.setScene(gameScene));
     startButtonLayout.getChildren().addAll(startBtn);
 
     //Whole menu layout
@@ -94,16 +94,15 @@ public class MainMenu extends Application {
 
     //The gameLayout
     HBox layoutPlayerInfo = new HBox();
-    layoutPlayerInfo.setSpacing(10);
-    Label playerName = new Label("Name: " + playerNameInput.getText());
-    Label playerHealth = new Label("Health: " + playerHealthInput.getText());
-    Label playerGold = new Label("Gold: " + playerGoldInput.getText());
-    Region infoSpacing = new Region();
-    Button backToMenu = new Button("Return to Menu");
-    backToMenu.setOnAction(e -> window.setScene(menuScene));
-    Button help = new Button("Help");
-    help.setOnAction(e -> System.out.println("Help!"));
-
+      layoutPlayerInfo.setSpacing(10);
+      Label playerName = new Label("Name: " + playerNameInput.getText());
+      Label playerHealth = new Label("Health: " + playerHealthInput.getText());
+      Label playerGold = new Label("Gold: " + playerGoldInput.getText());
+      Region infoSpacing = new Region();
+      Button backToMenu = new Button("Return to Menu");
+        backToMenu.setOnAction(e -> window.setScene(menuScene));
+      Button help = new Button("Help");
+        help.setOnAction(e -> System.out.println("Help!"));
     layoutPlayerInfo.getChildren().addAll(playerName, playerHealth, playerGold, infoSpacing, backToMenu);
 
     //Whole gameLayout layout
