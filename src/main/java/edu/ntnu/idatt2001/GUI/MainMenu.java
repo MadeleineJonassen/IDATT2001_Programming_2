@@ -1,7 +1,9 @@
 package edu.ntnu.idatt2001.GUI;
 
+import edu.ntnu.idatt2001.Link;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -32,19 +34,19 @@ public class MainMenu extends Application {
 
 
     //Title Menu
-    VBox titleLayout = new VBox();
-      titleLayout.setPadding(new Insets(20));
-      titleLayout.setSpacing(10);
-      titleLayout.setAlignment(Pos.CENTER);
+    VBox layoutMenuTitle = new VBox();
+      layoutMenuTitle.setPadding(new Insets(20));
+      layoutMenuTitle.setSpacing(10);
+      layoutMenuTitle.setAlignment(Pos.CENTER);
     Label menuTitle = new Label("Paths");
       menuTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 40));
-    Label underTitle = new Label("Welcome to a story based game");
-    titleLayout.getChildren().addAll(menuTitle, underTitle);
-
-    //Info and photo menu
-    HBox optionsLayout = new HBox();
-      optionsLayout.setAlignment(Pos.CENTER);
-      optionsLayout.setSpacing(20);
+    Label underTitle = new Label("Welcome to a storyDisplay based game");
+    layoutMenuTitle.getChildren().addAll(menuTitle, underTitle);
+    
+    //Info and photo layoutMenu
+    HBox layoutMenuOptions = new HBox();
+      layoutMenuOptions.setAlignment(Pos.CENTER);
+      layoutMenuOptions.setSpacing(20);
     Image menuImage = new Image(new FileInputStream("src\\main\\resources\\photos\\pathsMenu.jpg"));
     ImageView viewMenuImage = new ImageView(menuImage);
       viewMenuImage.setFitWidth(300);
@@ -68,49 +70,84 @@ public class MainMenu extends Application {
     playerInfo.setAlignment(Pos.CENTER);
     playerInfo.setSpacing(10);
     playerInfo.getChildren().addAll(playerNameTitle, playerNameInput, playerHealthTitle, playerHealthInput, playerGoldTitle, playerGoldInput);
-    optionsLayout.getChildren().addAll(viewMenuImage, playerInfo);
+    layoutMenuOptions.getChildren().addAll(viewMenuImage, playerInfo);
 
     //Start Button
-    HBox startButtonLayout = new HBox();
-      startButtonLayout.setAlignment(Pos.CENTER);
-      startButtonLayout.setPadding(new Insets(20));
+    HBox layoutMenuStartButton = new HBox();
+      layoutMenuStartButton.setAlignment(Pos.CENTER);
+      layoutMenuStartButton.setPadding(new Insets(20));
       Button startBtn = new Button("Start Game");
         startBtn.setOnAction(e -> window.setScene(gameScene));
-    startButtonLayout.getChildren().addAll(startBtn);
+    layoutMenuStartButton.getChildren().addAll(startBtn);
 
-    //Whole menu layout
-    BorderPane menu = new BorderPane();
-      menu.setTop(titleLayout);
-      menu.setCenter(optionsLayout);
-      menu.setBottom(startButtonLayout);
+    //Whole layoutMenu layout
+    BorderPane layoutMenu = new BorderPane();
+      layoutMenu.setTop(layoutMenuTitle);
+      layoutMenu.setCenter(layoutMenuOptions);
+      layoutMenu.setBottom(layoutMenuStartButton);
 
     window = menuStage;
     window.setTitle("Menu for Paths");
     window.setResizable(false);
-    menuScene = new Scene(menu, 600, 600);
+    menuScene = new Scene(layoutMenu, 600, 600);
     window.setScene(menuScene);
     window.show();
 
+    
+    //The game layout
+    //Top layout 
+    VBox layoutGameTop = new VBox();
+      HBox layoutGamePlayerInfo = new HBox();
+        layoutGamePlayerInfo.setAlignment(Pos.CENTER_LEFT);
+        layoutGamePlayerInfo.setSpacing(10);
+        layoutGamePlayerInfo.setPadding(new Insets(20));
+        Label playerName = new Label("Name: " + playerNameInput.getText());
+        Label playerHealth = new Label("Health: " + playerHealthInput.getText());
+        Label playerGold = new Label("Gold: " + playerGoldInput.getText());
+      layoutGamePlayerInfo.getChildren().addAll(playerName,playerHealth,playerGold);  
+      Region gameTopSpacing = new Region();
+      HBox layoutGameTopButtons = new HBox();
+        Button backToMenu = new Button("Return to Menu");
+          backToMenu.setOnAction(e -> window.setScene(menuScene));
+        Button helpButton = new Button("Help");
+          helpButton.setOnAction(e -> helpScene.display());
+        layoutGameTopButtons.getChildren().addAll(backToMenu, helpButton);
+    layoutGameTop.getChildren().addAll(layoutGamePlayerInfo, gameTopSpacing, layoutGameTopButtons);
 
-    //The gameLayout
-    HBox layoutPlayerInfo = new HBox();
-      layoutPlayerInfo.setSpacing(10);
-      Label playerName = new Label("Name: " + playerNameInput.getText());
-      Label playerHealth = new Label("Health: " + playerHealthInput.getText());
-      Label playerGold = new Label("Gold: " + playerGoldInput.getText());
-      Region infoSpacing = new Region();
-      Button backToMenu = new Button("Return to Menu");
-        backToMenu.setOnAction(e -> window.setScene(menuScene));
-      Button help = new Button("Help");
-        help.setOnAction(e -> System.out.println("Help!"));
-    layoutPlayerInfo.getChildren().addAll(playerName, playerHealth, playerGold, infoSpacing, backToMenu);
+    //Center visuals/layout
+    VBox layoutGameVisuals = new VBox();
+    layoutGameVisuals.setAlignment(Pos.CENTER);
+    layoutGameVisuals.setPadding(new Insets(20));
+      Image pathImage = new Image(new FileInputStream("src\\main\\resources\\photos\\pathsMenu.jpg"));
+      ImageView viewPathImage = new ImageView(pathImage);
+        viewPathImage.setFitWidth(300);
+        viewPathImage.setFitHeight(300);
+    layoutGameVisuals.getChildren().addAll(viewPathImage);
+
+    //Bottom layout
+    VBox layoutGameStoryMenu = new VBox();
+      layoutGameStoryMenu.setPadding(new Insets(10));
+      ScrollPane storyDisplay = new ScrollPane();
+        storyDisplay.setStyle("-fx-background-color: FAEBD7;");
+      TableView<Object> storyOptions = new TableView<>();
+        storyOptions.setStyle("-fx-background-color: FAEBD7;");
+        storyOptions.setItems(getLink());
+    layoutGameStoryMenu.getChildren().addAll(storyDisplay, storyOptions);
 
     //Whole gameLayout layout
     BorderPane gameLayout = new BorderPane();
-    gameLayout.setTop(layoutPlayerInfo);
+    gameLayout.setTop(layoutGamePlayerInfo);
+    gameLayout.setCenter(layoutGameVisuals);
+    gameLayout.setBottom(layoutGameStoryMenu);
     gameScene = new Scene(gameLayout, 600, 600);
 
-  }
+
+    }
+    public ObservableList<Object> getLink() {
+    ObservableList<Link> links = FXCollections.observableArrayList();
+    links.add(new Link("Something","Dunno"));
+      return null;
+    }
 
     /* Put above
     //Settings Menu
@@ -147,7 +184,7 @@ public class MainMenu extends Application {
       CheckMenuItem healGoal = new CheckMenuItem("Heal up!");
         healGoal.setOnAction(e -> {
           if (healGoal.isSelected()) {
-            System.out.println("Chaing to Gold digger as goal");
+            System.out.println("Changing to Gold digger as goal");
           } else {
             System.out.println("Gold digger not selected");
           }
@@ -155,12 +192,12 @@ public class MainMenu extends Application {
       CheckMenuItem itemGoal = new CheckMenuItem("Item Acquired");
         itemGoal.setOnAction(e -> {
           if (itemGoal.isSelected()) {
-            System.out.println("Chaing to Gold digger as goal");
+            System.out.println("Changing to Gold digger as goal");
           } else {
             System.out.println("Gold digger not selected");
           }
         });
-      CheckMenuItem autoSave = new CheckMenuItem("Enable Autosave");
+      CheckMenuItem autoSave = new CheckMenuItem("Enable auto save");
       autoSave.setSelected(true);
       goals.getItems().addAll(goldDiggerGoal, healGoal, itemGoal, autoSave);
   //May change to RadioMenu, so the user only can select one item...?
