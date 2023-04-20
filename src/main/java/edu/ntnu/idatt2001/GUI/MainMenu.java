@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -20,7 +21,7 @@ import java.io.FileInputStream;
 
 public class MainMenu extends Application {
   Stage window;
-  Scene menuScene, game, end;
+  Scene menuScene, gameScene, end;
 
   public static void main (String[] args) {
     launch();
@@ -40,14 +41,6 @@ public class MainMenu extends Application {
     Label underTitle = new Label("Welcome to a story based game");
     titleLayout.getChildren().addAll(menuTitle, underTitle);
 
-    //Start Button
-    HBox startButtonLayout = new HBox();
-      startButtonLayout.setAlignment(Pos.CENTER);
-      startButtonLayout.setPadding(new Insets(20));
-    Button startBtn = new Button("Start Game");
-      startBtn.setOnAction(e -> System.out.println("Start button pressed"));
-      startButtonLayout.getChildren().addAll(startBtn);
-
     //Info and photo menu
     HBox optionsLayout = new HBox();
       optionsLayout.setAlignment(Pos.CENTER);
@@ -62,20 +55,28 @@ public class MainMenu extends Application {
         playerNameInput.setPromptText("Enter your name");
         playerNameInput.setStyle("-fx-background-color: FAEBD7;");
         playerNameInput.setOnAction(e -> System.out.println("Your name is " + playerNameInput.getText()));
-      Label playerHealth = new Label("Health:");
+      Label playerHealthTitle = new Label("Health:");
       TextField playerHealthInput = new TextField();
         playerHealthInput.setPromptText("Enter your health");
         playerHealthInput.setStyle("-fx-background-color: FAEBD7;");
         playerHealthInput.setOnAction(e -> System.out.println("Your health is " + playerHealthInput.getText()));
-      Label playerGold = new Label("Gold supply:");
+      Label playerGoldTitle = new Label("Gold supply:");
       TextField playerGoldInput = new TextField();
         playerGoldInput.setPromptText("Enter your gold supply");
         playerGoldInput.setStyle("-fx-background-color: FAEBD7;");
         playerGoldInput.setOnAction(e -> System.out.println("Your gold is " + playerGoldInput.getText()));
     playerInfo.setAlignment(Pos.CENTER);
     playerInfo.setSpacing(10);
-    playerInfo.getChildren().addAll(playerNameTitle, playerNameInput, playerHealth, playerHealthInput, playerGold, playerGoldInput);
+    playerInfo.getChildren().addAll(playerNameTitle, playerNameInput, playerHealthTitle, playerHealthInput, playerGoldTitle, playerGoldInput);
     optionsLayout.getChildren().addAll(viewMenuImage, playerInfo);
+
+    //Start Button
+    HBox startButtonLayout = new HBox();
+    startButtonLayout.setAlignment(Pos.CENTER);
+    startButtonLayout.setPadding(new Insets(20));
+    Button startBtn = new Button("Start Game");
+    startBtn.setOnAction(e -> window.setScene(gameScene));
+    startButtonLayout.getChildren().addAll(startBtn);
 
     //Whole menu layout
     BorderPane menu = new BorderPane();
@@ -89,6 +90,27 @@ public class MainMenu extends Application {
     menuScene = new Scene(menu, 600, 600);
     window.setScene(menuScene);
     window.show();
+
+
+    //The gameLayout
+    HBox layoutPlayerInfo = new HBox();
+    layoutPlayerInfo.setSpacing(10);
+    Label playerName = new Label("Name: " + playerNameInput.getText());
+    Label playerHealth = new Label("Health: " + playerHealthInput.getText());
+    Label playerGold = new Label("Gold: " + playerGoldInput.getText());
+    Region infoSpacing = new Region();
+    Button backToMenu = new Button("Return to Menu");
+    backToMenu.setOnAction(e -> window.setScene(menuScene));
+    Button help = new Button("Help");
+    help.setOnAction(e -> System.out.println("Help!"));
+
+    layoutPlayerInfo.getChildren().addAll(playerName, playerHealth, playerGold, infoSpacing, backToMenu);
+
+    //Whole gameLayout layout
+    BorderPane gameLayout = new BorderPane();
+    gameLayout.setTop(layoutPlayerInfo);
+    gameScene = new Scene(gameLayout, 600, 600);
+
   }
 
     /* Put above
