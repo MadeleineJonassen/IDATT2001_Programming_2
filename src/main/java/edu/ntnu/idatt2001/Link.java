@@ -37,12 +37,14 @@ public class Link {
   }
   
   public void addAction(Action action){
-    if(!actions.contains(action)){
-      actions.add(action);
+    if(actions.contains(action)){
+      throw new IllegalArgumentException("Action has already been added to the link");
     }
+    actions.add(action);
   }
   
   public List<Action> getActions() {
+    //return deep copied list?
     return actions;
   }
   
@@ -57,7 +59,8 @@ public class Link {
     if (obj == null || getClass() != obj.getClass()) return false;
     
     Link compareTo = (Link) obj;
-    return this.text.equals(compareTo.getText()) && this.reference.equals(compareTo.getReference());
+    //return this.text.equals(compareTo.getText()) && this.reference.equals(compareTo.getReference());
+    return this.reference.equals(compareTo.getReference());
   }
   
   @Override
