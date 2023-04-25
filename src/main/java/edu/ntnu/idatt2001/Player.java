@@ -24,12 +24,24 @@ public class Player {
   public int getHealth() {
     return health;
   }
+  public void addHealth(int health){
+    this.health += health;
+  }
+
   public int getScore() {
     return score;
   }
+  public void addScore(int score){
+    this.score += score;
+  }
+
   public int getGold() {
     return gold;
   }
+  public void addGold(int gold){
+    this.gold += gold;
+  }
+
   public List<String> getInventory() {
     return inventory;
   }
