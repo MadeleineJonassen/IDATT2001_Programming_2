@@ -96,7 +96,7 @@ public class MainMenu extends Application {
     
     //The game layout
     //Top layout 
-    VBox layoutGameTop = new VBox();
+    //VBox layoutGameTop = new VBox();
       HBox layoutGamePlayerInfo = new HBox();
         layoutGamePlayerInfo.setAlignment(Pos.CENTER_LEFT);
         layoutGamePlayerInfo.setSpacing(10);
@@ -104,15 +104,14 @@ public class MainMenu extends Application {
         Label playerName = new Label("Name: " + playerNameInput.getText());
         Label playerHealth = new Label("Health: " + playerHealthInput.getText());
         Label playerGold = new Label("Gold: " + playerGoldInput.getText());
-      layoutGamePlayerInfo.getChildren().addAll(playerName,playerHealth,playerGold);  
+      //layoutGamePlayerInfo.getChildren().addAll(playerName,playerHealth,playerGold);
       Region gameTopSpacing = new Region();
-      HBox layoutGameTopButtons = new HBox();
         Button backToMenu = new Button("Return to Menu");
           backToMenu.setOnAction(e -> window.setScene(menuScene));
         Button helpButton = new Button("Help");
           helpButton.setOnAction(e -> helpScene.display());
-        layoutGameTopButtons.getChildren().addAll(backToMenu, helpButton);
-    layoutGameTop.getChildren().addAll(layoutGamePlayerInfo, gameTopSpacing, layoutGameTopButtons);
+    layoutGamePlayerInfo.getChildren().addAll(playerName,playerHealth,playerGold, gameTopSpacing, backToMenu,helpButton);
+
 
     //Center visuals/layout
     VBox layoutGameVisuals = new VBox();
