@@ -49,6 +49,7 @@ public class Player {
     inventory.add(item);
   }
 
+
   public String toString() {
     return "Name: " + this.name + " | " + this.health + " HP | " + this.score + " score | " + this.gold + " Gold || Inventory: " + this.inventory;
   }

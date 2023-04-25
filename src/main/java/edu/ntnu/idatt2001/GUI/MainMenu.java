@@ -117,7 +117,7 @@ public class MainMenu extends Application {
     VBox layoutGameVisuals = new VBox();
     layoutGameVisuals.setAlignment(Pos.CENTER);
     layoutGameVisuals.setPadding(new Insets(20));
-      Image pathImage = new Image(new FileInputStream("src\\main\\resources\\photos\\pathsMenu.jpg"));
+      Image pathImage = new Image(new FileInputStream("\\src\\main\\resources\\photos\\pathsMenu.jpg"));
       ImageView viewPathImage = new ImageView(pathImage);
         viewPathImage.setFitWidth(300);
         viewPathImage.setFitHeight(300);
