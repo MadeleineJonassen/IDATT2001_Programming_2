@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.Goal;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Players.Player;
 
 public class GoldGoal implements Goal {
   private final int minimumGold;

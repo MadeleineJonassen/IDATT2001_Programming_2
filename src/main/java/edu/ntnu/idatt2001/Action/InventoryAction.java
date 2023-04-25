@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.Players.Player;
 
 public class InventoryAction implements Action {
   private final String inventory;

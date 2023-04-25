@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.Players.Player;
+
 import java.io.*;
 import java.util.Collections;
 import java.util.Scanner;

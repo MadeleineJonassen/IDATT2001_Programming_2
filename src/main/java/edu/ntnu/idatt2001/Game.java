@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001;
 
 import edu.ntnu.idatt2001.Goal.Goal;
+import edu.ntnu.idatt2001.Players.Player;
 
 import java.util.ArrayList;
 import java.util.List;

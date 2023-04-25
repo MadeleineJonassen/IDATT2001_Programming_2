@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Players;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Player {
   private int gold;
   private List<String> inventory = new ArrayList<>();
 
-  private Player(Builder builder) {
+  public Player(Builder builder) {
     this.name = builder.name;
     this.health = builder.health;
     this.score = builder.score;
