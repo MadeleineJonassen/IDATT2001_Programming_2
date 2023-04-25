@@ -9,52 +9,68 @@ public class Player {
   private int score;
   private int gold;
   private List<String> inventory = new ArrayList<>();
-  
-  public Player(String name, int health, int score, int gold) {
-    this.name = name;
-    this.health = health;
-    this.score = score;
-    this.gold = gold;
+
+  private Player(Builder builder) {
+    this.name = builder.name;
+    this.health = builder.health;
+    this.score = builder.score;
+    this.gold = builder.gold;
+    this.inventory = builder.inventory;
   }
-  
+
   public String getName(String name) {
     return name;
   }
-  
-  public void addHealth(int health){
-    this.health += health;
-  }
-  
+
   public int getHealth() {
     return health;
   }
-  
-  public void addScore(int score){
-    this.score += score;
+  public void addHealth(int health){
+    this.health += health;
   }
-  
+
   public int getScore() {
     return score;
   }
-  
-  public void addGold(int gold){
-    this.gold += gold;
+  public void addScore(int score){
+    this.score += score;
   }
-  
+
   public int getGold() {
     return gold;
   }
-  
-  public void addToInventory(String item){
-    inventory.add(item);
+  public void addGold(int gold){
+    this.gold += gold;
   }
-  
+
   public List<String> getInventory() {
     return inventory;
   }
-
-  public String toString() {
-    return "Name: " + name + " | " + health + " HP | " + score + " score | " + gold + " Gold || Inventory: " + inventory;
+  public void addToInventory(String item){
+    inventory.add(item);
   }
+
+
+
+  /**
+   * A builder class
+   */
+  public static class Builder {
+    private String name;
+    private int health;
+    private int score;
+    private int gold;
+    private List<String> inventory = new ArrayList<>();
+
+    public Builder(String name, int health, int score, int gold, List<String> inventory){
+      this.name = name;
+      this.health = health;
+      this.score = score;
+      this.gold = gold;
+      this.inventory = inventory;
+    }
+
+  }
+
 }
 

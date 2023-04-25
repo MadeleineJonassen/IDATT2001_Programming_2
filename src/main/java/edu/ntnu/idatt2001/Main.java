@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Main {
 
     private final Scanner in = new Scanner(System.in);
-    private Player player = new Player("Arthur", 10, 0, 0);
 
     public static void main(String[] args) throws FileNotFoundException {
         Main client = new Main();
@@ -15,7 +14,7 @@ public class Main {
 
     public void menu() throws FileNotFoundException {
 
-            File stories = new File("C:\\NTNU\\Programmering 2\\paths\\src\\main\\resources\\Stories.txt");
+            File stories = new File("\\src\\main\\resources\\Stories.txt");
             Scanner scan = new Scanner(stories);
 
             //Prints only the first line in the text file
@@ -35,5 +34,7 @@ public class Main {
             } else {
               System.out.println("File not found");
             }
+
+            Player player1 = new Player.Builder("Maddy",250,0,100,["Sword","Axe"]);
     }
 }
