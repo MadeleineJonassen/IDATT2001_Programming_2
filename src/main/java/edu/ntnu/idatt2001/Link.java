@@ -20,9 +20,14 @@ public class Link {
     this.text = text;
     this.reference = reference;
   }
-  
-  //additional constructor with actions?
-  
+  public String setText(){
+    return text;
+  }
+
+  public String setReference() {
+    return reference;
+  }
+
   public String getText() {
     return text;
   }
