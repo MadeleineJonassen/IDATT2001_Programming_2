@@ -1,11 +1,12 @@
 package edu.ntnu.idatt2001.Controller;
 
+import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.Story;
 
 import java.io.File;
 
 public class MenuSceneController {
-  private Story story;
+  private GameManager gameManager;
   
   public void getStoryFiles(){
   
@@ -16,7 +17,7 @@ public class MenuSceneController {
   }
   
   public void getBrokenLinks(){
-    story.getBrokenLinks();
+    //story.getBrokenLinks();
     //return missing passage-names
   }
   

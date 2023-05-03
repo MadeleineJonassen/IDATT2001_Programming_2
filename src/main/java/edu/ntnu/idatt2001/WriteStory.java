@@ -10,8 +10,7 @@ import java.util.List;
 public class WriteStory {
   public void write(Story story, File file){
     try (FileWriter fileWriter = new FileWriter(file)) {
-      //fileWriter.write("Hello world!");
-  
+      
       fileWriter.write(story.getTitle() + "\n");
       
       Passage openingPassage = story.getOpeningPassage();

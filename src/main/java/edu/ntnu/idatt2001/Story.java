@@ -101,4 +101,12 @@ public class Story {
     passages.remove(link);
   }
   
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if(obj == null || getClass() != obj.getClass()) return false;
+    
+    Story s = (Story) obj;
+    return (s.getTitle() == this.title && s.getPassages().equals(this.passages));
+  }
 }
