@@ -1,14 +1,23 @@
-.label {
-    -fx-font-size: 20;
-    -fx-font-family: "Lucida Calligraphy";
-    -fx-text-fill: "white";
-    -fx-alignment: center;
-}
-
-.root{
-    -fx-background-image: "pathsMenu.jpg";
+.root {
+    -fx-background-image: url("photos/pathsMenu.png");
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: strech;
+    -fx-background-size: stretch;
     -fx-alignment: center;
+    -fx-border-insets: 50;
+}
+
+.label {
+    -fx-font-size: 50;
+    -fx-font-family: "Lucida Calligraphy";
+    -fx-text-fill: royalblue;
+}
+
+.text {
+    -fx-font-size: 20;
+    -fx-font-family: "Lucida Calligraphy";
+    -fx-text-fill: steelblue;
+}
+.button {
+    -fx-background-color: beige;
 }

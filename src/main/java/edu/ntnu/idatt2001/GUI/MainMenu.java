@@ -29,23 +29,24 @@ public class MainMenu extends Application {
   @Override
   public void start(Stage menuStage) throws Exception {
 
-      //Title Menu
-      VBox layoutMenuTitle = new VBox();
+    //Title Menu
+    VBox layoutMenuTitle = new VBox();
       layoutMenuTitle.setPadding(new Insets(20));
       layoutMenuTitle.setSpacing(10);
-      Label menuTitle = new Label("Paths");
-      Text underTitle = new Text("Welcome to a storyDisplay based game engine");
-      Button startBtn = new Button("Create Game");
+      layoutMenuTitle.setAlignment(Pos.CENTER);
+    Label menuTitle = new Label("Paths");
+    Text underTitle = new Text("Welcome to a storyDisplay based game engine");
+    Button startBtn = new Button("Create Game");
     layoutMenuTitle.getChildren().addAll(menuTitle, underTitle, startBtn);
 
     //Whole layoutMenu layout
-      BorderPane layoutMenu = new BorderPane();
-      layoutMenu.setTop(layoutMenuTitle);
+    BorderPane layoutMenu = new BorderPane();
+    layoutMenu.setTop(layoutMenuTitle);
 
-      Scene scene = new Scene(layoutMenu, 600, 600);
-      //String css = Objects.requireNonNull(this.getClass().getResource("menu.css")).toExternalForm();
-      scene.getStylesheets().add("menu.css");
-      menuStage.setScene(scene);
-      menuStage.show();
+    Scene scene = new Scene(layoutMenu, 800, 800);
+    scene.getStylesheets().add("menu.css");
+    menuStage.setResizable(false);
+    menuStage.setScene(scene);
+    menuStage.show();
   }
 }
