@@ -1,0 +1,14 @@
+.label {
+    -fx-font-size: 20;
+    -fx-font-family: "Lucida Calligraphy";
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+}
+
+.root{
+    -fx-background-image: "pathsMenu.jpg";
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: strech;
+    -fx-alignment: center;
+}
