@@ -32,18 +32,39 @@ public class MainMenu extends Application {
     //Title Menu
     VBox layoutMenuTitle = new VBox();
       layoutMenuTitle.setPadding(new Insets(20));
-      layoutMenuTitle.setSpacing(10);
+      layoutMenuTitle.setSpacing(5);
       layoutMenuTitle.setAlignment(Pos.CENTER);
     Label menuTitle = new Label("Paths");
-    Text underTitle = new Text("Welcome to a storyDisplay based game engine");
-    Button startBtn = new Button("Create Game");
-    layoutMenuTitle.getChildren().addAll(menuTitle, underTitle, startBtn);
+      menuTitle.setId("menuTitle");
+    Label underTitle = new Label("Welcome to a story based game engine!");
+      underTitle.setId("underTitle");
+    layoutMenuTitle.getChildren().addAll(menuTitle, underTitle);
+
+    //Mid menu options
+    VBox layoutMenuOptions = new VBox();
+      layoutMenuOptions.setPadding(new Insets(20));
+      layoutMenuOptions.setSpacing(10);
+      layoutMenuOptions.setAlignment(Pos.CENTER);
+    Button createGameBtn = new Button("Create Game");
+    Button excitingGameBtn = new Button("Play game");
+    layoutMenuOptions.getChildren().addAll(createGameBtn, excitingGameBtn);
+
+    // Bottom layer
+    HBox layoutMenuBottom = new HBox();
+      layoutMenuBottom.setPadding(new Insets(20));
+      layoutMenuBottom.setAlignment(Pos.CENTER_RIGHT);
+    Button helpBtn = new Button(" ");
+      helpBtn.getStyleClass().add("helpButton");
+      helpBtn.setOnAction(e -> helpScene.display());
+    layoutMenuBottom.getChildren().addAll(helpBtn);
 
     //Whole layoutMenu layout
     BorderPane layoutMenu = new BorderPane();
     layoutMenu.setTop(layoutMenuTitle);
+    layoutMenu.setCenter(layoutMenuOptions);
+    layoutMenu.setBottom(layoutMenuBottom);
 
-    Scene scene = new Scene(layoutMenu, 800, 800);
+    Scene scene = new Scene(layoutMenu, 900, 700);
     scene.getStylesheets().add("menu.css");
     menuStage.setResizable(false);
     menuStage.setScene(scene);
