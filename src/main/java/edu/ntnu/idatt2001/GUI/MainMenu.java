@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class MainMenu extends Application {
   Stage openWindow;
-  Scene mainMenuScene, createGameScene;
+  Scene mainMenuScene, createGameScene, playGameScene;
 
   public static void main(String[] args) {
     launch();
@@ -21,18 +21,20 @@ public class MainMenu extends Application {
   public void start(Stage primaryStage) throws Exception {
 
     openWindow = primaryStage;
-    //Menu
+
+    // ***** Menu *****
+    // Top menu layout
     VBox layoutMenuTitle = new VBox();
       layoutMenuTitle.setPadding(new Insets(20));
       layoutMenuTitle.setSpacing(5);
       layoutMenuTitle.setAlignment(Pos.CENTER);
     Label menuTitle = new Label("Paths");
-      menuTitle.setId("menuTitle");
+      menuTitle.setId("title");
     Label underTitle = new Label("Welcome to a story based game engine!");
       underTitle.setId("underTitle");
     layoutMenuTitle.getChildren().addAll(menuTitle, underTitle);
 
-    //Mid menu options
+    // Mid menu layout
     VBox layoutMenuOptions = new VBox();
       layoutMenuOptions.setPadding(new Insets(20));
       layoutMenuOptions.setSpacing(10);
@@ -40,42 +42,67 @@ public class MainMenu extends Application {
     Button createGameBtn = new Button("Create Game");
       createGameBtn.setOnAction(e -> openWindow.setScene(createGameScene));
     Button excitingGameBtn = new Button("Play game");
+      excitingGameBtn.setOnAction(e -> openWindow.setScene(playGameScene));
     layoutMenuOptions.getChildren().addAll(createGameBtn, excitingGameBtn);
 
-    // Bottom layer
-    HBox layoutMenuBottom = new HBox();
-      layoutMenuBottom.setPadding(new Insets(20));
-      layoutMenuBottom.setAlignment(Pos.CENTER_RIGHT);
+    // Bottom menu layer
+    BorderPane layoutBottom = new BorderPane();
+      layoutBottom.setPadding(new Insets(20));
     Button helpBtn = new Button(" ");
       helpBtn.getStyleClass().add("helpButton");
       helpBtn.setOnAction(e -> helpScene.display());
-    layoutMenuBottom.getChildren().addAll(helpBtn);
+    layoutBottom.setLeft(helpBtn);
 
-    //Whole layoutMenu layout
+    // Whole menu layout
     BorderPane layoutMenu = new BorderPane();
       layoutMenu.setTop(layoutMenuTitle);
       layoutMenu.setCenter(layoutMenuOptions);
-      layoutMenu.setBottom(layoutMenuBottom);
     mainMenuScene = new Scene(layoutMenu, 900, 700);
     mainMenuScene.getStylesheets().add("menu.css");
 
 
-    //Create game stage
-    VBox createGameLayout = new VBox();
+    // ***** Create game stage *****
+    // Top create game layout
+    BorderPane layoutCreateGameTop = new BorderPane();
+      layoutCreateGameTop.setPadding(new Insets(20));
+    Button goHomeCreateHome = new Button(" ");
+      goHomeCreateHome.getStyleClass().add("homeButton");
+      goHomeCreateHome.setOnAction(e -> openWindow.setScene(mainMenuScene));
     Label createGameTitle = new Label("Create game!");
-    Button backToMenuBtn = new Button("Back to Homepage");
-      backToMenuBtn.setOnAction(e -> openWindow.setScene(mainMenuScene));
-    createGameLayout.getChildren().addAll(createGameTitle, backToMenuBtn);
+      createGameTitle.setId("title");
+    layoutCreateGameTop.setLeft(goHomeCreateHome);
+    layoutCreateGameTop.setCenter(createGameTitle);
 
-
+    // Whole create game layout
     BorderPane layoutCreateGame = new BorderPane();
-      layoutCreateGame.setCenter(createGameLayout);
-    layoutCreateGame.getStylesheets().add("menu.css");
+      layoutCreateGame.setTop(layoutCreateGameTop);
+      layoutCreateGame.setBottom(layoutBottom);
+      layoutCreateGame.getStylesheets().add("menu.css");
     createGameScene = new Scene(layoutCreateGame, 900,700);
 
 
-    //Opening window
+    // ***** Play game layout *****
+    // Top playing game layout
+    BorderPane layoutPlayGameTop = new BorderPane();
+    layoutPlayGameTop.setPadding(new Insets(20));
+    Button goHomePlayGame = new Button(" ");
+      goHomePlayGame.getStyleClass().add("homeButton");
+      goHomePlayGame.setOnAction(e -> openWindow.setScene(mainMenuScene));
+    Label playGameTitle = new Label("Play game");
+    playGameTitle.setId("title");
+    layoutPlayGameTop.setLeft(goHomePlayGame);
+    layoutPlayGameTop.setCenter(playGameTitle);
 
+    // Whole playing game layout
+    BorderPane layoutPlayGame = new BorderPane();
+    layoutPlayGame.setTop(layoutPlayGameTop);
+    layoutPlayGame.setBottom(layoutBottom);
+    layoutPlayGame.getStylesheets().add("menu.css");
+    playGameScene = new Scene(layoutPlayGame, 900,700);
+
+
+
+    // ~~~ Opening window ~~~
     primaryStage.setResizable(false);
     primaryStage.setScene(mainMenuScene);
     primaryStage.show();

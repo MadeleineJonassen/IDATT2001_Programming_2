@@ -7,7 +7,7 @@
     -fx-border-insets: 50;
 }
 
-#menuTitle {
+#title {
     -fx-font-size: 65px;
     -fx-text-fill: "190B28";
 }
@@ -37,10 +37,23 @@
     -fx-background-color: transparent;
     -fx-background-image: url("/photos/HelpIcon.png");
     -fx-background-size: stretch;
+    -fx-alignment: center-right;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+}
+.helpButton:hover {
+    -fx-background-color: "white";
+}
+
+.homeButton {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/home.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center-right;
     -fx-pref-width: 50;
     -fx-pref-height: 50;
 }
 
-.helpButton:hover {
+.homeButton:hover {
     -fx-background-color: "white";
 }
