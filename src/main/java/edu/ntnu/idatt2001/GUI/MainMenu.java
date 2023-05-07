@@ -1,35 +1,27 @@
 package edu.ntnu.idatt2001.GUI;
 
-import edu.ntnu.idatt2001.Link;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.FileInputStream;
-import java.util.Objects;
 
 
 public class MainMenu extends Application {
+  Stage openWindow;
+  Scene mainMenuScene, createGameScene;
 
   public static void main(String[] args) {
     launch();
   }
 
   @Override
-  public void start(Stage menuStage) throws Exception {
+  public void start(Stage primaryStage) throws Exception {
 
-    //Title Menu
+    openWindow = primaryStage;
+    //Menu
     VBox layoutMenuTitle = new VBox();
       layoutMenuTitle.setPadding(new Insets(20));
       layoutMenuTitle.setSpacing(5);
@@ -46,6 +38,7 @@ public class MainMenu extends Application {
       layoutMenuOptions.setSpacing(10);
       layoutMenuOptions.setAlignment(Pos.CENTER);
     Button createGameBtn = new Button("Create Game");
+      createGameBtn.setOnAction(e -> openWindow.setScene(createGameScene));
     Button excitingGameBtn = new Button("Play game");
     layoutMenuOptions.getChildren().addAll(createGameBtn, excitingGameBtn);
 
@@ -60,14 +53,33 @@ public class MainMenu extends Application {
 
     //Whole layoutMenu layout
     BorderPane layoutMenu = new BorderPane();
-    layoutMenu.setTop(layoutMenuTitle);
-    layoutMenu.setCenter(layoutMenuOptions);
-    layoutMenu.setBottom(layoutMenuBottom);
+      layoutMenu.setTop(layoutMenuTitle);
+      layoutMenu.setCenter(layoutMenuOptions);
+      layoutMenu.setBottom(layoutMenuBottom);
+    mainMenuScene = new Scene(layoutMenu, 900, 700);
+    mainMenuScene.getStylesheets().add("menu.css");
 
-    Scene scene = new Scene(layoutMenu, 900, 700);
-    scene.getStylesheets().add("menu.css");
-    menuStage.setResizable(false);
-    menuStage.setScene(scene);
-    menuStage.show();
+
+    //Create game stage
+    VBox createGameLayout = new VBox();
+    Label createGameTitle = new Label("Create game!");
+    Button backToMenuBtn = new Button("Back to Homepage");
+      backToMenuBtn.setOnAction(e -> openWindow.setScene(mainMenuScene));
+    createGameLayout.getChildren().addAll(createGameTitle, backToMenuBtn);
+
+
+    BorderPane layoutCreateGame = new BorderPane();
+      layoutCreateGame.setCenter(createGameLayout);
+    layoutCreateGame.getStylesheets().add("menu.css");
+    createGameScene = new Scene(layoutCreateGame, 900,700);
+
+
+    //Opening window
+
+    primaryStage.setResizable(false);
+    primaryStage.setScene(mainMenuScene);
+    primaryStage.show();
   }
 }
+
+
