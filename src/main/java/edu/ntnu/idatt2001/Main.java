@@ -14,8 +14,5 @@ public class Main {
     }
 
     public void menu() {
-      Player player1 = new Player.Builder("Maddy",250,0,100).inventory(Collections.singletonList("Sword")).build();
-      System.out.println(player1);
-      System.out.println(PlayerData.playerData());
     }
 }
