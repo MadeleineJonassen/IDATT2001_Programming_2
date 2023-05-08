@@ -48,6 +48,13 @@
     -fx-background-color: "2F4858";
 }
 
+.list-view {
+    -fx-pref-width: 400;
+    -fx-pref-height: 250;
+    -fx-background-color: "B2DAF0";
+    -fx-font-family: "Constantia";
+}
+
 .helpButton {
     -fx-background-color: transparent;
     -fx-background-image: url("/photos/Icons/HelpIcon.png");

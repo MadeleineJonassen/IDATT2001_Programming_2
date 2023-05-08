@@ -66,13 +66,30 @@ public class Player {
     private int gold;
     private List<String> inventory = new ArrayList<>();
 
-    public Builder(String name, int health, int score, int gold){
+    public Builder(String name, int health, int score, int gold, List<String> inventory){
       this.name = name;
       this.health = health;
       this.score = score;
       this.gold = gold;
+      this.inventory = inventory;
     }
 
+    public Builder name (String name){
+      this.name = name;
+      return this;
+    }
+    public Builder health (int health){
+      this.health = health;
+      return this;
+    }
+    public Builder score (int score){
+      this.score = score;
+      return this;
+    }
+    public Builder gold (int gold){
+      this.gold = gold;
+      return this;
+    }
     public Builder inventory (List <String> inventory){
       this.inventory = inventory;
       return this;
@@ -80,8 +97,6 @@ public class Player {
     public Player build(){
       return new Player(this);
     }
-
   }
-
 }
 

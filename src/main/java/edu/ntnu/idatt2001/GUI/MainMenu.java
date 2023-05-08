@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.GUI;
 
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
 import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.Players.PlayerData;
 import edu.ntnu.idatt2001.Story;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -26,8 +27,8 @@ public class MainMenu extends Application {
   Stage openWindow;
   Scene mainMenuScene, createGameScene, playGameScene;
   TableView <Story> storyBox;
-  static ComboBox playerBox;
-  private ListView<String> listView = new ListView<>();
+  public static ComboBox playerBox;
+  public static ListView<String> listView = new ListView<>();
 
   public static void main(String[] args) {
     launch();
@@ -115,20 +116,23 @@ public class MainMenu extends Application {
 
     HBox optionsPlayerGoalLayout = new HBox();
     optionsPlayerGoalLayout.setId("boxes");
-      VBox playerLayout = new VBox();
-      Button addPlayer = new Button();
+
+    VBox playerLayout = new VBox();
+    playerLayout.setId("boxes");
+      listView.getItems().addAll(PlayerData.getPlayers());
+      Button addPlayer = new Button("Add Player");
         addPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-              Dialog<Player> createPlayer = new createPlayer(new Player.Builder(null,0,0,0).build());
+              Dialog<Player> createPlayer = new createPlayer(new Player.Builder(null,0,0,0,null).build());
               Optional<Player> result = createPlayer.showAndWait();
+
               if (result.isPresent()) {
                 Player player = result.get();
                 listView.getItems().addAll(player.toString());
               }
             }
-      }
-      );
+        });
       /*playerBox = new ComboBox<>();
       playerBox.setPromptText("Select player");
       ObservableList<Player> players = playerBox.getItems();
