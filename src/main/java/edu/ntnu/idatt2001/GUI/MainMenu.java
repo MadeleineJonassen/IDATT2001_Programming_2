@@ -13,11 +13,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.util.Collections;
 import java.util.Optional;
@@ -82,16 +86,16 @@ public class MainMenu extends Application {
     layoutCreateGameTop.setCenter(createGameTitle);
 
     // Mid create game layout
-    VBox layoutCreateGameMid = new VBox();
+    HBox layoutCreateGameMid = new HBox();
     layoutCreateGameMid.setId("boxes");
 
-    HBox storyTableLayout = new HBox();
+    VBox storyTableLayout = new VBox();
     storyTableLayout.setId("boxes");
     TableColumn<Story, String> titleColum = new TableColumn<>("Title");
-      titleColum.setMinWidth(300);
+      titleColum.setMinWidth(200);
       titleColum.setCellValueFactory(new PropertyValueFactory<>("name"));
     storyBox = new TableView<>();
-    storyBox.setMaxHeight(250);
+    storyBox.setMaxHeight(100);
     storyBox.setItems(getStories());
     storyBox.getColumns().add(titleColum);
     VBox tableButton = new VBox();
@@ -114,8 +118,6 @@ public class MainMenu extends Application {
     tableButton.getChildren().addAll(openFile, addStory);
     storyTableLayout.getChildren().addAll(storyBox, tableButton);
 
-    HBox optionsPlayerGoalLayout = new HBox();
-    optionsPlayerGoalLayout.setId("boxes");
 
     VBox playerLayout = new VBox();
     playerLayout.setId("boxes");
@@ -146,11 +148,14 @@ public class MainMenu extends Application {
       } );
        */
     playerLayout.getChildren().addAll(addPlayer, listView);
+
+    VBox createGoalsLayout = new VBox();
+      createGoalsLayout.setId("boxes");
       Button goalBox = new Button("Create Goal");
         goalBox.setOnAction(e -> createGoals.display());
-      optionsPlayerGoalLayout.getChildren().addAll(playerLayout, goalBox);
+      createGoalsLayout.getChildren().addAll(goalBox);
 
-    layoutCreateGameMid.getChildren().addAll(storyTableLayout, optionsPlayerGoalLayout);
+    layoutCreateGameMid.getChildren().addAll(storyTableLayout, playerLayout, createGoalsLayout);
 
     // Bottom menu layer
     BorderPane layoutBottom = new BorderPane();
@@ -213,8 +218,8 @@ public class MainMenu extends Application {
 
 
   public ObservableList<Story> getStories() {
-    ObservableList<Story> stories = FXCollections.observableArrayList();
-    //stories.add(new Story("Haunted House",":: Beginnings"));
+    ObservableList stories = storyBox.getItems();
+    //stories.add(new Story("Haunted House",null));
     return stories;
   }
 }

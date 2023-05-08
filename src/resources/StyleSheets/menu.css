@@ -7,7 +7,7 @@
     -fx-border-insets: 50;
 }
 #boxes {
-    -fx-padding: 20px;
+    -fx-padding: 10px;
     -fx-alignment: Center;
     -fx-spacing: 20;
 }
