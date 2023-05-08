@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Action.GoldAction;
-import edu.ntnu.idatt2001.Action.InventoryAction;
+import edu.ntnu.idatt2001.Action.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -33,14 +32,13 @@ class ScanStoryTest {
   
   @Test
   void scanLinkTest(){
-    Link link = new Link("text", "reference");
-    link.addAction(new GoldAction(10));
-    link.addAction(new InventoryAction("watch"));
+    Link link1 = new Link("text", "reference");
+    link1.addAction(new GoldAction(10));
+    link1.addAction(new InventoryAction("watch"));
     
     ScanStory scan = new ScanStory();
-    Link stringLink = scan.scanLink("[text](reference){gold(10)}{inventory(watch)}");
+    Link link2 = scan.scanLink("[text](reference){gold(10)}{inventory(watch)}");
     
-    
-    
+    assertEquals(link1.toString(), link2.toString());
   }
 }

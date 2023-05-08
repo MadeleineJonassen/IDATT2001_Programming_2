@@ -16,13 +16,23 @@ public class MenuSceneController {
     //return story name?
   }
   
+  public void getPassages(){
+  
+  }
+  
+  public void deletePassage(){
+    //remove passage from story
+    //return passages that link to this passage, so that user may delete these?
+    //Alternatively, add possibility to edit passages (separate window)
+  }
+  
   public void getBrokenLinks(){
     //story.getBrokenLinks();
     //return missing passage-names
   }
   
   public void addPlayer(){
-    //Use builder,
+    //Use builder-player
   }
   
   public void addGoal(){
@@ -30,11 +40,7 @@ public class MenuSceneController {
   }
   
   
-  public void deletePassage(){
-    //remove passage from story
-    //return passages that link to this passage, so that user may delete these?
-    //Alternatively, add possibility to edit passages (separate window)
-  }
+  
   
   
 }

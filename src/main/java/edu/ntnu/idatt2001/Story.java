@@ -58,7 +58,6 @@ public class Story {
       throw new IllegalArgumentException("No such link in the story.");
     }
     //return deep copy?
-    
     return passages.get(link);
   }
   
@@ -91,6 +90,7 @@ public class Story {
     return brokenLinks;
   }
   
+  //removes a passage from the story
   public void removePassage(Link link){
     if(!passages.containsKey(link)){
       throw new IllegalArgumentException("No such link in the story.");
@@ -98,6 +98,7 @@ public class Story {
     //not supposed to be able to remove passage if other passages contain a link leading to the passage.
     //Should it instead be the other way around? If a passage links to other passages it would create
     //passages that cannot be accessed
+    //if not: need a way to replace passage or remove links!
     passages.remove(link);
   }
   
@@ -107,6 +108,6 @@ public class Story {
     if(obj == null || getClass() != obj.getClass()) return false;
     
     Story s = (Story) obj;
-    return (s.getTitle() == this.title && s.getPassages().equals(this.passages));
+    return (s.getTitle().equals(this.title)  && s.getPassages().equals(this.passages));
   }
 }

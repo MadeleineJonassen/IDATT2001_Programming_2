@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001;
 
 import edu.ntnu.idatt2001.Action.*;
+import org.apache.maven.shared.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class ScanStory {
   
-  //make method static?
+  //Scans a story from a text-file, returns the story
   public Story scanStory(File file) throws FileNotFoundException {
     //TODO: check file type, throw exceptions
     
@@ -26,6 +27,7 @@ public class ScanStory {
     return story;
   }
   
+  //help method, scans an undividual passage in the story
   private Passage scanPassage(Scanner scan){
     if(!scan.hasNext()){
       throw new IllegalArgumentException();
@@ -49,25 +51,21 @@ public class ScanStory {
     String reference = line.substring(line.indexOf('(') + 1, line.indexOf(')'));
     
     Link link = new Link(text, reference);
-    
-    int actionCount = line.length() - line.replace("{", "").length();
-    int actionIndex = 0;
-    
+    int actionCount = StringUtils.countMatches(line, "{");
+    String[] actionStrings = line.split("[{]");
     //TODO: seperate out scanAction method
-    while(actionIndex <= (line.length() - 1)){
-      String actionString = line.substring(line.indexOf('{') + 1, line.indexOf('}'));
-      
-      actionIndex = line.indexOf('}');
-      
-      String actiontype = actionString.substring(0, actionString.indexOf('('));
-      String actionContent = actionString.substring(actionString.indexOf('(') + 1, actionString.indexOf(')'));
-      if(actiontype.equalsIgnoreCase("gold")){
+    for(int i = 1; i < actionStrings.length; i++){
+      String actionString = actionStrings[i];
+      String s = actionString.replace("[{}]", "");
+      String actionType = s.substring(0, s.indexOf('('));
+      String actionContent = s.substring(s.indexOf('(') + 1, s.indexOf(')'));
+      if(s.equalsIgnoreCase("gold")){
         Action goldAction = new GoldAction(Integer.parseInt(actionContent));
         link.addAction(goldAction);
-      }else if(actiontype.equalsIgnoreCase("health")){
+      }else if(s.equalsIgnoreCase("health")){
         Action healthAction = new HealthAction(Integer.parseInt(actionContent));
         link.addAction(healthAction);
-      }else if(actiontype.equalsIgnoreCase("score")){
+      }else if(s.equalsIgnoreCase("score")){
         Action scoreAction = new ScoreAction(Integer.parseInt(actionContent));
         link.addAction(scoreAction);
       }else{
@@ -77,6 +75,10 @@ public class ScanStory {
     }
     
     return link;
+  }
+  
+  private void scanAction(String substring){
+  
   }
   
 }
