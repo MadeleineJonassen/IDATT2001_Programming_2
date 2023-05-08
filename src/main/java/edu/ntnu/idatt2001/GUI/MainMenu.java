@@ -37,7 +37,7 @@ public class MainMenu extends Application {
     // Mid menu layout
     VBox layoutMenuOptions = new VBox();
       layoutMenuOptions.setPadding(new Insets(20));
-      layoutMenuOptions.setSpacing(10);
+      layoutMenuOptions.setSpacing(20);
       layoutMenuOptions.setAlignment(Pos.CENTER);
     Button createGameBtn = new Button("Create Game");
       createGameBtn.setOnAction(e -> openWindow.setScene(createGameScene));
@@ -57,6 +57,7 @@ public class MainMenu extends Application {
     BorderPane layoutMenu = new BorderPane();
       layoutMenu.setTop(layoutMenuTitle);
       layoutMenu.setCenter(layoutMenuOptions);
+      layoutMenu.setBottom(layoutBottom);
     mainMenuScene = new Scene(layoutMenu, 900, 700);
     mainMenuScene.getStylesheets().add("menu.css");
 
@@ -73,10 +74,28 @@ public class MainMenu extends Application {
     layoutCreateGameTop.setLeft(goHomeCreateHome);
     layoutCreateGameTop.setCenter(createGameTitle);
 
+    // Mid create game layout
+    VBox layoutCreateGameMid = new VBox();
+    ComboBox playerBox = new ComboBox<>();
+    playerBox.getItems().addAll(
+            "Swordsmen",
+            "Witch",
+            "Create new player"
+    );
+    playerBox.setPromptText("Select player");
+    playerBox.setOnAction(e -> {
+      System.out.println("User selected: " + playerBox.getValue() );
+      if (playerBox.getValue() == "Create new player") {
+        createPlayer.display();
+      }
+    } );
+    layoutCreateGameMid.getChildren().addAll(playerBox);
+
+
     // Whole create game layout
     BorderPane layoutCreateGame = new BorderPane();
       layoutCreateGame.setTop(layoutCreateGameTop);
-      layoutCreateGame.setBottom(layoutBottom);
+      layoutCreateGame.setCenter(layoutCreateGameMid);
       layoutCreateGame.getStylesheets().add("menu.css");
     createGameScene = new Scene(layoutCreateGame, 900,700);
 
@@ -96,7 +115,6 @@ public class MainMenu extends Application {
     // Whole playing game layout
     BorderPane layoutPlayGame = new BorderPane();
     layoutPlayGame.setTop(layoutPlayGameTop);
-    layoutPlayGame.setBottom(layoutBottom);
     layoutPlayGame.getStylesheets().add("menu.css");
     playGameScene = new Scene(layoutPlayGame, 900,700);
 
