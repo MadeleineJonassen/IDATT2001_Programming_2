@@ -91,13 +91,7 @@ public class MainMenu extends Application {
 
     VBox storyTableLayout = new VBox();
     storyTableLayout.setId("boxes");
-    TableColumn<Story, String> titleColum = new TableColumn<>("Title");
-      titleColum.setMinWidth(200);
-      titleColum.setCellValueFactory(new PropertyValueFactory<>("name"));
-    storyBox = new TableView<>();
-    storyBox.setMaxHeight(100);
-    storyBox.setItems(getStories());
-    storyBox.getColumns().add(titleColum);
+
     VBox tableButton = new VBox();
     tableButton.setId("boxes");
       Button openFile = new Button("Select Story");
@@ -117,6 +111,9 @@ public class MainMenu extends Application {
       Button addStory = new Button("Add Story");
     tableButton.getChildren().addAll(openFile, addStory);
     storyTableLayout.getChildren().addAll(storyBox, tableButton);
+
+    layoutCreateGameMid.getChildren().addAll(storyTableLayout);
+
 
 
     VBox playerLayout = new VBox();
@@ -147,15 +144,11 @@ public class MainMenu extends Application {
         }
       } );
        */
-    playerLayout.getChildren().addAll(addPlayer, listView);
+    Button goalBox = new Button("Create Goal");
+      goalBox.setOnAction(e -> createGoals.display());
 
-    VBox createGoalsLayout = new VBox();
-      createGoalsLayout.setId("boxes");
-      Button goalBox = new Button("Create Goal");
-        goalBox.setOnAction(e -> createGoals.display());
-      createGoalsLayout.getChildren().addAll(goalBox);
+    playerLayout.getChildren().addAll(addPlayer, listView, goalBox);
 
-    layoutCreateGameMid.getChildren().addAll(storyTableLayout, playerLayout, createGoalsLayout);
 
     // Bottom menu layer
     BorderPane layoutBottom = new BorderPane();
@@ -179,6 +172,7 @@ public class MainMenu extends Application {
     BorderPane layoutCreateGame = new BorderPane();
       layoutCreateGame.setTop(layoutCreateGameTop);
       layoutCreateGame.setCenter(layoutCreateGameMid);
+      layoutCreateGame.setRight(playerLayout);
       layoutCreateGame.setBottom(layoutBottom);
       layoutCreateGame.getStylesheets().add("StyleSheets/menu.css");
     createGameScene = new Scene(layoutCreateGame, 900,700);
@@ -192,7 +186,7 @@ public class MainMenu extends Application {
     Button goHomePlayGame = new Button(" ");
       goHomePlayGame.getStyleClass().add("homeButton");
       goHomePlayGame.setOnAction(e -> openWindow.setScene(mainMenuScene));
-    Label playGameTitle = new Label("Play existing game");
+    Label playGameTitle = new Label("Play game");
     playGameTitle.setId("title");
     layoutPlayGameTop.setLeft(goHomePlayGame);
     layoutPlayGameTop.setCenter(playGameTitle);
@@ -200,7 +194,7 @@ public class MainMenu extends Application {
     // Whole playing game layout
     BorderPane layoutPlayGame = new BorderPane();
     layoutPlayGame.setTop(layoutPlayGameTop);
-    layoutPlayGame.getStylesheets().add("StyleSheets/menu.css");
+    layoutPlayGame.getStylesheets().add("StyleSheets/playGameStyle.css");
     playGameScene = new Scene(layoutPlayGame, 900,700);
 
 
@@ -215,13 +209,6 @@ public class MainMenu extends Application {
     primaryStage.show();
   }
 
-
-
-  public ObservableList<Story> getStories() {
-    ObservableList stories = storyBox.getItems();
-    //stories.add(new Story("Haunted House",null));
-    return stories;
-  }
 }
 
 

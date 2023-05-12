@@ -49,7 +49,7 @@
 
 .list-view {
     -fx-pref-width: 400;
-    -fx-pref-height: 250;
+    -fx-pref-height: 100;
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
 }
