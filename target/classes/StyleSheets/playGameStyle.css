@@ -1,21 +1,22 @@
 .root {
-    -fx-background-image: url("../photos/Background/castleBackground.jpg");
+    -fx-background-image: url("../photos/Background/gardenBackground.jpg");
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-border-insets: 50;
 }
-
 #boxes {
     -fx-padding: 10px;
     -fx-alignment: Center;
     -fx-spacing: 20;
 }
+
 #title {
     -fx-font-size: 65px;
     -fx-text-fill: "190B28";
     -fx-font-family: "Constantia";
+
 }
 #underTitle {
     -fx-background-color: "86BBD8";
