@@ -3,36 +3,34 @@ package edu.ntnu.idatt2001.GUI;
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
 import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.Players.PlayerData;
-import edu.ntnu.idatt2001.Story;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
-import java.util.Collections;
+import java.io.FileNotFoundException;
 import java.util.Optional;
+import java.util.Scanner;
 
 
 public class MainMenu extends Application {
   Stage openWindow;
   Scene mainMenuScene, createGameScene, playGameScene;
-  TableView <Story> storyBox;
+  ListView <String> storyListView;
   public static ComboBox playerBox;
-  public static ListView<String> listView = new ListView<>();
+
+  public static ListView<String> playerListView = new ListView<>();
+
+
 
   public static void main(String[] args) {
     launch();
@@ -94,23 +92,30 @@ public class MainMenu extends Application {
 
     VBox tableButton = new VBox();
     tableButton.setId("boxes");
+      Button addStory = new Button("Add Story");
+      storyListView = new ListView<>();
       Button openFile = new Button("Select Story");
       openFile.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
           FileChooser fileChooser = new FileChooser();
-          fileChooser.setTitle("Select a story");
-          fileChooser.setInitialDirectory(new File("src/resources/Stories"));
+            fileChooser.setTitle("Select a story");
+            fileChooser.setInitialDirectory(new File("src/resources/Stories"));
           File selectedFile = fileChooser.showOpenDialog(openWindow);
-          if (selectedFile != null) {
-            System.out.println("Open File");
-            System.out.println(selectedFile.getPath());
+            if (selectedFile != null) {
+              try {
+                Scanner fileScanner = new Scanner(selectedFile);
+                while (fileScanner.hasNextLine()) {
+                  storyListView.getItems().add(fileScanner.nextLine() + "\n");
+                }
+              } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+              }
           }
         }
       });
-      Button addStory = new Button("Add Story");
     tableButton.getChildren().addAll(openFile, addStory);
-    storyTableLayout.getChildren().addAll(storyBox, tableButton);
+    storyTableLayout.getChildren().addAll(tableButton, storyListView);
 
     layoutCreateGameMid.getChildren().addAll(storyTableLayout);
 
@@ -118,7 +123,7 @@ public class MainMenu extends Application {
 
     VBox playerLayout = new VBox();
     playerLayout.setId("boxes");
-      listView.getItems().addAll(PlayerData.getPlayers());
+      playerListView.getItems().addAll(PlayerData.getPlayers());
       Button addPlayer = new Button("Add Player");
         addPlayer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -128,7 +133,7 @@ public class MainMenu extends Application {
 
               if (result.isPresent()) {
                 Player player = result.get();
-                listView.getItems().addAll(player.toString());
+                playerListView.getItems().addAll(player.toString());
               }
             }
         });
@@ -147,7 +152,7 @@ public class MainMenu extends Application {
     Button goalBox = new Button("Create Goal");
       goalBox.setOnAction(e -> createGoals.display());
 
-    playerLayout.getChildren().addAll(addPlayer, listView, goalBox);
+    playerLayout.getChildren().addAll(addPlayer, playerListView, goalBox);
 
 
     // Bottom menu layer
