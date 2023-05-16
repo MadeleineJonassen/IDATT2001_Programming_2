@@ -1,18 +1,12 @@
 package edu.ntnu.idatt2001.Model;
 
-import edu.ntnu.idatt2001.Game;
+import edu.ntnu.idatt2001.*;
 import edu.ntnu.idatt2001.Goal.Goal;
-import edu.ntnu.idatt2001.Link;
 import edu.ntnu.idatt2001.Players.Player;
-import edu.ntnu.idatt2001.ScanStory;
-import edu.ntnu.idatt2001.Story;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,13 +21,13 @@ public class GameManager {
     //TODO: add exceptions if path is invalid, or empty
     //TODO: filter or sort by file type (se filechooser)
     String dir = "src/main/resources";
-    return Stream.of(new File(dir).listFiles())
+    return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
             .filter(file -> !file.isDirectory())
             .map(File::getName)
             .collect(Collectors.toSet());
   }
   
-  private void scanStory(File file) throws FileNotFoundException {
+  public void scanStory(File file) throws FileNotFoundException {
     //TODO: handle FineNotFoundException? Or handle somewhere else?
     ScanStory scan = new ScanStory();
     this.story = scan.scanStory(file);
@@ -53,9 +47,15 @@ public class GameManager {
     game.getGoals().add(goal);
   }
   
-  public void newGame(){
+  public void createGame(){
     //TODO: throw exceptions if story, player and goals are not filled out. Alt, take these as params
     this.game = new Game(this.player, this.story, this.goals);
+  }
+  
+  public Game getGame(){
+    //TODO: return deep copy????
+    //method might not be needed, as the class provides relevant get-methods
+    return game;
   }
   
   public List<String> getBrokenLinks(){
@@ -74,18 +74,29 @@ public class GameManager {
     return linkNames;
   }
   
-  
-  public Game getGame(){
-    //return deep copy????
-    return game;
-  }
-  
-  //Are the methods below superfluous? Should the
-  //class instead return the story object (or rather, a copy)
-  //and controllers can use get-methods on these?
   public String getStoryTitle(){
-    //handle exception, if story == null
+    if (this.story == null){
+      throw new NullPointerException("Story must be added first");
+    }
     return story.getTitle();
   }
+  
+  public Collection<Passage> getStoryPassages(){
+    if (this.story == null){
+      throw new NullPointerException("Story must be added first");
+    }
+    
+    Collection<Passage> passages = this.story.getPassages();
+    
+    //TODO: deep copies???
+    
+    return passages;
+  }
+  
+  public Set<String> getStoryPassageNames(){
+    return getStoryPassages().stream().map(Passage::getTitle).collect(Collectors.toSet());
+  }
+  
+  //Methods to modify story etc? Or do this directly in controller?
   
 }
