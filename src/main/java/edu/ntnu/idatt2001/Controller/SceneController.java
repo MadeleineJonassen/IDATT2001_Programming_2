@@ -14,23 +14,25 @@ public class SceneController {
         //main menu?
         MainMenuController mainMenuController = new MainMenuController();
         //MainMenu mainMenu = new MainMenu(mainMenuController, gameManager);
-        
+        //stage.setScene(mainMenu.getScene);
         break;
       case 2:
         //edit game
-        CreateGameController createGameController = new CreateGameController();
-        //CreateGame createGame = CreateGame(createGameController, gameManager);
-        
+        CreateGameController createGameController = new CreateGameController(gameManager);
+        //CreateGame createGame = new CreateGame(createGameController, gameManager);
+        //stage.setScene(createGame.getScene);
         break;
       case 3:
         //create player
-        //GameSceneController controller;
-        ////controller.setGameManager(gameManager);
-        //stage.setScene(gameScene.getScene);
-        //GameSceneController set controller???
+        CreatePlayerController createPlayerController = new CreatePlayerController();
+        //CreatePlayer createPlayer = new CreatePlayer(createPlayerController, gameManager);
+        //stage.setScene(createPlayer.getScene);
         break;
       case 4:
         //create goals
+        CreateGoalsController createGoalsController = new CreateGoalsController();
+        //CreateGoals createGoals = new CreateGoals(createGoalsController, gameManager);
+        //stage.setScene(createGoals.getScene);
         break;
       case 5:
         //play game

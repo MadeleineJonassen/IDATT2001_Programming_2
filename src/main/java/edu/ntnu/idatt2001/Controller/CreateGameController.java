@@ -14,22 +14,41 @@ import java.util.stream.Stream;
 public class CreateGameController {
   private GameManager gameManager = new GameManager();
   
-  public void getStoryFiles(){
-    
-    //returns string list
+  public CreateGameController(GameManager gameManager){
+    this.gameManager = gameManager;
+  }
+  
+  /** Lists all files in the resources folder. Returns a set of strings
+   *
+   * @return files
+   */
+  public Set<String> listFiles() {
+    //TODO: add exceptions if path is invalid, or empty
+    //TODO: filter or sort by file type (se filechooser)
+    //possibly not within the scope of this class
+    String dir = "src/main/resources";
+    return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
+            .filter(file -> !file.isDirectory())
+            .map(File::getName)
+            .collect(Collectors.toSet());
   }
   
   public void scanStory(String fileName) throws FileNotFoundException {
     //TODO: exception handling
     File file = new File("src/main/resources" + fileName);
-    gameManager.scanStory(file);
+    scanStory(file);
   }
   
   //Used if user is presented with the files
   public void scanStory(File file) throws FileNotFoundException {
     //TODO: handle FileNotFoundException
-    //try/catch? FileNotFoundException thrown in gameManager
-    gameManager.scanStory(file);
+    try{
+      ScanStory scan = new ScanStory();
+      gameManager.setStory(scan.scanStory(file));
+    }catch (FileNotFoundException e){
+      throw new FileNotFoundException("Finner ikke den angitte filen ");
+    }
+    
   }
   
   public void deletePassage(String passageName){
@@ -43,7 +62,6 @@ public class CreateGameController {
   public void editPassage(String passageName){
     //Open popup window
   }
-  
   
   
   public void addPlayer(String name, int health, int score, int gold, List<String> inventory){

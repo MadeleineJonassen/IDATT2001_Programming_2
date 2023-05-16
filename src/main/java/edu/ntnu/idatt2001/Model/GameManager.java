@@ -12,25 +12,12 @@ import java.util.stream.Stream;
 
 public class GameManager {
   private Game game; //Assumes user will only edit/run 1 game at a time. Final?
-  private Story story; //current story
+  private Story story; //current story. Is stored in game-object, superfluous to store here?
   private Player player;
   private List<Goal> goals = new ArrayList<>();
   
-  //returns a list of all files in the resources folder
-  public Set<String> listFiles() {
-    //TODO: add exceptions if path is invalid, or empty
-    //TODO: filter or sort by file type (se filechooser)
-    String dir = "src/main/resources";
-    return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
-            .filter(file -> !file.isDirectory())
-            .map(File::getName)
-            .collect(Collectors.toSet());
-  }
-  
-  public void scanStory(File file) throws FileNotFoundException {
-    //TODO: handle FineNotFoundException? Or handle somewhere else?
-    ScanStory scan = new ScanStory();
-    this.story = scan.scanStory(file);
+  public void setStory(Story story){
+    this.story = story;
   }
   
   //methods to init player. Modify to comply with builder:
@@ -39,22 +26,28 @@ public class GameManager {
     this.player = player;
   }
   
-  public void setGoals(List<Goal> goals){
-    this.goals = goals;
-  }
-  
   public void addGoal(Goal goal){
     game.getGoals().add(goal);
   }
   
   public void createGame(){
-    //TODO: throw exceptions if story, player and goals are not filled out. Alt, take these as params
+    //TODO: check if goals actually is required
+    //TODO: check for broken links?
+    if(this.story == null){
+      throw new NullPointerException("Spillet har ingen story, dette må legges til før du oppretter et spill.");
+    }
+    if(this.player == null){
+      throw new NullPointerException("Spillet har ingen player, dette må legges til før du oppretter et spill.");
+    }
+    if(this.goals.isEmpty()){
+      throw new NullPointerException("Spillet har ingen goals, dette må legges til før du oppretter et spill.");
+    }
     this.game = new Game(this.player, this.story, this.goals);
   }
   
   public Game getGame(){
     //TODO: return deep copy????
-    //method might not be needed, as the class provides relevant get-methods
+    //method might not be needed, as the class provides relevant get- and set-methods
     return game;
   }
   
@@ -62,12 +55,11 @@ public class GameManager {
     if(this.story == null){
       throw new IllegalArgumentException("The story is not defined");
     }
+    
     List<Link> links = this.game.getStory().getBrokenLinks();
-    if(links.isEmpty()){
-      //throw exception? Or let this be handled later?
-    }
     
     List<String> linkNames = new ArrayList<>();
+    
     for(Link l : links){
       linkNames.add(l.getText());
     }
@@ -97,6 +89,19 @@ public class GameManager {
     return getStoryPassages().stream().map(Passage::getTitle).collect(Collectors.toSet());
   }
   
-  //Methods to modify story etc? Or do this directly in controller?
+  public Passage getOpeningPassage(){
+    if (this.game == null){
+      throw new NullPointerException("The game has not been created");
+    }
+    return this.game.getStory().getOpeningPassage();
+  }
+  public Passage nextPassage(Link link){
+    if (this.game == null){
+      throw new NullPointerException("The game has not been created");
+    }
+    return this.game.go(link);
+  }
+  
+  //Methods to modify story etc? Or do this directly in controller with game-object?
   
 }
