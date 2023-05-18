@@ -20,13 +20,14 @@ public class GameManager {
     this.story = story;
   }
   
-  //methods to init player. Modify to comply with builder:
-  //TODO: refactor setPlayer method
   public void setPlayer(Player player){
     this.player = player;
   }
   
   public void addGoal(Goal goal){
+    if(game.getGoals().contains(goal)){
+      throw new IllegalArgumentException("Goal has already been added.");
+    }
     game.getGoals().add(goal);
   }
   
@@ -47,7 +48,8 @@ public class GameManager {
   
   public Game getGame(){
     //TODO: return deep copy????
-    //method might not be needed, as the class provides relevant getters and setters
+    //method might not be needed, as the class provides relevant getters and
+    //Game is only created when story, player etc is finished, so method might be nice for playGame-scene?
     return game;
   }
   
@@ -56,10 +58,9 @@ public class GameManager {
       throw new IllegalArgumentException("The story is not defined");
     }
     
-    List<Link> links = this.game.getStory().getBrokenLinks();
+    List<Link> links = this.story.getBrokenLinks();
     
     List<String> linkNames = new ArrayList<>();
-    
     for(Link l : links){
       linkNames.add(l.getText());
     }
@@ -77,14 +78,12 @@ public class GameManager {
     return story.getTitle();
   }
   
-  public Collection<Passage> getStoryPassages(){
+  private Collection<Passage> getStoryPassages(){
     if (this.story == null){
       throw new NullPointerException("Story must be added first");
     }
     
     Collection<Passage> passages = this.story.getPassages();
-    
-    //TODO: deep copies???
     
     return passages;
   }
@@ -99,13 +98,12 @@ public class GameManager {
     }
     return this.game.getStory().getOpeningPassage();
   }
+  
   public Passage nextPassage(Link link){
     if (this.game == null){
       throw new NullPointerException("The game has not been created");
     }
     return this.game.go(link);
   }
-  
-  //Methods to modify story etc? Or do this directly in controller with game-object?
   
 }

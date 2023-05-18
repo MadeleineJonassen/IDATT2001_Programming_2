@@ -24,9 +24,9 @@ public class SceneController {
         break;
       case 3:
         //create story
-        //CreateGoalsController createGoalsController = new CreateGoalsController();
-        //CreateGoals createGoals = new CreateGoals(createGoalsController, gameManager);
-        //stage.setScene(createGoals.getScene);
+        CreateStoryController createStoryController = new CreateStoryController(gameManager);
+        //CreateStory createStory = new CreateStory(CreateStoryController, gameManager);
+        //stage.setScene(CreateStory.getScene);
       case 4:
         //create player
         CreatePlayerController createPlayerController = new CreatePlayerController(gameManager);

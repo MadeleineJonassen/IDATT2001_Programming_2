@@ -34,4 +34,8 @@ public class CreateGoalsController {
     gameManager.addGoal(goal);
     
   }
+  
+  public void clearGoals(){
+  
+  }
 }
