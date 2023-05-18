@@ -1,5 +1,5 @@
 .root {
-    -fx-background-image: url("../photos/Background/gardenBackground.jpg");
+    -fx-background-image: url("../photos/Background/castleBackground.jpg");
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
     -fx-background-size: stretch;
@@ -49,11 +49,10 @@
 }
 
 .list-view {
-    -fx-pref-width: 300;
-    -fx-pref-height: 50;
+    -fx-pref-width: 400;
+    -fx-pref-height: 250;
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
-    -fx-font-size: 20;
 }
 
 .helpButton {

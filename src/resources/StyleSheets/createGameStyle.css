@@ -6,16 +6,17 @@
     -fx-alignment: center;
     -fx-border-insets: 50;
 }
-
 #boxes {
     -fx-padding: 10px;
     -fx-alignment: Center;
     -fx-spacing: 20;
 }
+
 #title {
     -fx-font-size: 65px;
     -fx-text-fill: "190B28";
     -fx-font-family: "Constantia";
+
 }
 #underTitle {
     -fx-background-color: "86BBD8";
@@ -49,7 +50,7 @@
 
 .list-view {
     -fx-pref-width: 400;
-    -fx-pref-height: 100;
+    -fx-pref-height: 250;
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
 }

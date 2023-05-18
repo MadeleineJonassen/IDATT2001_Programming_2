@@ -49,10 +49,11 @@
 }
 
 .list-view {
-    -fx-pref-width: 400;
-    -fx-pref-height: 250;
+    -fx-pref-width: 300;
+    -fx-pref-height: 50;
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
+    -fx-font-size: 20;
 }
 
 .helpButton {
