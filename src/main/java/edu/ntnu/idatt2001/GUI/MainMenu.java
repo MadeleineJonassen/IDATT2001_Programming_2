@@ -25,7 +25,7 @@ public class MainMenu extends Application {
   Stage openWindow;
   Scene mainMenuScene, createGameScene, createStoryScene, createPlayerScene, createGoalScene, playGameScene;
   public static ListView <String> storyListView; //TODO: Change from string to story?
-  public static ListView<String> playerListView;
+  public static ListView<String> playerListView = new ListView();
 
 
 
@@ -191,7 +191,7 @@ public class MainMenu extends Application {
     createStoryLayout.setTop(createStoryTop);
     createStoryLayout.setCenter(createStoryMid);
     createStoryScene = new Scene(createStoryLayout, 900, 700);
-    createStoryScene.getStylesheets().add("createGameStyle.css");
+    createStoryScene.getStylesheets().add("StyleSheets/createGameStyle.css");
 
 
 
