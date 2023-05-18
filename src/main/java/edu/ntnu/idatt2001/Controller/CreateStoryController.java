@@ -51,6 +51,10 @@ public class CreateStoryController {
     }
   }
   
+  public void deleteBrokenLinks(){
+    gameManager.deleteBrokenLinks();
+  }
+  
   public void deletePassage(String passageName){
     //remove passage from story
     //return passages that link to this passage, so that user may delete these?

@@ -91,7 +91,14 @@ public class Story {
   }
   
   public void deleteBrokenLinks(){
-  
+    for(Link l : getBrokenLinks()){
+      for (Passage p : getPassages()){
+        if(p.getLinks().contains(l)){
+          p.removeLink(l);
+        }
+      }
+    }
+    
   }
   
   //removes a passage from the story

@@ -67,7 +67,7 @@ public class GameManager {
   }
   
   public void deleteBrokenLinks(){
-  
+    story.deleteBrokenLinks();
   }
   
   public String getStoryTitle(){

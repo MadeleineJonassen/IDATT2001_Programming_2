@@ -51,6 +51,14 @@ public class Passage {
     return true;
   }
   
+  public void removeLink(Link link){
+    if (!links.contains(link)){
+      throw new IllegalArgumentException("This link does not exist in this passage");
+    }
+    
+    links.remove(link);
+  }
+  
   public List<Link> getLinks() {
     //Return deep copied list?
     return links;
