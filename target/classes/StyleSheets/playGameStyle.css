@@ -7,7 +7,7 @@
     -fx-border-insets: 50;
 }
 #boxes {
-    -fx-padding: 10px;
+    -fx-padding: 20px;
     -fx-alignment: Center;
     -fx-spacing: 20;
 }
@@ -26,13 +26,6 @@
 
 }
 
-.combo-box {
-    -fx-background-color: "B2DAF0";
-    -fx-pref-width: 250px;
-    -fx-font-family: "Constantia";
-    -fx-text-fill: "2F4858";
-    -fx-font-size: 18px;
-}
 
 .button {
     -fx-background-color: "B2DAF0";
@@ -40,6 +33,7 @@
     -fx-font-family: "Constantia";
     -fx-text-fill: "2F4858";
     -fx-font-size: 18px;
+    -fx-padding: 5;
 }
 .button:hover {
     -fx-background-color: "33658A";
@@ -48,36 +42,71 @@
     -fx-background-color: "2F4858";
 }
 
+#big-list-view {
+    -fx-pref-width: 400;
+    -fx-pref-height: 250;
+}
 .list-view {
-    -fx-pref-width: 300;
-    -fx-pref-height: 50;
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
-    -fx-font-size: 20;
+    -fx-pref-width: 200;
+    -fx-pref-height: 50;
+}
+
+.text-field {
+    -fx-pref-width: 200;
+    -fx-pref-height: 10;
 }
 
 .helpButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/HelpIcon.png");
+    -fx-background-image: url("/photos/Icons/lightHelp.png");
     -fx-background-size: stretch;
-    -fx-alignment: center-right;
-    -fx-pref-width: 50;
-    -fx-pref-height: 50;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 30;
 }
 .helpButton:hover {
-    -fx-background-color: "white";
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/Icons/darkHelpFull.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 30;
 }
 
 .homeButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/home.png");
+    -fx-background-image: url("/photos/Icons/lightHome.png");
     -fx-background-size: stretch;
-    -fx-alignment: center-right;
-    -fx-pref-width: 50;
-    -fx-pref-height: 50;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
 }
 .homeButton:hover {
-    -fx-background-color: "white";
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/Icons/darkHomeFull.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+
+.backButton {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/Icons/arrow-small-left.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+.backButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/Icons/arrow-left.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
 }
 
 #finalButton {

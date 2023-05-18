@@ -5,6 +5,7 @@ import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.Players.PlayerData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -92,21 +93,29 @@ public class MainMenu extends Application {
     // Mid create game layout
     VBox createGameLayout = new VBox();
     createGameLayout.setId("boxes");
-    Button createStory = new Button("Story");
-      createStory.setOnAction(e -> openWindow.setScene(createStoryScene));
-    Button createPlayer = new Button("Player");
-      createPlayer.setOnAction(e -> openWindow.setScene(createPlayerScene));
-    Button createGoal = new Button("Goals");
-      createGoal.setOnAction(e -> openWindow.setScene(createGoalScene));
-    createGameLayout.getChildren().addAll(createStory, createPlayer, createGoal);
+    HBox menuStoryLayout = new HBox();
+    menuStoryLayout.setId("boxes");
+      Button createStoryBtn = new Button("Story");
+        createStoryBtn.setOnAction(e -> openWindow.setScene(createStoryScene));
+      TextField storySelectedDisplay = new TextField();
+        storySelectedDisplay.setPromptText("Story not selected yet...");
+        //TODO: display selected story
+    menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);
+    HBox menuPlayerLayout = new HBox();
+    menuPlayerLayout.setId("boxes");
+      Button createPlayerBtn = new Button("Player");
+        createPlayerBtn.setOnAction(e -> openWindow.setScene(createPlayerScene));
+      TextField playerSelectedDisplay = new TextField();
+        playerSelectedDisplay.setPromptText("Player not selected yet");
+    menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);
+    HBox menuGoalsLayout = new HBox();
+    menuGoalsLayout.setId("boxes");
+      Button createGoalBtn = new Button("Goals");
+        createGoalBtn.setOnAction(e -> openWindow.setScene(createGoalScene));
+      ListView goalsSelectedDisplay = new ListView<>();
+    menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);
+    createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);
 
-    // Left create game layout
-    VBox createGameRight = new VBox();
-      createGameRight.setId("boxes");
-    Text overviewTitle = new Text("Overview");
-      TableView overview = new TableView<>();
-        //TODO: add selected story, player, goals to tableview
-    createGameRight.getChildren().addAll(overviewTitle, overview);
 
     // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
@@ -129,7 +138,6 @@ public class MainMenu extends Application {
     BorderPane layoutCreateGame = new BorderPane();
       layoutCreateGame.setTop(layoutCreateGameTop);
       layoutCreateGame.setCenter(createGameLayout);
-      layoutCreateGame.setRight(createGameRight);
       layoutCreateGame.setBottom(layoutBottom);
       layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
     createGameScene = new Scene(layoutCreateGame, 900,700);
@@ -141,7 +149,7 @@ public class MainMenu extends Application {
     BorderPane createStoryTop = new BorderPane();
       createStoryTop.setId("boxes");
     Button goToCreateHomeStory = new Button(" ");
-      goToCreateHomeStory.getStyleClass().add("homeButton");  //TODO: change from home-icon to back icon
+      goToCreateHomeStory.getStyleClass().add("backButton");
       goToCreateHomeStory.setOnAction(e -> openWindow.setScene(createGameScene));
     Label createStoryTitle = new Label("Create Story");
       createStoryTitle.setId("title");
@@ -157,6 +165,7 @@ public class MainMenu extends Application {
       VBox createStoryMidDisplay = new VBox();
       createStoryMidDisplay.setId("boxes");
         storyListView = new ListView<>();
+        storyListView.setId("big-list-view");
       createStoryMidDisplay.getChildren().addAll(storyListView);
       VBox createStoryMidBtn = new VBox();
       createStoryMidBtn.setId("boxes");
@@ -200,7 +209,7 @@ public class MainMenu extends Application {
     BorderPane createPlayerTop = new BorderPane();
     createPlayerTop.setId("boxes");
     Button goToCreateHomePlayer = new Button(" ");
-    goToCreateHomePlayer.getStyleClass().add("homeButton");
+    goToCreateHomePlayer.getStyleClass().add("backButton");
     goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
     Label createPlayerTitle = new Label("Create Player");
     createPlayerTop.setId("title");
@@ -212,8 +221,8 @@ public class MainMenu extends Application {
 
     // Mid create player layout
     HBox createPlayerMid = new HBox();
-      VBox createPlayerBtn = new VBox();
-      createPlayerBtn.setId("boxes");
+      VBox createPlayer = new VBox();
+      createPlayer.setId("boxes");
       playerListView.getItems().addAll(PlayerData.getPlayers());
       Button addPlayer = new Button("Add Player");
       addPlayer.setOnAction(actionEvent -> {
@@ -227,8 +236,8 @@ public class MainMenu extends Application {
         }
       });
         //TODO: Bug fix with listview; last line prints out all info in the playerData() in one line
-      createPlayerBtn.getChildren().addAll(addPlayer);
-    createPlayerMid.getChildren().addAll(playerListView, createPlayerBtn);
+      createPlayer.getChildren().addAll(addPlayer);
+    createPlayerMid.getChildren().addAll(playerListView, createPlayer);
 
 
     // * Overall Create Player Layout *
@@ -245,7 +254,7 @@ public class MainMenu extends Application {
     BorderPane createGoalTop = new BorderPane();
     createGoalTop.setId("boxes");
     Button goToCreateHomeGoals = new Button(" ");
-    goToCreateHomeGoals.getStyleClass().add("homeButton");
+    goToCreateHomeGoals.getStyleClass().add("backButton");
     goToCreateHomeGoals.setOnAction(e -> openWindow.setScene(createGameScene));
     Label createGoalTitle = new Label("Create Goal");
       createGoalTitle.setId("title");
@@ -293,8 +302,8 @@ public class MainMenu extends Application {
     playerListView = new ListView<>();
       //TODO: set selected player; currently displaying the testDataPlayers
       playerListView.getItems().addAll(PlayerData.getPlayers());
-    storyListView = new ListView<>();
-      storyListView.getItems().addAll();
+    //storyListView = new ListView<>();
+      //storyListView.getItems().addAll();
       //TODO: set selected story
     HBox userOptions = new HBox();
       userOptions.setId("boxes");
@@ -311,7 +320,7 @@ public class MainMenu extends Application {
       Button other = new Button("other?");
     rightInfoBox.getChildren().addAll(setGoals,options,other);
     layoutPlayGameMid.setTop(playerListView);
-    layoutPlayGameMid.setCenter(storyListView);
+    //layoutPlayGameMid.setCenter(storyListView);
     layoutPlayGameMid.setRight(rightInfoBox);
     layoutPlayGameMid.setBottom(userOptions);
 
