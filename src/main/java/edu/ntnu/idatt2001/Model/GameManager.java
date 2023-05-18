@@ -31,8 +31,8 @@ public class GameManager {
   }
   
   public void createGame(){
-    //TODO: check if goals actually is required
     //TODO: check for broken links?
+    //This method is run when user clicks "run game"-button
     if(this.story == null){
       throw new NullPointerException("Spillet har ingen story, dette må legges til før du oppretter et spill.");
     }
@@ -47,7 +47,7 @@ public class GameManager {
   
   public Game getGame(){
     //TODO: return deep copy????
-    //method might not be needed, as the class provides relevant get- and set-methods
+    //method might not be needed, as the class provides relevant getters and setters
     return game;
   }
   
@@ -64,6 +64,10 @@ public class GameManager {
       linkNames.add(l.getText());
     }
     return linkNames;
+  }
+  
+  public void deleteBrokenLinks(){
+  
   }
   
   public String getStoryTitle(){

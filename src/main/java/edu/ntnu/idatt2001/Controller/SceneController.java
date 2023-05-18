@@ -11,9 +11,9 @@ public class SceneController {
     //set gameManager for each controller/scene
     switch (sceneChoice){
       case 1:
-        //main menu?
+        //main menu
         MainMenuController mainMenuController = new MainMenuController();
-        //MainMenu mainMenu = new MainMenu(mainMenuController, gameManager);
+        ///MainMenu mainMenu = new MainMenu(mainMenuController, gameManager);
         //stage.setScene(mainMenu.getScene);
         break;
       case 2:
@@ -23,23 +23,30 @@ public class SceneController {
         //stage.setScene(createGame.getScene);
         break;
       case 3:
+        //create story
+        //CreateGoalsController createGoalsController = new CreateGoalsController();
+        //CreateGoals createGoals = new CreateGoals(createGoalsController, gameManager);
+        //stage.setScene(createGoals.getScene);
+      case 4:
         //create player
-        CreatePlayerController createPlayerController = new CreatePlayerController();
+        CreatePlayerController createPlayerController = new CreatePlayerController(gameManager);
         //CreatePlayer createPlayer = new CreatePlayer(createPlayerController, gameManager);
         //stage.setScene(createPlayer.getScene);
         break;
-      case 4:
+      case 5:
         //create goals
-        CreateGoalsController createGoalsController = new CreateGoalsController();
+        CreateGoalsController createGoalsController = new CreateGoalsController(gameManager);
         //CreateGoals createGoals = new CreateGoals(createGoalsController, gameManager);
         //stage.setScene(createGoals.getScene);
         break;
-      case 5:
+      case 6:
         //play game
         break;
-      case 6:
+      case 7:
         //end scene
         break;
+      default:
+        throw new IllegalArgumentException("The number must be between 1 and 7");
     }
     
   }
