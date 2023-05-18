@@ -274,10 +274,16 @@ public class MainMenu extends Application {
     playerInventoryLayout.setId("boxes");
       TextField playerInventory = new TextField();
         playerInventory.setPromptText("Enter Inventory");
-    playerInventoryLayout.getChildren().addAll(playerInventory);
+        playerInventory.setMinHeight(40);
+      Image inventoryIcon = new Image("photos/Icons/PlayerIcons/apps.png");
+      ImageView InventoryIconView = new ImageView();
+        InventoryIconView.setImage(inventoryIcon);
+        InventoryIconView.setFitWidth(30);
+        InventoryIconView.setFitHeight(30);
+    playerInventoryLayout.getChildren().addAll(playerInventory, InventoryIconView);
     createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout ,playerGoldLayout,playerScoreLayout,playerInventoryLayout);
 
-    //
+    // Bottom create player layout
     HBox createPlayerBottom = new HBox();
     Button submitPlayerBtn = new Button("Submit player");
     //TODO: make submit work
@@ -307,21 +313,33 @@ public class MainMenu extends Application {
     createGoalUnderTitle.setId("underTitle");
     createGoalTop.setLeft(goToCreateHomeGoals);
     createGoalTop.setCenter(createGoalTitle);
-    createGoalTop.setBottom(createPlayerUnderTitle);
+    createGoalTop.setBottom(createGoalUnderTitle);
 
     // Mid create goal layout
-    VBox createGoalMid = new VBox();
+    HBox createGoalMid = new HBox();
     createGoalMid.setId("boxes");
+      ListView selectedGoals = new ListView<>();
+      selectedGoals.setId("big-list-view");
+    VBox createGoalsBtn = new VBox();
+      createGoalsBtn.setId("boxes");
       Button goalBox = new Button("Create Goal");
       goalBox.setOnAction(e -> createGoals.display());
         //TODO: add ability to create goals based on "category" -> gold, health, inventory or score.
-    createGoalMid.getChildren().addAll(goalBox);
+      Button clearAllGoals = new Button("Clear All");
+        //TODO: create a delete option for the listview
+    createGoalsBtn.getChildren().addAll(goalBox, clearAllGoals);
+    createGoalMid.getChildren().addAll(selectedGoals, createGoalsBtn);
 
+    // Bottom create gal layout
+    HBox createGoalsBottom = new HBox();
+    Button submitGoalBtn = new Button("Submit goal(s)");
+    createGoalsBottom.getChildren().addAll(submitGoalBtn);
 
     // * Overall Create Goal Layout *
     BorderPane createGoalLayout = new BorderPane();
     createGoalLayout.setTop(createGoalTop);
     createGoalLayout.setCenter(createGoalMid);
+    createGoalLayout.setBottom(createGoalsBottom);
     createGoalScene = new Scene(createGoalLayout, 1300, 700);
     createGoalScene.getStylesheets().add("StyleSheets/createGameStyle.css");
 
