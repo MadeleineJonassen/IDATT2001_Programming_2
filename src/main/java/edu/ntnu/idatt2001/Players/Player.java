@@ -1,14 +1,17 @@
 package edu.ntnu.idatt2001.Players;
 
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-  private final String name;
+  private String name;
   private int health;
   private int score;
   private int gold;
   private List<String> inventory = new ArrayList<>();
+  private StringProperty nameProperty;
 
   public Player(Builder builder) {
     this.name = builder.name;
@@ -17,8 +20,7 @@ public class Player {
     this.gold = builder.gold;
     this.inventory = builder.inventory;
   }
-
-  public String getName(String name) {
+  public String getName() {
     return name;
   }
   public int getHealth() {
@@ -64,13 +66,30 @@ public class Player {
     private int gold;
     private List<String> inventory = new ArrayList<>();
 
-    public Builder(String name, int health, int score, int gold){
+    public Builder(String name, int health, int score, int gold, List<String> inventory){
       this.name = name;
       this.health = health;
       this.score = score;
       this.gold = gold;
+      this.inventory = inventory;
     }
 
+    public Builder name (String name){
+      this.name = name;
+      return this;
+    }
+    public Builder health (int health){
+      this.health = health;
+      return this;
+    }
+    public Builder score (int score){
+      this.score = score;
+      return this;
+    }
+    public Builder gold (int gold){
+      this.gold = gold;
+      return this;
+    }
     public Builder inventory (List <String> inventory){
       this.inventory = inventory;
       return this;
@@ -78,8 +97,6 @@ public class Player {
     public Player build(){
       return new Player(this);
     }
-
   }
-
 }
 

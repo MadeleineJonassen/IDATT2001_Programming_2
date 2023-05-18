@@ -1,44 +1,96 @@
 package edu.ntnu.idatt2001.GUI;
 
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import edu.ntnu.idatt2001.Players.Player;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 
-public class createPlayer {
+import javax.imageio.plugins.tiff.BaselineTIFFTagSet;
 
-  public static void display() {
-    Stage window = new Stage();
+public class createPlayer extends Dialog<Player> {
 
-    window.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
-    window.setMinWidth(300);
+  private Player player;
 
-    VBox helpLayout = new VBox();
-    helpLayout.setAlignment((Pos.CENTER));
-    helpLayout.setSpacing(10);
+  private TextField playerName;
+  private TextField playerHealth;
+  private TextField playerGold;
+  private TextField playerScore;
+  private TextField playerInventory;
+
+  public createPlayer(Player player) {
+    super();
+    this.setTitle("Create Player");
+    this.player = player;
+    buildUI();
+    setPropertyBindings();
+    setResultConverter();
+  }
+
+  private void buildUI() {
+    Pane createPlayer = createPlayerPane();
+    getDialogPane().setContent(createPlayer);
+    getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+    Button button = (Button) getDialogPane().lookupButton(ButtonType.OK);
+    button.addEventFilter(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent actionEvent) {
+        if (! validateDialog()){
+          actionEvent.consume();
+        }
+      }
+      private boolean validateDialog() {
+        if ((playerName.getText().isEmpty() || playerHealth.getText().isEmpty() || playerGold.getText().isEmpty() ||playerScore.getText().isEmpty() || playerInventory.getText().isEmpty())) {
+          return false;
+        }
+        return true;
+      }
+    });
+    getDialogPane().expandableContentProperty().set(new Label("Here, you can add a player given the specified text fields"));
+  }
+
+  private void setPropertyBindings() {
+    //playerName.textProperty().bindBidirectional(player.getName());
+    //TO DO: Figure out properties and
+  }
+
+  private void setResultConverter() {
+    Callback<ButtonType, Player> playerResultConverter = new Callback<ButtonType, Player>() {
+      @Override
+              public Player call(ButtonType param) {
+        if (param == ButtonType.OK) {
+          return player;
+        } else {
+          return null;
+        }
+      }
+    };
+    setResultConverter(playerResultConverter);
+  }
+
+
+  public Pane createPlayerPane() {
+
+    VBox createPlayerLayout = new VBox(10);
+      createPlayerLayout.setId("boxes");
+
     Label createPlayerTitle = new Label("Create Player");
-    TextField playerName = new TextField();
+    this.playerName = new TextField();
       playerName.setPromptText("Player name");
-    TextField playerHealth = new TextField();
+    this.playerHealth = new TextField();
       playerHealth.setPromptText("Player health");
-    TextField playerGold = new TextField();
+    this.playerGold = new TextField();
       playerGold.setPromptText("Player gold");
-    TextField playerScore = new TextField();
+    this.playerScore = new TextField();
       playerScore.setPromptText("Player score");
-    TextField playerInventory = new TextField(); //May change later based on the ability to add/ edit inventory
+    this.playerInventory = new TextField(); //May change later based on the ability to add/ edit inventory
       playerInventory.setPromptText("Player Inventory");
-    Button closeButton = new Button(("Submit"));
-      closeButton.setOnAction(e -> window.close());
-    helpLayout.getChildren().addAll(createPlayerTitle,playerName,playerHealth,playerGold,playerScore,playerInventory, closeButton);
 
-    Scene scene = new Scene(helpLayout, 300,300);
-    window.setScene(scene);
-    window.showAndWait();
+    createPlayerLayout.getChildren().addAll(createPlayerTitle, playerName, playerHealth, playerGold, playerScore, playerInventory);
+
+    return createPlayerLayout;
   }
 }

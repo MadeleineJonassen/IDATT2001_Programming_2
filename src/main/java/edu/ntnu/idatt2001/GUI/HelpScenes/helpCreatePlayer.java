@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.GUI;
+package edu.ntnu.idatt2001.GUI.HelpScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class helpScene {
+public class helpCreatePlayer {
 
   public static void display() {
     Stage window = new Stage();
@@ -21,15 +21,16 @@ public class helpScene {
     VBox helpLayout = new VBox();
     helpLayout.setAlignment((Pos.CENTER));
     helpLayout.setSpacing(10);
-      Label helpTitle = new Label("What to do in Paths");
+      Label helpTitle = new Label("What to do in 'Create Player'");
       helpTitle.setFont(Font.font(30));
-      Text helpText1 = new Text("Press the button and it will take you on the right path.");
-      Text helpText2 = new Text("Yes, pun intended.");
+      Text helpText1 = new Text("By clicking 'Select Player', you will be able to select a player from the application or create your own!");
+      Text helpText2 = new Text("By clicking 'Create Goal', a window should pop up. Here you can create your own goals within the game");
       Button closeButton = new Button(("Okay"));
        closeButton.setOnAction(e -> window.close());
     helpLayout.getChildren().addAll(helpTitle, helpText1, helpText2, closeButton);
 
     Scene scene = new Scene(helpLayout, 300,300);
+    window.setResizable(false);
     window.setScene(scene);
     window.showAndWait();
   }

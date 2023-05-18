@@ -1,16 +1,17 @@
 package edu.ntnu.idatt2001.Players;
 
+import javafx.collections.ObservableList;
+
 import java.util.Collections;
-import java.util.List;
+
+import static edu.ntnu.idatt2001.GUI.MainMenu.playerListView;
 
 public class PlayerData {
 
-  //TODO make a list of "listed" players.
-
-  //private List listedPlayers = new List <>;
-  public static Player playerData(){
-    Player Swordsman = new Player.Builder("Swordsman", 250, 10, 100).inventory(Collections.singletonList("Sword")).build();
-    Player Witch = new Player.Builder("Witch", 200, 35, 150).inventory(Collections.singletonList("Book of Spells")).build();
-    return Swordsman;
+  public static String getPlayers() {
+    ObservableList players = playerListView.getItems();
+    players.add(new Player.Builder("Swordsman", 250, 10, 100, Collections.singletonList("Sword")).build());
+    players.add(new Player.Builder("Witch", 200, 35, 150, Collections.singletonList("Book of Spells")).build());
+    return players.toString();
   }
 }
