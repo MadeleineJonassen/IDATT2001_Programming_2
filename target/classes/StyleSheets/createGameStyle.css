@@ -52,10 +52,11 @@
     -fx-pref-height: 50;
 }
 
-.text-field {
+.textField {
     -fx-pref-width: 200;
     -fx-pref-height: 10;
 }
+
 
 .helpButton {
     -fx-background-color: transparent;

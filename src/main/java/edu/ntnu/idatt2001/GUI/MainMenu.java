@@ -11,12 +11,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.text.Element;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -73,7 +77,7 @@ public class MainMenu extends Application {
     BorderPane layoutMenu = new BorderPane();
       layoutMenu.setTop(layoutMenuTitle);
       layoutMenu.setCenter(layoutMenuOptions);
-    mainMenuScene = new Scene(layoutMenu, 900, 700);
+    mainMenuScene = new Scene(layoutMenu, 1300, 700);
     mainMenuScene.getStylesheets().add("StyleSheets/menuStyle.css");
 
 
@@ -120,6 +124,7 @@ public class MainMenu extends Application {
     // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
       layoutBottom.setId("boxes");
+
     Button helpBtn = new Button(" ");
       helpBtn.getStyleClass().add("helpButton");
       helpBtn.setOnAction(e -> helpCreatePlayer.display());
@@ -140,7 +145,7 @@ public class MainMenu extends Application {
       layoutCreateGame.setCenter(createGameLayout);
       layoutCreateGame.setBottom(layoutBottom);
       layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
-    createGameScene = new Scene(layoutCreateGame, 900,700);
+    createGameScene = new Scene(layoutCreateGame, 1300, 700);
 
 
 
@@ -202,7 +207,7 @@ public class MainMenu extends Application {
     BorderPane createStoryLayout = new BorderPane();
     createStoryLayout.setTop(createStoryTop);
     createStoryLayout.setCenter(createStoryMid);
-    createStoryScene = new Scene(createStoryLayout, 900, 700);
+    createStoryScene = new Scene(createStoryLayout, 1300, 700);
     createStoryScene.getStylesheets().add("StyleSheets/createGameStyle.css");
 
 
@@ -212,42 +217,79 @@ public class MainMenu extends Application {
     BorderPane createPlayerTop = new BorderPane();
     createPlayerTop.setId("boxes");
     Button goToCreateHomePlayer = new Button(" ");
-    goToCreateHomePlayer.getStyleClass().add("backButton");
-    goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
+      goToCreateHomePlayer.getStyleClass().add("backButton");
+      goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
     Label createPlayerTitle = new Label("Create Player");
-    createPlayerTop.setId("title");
+      createPlayerTop.setId("title");
     Label createPlayerUnderTitle = new Label("Select, delete or add your player to the library");
-    createPlayerUnderTitle.setId("underTitle");
+      createPlayerUnderTitle.setId("underTitle");
     createPlayerTop.setLeft(goToCreateHomePlayer);
     createPlayerTop.setCenter(createPlayerTitle);
     createPlayerTop.setBottom(createPlayerUnderTitle);
 
     // Mid create player layout
-    HBox createPlayerMid = new HBox();
-      VBox createPlayer = new VBox();
-      createPlayer.setId("boxes");
-      playerListView.getItems().addAll(PlayerData.getPlayers());
-      Button addPlayer = new Button("Add Player");
-      addPlayer.setOnAction(actionEvent -> {
-        //TODO: make listview display into own method + next TODO
-        Dialog<Player> createPlayer1 = new createPlayer(new Player.Builder(null,0,0,0,null).build());
-        Optional<Player> result = createPlayer1.showAndWait();
-        if (result.isPresent()) {
-          Player player = result.get();
-          playerListView.getItems().addAll(player.toString());
-          //TODO: be able to create a player (issue is using a builder pattern design)
-        }
-      });
-        //TODO: Bug fix with listview; last line prints out all info in the playerData() in one line
-      createPlayer.getChildren().addAll(addPlayer);
-    createPlayerMid.getChildren().addAll(playerListView, createPlayer);
+    VBox createPlayerMid = new VBox();
+    createPlayerMid.setId("boxes");
+    HBox playerNameLayout = new HBox();
+    playerNameLayout.setId("boxes");
+      TextField playerName = new TextField();
+        playerName.setPromptText("Enter Name");
+      Image nameIcon = new Image("photos/Icons/PlayerIcons/person-simple.png");
+      ImageView nameIconView = new ImageView();
+        nameIconView.setImage(nameIcon);
+        nameIconView.setFitWidth(30);
+        nameIconView.setFitHeight(30);
+    playerNameLayout.getChildren().addAll(playerName,nameIconView);
+    HBox playerHealthLayout = new HBox();
+    playerHealthLayout.setId("boxes");
+      TextField playerHealth = new TextField();
+        playerHealth.setPromptText("Enter Health");
+      Image healthIcon = new Image("photos/Icons/PlayerIcons/pharmacy (1).png");
+      ImageView healthIconView = new ImageView();
+      healthIconView.setImage(healthIcon);
+      healthIconView.setFitWidth(30);
+      healthIconView.setFitHeight(30);
+    playerHealthLayout.getChildren().addAll(playerHealth, healthIconView);
+    HBox playerGoldLayout = new HBox();
+    playerGoldLayout.setId("boxes");
+      TextField playerGold = new TextField();
+        playerGold.setPromptText("Enter Gold");
+      Image goldIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
+      ImageView goldIconView = new ImageView();
+      goldIconView.setImage(goldIcon);
+      goldIconView.setFitWidth(30);
+      goldIconView.setFitHeight(30);
+      playerGoldLayout.getChildren().addAll(playerGold, goldIconView);
+    HBox playerScoreLayout = new HBox();
+    playerScoreLayout.setId("boxes");
+      TextField playerScore = new TextField();
+        playerScore.setPromptText("Enter Score");
+      Image scoreIcon = new Image("photos/Icons/PlayerIcons/star-sharp-half-stroke.png");
+      ImageView scoreIconView = new ImageView();
+        scoreIconView.setImage(scoreIcon);
+        scoreIconView.setFitWidth(30);
+        scoreIconView.setFitHeight(30);
+    playerScoreLayout.getChildren().addAll(playerScore, scoreIconView);
+    HBox playerInventoryLayout = new HBox();
+    playerInventoryLayout.setId("boxes");
+      TextField playerInventory = new TextField();
+        playerInventory.setPromptText("Enter Inventory");
+    playerInventoryLayout.getChildren().addAll(playerInventory);
+    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout ,playerGoldLayout,playerScoreLayout,playerInventoryLayout);
 
+    //
+    HBox createPlayerBottom = new HBox();
+    Button submitPlayerBtn = new Button("Submit player");
+    //TODO: make submit work
+    createPlayerBottom.getChildren().addAll(submitPlayerBtn);
 
     // * Overall Create Player Layout *
     BorderPane createPlayerLayout = new BorderPane();
+    createPlayerBottom.setId("boxes");
     createPlayerLayout.setTop(createPlayerTop);
     createPlayerLayout.setCenter(createPlayerMid);
-    createPlayerScene = new Scene(createPlayerLayout, 900, 700);
+    createPlayerLayout.setBottom(createPlayerBottom);
+    createPlayerScene = new Scene(createPlayerLayout, 1300, 700);
     createPlayerScene.getStylesheets().add("StyleSheets/createGameStyle.css");
 
 
@@ -261,7 +303,7 @@ public class MainMenu extends Application {
     goToCreateHomeGoals.setOnAction(e -> openWindow.setScene(createGameScene));
     Label createGoalTitle = new Label("Create Goal");
       createGoalTitle.setId("title");
-    Label createGoalUnderTitle = new Label("Select multiple or one goal for your character");
+    Label createGoalUnderTitle = new Label("Select one or multiple goal for your character");
     createGoalUnderTitle.setId("underTitle");
     createGoalTop.setLeft(goToCreateHomeGoals);
     createGoalTop.setCenter(createGoalTitle);
@@ -280,7 +322,7 @@ public class MainMenu extends Application {
     BorderPane createGoalLayout = new BorderPane();
     createGoalLayout.setTop(createGoalTop);
     createGoalLayout.setCenter(createGoalMid);
-    createGoalScene = new Scene(createGoalLayout, 900, 700);
+    createGoalScene = new Scene(createGoalLayout, 1300, 700);
     createGoalScene.getStylesheets().add("StyleSheets/createGameStyle.css");
 
 
@@ -333,7 +375,7 @@ public class MainMenu extends Application {
     layoutPlayGame.setTop(layoutPlayGameTop);
     layoutPlayGame.setCenter(layoutPlayGameMid);
     layoutPlayGame.getStylesheets().add("StyleSheets/playGameStyle.css");
-    playGameScene = new Scene(layoutPlayGame, 900,700);
+    playGameScene = new Scene(layoutPlayGame, 1300, 700);
 
 
 
