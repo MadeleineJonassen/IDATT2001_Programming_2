@@ -164,9 +164,11 @@ public class MainMenu extends Application {
     createStoryMid.setId("boxes");
       VBox createStoryMidDisplay = new VBox();
       createStoryMidDisplay.setId("boxes");
+      TextField displayStoryPath = new TextField();
+        displayStoryPath.setPromptText("Path for display");
         storyListView = new ListView<>();
         storyListView.setId("big-list-view");
-      createStoryMidDisplay.getChildren().addAll(storyListView);
+      createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView);
       VBox createStoryMidBtn = new VBox();
       createStoryMidBtn.setId("boxes");
         Button selectStory = new Button("Select ");
@@ -181,6 +183,7 @@ public class MainMenu extends Application {
                 Scanner fileScanner = new Scanner(selectedFile);
                 while (fileScanner.hasNextLine()) {
                   storyListView.getItems().add(fileScanner.nextLine() + "\n");
+                  displayStoryPath.setPromptText(selectedFile.getPath());
                 }
               } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
