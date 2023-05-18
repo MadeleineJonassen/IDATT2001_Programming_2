@@ -30,6 +30,7 @@ public class helpCreatePlayer {
     helpLayout.getChildren().addAll(helpTitle, helpText1, helpText2, closeButton);
 
     Scene scene = new Scene(helpLayout, 300,300);
+    window.setResizable(false);
     window.setScene(scene);
     window.showAndWait();
   }

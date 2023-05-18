@@ -24,7 +24,7 @@ import java.util.Scanner;
 
 public class MainMenu extends Application {
   Stage openWindow;
-  Scene mainMenuScene, createGameScene, playGameScene;
+  Scene mainMenuScene, createGameScene, createStoryScene, createPlayerScene, createGoalScene, playGameScene;
   ListView <String> storyListView;
   public static ComboBox playerBox;
 
@@ -52,7 +52,7 @@ public class MainMenu extends Application {
     layoutMenuTitle.getChildren().addAll(menuTitle, underTitle);
 
     // Mid menu layout
-    VBox layoutMenuOptions = new VBox();
+    HBox layoutMenuOptions = new HBox();
       layoutMenuOptions.setId("boxes");
     Button createGameBtn = new Button("Create Game");
       createGameBtn.setId("finalButton");
@@ -75,87 +75,27 @@ public class MainMenu extends Application {
     // Top create game layout
     BorderPane layoutCreateGameTop = new BorderPane();
     layoutCreateGameTop.setId("boxes");
-    Button goHomeCreateHome = new Button(" ");
-      goHomeCreateHome.getStyleClass().add("homeButton");
-      goHomeCreateHome.setOnAction(e -> openWindow.setScene(mainMenuScene));
-    Label createGameTitle = new Label("Create a game");
+    Button goHomeMenu = new Button(" ");
+      goHomeMenu.getStyleClass().add("homeButton");
+      goHomeMenu.setOnAction(e -> openWindow.setScene(mainMenuScene));
+    Label createGameTitle = new Label("Create game");
       createGameTitle.setId("title");
-    layoutCreateGameTop.setLeft(goHomeCreateHome);
+    layoutCreateGameTop.setLeft(goHomeMenu);
     layoutCreateGameTop.setCenter(createGameTitle);
 
     // Mid create game layout
-    HBox layoutCreateGameMid = new HBox();
-    layoutCreateGameMid.setId("boxes");
-
-    VBox storyTableLayout = new VBox();
-    storyTableLayout.setId("boxes");
-
-    VBox tableButton = new VBox();
-    tableButton.setId("boxes");
-      Button addStory = new Button("Add Story");
-      storyListView = new ListView<>();
-      Button openFile = new Button("Select Story");
-      openFile.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-          FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select a story");
-            fileChooser.setInitialDirectory(new File("src/resources/Stories"));
-          File selectedFile = fileChooser.showOpenDialog(openWindow);
-            if (selectedFile != null) {
-              try {
-                Scanner fileScanner = new Scanner(selectedFile);
-                while (fileScanner.hasNextLine()) {
-                  storyListView.getItems().add(fileScanner.nextLine() + "\n");
-                }
-              } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-              }
-          }
-        }
-      });
-    tableButton.getChildren().addAll(openFile, addStory);
-    storyTableLayout.getChildren().addAll(tableButton, storyListView);
-
-    layoutCreateGameMid.getChildren().addAll(storyTableLayout);
+    VBox createGameLayout = new VBox();
+    createGameLayout.setId("boxes");
+    Button createStory = new Button("Story");
+      createStory.setOnAction(e -> openWindow.setScene(createStoryScene));
+    Button createPlayer = new Button("Player");
+      createPlayer.setOnAction(e -> openWindow.setScene(createPlayerScene));
+    Button createGoal = new Button("Goals");
+      createGoal.setOnAction(e -> openWindow.setScene(createGoalScene));
+    createGameLayout.getChildren().addAll(createStory, createPlayer, createGoal);
 
 
-
-    VBox playerLayout = new VBox();
-    playerLayout.setId("boxes");
-      playerListView.getItems().addAll(PlayerData.getPlayers());
-      Button addPlayer = new Button("Add Player");
-        addPlayer.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-              Dialog<Player> createPlayer = new createPlayer(new Player.Builder(null,0,0,0,null).build());
-              Optional<Player> result = createPlayer.showAndWait();
-
-              if (result.isPresent()) {
-                Player player = result.get();
-                playerListView.getItems().addAll(player.toString());
-              }
-            }
-        });
-      /*playerBox = new ComboBox<>();
-      playerBox.setPromptText("Select player");
-      ObservableList<Player> players = playerBox.getItems();
-      players.add(new Player.Builder("Swordsman", 250, 10, 100).inventory(Collections.singletonList("Sword")).build());
-      players.add(new Player.Builder("Witch", 200, 35, 150).inventory(Collections.singletonList("Book of Spells")).build());
-      playerBox.getItems().add("Create new player");
-      playerBox.setOnAction(e -> {
-        if (playerBox.getValue() == "Create new player") {
-          createPlayer.display();
-        }
-      } );
-       */
-    Button goalBox = new Button("Create Goal");
-      goalBox.setOnAction(e -> createGoals.display());
-
-    playerLayout.getChildren().addAll(addPlayer, playerListView, goalBox);
-
-
-    // Bottom menu layer
+    // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
       layoutBottom.setId("boxes");
     Button helpBtn = new Button(" ");
@@ -176,16 +116,147 @@ public class MainMenu extends Application {
     // Whole create game layout
     BorderPane layoutCreateGame = new BorderPane();
       layoutCreateGame.setTop(layoutCreateGameTop);
-      layoutCreateGame.setCenter(layoutCreateGameMid);
-      layoutCreateGame.setRight(playerLayout);
+      layoutCreateGame.setCenter(createGameLayout);
       layoutCreateGame.setBottom(layoutBottom);
       layoutCreateGame.getStylesheets().add("StyleSheets/menu.css");
     createGameScene = new Scene(layoutCreateGame, 900,700);
 
 
 
+    // ***CREATE STORY SCENE ***
+    // Top create story layout
+    BorderPane createStoryTop = new BorderPane();
+      createStoryTop.setId("boxes");
+    Button goToCreateHomeStory = new Button(" ");
+    goToCreateHomeStory.getStyleClass().add("homeButton");
+    goToCreateHomeStory.setOnAction(e -> openWindow.setScene(createGameScene));
+      Label createStoryTitle = new Label("Create Story");
+      createStoryTitle.setId("title");
+      Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
+      createStoryUnderTitle.setId("underTitle");
+    createStoryTop.setLeft(goToCreateHomeStory);
+    createStoryTop.setCenter(createStoryTitle);
+    createStoryTop.setBottom(createStoryUnderTitle);
+
+    // Mid create story layout
+    HBox createStoryMid = new HBox();
+    createStoryMid.setId("boxes");
+      VBox createStoryMidDisplay = new VBox();
+      createStoryMidDisplay.setId("boxes");
+        storyListView = new ListView<>();
+      createStoryMidDisplay.getChildren().addAll(storyListView);
+      VBox createStoryMidBtn = new VBox();
+      createStoryMidBtn.setId("boxes");
+        Button selectStory = new Button("Select ");
+          selectStory.setOnAction(actionEvent -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select a story");
+            fileChooser.setInitialDirectory(new File("src/resources/Stories"));
+            File selectedFile = fileChooser.showOpenDialog(openWindow);
+            if (selectedFile != null) {
+              try {
+                Scanner fileScanner = new Scanner(selectedFile);
+                while (fileScanner.hasNextLine()) {
+                  storyListView.getItems().add(fileScanner.nextLine() + "\n");
+                }
+              } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+              }
+            }
+          });
+        Button addStory = new Button("Add");
+        Button editStory = new Button("Edit");
+      createStoryMidBtn.getChildren().addAll(selectStory,addStory,editStory);
+    createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);
+
+    // * Whole Create Story layout *
+    BorderPane createStoryLayout = new BorderPane();
+    createStoryLayout.setTop(createStoryTop);
+    createStoryLayout.setCenter(createStoryMid);
+    createStoryScene = new Scene(createStoryLayout, 900, 700);
+    createStoryScene.getStylesheets().add("StyleSheets/menu.css");
+
+
+
+    // *** CREATE PLAYER SCENE ***
+    // Top create player layout
+    BorderPane createPlayerTop = new BorderPane();
+    createPlayerTop.setId("boxes");
+    Button goToCreateHomePlayer = new Button(" ");
+    goToCreateHomePlayer.getStyleClass().add("homeButton");
+    goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
+    Label createPlayerTitle = new Label("Create Player");
+    createPlayerTop.setId("title");
+    Label createPlayerUnderTitle = new Label("Select, delete or add your player to the library");
+    createPlayerUnderTitle.setId("underTitle");
+    createPlayerTop.setLeft(goToCreateHomePlayer);
+    createPlayerTop.setCenter(createPlayerTitle);
+    createPlayerTop.setBottom(createPlayerUnderTitle);
+
+    // Mid create player layout
+    HBox createPlayerMid = new HBox();
+      VBox createPlayerBtn = new VBox();
+      createPlayerBtn.setId("boxes");
+      playerListView.getItems().addAll(PlayerData.getPlayers());
+      Button addPlayer = new Button("Add Player");
+      addPlayer.setOnAction(actionEvent -> {
+        Dialog<Player> createPlayer1 = new createPlayer(new Player.Builder(null,0,0,0,null).build());
+        Optional<Player> result = createPlayer1.showAndWait();
+
+        if (result.isPresent()) {
+          Player player = result.get();
+          playerListView.getItems().addAll(player.toString());
+        }
+      });
+
+      createPlayerBtn.getChildren().addAll(addPlayer);
+    createPlayerMid.getChildren().addAll(playerListView, createPlayerBtn);
+
+    // * Whole Create Player layout *
+    BorderPane createPlayerLayout = new BorderPane();
+    createPlayerLayout.setTop(createPlayerTop);
+    createPlayerLayout.setCenter(createPlayerMid);
+    createPlayerScene = new Scene(createPlayerLayout, 900, 700);
+    createPlayerScene.getStylesheets().add("StyleSheets/menu.css");
+
+
+
+    // *** CREATE GOALS SCENE ***
+    // Top create goals layout
+    BorderPane createGoalTop = new BorderPane();
+    createGoalTop.setId("boxes");
+    Button goToCreateHomeGoals = new Button(" ");
+    goToCreateHomeGoals.getStyleClass().add("homeButton");
+    goToCreateHomeGoals.setOnAction(e -> openWindow.setScene(createGameScene));
+    Label createGoalTitle = new Label("Create Goal");
+      createGoalTitle.setId("title");
+    Label createGoalUnderTitle = new Label("Select multiple or one goal for your character");
+    createGoalUnderTitle.setId("underTitle");
+    createGoalTop.setLeft(goToCreateHomeGoals);
+    createGoalTop.setCenter(createGoalTitle);
+    createGoalTop.setBottom(createPlayerUnderTitle);
+
+    // Mid create goal layout
+    VBox createGoalMid = new VBox();
+    createGoalMid.setId("boxes");
+      Button goalBox = new Button("Create Goal");
+      goalBox.setOnAction(e -> createGoals.display());
+    createGoalMid.getChildren().addAll(goalBox);
+
+
+    // * Whole Create Goal layout *
+    BorderPane createGoalLayout = new BorderPane();
+    createGoalLayout.setTop(createGoalTop);
+    createGoalLayout.setCenter(createGoalMid);
+    createGoalScene = new Scene(createGoalLayout, 900, 700);
+    createGoalScene.getStylesheets().add("StyleSheets/menu.css");
+
+
+
+
+
     // ***** PLAY GAME LAYOUT *****
-    // Top playing game layout
+    // Top play game layout
     BorderPane layoutPlayGameTop = new BorderPane();
     layoutPlayGameTop.setPadding(new Insets(20));
     Button goHomePlayGame = new Button(" ");
@@ -196,11 +267,38 @@ public class MainMenu extends Application {
     layoutPlayGameTop.setLeft(goHomePlayGame);
     layoutPlayGameTop.setCenter(playGameTitle);
 
+    // Mid play game layout
+    BorderPane layoutPlayGameMid = new BorderPane();
+      layoutPlayGameMid.setId("boxes");
+    playerListView = new ListView<>();
+      playerListView.getItems().addAll(PlayerData.getPlayers()); //TODO: set selected player
+    storyListView = new ListView<>();
+      storyListView.getItems().addAll();  //TODO: set selected story
+    HBox userOptions = new HBox();
+      userOptions.setId("boxes");
+      //TODO: Make HBox create buttons based on number of passages
+    VBox rightInfoBox = new VBox();
+      rightInfoBox.setId("boxes");
+      ComboBox setGoals = new ComboBox<>();
+        setGoals.setPromptText("Goals/Achievements");
+          //TODO: add selected goals in box and add function "crossed out" when finished a goal
+      Button options = new Button("options?");
+      Button other = new Button("other?");
+    rightInfoBox.getChildren().addAll(setGoals,options,other);
+    layoutPlayGameMid.setTop(playerListView);
+    layoutPlayGameMid.setCenter(storyListView);
+    layoutPlayGameMid.setRight(rightInfoBox);
+    layoutPlayGameMid.setBottom(userOptions);
+
+
+
     // Whole playing game layout
     BorderPane layoutPlayGame = new BorderPane();
     layoutPlayGame.setTop(layoutPlayGameTop);
+    layoutPlayGame.setCenter(layoutPlayGameMid);
     layoutPlayGame.getStylesheets().add("StyleSheets/playGameStyle.css");
     playGameScene = new Scene(layoutPlayGame, 900,700);
+
 
 
 
