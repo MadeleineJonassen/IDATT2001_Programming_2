@@ -3,8 +3,11 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.ScanStory;
+import edu.ntnu.idatt2001.View.CreateStoryView;
+import edu.ntnu.idatt2001.View.MainMenuView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,11 +22,33 @@ import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
 
 public class CreateStoryController {
   
-  private GameManager gameManager;
-  
+  //private GameManager gameManager;
+
+  private CreateStoryView view;
+  private final Stage stage;
+
+  public CreateStoryController(Stage stage){
+    this.stage = stage;
+  }
+
+  public void initialize() {
+    CreateStoryView view = new CreateStoryView(stage, this);
+    view.setup();
+  }
+/*
+  public void createGame() {
+    CreateGameController controller = new CreateGameController(stage, this);
+    controller.initialize();
+  }
+
+
+
+ */
+  /*
   public CreateStoryController(GameManager gameManager) {
     this.gameManager = gameManager;
   }
+
 
   public static void chooseStory() {
     FileChooser fileChooser = new FileChooser();
@@ -32,10 +57,11 @@ public class CreateStoryController {
     File selectedFile = fileChooser.showOpenDialog(MainMenu.openWindow);
     if (selectedFile != null) {
       try {
+        MainMenu.displayStoryPath.setPromptText(selectedFile.getPath());
         Scanner fileScanner = new Scanner(selectedFile);
         while (fileScanner.hasNextLine()) {
-          storyListView.getItems().add(fileScanner.nextLine() + "\n");
-          displayStoryPath.setPromptText(selectedFile.getPath());
+          MainMenu.storyListView.getItems().add(fileScanner.nextLine() + "\n");
+          storyListView.getItems().add("test");
         }
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
@@ -45,11 +71,10 @@ public class CreateStoryController {
 
 
 
-
   /** Lists all files in the resources' folder. Returns a set of strings
    *
    * @return files
-   */
+   **/
   public Set<String> listFiles() {
     //TODO: add exceptions if path is invalid, or empty
     //TODO: filter or sort by file type (se filechooser)
@@ -61,7 +86,7 @@ public class CreateStoryController {
             .collect(Collectors.toSet());
   }
   
-  
+  /*
   public void scanStory(String fileName) throws FileNotFoundException {
     //TODO: exception handling
     File file = new File("src/main/resources" + fileName);
@@ -92,5 +117,7 @@ public class CreateStoryController {
   public void editPassage(String passageName){
     //Open popup window
   }
-  
+
+
+   */
 }

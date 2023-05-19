@@ -52,49 +52,20 @@ public class MainMenu extends Application {
 
     openWindow = primaryStage;
 
-    // **************************** MENU ****************************
-    // Top menu layout
-    VBox layoutMenuTitle = new VBox();
-    layoutMenuTitle.setId("titleBox");
-    Label menuTitle = new Label("PATHS");
-      menuTitle.setId("title");
-    Label menuUnderTitle = new Label("A story based game engine");
-      menuUnderTitle.setId("underTitle");
-    layoutMenuTitle.getChildren().addAll(menuTitle, menuUnderTitle);
-
-    // Mid menu layout
-    VBox layoutMenuOptions = new VBox();
-    layoutMenuOptions.setId("boxes");
-    Button createGameBtn = new Button("Create Game");
-      createGameBtn.setId("menuButton");
-      createGameBtn.setOnAction(e -> openWindow.setScene(createGameScene));
-    Button excitingGameBtn = new Button("Play game");
-      excitingGameBtn.setId("menuButton");
-      excitingGameBtn.setOnAction(e -> openWindow.setScene(playGameScene));
-    layoutMenuOptions.getChildren().addAll(createGameBtn, excitingGameBtn);
-
-    // * Overall Main Menu Layout *
-    BorderPane layoutMenu = new BorderPane();
-      layoutMenu.setCenter(layoutMenuTitle);
-      layoutMenu.setLeft(layoutMenuOptions);
-    mainMenuScene = new Scene(layoutMenu, 1300, 700);
-    mainMenuScene.getStylesheets().add("StyleSheets/menuStyle.css");
-
-
 
     // **************************** CREATE GAME LAYOUT ****************************
     // Top create game layout
     BorderPane layoutCreateGameTop = new BorderPane();
     layoutCreateGameTop.setId("boxes");
     Button goHomeMenu = new Button(" ");
-      goHomeMenu.getStyleClass().add("homeButton");
-      goHomeMenu.setOnAction(e -> openWindow.setScene(mainMenuScene));
+    goHomeMenu.getStyleClass().add("homeButton");
+      //goHomeMenu.setOnAction(e -> controller.mainMenu());
     VBox createGameTopMid = new VBox();
     createGameTopMid.setId("boxes");
-      Label createGameTitle = new Label("Create game");
-        createGameTitle.setId("title");
-      Label createGameUnderTitle = new Label("Create your own game!");
-        createGameUnderTitle.setId("underTitle");
+    Label createGameTitle = new Label("Create game");
+    createGameTitle.setId("title");
+    Label createGameUnderTitle = new Label("Create your own game!");
+    createGameUnderTitle.setId("underTitle");
     createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);
     layoutCreateGameTop.setLeft(goHomeMenu);
     layoutCreateGameTop.setCenter(createGameTopMid);
@@ -104,40 +75,40 @@ public class MainMenu extends Application {
     createGameLayout.setId("boxes");
     HBox menuStoryLayout = new HBox();
     menuStoryLayout.setId("boxes");
-      Button createStoryBtn = new Button("Story");
-        createStoryBtn.setOnAction(e -> openWindow.setScene(createStoryScene));
-      TextField storySelectedDisplay = new TextField();
-        storySelectedDisplay.setPromptText("Story not selected yet...");
-        //TODO: display selected story
+    Button createStoryBtn = new Button("Story");
+      //createStoryBtn.setOnAction(e -> controller.createStory());
+    TextField storySelectedDisplay = new TextField();
+    storySelectedDisplay.setPromptText("Story not selected yet...");
+    //TODO: display selected story
     menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);
     HBox menuPlayerLayout = new HBox();
     menuPlayerLayout.setId("boxes");
-      Button createPlayerBtn = new Button("Player");
-        createPlayerBtn.setOnAction(e -> openWindow.setScene(createPlayerScene));
-      TextField playerSelectedDisplay = new TextField();
-        playerSelectedDisplay.setPromptText("Player not selected yet");
+    Button createPlayerBtn = new Button("Player");
+      //createPlayerBtn.setOnAction(e -> controller.createPlayer());
+    TextField playerSelectedDisplay = new TextField();
+    playerSelectedDisplay.setPromptText("Player not selected yet");
     menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);
     HBox menuGoalsLayout = new HBox();
     menuGoalsLayout.setId("boxes");
-      Button createGoalBtn = new Button("Goals");
-        createGoalBtn.setOnAction(e -> openWindow.setScene(createGoalScene));
-      ListView goalsSelectedDisplay = new ListView<>();
+    Button createGoalBtn = new Button("Goals");
+      //createGoalBtn.setOnAction(e -> controller.createGoals());
+    ListView goalsSelectedDisplay = new ListView<>();
     menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);
     createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);
 
 
     // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
-      layoutBottom.setId("boxes");
+    layoutBottom.setId("boxes");
     Button helpBtn = new Button(" ");
-      helpBtn.getStyleClass().add("helpButton");
-      helpBtn.setOnAction(e -> helpCreatePlayer.display());
+    helpBtn.getStyleClass().add("helpButton");
+    helpBtn.setOnAction(e -> helpCreatePlayer.display());
     Button submitNewGame = new Button("Submit");
     submitNewGame.setId("finalButton");
     submitNewGame.setDisable(!storySelectedDisplay.hasProperties() && !playerSelectedDisplay.hasProperties() && !goalsSelectedDisplay.hasProperties());
     submitNewGame.setOnAction(e -> {
       //TODO: Save selected info and error handling
-      openWindow.setScene(playGameScene);
+    //  stage.setScene(controller.playGame());
     });
     Region space = new Region();
     layoutBottom.setLeft(helpBtn);
@@ -146,12 +117,15 @@ public class MainMenu extends Application {
 
     // * Overall Create Game Layout *
     BorderPane layoutCreateGame = new BorderPane();
-      layoutCreateGame.setTop(layoutCreateGameTop);
-      layoutCreateGame.setCenter(createGameLayout);
-      layoutCreateGame.setBottom(layoutBottom);
-      layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
-    createGameScene = new Scene(layoutCreateGame, 1300, 700);
+    layoutCreateGame.setTop(layoutCreateGameTop);
+    layoutCreateGame.setCenter(createGameLayout);
+    layoutCreateGame.setBottom(layoutBottom);
+    //layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
 
+    Scene scene = new Scene(layoutCreateGame, 1300, 700);
+    scene.getStylesheets().add("StyleSheets/createGame  Style.css");
+    //stage.setScene(scene);
+    //stage.show();
 
 
     // -------------------- CREATE STORY SCENE --------------------
@@ -186,7 +160,7 @@ public class MainMenu extends Application {
       createStoryMidBtn.setId("boxes");
         Button selectStory = new Button("Select ");
           selectStory.setOnAction(actionEvent -> {
-            CreateStoryController.chooseStory();
+            //  CreateStoryController.chooseStory();
             //Story.getBrokenLinks();
             //TODO: fileDisplay-functionality; broken links, ect.
           });

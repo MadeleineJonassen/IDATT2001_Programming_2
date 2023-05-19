@@ -3,7 +3,11 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.View.CreateGameView;
+import edu.ntnu.idatt2001.View.CreatePlayerView;
+import edu.ntnu.idatt2001.View.MainMenuView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +15,30 @@ import java.util.List;
 import static edu.ntnu.idatt2001.GUI.MainMenu.playerErrorIcon;
 
 public class CreatePlayerController {
+
+  private final Stage stage;
+  private CreatePlayerView view;
+
+
+  public CreatePlayerController(Stage stage){
+    this.stage = stage;
+  }
+
+  public void initialize() {
+    CreatePlayerView view = new CreatePlayerView(stage, this);
+    view.setup();
+  }
+/*
+  public void createGame() {
+    CreateGameController controller = new CreateGameController(stage, this);
+    controller.initialize();
+  }
+
+
+
+  /*
   private GameManager gameManager;
-  
+
   private Player player;
   private List<String> inventory = new ArrayList<>();
   
@@ -23,7 +49,6 @@ public class CreatePlayerController {
     //if (gameManager.getPlayer.getInventory != null) {this.inventory = gameManager.getPlayer.getInventory}
     //^^ to sync inventory items for builder
   }
-  /*
   
   //attach listeners in view?
   
