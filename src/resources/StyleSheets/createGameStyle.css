@@ -136,7 +136,8 @@
     -fx-background-color: "2F4858";
 }
 
-.invinsable {
+
+.invincible {
     -fx-background-color: transparent;
     -fx-background-size: stretch;
     -fx-alignment: center;
@@ -151,7 +152,6 @@
     -fx-pref-height: 30;
 }
 .errorText {
-    -fx-text-fill: "DD5050";
     -fx-border-color: "DD5050";
 }
 

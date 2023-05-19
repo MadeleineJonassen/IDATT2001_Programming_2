@@ -28,7 +28,7 @@ public class MainMenu extends Application {
 
   public static TextField displayStoryPath, displayBrokenLinks;
   public static ListView <String> storyListView; //TODO: Change from string to story?
-  public static ListView<String> playerListView = new ListView();
+  public static ListView<String> playerListView;
   public static TextField  playerName, playerHealth, playerGold, playerScore, playerInventory;
   public static Button submitPlayerBtn, playerErrorIcon;
 
@@ -55,28 +55,28 @@ public class MainMenu extends Application {
     // **************************** MENU ****************************
     // Top menu layout
     VBox layoutMenuTitle = new VBox();
-    layoutMenuTitle.setId("boxes");
-    Label menuTitle = new Label("Paths");
+    layoutMenuTitle.setId("titleBox");
+    Label menuTitle = new Label("PATHS");
       menuTitle.setId("title");
-    Label underTitle = new Label("Welcome to a story based game engine!");
-      underTitle.setId("underTitle");
-    layoutMenuTitle.getChildren().addAll(menuTitle, underTitle);
+    Label menuUnderTitle = new Label("A story based game engine");
+      menuUnderTitle.setId("underTitle");
+    layoutMenuTitle.getChildren().addAll(menuTitle, menuUnderTitle);
 
     // Mid menu layout
-    HBox layoutMenuOptions = new HBox();
-      layoutMenuOptions.setId("boxes");
+    VBox layoutMenuOptions = new VBox();
+    layoutMenuOptions.setId("boxes");
     Button createGameBtn = new Button("Create Game");
-      createGameBtn.setId("finalButton");
+      createGameBtn.setId("menuButton");
       createGameBtn.setOnAction(e -> openWindow.setScene(createGameScene));
     Button excitingGameBtn = new Button("Play game");
-      excitingGameBtn.setId("finalButton");
+      excitingGameBtn.setId("menuButton");
       excitingGameBtn.setOnAction(e -> openWindow.setScene(playGameScene));
     layoutMenuOptions.getChildren().addAll(createGameBtn, excitingGameBtn);
 
     // * Overall Main Menu Layout *
     BorderPane layoutMenu = new BorderPane();
-      layoutMenu.setTop(layoutMenuTitle);
-      layoutMenu.setCenter(layoutMenuOptions);
+      layoutMenu.setCenter(layoutMenuTitle);
+      layoutMenu.setLeft(layoutMenuOptions);
     mainMenuScene = new Scene(layoutMenu, 1300, 700);
     mainMenuScene.getStylesheets().add("StyleSheets/menuStyle.css");
 
@@ -93,9 +93,9 @@ public class MainMenu extends Application {
     createGameTopMid.setId("boxes");
       Label createGameTitle = new Label("Create game");
         createGameTitle.setId("title");
-      Label createGameUndertitle = new Label("Create your own game!");
-        createGameUndertitle.setId("underTitle");
-    createGameTopMid.getChildren().addAll(createGameTitle, createGameUndertitle);
+      Label createGameUnderTitle = new Label("Create your own game!");
+        createGameUnderTitle.setId("underTitle");
+    createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);
     layoutCreateGameTop.setLeft(goHomeMenu);
     layoutCreateGameTop.setCenter(createGameTopMid);
 
@@ -283,7 +283,7 @@ public class MainMenu extends Application {
     VBox createPlayerBottom = new VBox();
       createPlayerBottom.setId("boxes");
     playerErrorIcon = new Button("");
-      playerErrorIcon.getStyleClass().add("invinsable");
+      playerErrorIcon.getStyleClass().add("invincible");
     submitPlayerBtn = new Button("Submit player");
       submitPlayerBtn.setOnAction(e -> {
         CreatePlayerController.isString();
@@ -369,9 +369,8 @@ public class MainMenu extends Application {
     BorderPane layoutPlayGameMid = new BorderPane();
       layoutPlayGameMid.setId("boxes");
     playerListView = new ListView<>();
-      //TODO: set selected player; currently displaying the testDataPlayers
-      playerListView.getItems().addAll(PlayerData.getPlayers());
-    //storyListView = new ListView<>();
+      //TODO: set selected player;
+    storyListView = new ListView<>();
       //storyListView.getItems().addAll();
       //TODO: set selected story
     HBox userOptions = new HBox();
@@ -389,7 +388,7 @@ public class MainMenu extends Application {
       Button other = new Button("other?");
     rightInfoBox.getChildren().addAll(setGoals,options,other);
     layoutPlayGameMid.setTop(playerListView);
-    //layoutPlayGameMid.setCenter(storyListView);
+    layoutPlayGameMid.setCenter(storyListView);
     layoutPlayGameMid.setRight(rightInfoBox);
     layoutPlayGameMid.setBottom(userOptions);
 

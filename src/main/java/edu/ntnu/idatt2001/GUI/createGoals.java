@@ -46,7 +46,7 @@ public class createGoals {
         inputValueGoal = new TextField();
         inputValueGoal.setPromptText("Amount/Item");
       iconView = new Button();
-        iconView.getStyleClass().add("invinsable");
+        iconView.getStyleClass().add("invincible");
     optionsGoal.getChildren().addAll(selectGoal,inputValueGoal, iconView);
     Button closeButton = new Button(("Submit"));
       //TODO: save input
