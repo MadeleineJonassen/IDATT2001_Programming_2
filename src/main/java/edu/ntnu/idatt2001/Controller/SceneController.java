@@ -6,13 +6,13 @@ import javafx.stage.Stage;
 
 public class SceneController {
   
-  
+  /*
   public void switchScene(Stage stage, int sceneChoice, GameManager gameManager){
     //set gameManager for each controller/scene
     switch (sceneChoice){
       case 1:
         //main menu
-        MainMenuController mainMenuController = new MainMenuController();
+        //MainMenuController mainMenuController = new MainMenuController(ga);
         ///MainMenu mainMenu = new MainMenu(mainMenuController, gameManager);
         //stage.setScene(mainMenu.getScene);
         break;
@@ -50,4 +50,6 @@ public class SceneController {
     }
     
   }
+
+   */
 }

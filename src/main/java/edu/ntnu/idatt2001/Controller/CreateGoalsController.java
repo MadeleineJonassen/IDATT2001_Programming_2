@@ -2,13 +2,38 @@ package edu.ntnu.idatt2001.Controller;
 
 import edu.ntnu.idatt2001.Goal.*;
 import edu.ntnu.idatt2001.Model.GameManager;
+import edu.ntnu.idatt2001.View.CreateGameView;
+import edu.ntnu.idatt2001.View.CreateGoalsView;
+import edu.ntnu.idatt2001.View.MainMenuView;
+import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class CreateGoalsController {
-  private GameManager gameManager;
-  
+  //private GameManager gameManager;
+
+  private final Stage stage;
+  private CreateGoalsView view;
+
+
+  public CreateGoalsController(Stage stage){
+    this.stage = stage;
+  }
+
+  public void initialize() {
+    CreateGoalsView view = new CreateGoalsView(stage, this);
+    view.setup();
+  }
+  /*
+  public void createGame() {
+    CreateGameController controller = new CreateGameController(stage, this);
+    controller.initialize();
+  }
+
+
+
+  /*
   public CreateGoalsController(GameManager gameManager) {
     this.gameManager = gameManager;
   }
@@ -38,4 +63,6 @@ public class CreateGoalsController {
   public void clearGoals(){
   
   }
+
+   */
 }
