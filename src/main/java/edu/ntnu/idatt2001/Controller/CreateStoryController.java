@@ -3,8 +3,8 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.ScanStory;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,8 +42,34 @@ public class CreateStoryController {
       }
     }
   }
-  
-  /** Lists all files in the resources folder. Returns a set of strings
+
+
+  public static boolean isString(TextField playerName, String messageName, TextField playerInventory, String messageInventory ){
+    try{
+      //TODO: check to see if input is an integer
+      return true;
+    } catch(Exception e) {
+      playerName.setPromptText("Please input a valid name");
+      playerInventory.setPromptText("Please input a valid item");
+      return false;
+    }
+  }
+
+  public static boolean isInt(TextField playerHealth, String messageHealth, TextField playerGold, String messageGold, TextField playerScore, String messageScore) {
+    try{
+      int health = Integer.parseInt(playerHealth.getText());
+      int gold = Integer.parseInt(playerGold.getText());
+      int score = Integer.parseInt(playerScore.getText());
+      return true;
+    } catch(NumberFormatException e) {
+      playerHealth.setPromptText("Please input a valid number");
+      playerGold.setPromptText("Please input a valid number");
+      playerScore.setPromptText("Please input a valid number");
+      return false;
+    }
+  }
+
+  /** Lists all files in the resources' folder. Returns a set of strings
    *
    * @return files
    */

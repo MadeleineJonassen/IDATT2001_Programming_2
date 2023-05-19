@@ -6,21 +6,26 @@
     -fx-alignment: center;
     -fx-border-insets: 50;
 }
-#boxes {
+#boxes{
     -fx-padding: 20px;
     -fx-alignment: Center;
     -fx-spacing: 20;
 }
 
+
 #title {
     -fx-font-size: 65px;
     -fx-text-fill: "190B28";
     -fx-font-family: "Constantia";
-
 }
 #underTitle {
     -fx-background-color: "86BBD8";
     -fx-font-size: 18px;
+    -fx-text-fill: "190B28";
+    -fx-font-family: "Constantia";
+}
+#createTitles {
+    -fx-font-size: 50px;
     -fx-text-fill: "190B28";
     -fx-font-family: "Constantia";
 }
@@ -41,20 +46,28 @@
     -fx-background-color: "2F4858";
 }
 
-#big-list-view {
-    -fx-pref-width: 400;
-    -fx-pref-height: 250;
-}
+
 .list-view {
     -fx-background-color: "B2DAF0";
     -fx-font-family: "Constantia";
     -fx-pref-width: 200;
     -fx-pref-height: 50;
 }
+#big-list-view {
+    -fx-pref-width: 400;
+    -fx-pref-height: 250;
+}
+
 
 .textField {
-    -fx-pref-width: 200;
+    -fx-pref-width: 300;
     -fx-pref-height: 10;
+    -fx-font-family: "Constantia";
+}
+#playerTextFields{
+    -fx-pref-width: 300;
+    -fx-pref-height: 10;
+    -fx-font-family: "Constantia";
 }
 
 
@@ -121,5 +134,11 @@
 }
 #finalButton:pressed {
     -fx-background-color: "2F4858";
+}
+
+#error {
+    -fx-text-fill: red;
+    -fx-font-family: "Constantia";
+
 }
 

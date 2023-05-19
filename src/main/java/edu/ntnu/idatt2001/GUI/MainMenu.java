@@ -28,6 +28,8 @@ public class MainMenu extends Application {
   public static TextField displayStoryPath, displayBrokenLinks;
   public static ListView <String> storyListView; //TODO: Change from string to story?
   public static ListView<String> playerListView = new ListView();
+  public static TextField  playerName, playerHealth, playerGold, playerScore, playerInventory;
+  public static Button submitPlayerBtn;
 
 
 
@@ -86,10 +88,15 @@ public class MainMenu extends Application {
     Button goHomeMenu = new Button(" ");
       goHomeMenu.getStyleClass().add("homeButton");
       goHomeMenu.setOnAction(e -> openWindow.setScene(mainMenuScene));
-    Label createGameTitle = new Label("Create game");
-      createGameTitle.setId("title");
+    VBox createGameTopMid = new VBox();
+    createGameTopMid.setId("boxes");
+      Label createGameTitle = new Label("Create game");
+        createGameTitle.setId("title");
+      Label createGameUndertitle = new Label("Create your own game!");
+        createGameUndertitle.setId("underTitle");
+    createGameTopMid.getChildren().addAll(createGameTitle, createGameUndertitle);
     layoutCreateGameTop.setLeft(goHomeMenu);
-    layoutCreateGameTop.setCenter(createGameTitle);
+    layoutCreateGameTop.setCenter(createGameTopMid);
 
     // Mid create game layout
     VBox createGameLayout = new VBox();
@@ -121,7 +128,6 @@ public class MainMenu extends Application {
     // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
       layoutBottom.setId("boxes");
-
     Button helpBtn = new Button(" ");
       helpBtn.getStyleClass().add("helpButton");
       helpBtn.setOnAction(e -> helpCreatePlayer.display());
@@ -150,17 +156,19 @@ public class MainMenu extends Application {
     // -------------------- CREATE STORY SCENE --------------------
     // Top create story layout
     BorderPane createStoryTop = new BorderPane();
-      createStoryTop.setId("boxes");
+    createStoryTop.setId("boxes");
     Button goToCreateHomeStory = new Button(" ");
       goToCreateHomeStory.getStyleClass().add("backButton");
       goToCreateHomeStory.setOnAction(e -> openWindow.setScene(createGameScene));
-    Label createStoryTitle = new Label("Create Story");
-      createStoryTitle.setId("title");
-    Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
+    VBox creatStoryTopMid = new VBox();
+    creatStoryTopMid.setId("boxes");
+      Label createStoryTitle = new Label("Create Story");
+      createStoryTitle.setId("createTitles");
+      Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
       createStoryUnderTitle.setId("underTitle");
+    creatStoryTopMid.getChildren().addAll(createStoryTitle, createStoryUnderTitle);
     createStoryTop.setLeft(goToCreateHomeStory);
-    createStoryTop.setCenter(createStoryTitle);
-    createStoryTop.setBottom(createStoryUnderTitle);
+    createStoryTop.setCenter(creatStoryTopMid);
 
     // Mid create story layout
     HBox createStoryMid = new HBox();
@@ -201,25 +209,26 @@ public class MainMenu extends Application {
     // -------------------- CREATE PLAYER SCENE --------------------
     // Top create player layout
     BorderPane createPlayerTop = new BorderPane();
-    createPlayerTop.setId("boxes");
     Button goToCreateHomePlayer = new Button(" ");
       goToCreateHomePlayer.getStyleClass().add("backButton");
       goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
-    Label createPlayerTitle = new Label("Create Player");
-      createPlayerTop.setId("title");
-    Label createPlayerUnderTitle = new Label("Select, delete or add your player to the library");
+    VBox creatPlayerTopMid = new VBox();
+    creatPlayerTopMid.setId("boxes");
+      Label createPlayerTitle = new Label("Create Player");
+      createPlayerTitle.setId("createTitles");
+     Label createPlayerUnderTitle = new Label("Create your own player");
       createPlayerUnderTitle.setId("underTitle");
+    creatPlayerTopMid.getChildren().addAll(createPlayerTitle, createPlayerUnderTitle);
     createPlayerTop.setLeft(goToCreateHomePlayer);
-    createPlayerTop.setCenter(createPlayerTitle);
-    createPlayerTop.setBottom(createPlayerUnderTitle);
+    createPlayerTop.setCenter(creatPlayerTopMid);
 
     // Mid create player layout
     VBox createPlayerMid = new VBox();
-    createPlayerMid.setId("boxes");
     HBox playerNameLayout = new HBox();
     playerNameLayout.setId("boxes");
-      TextField playerName = new TextField();
+      playerName = new TextField();
         playerName.setPromptText("Enter Name");
+        playerName.setId("#playerTextFields");
       Image nameIcon = new Image("photos/Icons/PlayerIcons/person-simple.png");
       ImageView nameIconView = new ImageView();
         nameIconView.setImage(nameIcon);
@@ -228,7 +237,7 @@ public class MainMenu extends Application {
     playerNameLayout.getChildren().addAll(playerName,nameIconView);
     HBox playerHealthLayout = new HBox();
     playerHealthLayout.setId("boxes");
-      TextField playerHealth = new TextField();
+      playerHealth = new TextField();
         playerHealth.setPromptText("Enter Health");
       Image healthIcon = new Image("photos/Icons/PlayerIcons/pharmacy (1).png");
       ImageView healthIconView = new ImageView();
@@ -238,7 +247,7 @@ public class MainMenu extends Application {
     playerHealthLayout.getChildren().addAll(playerHealth, healthIconView);
     HBox playerGoldLayout = new HBox();
     playerGoldLayout.setId("boxes");
-      TextField playerGold = new TextField();
+      playerGold = new TextField();
         playerGold.setPromptText("Enter Gold");
       Image goldIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
       ImageView goldIconView = new ImageView();
@@ -248,8 +257,8 @@ public class MainMenu extends Application {
       playerGoldLayout.getChildren().addAll(playerGold, goldIconView);
     HBox playerScoreLayout = new HBox();
     playerScoreLayout.setId("boxes");
-      TextField playerScore = new TextField();
-        playerScore.setPromptText("Enter Score");
+      playerScore = new TextField();
+        playerScore.setPromptText("Enter Score (optional)");
       Image scoreIcon = new Image("photos/Icons/PlayerIcons/star-sharp-half-stroke.png");
       ImageView scoreIconView = new ImageView();
         scoreIconView.setImage(scoreIcon);
@@ -258,8 +267,8 @@ public class MainMenu extends Application {
     playerScoreLayout.getChildren().addAll(playerScore, scoreIconView);
     HBox playerInventoryLayout = new HBox();
     playerInventoryLayout.setId("boxes");
-      TextField playerInventory = new TextField();
-        playerInventory.setPromptText("Enter Inventory");
+    playerInventory = new TextField();
+        playerInventory.setPromptText("Enter Inventory (optional)");
         playerInventory.setMinHeight(40);
       Image inventoryIcon = new Image("photos/Icons/PlayerIcons/apps.png");
       ImageView InventoryIconView = new ImageView();
@@ -272,7 +281,11 @@ public class MainMenu extends Application {
     // Bottom create player layout
     HBox createPlayerBottom = new HBox();
       createPlayerBottom.setId("boxes");
-    Button submitPlayerBtn = new Button("Submit player");
+    submitPlayerBtn = new Button("Submit player");
+    submitPlayerBtn.setOnAction(e -> {
+      CreateStoryController.isString(playerName, playerName.getText(), playerInventory, playerInventory.getText());
+      CreateStoryController.isInt(playerHealth, playerHealth.getText(), playerGold, playerHealth.getText(), playerScore, playerScore.getText());
+    });
     //TODO: make submit work
     createPlayerBottom.getChildren().addAll(submitPlayerBtn);
 
@@ -294,13 +307,16 @@ public class MainMenu extends Application {
     Button goToCreateHomeGoals = new Button(" ");
     goToCreateHomeGoals.getStyleClass().add("backButton");
     goToCreateHomeGoals.setOnAction(e -> openWindow.setScene(createGameScene));
-    Label createGoalTitle = new Label("Create Goal");
-      createGoalTitle.setId("title");
-    Label createGoalUnderTitle = new Label("Select one or multiple goal for your character");
-    createGoalUnderTitle.setId("underTitle");
+    VBox creatGoalTopMid = new VBox();
+    creatGoalTopMid.setId("boxes");
+      Label createGoalTitle = new Label("Create Goal");
+      createGoalTitle.setId("createTitles");
+      Label createGoalUnderTitle = new Label("Select one or multiple goal for your character");
+      createGoalUnderTitle.setId("underTitle");
+    creatGoalTopMid.getChildren().addAll(createGoalTitle, createGoalUnderTitle);
+
     createGoalTop.setLeft(goToCreateHomeGoals);
-    createGoalTop.setCenter(createGoalTitle);
-    createGoalTop.setBottom(createGoalUnderTitle);
+    createGoalTop.setCenter(creatGoalTopMid);
 
     // Mid create goal layout
     HBox createGoalMid = new HBox();
