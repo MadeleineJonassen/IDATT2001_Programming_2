@@ -355,48 +355,51 @@ public class MainMenu extends Application {
 
     // **************************** PLAY GAME LAYOUT ****************************
     // Top play game layout
-    BorderPane layoutPlayGameTop = new BorderPane();
-    layoutPlayGameTop.setPadding(new Insets(20));
+    HBox layoutPlayGameTop = new HBox();
+      layoutPlayGameTop.setId("topBoxes");
     Button goHomePlayGame = new Button(" ");
       goHomePlayGame.getStyleClass().add("homeButton");
       goHomePlayGame.setOnAction(e -> openWindow.setScene(mainMenuScene));
     Label playGameTitle = new Label("Play game");
-    playGameTitle.setId("title");
-    layoutPlayGameTop.setLeft(goHomePlayGame);
-    layoutPlayGameTop.setCenter(playGameTitle);
+      playGameTitle.setId("title");
+    layoutPlayGameTop.getChildren().addAll(goHomePlayGame,playGameTitle);
 
     // Mid play game layout
-    BorderPane layoutPlayGameMid = new BorderPane();
+    HBox layoutPlayGameMid = new HBox();
       layoutPlayGameMid.setId("boxes");
-    playerListView = new ListView<>();
-      //TODO: set selected player;
-    storyListView = new ListView<>();
-      //storyListView.getItems().addAll();
-      //TODO: set selected story
-    HBox userOptions = new HBox();
-      userOptions.setId("boxes");
-      //TODO: make HBox create buttons based on number of passages
-      Button testButton1 = new Button("test button 1");
-      Button testButton2 = new Button("test button 2");
-    userOptions.getChildren().addAll(testButton1,testButton2);
+    VBox layoutPlayGameMidLeft = new VBox();
+    layoutPlayGameMidLeft.setId("big-boxes");
+      playerListView = new ListView<>();
+        playerListView.getItems().addAll("Player here");
+        //TODO: set selected player;
+      storyListView = new ListView<>();
+        storyListView.setId("big-list-view");
+        storyListView.getItems().addAll("Story here");
+       //TODO: set selected story
+    layoutPlayGameMidLeft.getChildren().addAll(playerListView, storyListView);
     VBox rightInfoBox = new VBox();
       rightInfoBox.setId("boxes");
       ComboBox setGoals = new ComboBox<>();
-        setGoals.setPromptText("Goals/Achievements");
+        setGoals.setPromptText("View Goals");
           //TODO: add selected goals in box and add function "crossed out" when finished a goal
       Button options = new Button("options?");
       Button other = new Button("other?");
     rightInfoBox.getChildren().addAll(setGoals,options,other);
-    layoutPlayGameMid.setTop(playerListView);
-    layoutPlayGameMid.setCenter(storyListView);
-    layoutPlayGameMid.setRight(rightInfoBox);
-    layoutPlayGameMid.setBottom(userOptions);
+    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, rightInfoBox);
 
+    // Bottom play game layout
+    HBox userOptions = new HBox();
+    userOptions.setId("boxes");
+      //TODO: make HBox create buttons based on number of passages
+      Button testButton1 = new Button("test button 1");
+      Button testButton2 = new Button("test button 2");
+    userOptions.getChildren().addAll(testButton1,testButton2);
 
     // * Overall Playing Game Layout *
     BorderPane layoutPlayGame = new BorderPane();
     layoutPlayGame.setTop(layoutPlayGameTop);
     layoutPlayGame.setCenter(layoutPlayGameMid);
+    layoutPlayGame.setBottom(userOptions);
     layoutPlayGame.getStylesheets().add("StyleSheets/playGameStyle.css");
     playGameScene = new Scene(layoutPlayGame, 1300, 700);
 
@@ -413,8 +416,6 @@ public class MainMenu extends Application {
     primaryStage.setScene(mainMenuScene);
     primaryStage.show();
   }
-
-
 
 }
 

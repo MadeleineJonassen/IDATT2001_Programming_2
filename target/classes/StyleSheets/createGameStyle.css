@@ -123,17 +123,21 @@
 }
 
 #finalButton {
-    -fx-background-color: "6B9CBB";
+    -fx-background-color: transparent;
     -fx-pref-width: 250px;
     -fx-font-family: "Constantia";
-    -fx-text-fill: "2F4858";
+    -fx-text-fill: "6B9CBB";
     -fx-font-size: 32px;
 }
 #finalButton:hover {
-    -fx-background-color: "315771";
+    -fx-background-color: linear-gradient(to top, rgb(134, 187, 216) 0%, rgba(0,0,0,0) 100%);
+    -fx-effect: dropshadow(gaussian,white , 5, 0, 0, 2);
+    -fx-text-fill: "2F4858";
 }
 #finalButton:pressed {
-    -fx-background-color: "2F4858";
+    -fx-background-color: linear-gradient(to top, rgb(49, 87, 113) 0%, rgba(0,0,0,0) 100%);
+    -fx-effect: dropshadow(gaussian,slategray , 5, 0, 0, 2);
+    -fx-text-fill: "2F4858";
 }
 
 
@@ -141,6 +145,9 @@
     -fx-background-color: transparent;
     -fx-background-size: stretch;
     -fx-alignment: center;
+}
+.invincible:hover {
+    -fx-background-color: transparent;
 }
 
 .errorImage {
