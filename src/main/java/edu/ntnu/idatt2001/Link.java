@@ -20,13 +20,6 @@ public class Link {
     this.text = text;
     this.reference = reference;
   }
-  public String setText(){
-    return text;
-  }
-
-  public String setReference() {
-    return reference;
-  }
 
   public String getText() {
     return text;
