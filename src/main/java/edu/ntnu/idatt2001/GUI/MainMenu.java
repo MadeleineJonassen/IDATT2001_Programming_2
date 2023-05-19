@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.GUI;
 
+import edu.ntnu.idatt2001.Controller.CreatePlayerController;
 import edu.ntnu.idatt2001.Controller.CreateStoryController;
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
 import edu.ntnu.idatt2001.Players.PlayerData;
@@ -29,7 +30,7 @@ public class MainMenu extends Application {
   public static ListView <String> storyListView; //TODO: Change from string to story?
   public static ListView<String> playerListView = new ListView();
   public static TextField  playerName, playerHealth, playerGold, playerScore, playerInventory;
-  public static Button submitPlayerBtn;
+  public static Button submitPlayerBtn, playerErrorIcon;
 
 
 
@@ -227,7 +228,7 @@ public class MainMenu extends Application {
     HBox playerNameLayout = new HBox();
     playerNameLayout.setId("boxes");
       playerName = new TextField();
-        playerName.setPromptText("Enter Name");
+        playerName.setPromptText("Enter Name * ");
         playerName.setId("#playerTextFields");
       Image nameIcon = new Image("photos/Icons/PlayerIcons/person-simple.png");
       ImageView nameIconView = new ImageView();
@@ -238,7 +239,7 @@ public class MainMenu extends Application {
     HBox playerHealthLayout = new HBox();
     playerHealthLayout.setId("boxes");
       playerHealth = new TextField();
-        playerHealth.setPromptText("Enter Health");
+        playerHealth.setPromptText("Enter Health *");
       Image healthIcon = new Image("photos/Icons/PlayerIcons/pharmacy (1).png");
       ImageView healthIconView = new ImageView();
       healthIconView.setImage(healthIcon);
@@ -248,7 +249,7 @@ public class MainMenu extends Application {
     HBox playerGoldLayout = new HBox();
     playerGoldLayout.setId("boxes");
       playerGold = new TextField();
-        playerGold.setPromptText("Enter Gold");
+        playerGold.setPromptText("Enter Gold *");
       Image goldIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
       ImageView goldIconView = new ImageView();
       goldIconView.setImage(goldIcon);
@@ -258,7 +259,7 @@ public class MainMenu extends Application {
     HBox playerScoreLayout = new HBox();
     playerScoreLayout.setId("boxes");
       playerScore = new TextField();
-        playerScore.setPromptText("Enter Score (optional)");
+        playerScore.setPromptText("Enter Score");
       Image scoreIcon = new Image("photos/Icons/PlayerIcons/star-sharp-half-stroke.png");
       ImageView scoreIconView = new ImageView();
         scoreIconView.setImage(scoreIcon);
@@ -268,7 +269,7 @@ public class MainMenu extends Application {
     HBox playerInventoryLayout = new HBox();
     playerInventoryLayout.setId("boxes");
     playerInventory = new TextField();
-        playerInventory.setPromptText("Enter Inventory (optional)");
+        playerInventory.setPromptText("Enter Inventory ");
         playerInventory.setMinHeight(40);
       Image inventoryIcon = new Image("photos/Icons/PlayerIcons/apps.png");
       ImageView InventoryIconView = new ImageView();
@@ -279,15 +280,17 @@ public class MainMenu extends Application {
     createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout ,playerGoldLayout,playerScoreLayout,playerInventoryLayout);
 
     // Bottom create player layout
-    HBox createPlayerBottom = new HBox();
+    VBox createPlayerBottom = new VBox();
       createPlayerBottom.setId("boxes");
+    playerErrorIcon = new Button("");
+      playerErrorIcon.getStyleClass().add("invinsable");
     submitPlayerBtn = new Button("Submit player");
-    submitPlayerBtn.setOnAction(e -> {
-      CreateStoryController.isString(playerName, playerName.getText(), playerInventory, playerInventory.getText());
-      CreateStoryController.isInt(playerHealth, playerHealth.getText(), playerGold, playerHealth.getText(), playerScore, playerScore.getText());
-    });
+      submitPlayerBtn.setOnAction(e -> {
+        CreatePlayerController.isString();
+        CreatePlayerController.isInt();
+      });
     //TODO: make submit work
-    createPlayerBottom.getChildren().addAll(submitPlayerBtn);
+    createPlayerBottom.getChildren().addAll( playerErrorIcon, submitPlayerBtn);
 
     // * Overall Create Player Layout *
     BorderPane createPlayerLayout = new BorderPane();

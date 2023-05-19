@@ -136,4 +136,22 @@
     -fx-background-color: "2F4858";
 }
 
+.invinsable {
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+}
+
+.errorImage {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/photos/Icons/triangle-warning.png");
+    -fx-background-size: stretch;
+    -fx-alignment: center;
+    -fx-pref-width: 40;
+    -fx-pref-height: 30;
+}
+.errorText {
+    -fx-text-fill: "DD5050";
+    -fx-border-color: "DD5050";
+}
 
