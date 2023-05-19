@@ -1,14 +1,21 @@
 package edu.ntnu.idatt2001.Controller;
 
+import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.ScanStory;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
+import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
 
 public class CreateStoryController {
   
@@ -16,6 +23,24 @@ public class CreateStoryController {
   
   public CreateStoryController(GameManager gameManager) {
     this.gameManager = gameManager;
+  }
+
+  public static void chooseStory() {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Select a story");
+    fileChooser.setInitialDirectory(new File("src/resources/Stories"));
+    File selectedFile = fileChooser.showOpenDialog(MainMenu.openWindow);
+    if (selectedFile != null) {
+      try {
+        Scanner fileScanner = new Scanner(selectedFile);
+        while (fileScanner.hasNextLine()) {
+          storyListView.getItems().add(fileScanner.nextLine() + "\n");
+          displayStoryPath.setPromptText(selectedFile.getPath());
+        }
+      } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+      }
+    }
   }
   
   /** Lists all files in the resources folder. Returns a set of strings

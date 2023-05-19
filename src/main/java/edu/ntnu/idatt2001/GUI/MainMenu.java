@@ -1,34 +1,31 @@
 package edu.ntnu.idatt2001.GUI;
 
+import edu.ntnu.idatt2001.Controller.CreateStoryController;
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
-import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.Players.PlayerData;
+import edu.ntnu.idatt2001.Story;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.text.Element;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Optional;
 import java.util.Scanner;
 
 
 public class MainMenu extends Application {
-  Stage openWindow;
+  public static Stage openWindow;
   Scene mainMenuScene, createGameScene, createStoryScene, createPlayerScene, createGoalScene, playGameScene;
+
+  public static TextField displayStoryPath, displayBrokenLinks;
   public static ListView <String> storyListView; //TODO: Change from string to story?
   public static ListView<String> playerListView = new ListView();
 
@@ -130,6 +127,7 @@ public class MainMenu extends Application {
       helpBtn.setOnAction(e -> helpCreatePlayer.display());
     Button submitNewGame = new Button("Submit");
     submitNewGame.setId("finalButton");
+    submitNewGame.setDisable(!storySelectedDisplay.hasProperties() && !playerSelectedDisplay.hasProperties() && !goalsSelectedDisplay.hasProperties());
     submitNewGame.setOnAction(e -> {
       //TODO: Save selected info and error handling
       openWindow.setScene(playGameScene);
@@ -169,31 +167,19 @@ public class MainMenu extends Application {
     createStoryMid.setId("boxes");
       VBox createStoryMidDisplay = new VBox();
       createStoryMidDisplay.setId("boxes");
-      TextField displayStoryPath = new TextField();
-        displayStoryPath.setPromptText("Path for display");
+        displayStoryPath = new TextField();
+          displayStoryPath.setPromptText("Path for display");
         storyListView = new ListView<>();
-        storyListView.setId("big-list-view");
-      createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView);
+          storyListView.setId("big-list-view");
+        displayBrokenLinks = new TextField();
+      createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView, displayBrokenLinks);
       VBox createStoryMidBtn = new VBox();
       createStoryMidBtn.setId("boxes");
         Button selectStory = new Button("Select ");
           selectStory.setOnAction(actionEvent -> {
-            //TODO: make own method for fileChooser and fileDisplay-functionality
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select a story");
-            fileChooser.setInitialDirectory(new File("src/resources/Stories"));
-            File selectedFile = fileChooser.showOpenDialog(openWindow);
-            if (selectedFile != null) {
-              try {
-                Scanner fileScanner = new Scanner(selectedFile);
-                while (fileScanner.hasNextLine()) {
-                  storyListView.getItems().add(fileScanner.nextLine() + "\n");
-                  displayStoryPath.setPromptText(selectedFile.getPath());
-                }
-              } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-              }
-            }
+            CreateStoryController.chooseStory();
+            //Story.getBrokenLinks();
+            //TODO: fileDisplay-functionality; broken links, ect.
           });
         Button addStory = new Button("Add");
           //TODO: add functionality
@@ -285,13 +271,14 @@ public class MainMenu extends Application {
 
     // Bottom create player layout
     HBox createPlayerBottom = new HBox();
+      createPlayerBottom.setId("boxes");
     Button submitPlayerBtn = new Button("Submit player");
     //TODO: make submit work
     createPlayerBottom.getChildren().addAll(submitPlayerBtn);
 
     // * Overall Create Player Layout *
     BorderPane createPlayerLayout = new BorderPane();
-    createPlayerBottom.setId("boxes");
+    createPlayerLayout.setId("boxes");
     createPlayerLayout.setTop(createPlayerTop);
     createPlayerLayout.setCenter(createPlayerMid);
     createPlayerLayout.setBottom(createPlayerBottom);
@@ -408,6 +395,8 @@ public class MainMenu extends Application {
     primaryStage.setScene(mainMenuScene);
     primaryStage.show();
   }
+
+
 
 }
 
