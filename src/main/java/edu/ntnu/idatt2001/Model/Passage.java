@@ -1,6 +1,5 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 

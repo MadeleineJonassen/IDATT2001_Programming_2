@@ -1,14 +1,10 @@
 package edu.ntnu.idatt2001.Model;
 
-import edu.ntnu.idatt2001.*;
 import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Players.Player;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GameManager {
   private Game game; //Assumes user will only edit/run 1 game at a time. Final?
@@ -25,10 +21,26 @@ public class GameManager {
   }
   
   public void addGoal(Goal goal){
-    if(game.getGoals().contains(goal)){
+    if(goals.contains(goal)){
       throw new IllegalArgumentException("Goal has already been added.");
     }
-    game.getGoals().add(goal);
+    goals.add(goal);
+  }
+  
+  public List<Goal> getGoals(){
+    return goals;
+  }
+  
+  public void clearGoals(){
+    goals.clear();
+  }
+  
+  public boolean storyHasBeenAdded(){
+    return !(story == null);
+  }
+  
+  public boolean playerHasBeenAdded(){
+    return !(player == null);
   }
   
   public void createGame(){
@@ -51,6 +63,20 @@ public class GameManager {
     //method might not be needed, as the class provides relevant getters and
     //Game is only created when story, player etc is finished, so method might be nice for playGame-scene?
     return game;
+  }
+  
+  public String getPlayerName(){
+    if(this.player == null){
+      throw new IllegalArgumentException("The player is not defined");
+    }
+    return player.getName();
+  }
+  
+  public Player getPlayer(){
+    if(player == null){
+      throw new IllegalArgumentException("Player has not been added.");
+    }
+    return player;
   }
   
   public List<String> getBrokenLinks(){

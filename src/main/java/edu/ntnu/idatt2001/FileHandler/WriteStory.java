@@ -1,11 +1,13 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.FileHandler;
+
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.Story;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 
 public class WriteStory {
   public void write(Story story, File file){

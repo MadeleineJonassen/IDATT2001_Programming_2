@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001;
 
 import edu.ntnu.idatt2001.Action.*;
-import org.junit.jupiter.api.Assertions;
+import edu.ntnu.idatt2001.Model.Link;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

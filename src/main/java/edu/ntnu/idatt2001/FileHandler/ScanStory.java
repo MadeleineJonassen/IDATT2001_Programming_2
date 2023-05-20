@@ -1,6 +1,9 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.FileHandler;
 
 import edu.ntnu.idatt2001.Action.*;
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.Story;
 import org.apache.maven.shared.utils.StringUtils;
 
 import java.io.File;

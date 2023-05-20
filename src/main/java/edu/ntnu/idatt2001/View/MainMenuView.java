@@ -10,16 +10,19 @@ import javafx.stage.Stage;
 
 public class MainMenuView  {
 
-  private final Stage stage;
+  //private final Stage stage;
   private final MainMenuController controller;
 
-  public MainMenuView(Stage stage, MainMenuController controller){
+  /*public MainMenuView(Stage stage, MainMenuController controller){
     this.stage = stage;
     this.controller = controller;
+  }*/
+  
+  public MainMenuView(MainMenuController controller){
+    this.controller = controller;
   }
-
-
-  public void setup(){
+  
+  public Scene setup(){
 
     // **************************** MENU ****************************
     // Top menu layout
@@ -36,10 +39,24 @@ public class MainMenuView  {
     layoutMenuOptions.setId("boxes");
     Button createGameBtn = new Button("Create Game");
     createGameBtn.setId("menuButton");
-     //createGameBtn.setOnAction(e -> controller.createGame());
+     createGameBtn.setOnAction(e -> {
+       try {
+         controller.createGame();
+         System.out.println("success");
+       } catch (Exception ex) {
+         //throw new RuntimeException(ex);
+         System.out.println("error");
+       }
+     });
     Button playGameBtn = new Button("Play game");
     playGameBtn.setId("menuButton");
-     //playGameBtn.setOnAction(e -> controller.playGame());
+     playGameBtn.setOnAction(e -> {
+       try {
+         controller.playGame();
+       } catch (Exception ex) {
+         throw new RuntimeException(ex);
+       }
+     });
     layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn);
 
     // * Overall Main Menu Layout *
@@ -49,8 +66,8 @@ public class MainMenuView  {
 
     Scene scene = new Scene(layoutMenu, 1300, 700);
     scene.getStylesheets().add("StyleSheets/menuStyle.css");
-    stage.setScene(scene);
-    stage.show();
+    return scene;
+    
   }
 
 

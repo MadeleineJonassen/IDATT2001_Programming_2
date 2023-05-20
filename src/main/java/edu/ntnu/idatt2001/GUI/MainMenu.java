@@ -1,12 +1,8 @@
 package edu.ntnu.idatt2001.GUI;
 
 import edu.ntnu.idatt2001.Controller.CreatePlayerController;
-import edu.ntnu.idatt2001.Controller.CreateStoryController;
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
-import edu.ntnu.idatt2001.Players.PlayerData;
-import edu.ntnu.idatt2001.Story;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -14,12 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 
 public class MainMenu extends Application {
@@ -40,7 +31,8 @@ public class MainMenu extends Application {
   //TODO: error handling!
   //TODO: transfer info from scene to scene
   //TODO: look closer at GUI later for better design; button size, layout, ect.
-
+  
+  
 
 
   public static void main(String[] args) {

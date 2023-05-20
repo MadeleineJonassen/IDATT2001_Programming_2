@@ -2,67 +2,55 @@ package edu.ntnu.idatt2001.Controller;
 
 import edu.ntnu.idatt2001.Goal.*;
 import edu.ntnu.idatt2001.Model.GameManager;
+import edu.ntnu.idatt2001.View.AddGoalView;
 import edu.ntnu.idatt2001.View.CreateGameView;
 import edu.ntnu.idatt2001.View.CreateGoalsView;
 import edu.ntnu.idatt2001.View.MainMenuView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class CreateGoalsController {
-  //private GameManager gameManager;
-
+  private GameManager gameManager;
   private final Stage stage;
   private CreateGoalsView view;
+  private SceneController sceneController = new SceneController();
+  private ObservableList<Goal> goalsList;
 
 
-  public CreateGoalsController(Stage stage){
-    this.stage = stage;
-  }
-
-  public void initialize() {
-    CreateGoalsView view = new CreateGoalsView(stage, this);
-    view.setup();
-  }
-  /*
-  public void createGame() {
-    CreateGameController controller = new CreateGameController(stage, this);
-    controller.initialize();
-  }
-
-
-
-  /*
-  public CreateGoalsController(GameManager gameManager) {
+  public CreateGoalsController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
+    updateGoalsList();
+    this.stage = stage;
+    view = new CreateGoalsView(this);
+    stage.setScene(view.setup());
+    stage.show();
   }
   
-  public void addGoal(int goalTypeSelection, String value){
-    //user selects goal type, 0=Gold, 1=Health, 2=Inventory, 3=Score
-    
-    
-    if(value.isEmpty()){
-      throw new IllegalArgumentException("You need to specify yhe amount/item");
-    }
-    Goal goal;
-    switch (goalTypeSelection) {
-      case 0 -> goal = new GoldGoal(Integer.parseInt(value));
-      case 1 -> goal = new HealthGoal(Integer.parseInt(value));
-      case 2 -> {
-        List<String> inventoryGoal = Arrays.asList(value.split("[,?.@]"));
-        goal = new InventoryGoal(inventoryGoal);
-      }
-      case 3 -> goal = new ScoreGoal(Integer.parseInt(value));
-      default -> throw new IllegalArgumentException("Goal selection must be from 0-3");
-    }
-    gameManager.addGoal(goal);
-    
+  public void createGame() throws Exception {
+    sceneController.switchScene(stage, 2, gameManager);
+  }
+  
+  public ObservableList<Goal> getGoalsList(){
+    return goalsList;
+  }
+  
+  public void updateGoalsList(){
+    goalsList = FXCollections.observableList(gameManager.getGoals());
+  }
+  
+  public void addSingleGoal(){
+    Stage addGoalWindow = new Stage();
+    //addGoalWindow.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
+    AddGoalController addGoalController = new AddGoalController(gameManager, addGoalWindow, this);
   }
   
   public void clearGoals(){
-  
+    gameManager.clearGoals();
   }
-
-   */
 }

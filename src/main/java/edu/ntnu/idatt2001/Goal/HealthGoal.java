@@ -13,4 +13,10 @@ public class HealthGoal implements Goal {
   public boolean isFulfilled(Player player) {
     return player.getHealth() >= minimumHealth;
   }
+  
+  @Override
+  public String toString() {
+    return "Health Goal :" + minimumHealth +
+            " hp";
+  }
 }

@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
 
 import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Players.Player;
@@ -36,6 +36,7 @@ public class Game {
   }
   
   public Passage go(Link link){
+    //TODO: excecute actions in link
     return story.getPassage(link);
   }
 }

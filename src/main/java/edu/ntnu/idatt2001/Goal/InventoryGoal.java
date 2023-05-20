@@ -25,4 +25,9 @@ public class InventoryGoal implements Goal {
     }
     return numOfItemsInInventory == mandatoryItems.size();
   }
+  
+  @Override
+  public String toString() {
+    return "Inventory Goal:" + mandatoryItems.toString();
+  }
 }

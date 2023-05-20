@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.Model;
 import java.util.*;
 
 public class Story {

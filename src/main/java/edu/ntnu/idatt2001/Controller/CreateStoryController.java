@@ -2,75 +2,60 @@ package edu.ntnu.idatt2001.Controller;
 
 import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
-import edu.ntnu.idatt2001.ScanStory;
+import edu.ntnu.idatt2001.FileHandler.ScanStory;
 import edu.ntnu.idatt2001.View.CreateStoryView;
-import edu.ntnu.idatt2001.View.MainMenuView;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
-import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
+//import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
+//import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
 
 public class CreateStoryController {
   
-  //private GameManager gameManager;
-
-  private CreateStoryView view;
+  private GameManager gameManager;
   private final Stage stage;
-
-  public CreateStoryController(Stage stage){
-    this.stage = stage;
-  }
-
-  public void initialize() {
-    CreateStoryView view = new CreateStoryView(stage, this);
-    view.setup();
-  }
-/*
-  public void createGame() {
-    CreateGameController controller = new CreateGameController(stage, this);
-    controller.initialize();
-  }
-
-
-
- */
-  /*
-  public CreateStoryController(GameManager gameManager) {
+  private SceneController sceneController = new SceneController();
+  
+  public CreateStoryController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
+    this.stage = stage;
+    CreateStoryView view = new CreateStoryView(this);
+    stage.setScene(view.setup());
+    stage.show();
   }
-
-
-  public static void chooseStory() {
+  
+  public void createGame() throws Exception {
+    System.out.println("goToCreateGame");
+    sceneController.switchScene(stage, 2, gameManager);
+  }
+  
+  public void chooseStory(){
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select a story");
     fileChooser.setInitialDirectory(new File("src/resources/Stories"));
     File selectedFile = fileChooser.showOpenDialog(MainMenu.openWindow);
     if (selectedFile != null) {
       try {
-        MainMenu.displayStoryPath.setPromptText(selectedFile.getPath());
-        Scanner fileScanner = new Scanner(selectedFile);
-        while (fileScanner.hasNextLine()) {
-          MainMenu.storyListView.getItems().add(fileScanner.nextLine() + "\n");
-          storyListView.getItems().add("test");
-        }
+        ScanStory scan = new ScanStory();
+        gameManager.setStory(scan.scanStory(selectedFile));
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
       }
     }
   }
-
-
-
+  
+  public Collection<String> getStoryPassageNames(){
+    return gameManager.getStoryPassageNames();
+  }
+  
   /** Lists all files in the resources' folder. Returns a set of strings
    *
    * @return files

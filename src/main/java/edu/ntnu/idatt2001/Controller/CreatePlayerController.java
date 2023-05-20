@@ -5,29 +5,51 @@ import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.View.CreateGameView;
 import edu.ntnu.idatt2001.View.CreatePlayerView;
+import edu.ntnu.idatt2001.View.CreateStoryView;
 import edu.ntnu.idatt2001.View.MainMenuView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static edu.ntnu.idatt2001.GUI.MainMenu.playerErrorIcon;
 
 public class CreatePlayerController {
-
+  private GameManager gameManager;
   private final Stage stage;
   private CreatePlayerView view;
+  private SceneController sceneController = new SceneController();
+  private boolean playerExists;
+  //TODO: getPlayer functionality
 
 
-  public CreatePlayerController(Stage stage){
+  public CreatePlayerController(Stage stage, GameManager gameManager){
+    this.gameManager = gameManager;
+    
     this.stage = stage;
+    view = new CreatePlayerView(this);
+    stage.setScene(view.setup());
+    stage.show();
   }
-
-  public void initialize() {
-    CreatePlayerView view = new CreatePlayerView(stage, this);
-    view.setup();
+  
+  public void createGame() throws Exception {
+    sceneController.switchScene(stage, 2, gameManager);
   }
+  
+  
+  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String ... inventoryItems) throws Exception {
+    //TODO: error handling, taking no input as 0
+    int health = Integer.parseInt(healthInput);
+    int score = Integer.parseInt(scoreInput);
+    int gold = Integer.parseInt(goldInput);
+    List<String> inventory = List.of(inventoryItems);
+    Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
+    gameManager.setPlayer(player);
+    createGame();
+  }
+  
 /*
   public void createGame() {
     CreateGameController controller = new CreateGameController(stage, this);
