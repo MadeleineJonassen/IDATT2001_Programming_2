@@ -103,9 +103,9 @@ public class Story {
   
   //removes a passage from the story
   public void removePassage(Link link){
-    /*if(!passages.containsKey(link)){
+    if(!passages.containsKey(link)){
       throw new IllegalArgumentException("No such link in the story.");
-    }*/
+    }
     //TODO: restrict, passages cannot be removed if linked to (creating broken links)
     //not supposed to be able to remove passage if other passages contain a link leading to the passage.
     //Should it instead be the other way around? If a passage links to other passages it would create
@@ -120,9 +120,6 @@ public class Story {
     if(obj == null || getClass() != obj.getClass()) return false;
     
     Story s = (Story) obj;
-    
-    
-    
     return (s.getTitle().equals(this.title) && s.getPassages().equals(getPassages()));
   }
   

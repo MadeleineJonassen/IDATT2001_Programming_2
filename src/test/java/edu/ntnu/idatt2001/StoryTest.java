@@ -52,6 +52,17 @@ public class StoryTest {
     }
     
     @Test
+    public void getNonExistingPassage(){
+      story.addPassage(passage1);
+      
+      assertFalse(story.getPassages().contains(passage2));
+      
+      assertThrows(IllegalArgumentException.class, () -> {
+        story.getPassage(new Link("PassageTitle2","PassageTitle2"));
+      }, "No such link in the story.");
+    }
+    
+    @Test
     public void getMultiplePassages(){
       story.addPassage(passage1);
       story.addPassage(passage2);
@@ -120,6 +131,21 @@ public class StoryTest {
       assertFalse(story.getPassages().contains(passage1));
       assertTrue(story.getPassages().contains(passage2));
       assertTrue(story.getPassages().contains(passage3));
+    }
+    
+    @Test
+    public void removeNonExistingPassage(){
+      Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
+      Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
+      story.addPassage(passage1);
+      
+      assertTrue(story.getPassages().contains(passage1));
+      assertFalse(story.getPassages().contains(passage2));
+      
+      assertThrows(IllegalArgumentException.class, () -> {
+        story.removePassage(new Link("PassageTitle1", "PassageTitle2"));
+      }, "No such link in the story.");
+      
     }
     
     @Test
