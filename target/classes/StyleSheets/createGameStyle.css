@@ -12,7 +12,6 @@
     -fx-spacing: 20;
 }
 
-
 #title {
     -fx-font-size: 65px;
     -fx-text-fill: "190B28";
@@ -160,5 +159,7 @@
 }
 .errorText {
     -fx-border-color: "DD5050";
+    -fx-font-family: "Constantia";
+    -fx-font-size: 15px;
 }
 
