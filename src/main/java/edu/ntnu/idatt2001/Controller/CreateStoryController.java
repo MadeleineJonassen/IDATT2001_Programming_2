@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,12 +46,15 @@ public class CreateStoryController {
     if (selectedFile != null) {
       try {
         ScanStory scan = new ScanStory();
+        //storyListView.getItems().add(scan.nextLine() + "\n");
+        //displayStoryPath.setPromptText(selectedFile.getPath());
         gameManager.setStory(scan.scanStory(selectedFile));
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
       }
     }
   }
+
   
   public Collection<String> getStoryPassageNames(){
     return gameManager.getStoryPassageNames();
