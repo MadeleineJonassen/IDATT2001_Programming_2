@@ -41,14 +41,12 @@ public class Passage {
     return content;
   }
   
-  public boolean addLink(Link link){
+  public void addLink(Link link){
     //diversion from task specification: return void
     if(links.contains(link)){
-      return false;
-      //throw new IllegalArgumentException("Link has already been added to the passage");
+      throw new IllegalArgumentException("Link has already been added to the passage");
     }
     links.add(link);
-    return true;
   }
   
   public void removeLink(Link link){

@@ -13,6 +13,16 @@ public class InventoryGoal implements Goal {
   
   @Override
   public boolean isFulfilled(Player player) {
-    return player.getInventory().contains(mandatoryItems);
+    List<String> playerInventory = player.getInventory();
+    
+    int numOfItemsInInventory = 0;
+    for (String s : mandatoryItems){
+      for (String i : playerInventory){
+        if (playerInventory.contains(i)){
+          numOfItemsInInventory++;
+        }
+      }
+    }
+    return numOfItemsInInventory == mandatoryItems.size();
   }
 }

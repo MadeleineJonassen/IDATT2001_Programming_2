@@ -84,7 +84,7 @@ public class Story {
       }
     }*/
     
-    List<Link> brokenLinks = passages.values().stream().map(Passage::getLinks).flatMap(Collection::stream).filter(link -> passages.containsKey(link)).toList();
+    List<Link> brokenLinks = passages.values().stream().map(Passage::getLinks).flatMap(Collection::stream).filter(link -> !passages.containsKey(link)).toList();
     
     
     return brokenLinks;
@@ -120,6 +120,8 @@ public class Story {
     if(obj == null || getClass() != obj.getClass()) return false;
     
     Story s = (Story) obj;
-    return (s.getTitle().equals(this.title)  && s.getPassages().equals(this.passages));
+    return (s.getTitle().equals(this.title) && s.getPassages().equals(getPassages()));
   }
+  
+  
 }
