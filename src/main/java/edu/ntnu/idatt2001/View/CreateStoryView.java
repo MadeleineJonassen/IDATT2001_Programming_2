@@ -60,29 +60,24 @@ public class CreateStoryView {
     HBox createStoryMid = new HBox();
     createStoryMid.setId("boxes");
     VBox createStoryMidDisplay = new VBox();
-    createStoryMidDisplay.setId("boxes");
-    TextField displayStoryPath = new TextField();
-    displayStoryPath.setPromptText("Path for display");
-    ListView storyListView = new ListView<>();
-    ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
-    storyListView.setItems(observableList);
-    storyListView.setId("big-list-view");
+      createStoryMidDisplay.setId("boxes");
+      TextField displayStoryPath = new TextField();
+      displayStoryPath.setPromptText("Directory for story");
     TextField displayBrokenLinks = new TextField();
+      displayBrokenLinks.setPromptText("Broken links");
+    ListView storyListView = new ListView<>();
+      ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
+      storyListView.setItems(observableList);
+      storyListView.setId("big-list-view");
     createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView, displayBrokenLinks);
     VBox createStoryMidBtn = new VBox();
     createStoryMidBtn.setId("boxes");
-    Button selectStory = new Button("Select ");
-    selectStory.setOnAction(actionEvent -> {
-      controller.chooseStory();
-      observableList.addAll(controller.getStoryPassageNames());
-      //Story.getBrokenLinks();
-      //TODO: fileDisplay-functionality; broken links, ect.
-    });
-    Button addStory = new Button("Add");
-    //TODO: add functionality
-    Button editStory = new Button("Edit");
-    //TODO: add functionality
-    createStoryMidBtn.getChildren().addAll(selectStory,addStory,editStory);
+      Button selectStory = new Button("Select Story");
+      selectStory.setOnAction(actionEvent -> {
+        controller.chooseStory();
+        observableList.addAll(controller.getStoryPassageNames());
+      });
+    createStoryMidBtn.getChildren().addAll(selectStory);
     createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);
     
     

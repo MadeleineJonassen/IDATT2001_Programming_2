@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.Controller;
 
-import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.FileHandler.ScanStory;
+import edu.ntnu.idatt2001.PathsLauncher;
 import edu.ntnu.idatt2001.View.CreateStoryView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -41,7 +41,7 @@ public class CreateStoryController {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select a story");
     fileChooser.setInitialDirectory(new File("src/resources/Stories"));
-    File selectedFile = fileChooser.showOpenDialog(MainMenu.openWindow);
+    File selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);
     if (selectedFile != null) {
       try {
         ScanStory scan = new ScanStory();
