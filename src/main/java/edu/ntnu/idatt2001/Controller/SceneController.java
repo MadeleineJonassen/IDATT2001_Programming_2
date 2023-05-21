@@ -35,7 +35,7 @@ public class SceneController {
         break;
       case 7:
         //end scene
-        //EndSceneController endSceneController = new EndSceneController(stage, gameManager);
+        EndSceneController endSceneController = new EndSceneController(stage, gameManager);
         break;
       default:
         throw new IllegalArgumentException("The number must be between 1 and 7");
