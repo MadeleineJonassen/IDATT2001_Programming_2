@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.Controller;
 
-import edu.ntnu.idatt2001.GUI.MainMenu;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.FileHandler.ScanStory;
+import edu.ntnu.idatt2001.PathsLauncher;
 import edu.ntnu.idatt2001.View.CreateStoryView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,6 +23,7 @@ public class CreateStoryController {
   private GameManager gameManager;
   private final Stage stage;
   private SceneController sceneController = new SceneController();
+  public File selectedFile;
   
   public CreateStoryController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
@@ -31,7 +32,9 @@ public class CreateStoryController {
     stage.setScene(view.setup());
     stage.show();
   }
-  
+
+
+
   public void createGame() throws Exception {
     System.out.println("goToCreateGame");
     sceneController.switchScene(stage, 2, gameManager);
@@ -41,16 +44,24 @@ public class CreateStoryController {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select a story");
     fileChooser.setInitialDirectory(new File("src/resources/Stories"));
-    File selectedFile = fileChooser.showOpenDialog(MainMenu.openWindow);
+    selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);
     if (selectedFile != null) {
       try {
         ScanStory scan = new ScanStory();
+        //storyListView.getItems().add(scan.nextLine() + "\n");
+        //displayStoryPath.setPromptText(selectedFile.getPath());
         gameManager.setStory(scan.scanStory(selectedFile));
       } catch (FileNotFoundException e) {
         throw new RuntimeException(e);
       }
     }
   }
+
+  public String getDirectory() {
+     String directory = selectedFile.getPath();
+     return directory;
+  }
+
   
   public Collection<String> getStoryPassageNames(){
     return gameManager.getStoryPassageNames();
@@ -69,6 +80,11 @@ public class CreateStoryController {
             .filter(file -> !file.isDirectory())
             .map(File::getName)
             .collect(Collectors.toSet());
+  }
+
+  public String getBrokenLinks() {
+    String brokenLinks = gameManager.getBrokenLinks().toString();
+    return brokenLinks;
   }
   
   /*

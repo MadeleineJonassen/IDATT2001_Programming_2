@@ -5,8 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class MainMenuView  {
 
@@ -17,6 +20,8 @@ public class MainMenuView  {
     this.stage = stage;
     this.controller = controller;
   }*/
+  public Button errorIcon;
+  public Label errorText;
   
   public MainMenuView(MainMenuController controller){
     this.controller = controller;
@@ -37,6 +42,9 @@ public class MainMenuView  {
     // Mid menu layout
     VBox layoutMenuOptions = new VBox();
     layoutMenuOptions.setId("boxes");
+       errorIcon = new Button("");
+      errorText = new Label("");
+    errorInvisible();
     Button createGameBtn = new Button("Create Game");
     createGameBtn.setId("menuButton");
      createGameBtn.setOnAction(e -> {
@@ -45,7 +53,7 @@ public class MainMenuView  {
          System.out.println("success");
        } catch (Exception ex) {
          //throw new RuntimeException(ex);
-         System.out.println("error");
+         errorVisable();
        }
      });
     Button playGameBtn = new Button("Play game");
@@ -54,10 +62,11 @@ public class MainMenuView  {
        try {
          controller.playGame();
        } catch (Exception ex) {
-         throw new RuntimeException(ex);
+         //throw new RuntimeException(ex);
+         errorVisable();
        }
      });
-    layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn);
+    layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn, errorIcon, errorText);
 
     // * Overall Main Menu Layout *
     BorderPane layoutMenu = new BorderPane();
@@ -68,6 +77,16 @@ public class MainMenuView  {
     scene.getStylesheets().add("StyleSheets/menuStyle.css");
     return scene;
     
+  }
+  public void errorInvisible(){
+    errorText.getStyleClass().add("invincible");
+    errorIcon.getStyleClass().add("invincible");
+  }
+
+  public void errorVisable(){
+    errorText.getStyleClass().add("errorText");
+    errorText.setText("Something went wrong, try again later...");
+    errorIcon.getStyleClass().add("errorImage");
   }
 
 

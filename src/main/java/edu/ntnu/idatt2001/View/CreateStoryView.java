@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001.View;
 
-import edu.ntnu.idatt2001.Controller.CreateGameController;
 import edu.ntnu.idatt2001.Controller.CreateStoryController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -24,6 +22,8 @@ public class CreateStoryView {
     this.stage = stage;
     this.controller = controller;
   }*/
+  public Button errorIcon;
+  public Label errorText;
   
   public CreateStoryView(CreateStoryController controller) {
     this.controller = controller;
@@ -45,13 +45,12 @@ public class CreateStoryView {
         System.out.println("error");
       }
     });
-    
     VBox creatStoryTopMid = new VBox();
     creatStoryTopMid.setId("boxes");
-    Label createStoryTitle = new Label("Create Story");
-    createStoryTitle.setId("createTitles");
-    Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
-    createStoryUnderTitle.setId("underTitle");
+      Label createStoryTitle = new Label("Create Story");
+      createStoryTitle.setId("createTitles");
+      Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
+      createStoryUnderTitle.setId("underTitle");
     creatStoryTopMid.getChildren().addAll(createStoryTitle, createStoryUnderTitle);
     createStoryTop.setLeft(goToCreateHomeStory);
     createStoryTop.setCenter(creatStoryTopMid);
@@ -60,38 +59,77 @@ public class CreateStoryView {
     HBox createStoryMid = new HBox();
     createStoryMid.setId("boxes");
     VBox createStoryMidDisplay = new VBox();
-    createStoryMidDisplay.setId("boxes");
-    TextField displayStoryPath = new TextField();
-    displayStoryPath.setPromptText("Path for display");
-    ListView storyListView = new ListView<>();
-    ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
-    storyListView.setItems(observableList);
-    storyListView.setId("big-list-view");
-    TextField displayBrokenLinks = new TextField();
-    createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView, displayBrokenLinks);
+      createStoryMidDisplay.setId("boxes");
+      TextField displayStoryPath = new TextField();
+      displayStoryPath.setPromptText("Directory for story");
+      displayStoryPath.setMinHeight(20);
+      displayStoryPath.setEditable(false);
+      TextField displayBrokenLinks = new TextField();
+        displayBrokenLinks.setPromptText("Broken links");
+        displayBrokenLinks.setEditable(false);
+      ListView storyListView = new ListView<>();
+        ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
+        storyListView.setItems(observableList);
+        storyListView.setId("big-list-view");
+    createStoryMidDisplay.getChildren().addAll(displayStoryPath, displayBrokenLinks, storyListView);
     VBox createStoryMidBtn = new VBox();
     createStoryMidBtn.setId("boxes");
-    Button selectStory = new Button("Select ");
-    selectStory.setOnAction(actionEvent -> {
-      controller.chooseStory();
-      observableList.addAll(controller.getStoryPassageNames());
-      //Story.getBrokenLinks();
-      //TODO: fileDisplay-functionality; broken links, ect.
-    });
-    Button addStory = new Button("Add");
-    //TODO: add functionality
-    Button editStory = new Button("Edit");
-    //TODO: add functionality
-    createStoryMidBtn.getChildren().addAll(selectStory,addStory,editStory);
+      HBox errorBox = new HBox();
+      errorBox.setId("boxes");
+         errorIcon = new Button();
+          errorIcon.getStyleClass().add("invincible");
+         errorText = new Label("");
+          errorText.getStyleClass().add("invincible");
+    errorBox.getChildren().addAll(errorIcon, errorText);
+      Button selectStory = new Button("Select Story");
+      selectStory.setOnAction(actionEvent -> {
+        try {
+          //errorInvisible();       Doesn't work
+          controller.chooseStory();
+          observableList.addAll(controller.getStoryPassageNames());
+          displayStoryPath.setText(controller.getDirectory());
+          displayBrokenLinks.setText(controller.getBrokenLinks());
+        } catch (Exception e) {
+          errorVisable();
+        }
+      });
+    createStoryMidBtn.getChildren().addAll(selectStory, errorBox);
     createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);
-    
+
+    // Bottom create story layout
+    HBox createStoryBottom = new HBox();
+    createStoryBottom.setId("boxes");
+      Button submit = new Button("Submit");
+      submit.setOnAction(e -> {
+          try {
+            //TODO: save input
+            controller.createGame();
+          } catch (Exception ex) {
+            errorVisable();
+          }
+      });
+    createStoryBottom.getChildren().addAll(submit);
+
     
     // * Overall Create Story layout *
     BorderPane createStoryLayout = new BorderPane();
     createStoryLayout.setTop(createStoryTop);
     createStoryLayout.setCenter(createStoryMid);
+    createStoryLayout.setBottom(createStoryBottom);
     Scene createStoryScene = new Scene(createStoryLayout, 1300, 700);
     createStoryScene.getStylesheets().add("StyleSheets/createGameStyle.css");
     return createStoryScene;
+  }
+
+
+  public void errorInvisible(){
+    errorText.getStyleClass().add("invincible");
+    errorIcon.getStyleClass().add("invincible");
+  }
+
+  public void errorVisable(){
+    errorText.getStyleClass().add("errorText");
+    errorText.setText("Could not resolve file, try again...");
+    errorIcon.getStyleClass().add("errorImage");
   }
 }
