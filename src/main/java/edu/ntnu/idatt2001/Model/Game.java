@@ -19,6 +19,12 @@ public class Game {
     this.goals = goals;
   }
   
+  public Game(Game game){
+    this.player = game.getPlayer();
+    this.story = game.getStory();
+    this.goals = game.getGoals();
+  }
+  
   public Player getPlayer() {
     return player;
   }

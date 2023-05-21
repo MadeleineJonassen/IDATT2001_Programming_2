@@ -13,6 +13,7 @@ public class GameManager {
   private List<Goal> goals = new ArrayList<>();
   
   public void setStory(Story story){
+    //TODO: check for broken links
     this.story = story;
   }
   
@@ -44,7 +45,6 @@ public class GameManager {
   }
   
   public void createGame(){
-    //TODO: check for broken links?
     //This method is run when user clicks "run game"-button
     if(this.story == null){
       throw new NullPointerException("Spillet har ingen story, dette må legges til før du oppretter et spill.");
@@ -62,7 +62,7 @@ public class GameManager {
     //TODO: return deep copy????
     //method might not be needed, as the class provides relevant getters and
     //Game is only created when story, player etc is finished, so method might be nice for playGame-scene?
-    return game;
+    return new Game(game);
   }
   
   public String getPlayerName(){
