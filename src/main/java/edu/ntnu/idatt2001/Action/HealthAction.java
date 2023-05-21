@@ -13,4 +13,9 @@ public class HealthAction implements Action {
   public void execute(Player player) {
     player.addHealth(health);
   }
+  
+  @Override
+  public String toString(){
+    return "Health: " + health;
+  }
 }

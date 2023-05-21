@@ -13,4 +13,9 @@ public class InventoryAction implements Action {
   public void execute(Player player) {
     player.addToInventory(inventory);
   }
+  
+  @Override
+  public String toString(){
+    return "Inventory: " + inventory.toString();
+  }
 }

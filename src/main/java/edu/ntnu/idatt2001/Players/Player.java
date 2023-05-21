@@ -73,7 +73,12 @@ public class Player {
       this.gold = gold;
       this.inventory = inventory;
     }
-
+    
+    public Builder(String name){
+      this.name = name;
+    }
+    
+    
     public Builder name (String name){
       this.name = name;
       return this;

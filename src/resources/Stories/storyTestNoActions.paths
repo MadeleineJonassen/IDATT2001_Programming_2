@@ -7,7 +7,7 @@ First description
 
 ::Second Passage
 The door opens to another room. You see a desk with a large, dusty book.
-[Open the book](Final Passage){gold(20)}
+[Open the book](Final Passage)
 [Go back](First passage)
 
 ::Final Passage

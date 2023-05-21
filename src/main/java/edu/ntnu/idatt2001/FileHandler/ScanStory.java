@@ -64,13 +64,14 @@ public class ScanStory {
       String s = actionString.replace("[{}]", "");
       String actionType = s.substring(0, s.indexOf('('));
       String actionContent = s.substring(s.indexOf('(') + 1, s.indexOf(')'));
-      if(s.equalsIgnoreCase("gold")){
+      
+      if(actionType.equalsIgnoreCase("gold")){
         Action goldAction = new GoldAction(Integer.parseInt(actionContent));
         link.addAction(goldAction);
-      }else if(s.equalsIgnoreCase("health")){
+      }else if(actionType.equalsIgnoreCase("health")){
         Action healthAction = new HealthAction(Integer.parseInt(actionContent));
         link.addAction(healthAction);
-      }else if(s.equalsIgnoreCase("score")){
+      }else if(actionType.equalsIgnoreCase("score")){
         Action scoreAction = new ScoreAction(Integer.parseInt(actionContent));
         link.addAction(scoreAction);
       }else{

@@ -133,6 +133,7 @@ public class GameManager {
     if (this.game == null){
       throw new NullPointerException("The game has not been created");
     }
+    
     return this.game.go(link);
   }
   

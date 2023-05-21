@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.Model;
 
+import edu.ntnu.idatt2001.Action.*;
 import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Players.Player;
 
@@ -42,7 +43,15 @@ public class Game {
   }
   
   public Passage go(Link link){
-    //TODO: excecute actions in link
+    //TODO: excecute actions in link, does not currently work
+    List<Action> linkActions = link.getActions();
+    if(linkActions.size() > 0){
+      for(int i = 0; i < linkActions.size(); i++){
+        Action action = linkActions.get(i);
+        action.execute(player);
+      }
+    }
+    
     return story.getPassage(link);
   }
 }

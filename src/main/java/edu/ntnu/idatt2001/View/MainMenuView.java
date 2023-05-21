@@ -5,11 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.awt.*;
 
 public class MainMenuView  {
 
@@ -53,7 +49,7 @@ public class MainMenuView  {
          System.out.println("success");
        } catch (Exception ex) {
          //throw new RuntimeException(ex);
-         errorVisable();
+         errorVisible(ex.getMessage());
        }
      });
     Button playGameBtn = new Button("Play game");
@@ -63,7 +59,7 @@ public class MainMenuView  {
          controller.playGame();
        } catch (Exception ex) {
          //throw new RuntimeException(ex);
-         errorVisable();
+         errorVisible(ex.getMessage());
        }
      });
     layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn, errorIcon, errorText);
@@ -83,9 +79,10 @@ public class MainMenuView  {
     errorIcon.getStyleClass().add("invincible");
   }
 
-  public void errorVisable(){
+  public void errorVisible(String message){
     errorText.getStyleClass().add("errorText");
-    errorText.setText("Something went wrong, try again later...");
+    //errorText.setText("Something went wrong, try again later...");
+    errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
   }
 

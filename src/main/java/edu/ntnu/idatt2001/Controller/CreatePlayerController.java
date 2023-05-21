@@ -21,7 +21,6 @@ public class CreatePlayerController {
   private final Stage stage;
   private CreatePlayerView view;
   private SceneController sceneController = new SceneController();
-  private boolean playerExists;
   //TODO: getPlayer functionality
 
 
@@ -45,7 +44,8 @@ public class CreatePlayerController {
     int score = Integer.parseInt(scoreInput);
     int gold = Integer.parseInt(goldInput);
     List<String> inventory = List.of(inventoryItems);
-    Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
+    //Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
+    Player player = new Player.Builder(name).health(health).score(score).gold(gold).inventory(inventory).build();
     gameManager.setPlayer(player);
     createGame();
   }

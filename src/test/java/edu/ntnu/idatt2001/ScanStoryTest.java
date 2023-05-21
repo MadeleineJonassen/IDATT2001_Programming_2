@@ -44,5 +44,7 @@ class ScanStoryTest {
     Link link2 = scan.scanLink("[text](reference){gold(10)}{inventory(watch)}");
     
     assertEquals(link1.toString(), link2.toString());
+    
   }
+  
 }

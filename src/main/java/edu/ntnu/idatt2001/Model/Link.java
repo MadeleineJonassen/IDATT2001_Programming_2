@@ -43,7 +43,7 @@ public class Link {
   
   @Override
   public String toString() {
-    return text + ", next: " + reference;
+    return text + ", next: " + reference + ". Actions: " + actions.toString();
   }
   
   @Override
