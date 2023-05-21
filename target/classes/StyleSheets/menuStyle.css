@@ -38,6 +38,7 @@
     -fx-font-family: "Constantia";
     -fx-text-fill: "6B9CBB";
     -fx-font-size: 32px;
+
 }
 #menuButton:hover {
     -fx-background-color: linear-gradient(to top, rgb(134, 187, 216) 0%, rgba(0,0,0,0) 100%);
@@ -68,7 +69,10 @@
     -fx-pref-height: 30;
 }
 .errorText {
-    -fx-font-family: "Constantia";
     -fx-font-size: 15px;
     -fx-text-fill: "DD5050";
+    -fx-font-family: "Constantia";
+    -fx-background-color: "190B28";
+    -fx-effect: dropshadow(gaussian,rgb(25, 11, 40) , 5, 2, 0, 0);
+    -fx-background-insets: 200;
 }
