@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class SceneController {
   
   
-  public void switchScene(Stage stage, int sceneChoice, GameManager gameManager) throws Exception {
+  public void switchScene(Stage stage, int sceneChoice, GameManager gameManager) {
     //set gameManager for each controller/scene
     switch (sceneChoice){
       case 1:
@@ -35,6 +35,7 @@ public class SceneController {
         break;
       case 7:
         //end scene
+        //EndSceneController endSceneController = new EndSceneController(stage, gameManager);
         break;
       default:
         throw new IllegalArgumentException("The number must be between 1 and 7");

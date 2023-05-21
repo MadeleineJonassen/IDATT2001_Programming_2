@@ -22,11 +22,11 @@ public class MainMenuController {
     
   }
 
-  public void createGame() throws Exception {
+  public void createGame() {
     sceneController.switchScene(stage, 2, gameManager);
   }
 
-  public void playGame() throws Exception {
+  public void playGame() {
     sceneController.switchScene(stage, 6, gameManager);
   }
   

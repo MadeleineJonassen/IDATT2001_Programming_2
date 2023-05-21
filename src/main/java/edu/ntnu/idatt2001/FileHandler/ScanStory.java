@@ -39,9 +39,11 @@ public class ScanStory {
     String title = scan.nextLine().substring(2);
     Passage passage = new Passage(title, scan.nextLine());
     
-    String line;
-    while(!(line = scan.nextLine()).isBlank()){
-      passage.addLink(scanLink(line));
+    if(scan.hasNext()){
+      String line;
+      while(!(line = scan.nextLine()).isBlank()){
+        passage.addLink(scanLink(line));
+      }
     }
     
     return passage;

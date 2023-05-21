@@ -6,10 +6,13 @@ import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.Model.Passage;
 import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.View.PlayGameView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlayGameController {
   private GameManager gameManager;
@@ -18,12 +21,19 @@ public class PlayGameController {
   private SceneController sceneController = new SceneController();
   private Passage currentPassage;
   private List<Link> currentLinks;
+  private ObservableList<String> currentPassageText = FXCollections.observableArrayList();
+  private ObservableList<String> currentLinkTitles = FXCollections.observableArrayList();
+  private ObservableList<String> currentPlayerInfo = FXCollections.observableArrayList();
+  private ObservableList<Goal> noncompletedGoals = FXCollections.observableArrayList();
+  private ObservableList<Goal> completedGoals = FXCollections.observableArrayList();
+  
   
   //TODO: exception handling
 
   public PlayGameController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
     currentPassage = gameManager.getOpeningPassage();
+    updateObservableLists();
     updateCurrentLinks();
     this.stage = stage;
     view = new PlayGameView(this);
@@ -46,6 +56,19 @@ public class PlayGameController {
     return player.toString();
   }
   
+  public ObservableList<String> getCurrentPlayer(){
+    return currentPlayerInfo;
+  }
+  
+  public ObservableList<String> getPassageText(){
+    return currentPassageText;
+  }
+  
+  public ObservableList<String> getLinkTitles(){
+    return currentLinkTitles;
+  }
+  
+  
   public void updateCurrentLinks(){
     //TODO: sort links by title (to keep order consistent)
     currentLinks = currentPassage.getLinks();
@@ -59,7 +82,7 @@ public class PlayGameController {
     return passageInformation;
   }
   
-  public List<String> getLinkTitles(){
+  /*public List<String> getLinkTitles(){
     List<String> linkTitles = new ArrayList<>();
     
     for (Link l : currentLinks){
@@ -67,7 +90,7 @@ public class PlayGameController {
     }
     
     return linkTitles;
-  }
+  }*/
   
   public void nextPassage(String linkTitle){
     Link link = null;
@@ -82,25 +105,62 @@ public class PlayGameController {
       throw new IllegalArgumentException("Cannot find the matching link");
     }
     
-    currentPassage = gameManager.nextPassage(link);
+    try{
+      currentPassage = gameManager.nextPassage(link);
+    } catch (Exception ex){
+      System.out.println("Something wrong with nextPassage in GameManager");
+      System.out.println(link.getText() + " | " + link.getReference());
+      System.out.println(link.getActions().toString());
+    }
+    
+    updateObservableLists();
+    
+    //updateCurrentLinks();
+  }
+  private void updateObservableLists(){
+    currentPassageText.clear();
+    currentPassageText.addAll(currentPassage.getTitle(), currentPassage.getContent());
+    
     updateCurrentLinks();
+    currentLinkTitles.clear();
+    for(Link l : currentLinks){
+      currentLinkTitles.add(l.getText());
+    }
+    
+    //TODO: update player more cleanly
+    currentPlayerInfo.clear();
+    currentPlayerInfo.addAll(
+            gameManager.getGame().getPlayer().getName(),
+            Integer.toString(gameManager.getGame().getPlayer().getGold()),
+            Integer.toString(gameManager.getGame().getPlayer().getHealth()),
+            Integer.toString(gameManager.getGame().getPlayer().getScore()),
+            gameManager.getGame().getPlayer().getInventory().toString()
+    );
+    
+    //goals
+    noncompletedGoals.clear();
+    noncompletedGoals = gameManager.getGoals().stream().filter(g -> !g.isFulfilled(gameManager.getPlayer())).collect(Collectors.toCollection(FXCollections::observableArrayList));
+    
+    completedGoals.clear();
+    completedGoals = gameManager.getGoals().stream().filter(g -> g.isFulfilled(gameManager.getPlayer())).collect(Collectors.toCollection(FXCollections::observableArrayList));
   }
   
-  public List<Goal> getNonCompletedGoals(){
-    List<Goal> allGoals = gameManager.getGoals();
-    return allGoals.stream().filter(g -> !g.isFulfilled(gameManager.getPlayer())).toList();
+  
+  public ObservableList<Goal> getNoncompletedGoals(){
+    return noncompletedGoals;
   }
   
-  public List<Goal> getCompletedGoals(){
-    List<Goal> allGoals = gameManager.getGoals();
-    return allGoals.stream().filter(g -> g.isFulfilled(gameManager.getPlayer())).toList();
+  
+  public ObservableList<Goal> getCompletedGoals(){
+    return completedGoals;
   }
   
-  public void mainMenu() throws Exception {
+  
+  public void mainMenu() {
     sceneController.switchScene(stage, 1, gameManager);
   }
   
-  public void endGame() throws Exception {
+  public void endGame() {
     sceneController.switchScene(stage, 7, gameManager);
   }
 }

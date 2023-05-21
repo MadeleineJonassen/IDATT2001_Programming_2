@@ -62,6 +62,10 @@ public class GameManager {
     //TODO: return deep copy????
     //method might not be needed, as the class provides relevant getters and
     //Game is only created when story, player etc is finished, so method might be nice for playGame-scene?
+    if (this.game == null){
+      return null;
+    }
+    
     return new Game(game);
   }
   
