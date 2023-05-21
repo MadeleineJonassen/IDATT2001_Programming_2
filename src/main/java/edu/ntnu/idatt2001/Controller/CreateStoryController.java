@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,6 +23,7 @@ public class CreateStoryController {
   private GameManager gameManager;
   private final Stage stage;
   private SceneController sceneController = new SceneController();
+  public File selectedFile;
   
   public CreateStoryController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
@@ -32,7 +32,9 @@ public class CreateStoryController {
     stage.setScene(view.setup());
     stage.show();
   }
-  
+
+
+
   public void createGame() throws Exception {
     System.out.println("goToCreateGame");
     sceneController.switchScene(stage, 2, gameManager);
@@ -42,7 +44,7 @@ public class CreateStoryController {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select a story");
     fileChooser.setInitialDirectory(new File("src/resources/Stories"));
-    File selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);
+    selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);
     if (selectedFile != null) {
       try {
         ScanStory scan = new ScanStory();
@@ -53,6 +55,11 @@ public class CreateStoryController {
         throw new RuntimeException(e);
       }
     }
+  }
+
+  public String getDirectory() {
+     String directory = selectedFile.getPath();
+     return directory;
   }
 
   
@@ -73,6 +80,11 @@ public class CreateStoryController {
             .filter(file -> !file.isDirectory())
             .map(File::getName)
             .collect(Collectors.toSet());
+  }
+
+  public String getBrokenLinks() {
+    String brokenLinks = gameManager.getBrokenLinks().toString();
+    return brokenLinks;
   }
   
   /*
