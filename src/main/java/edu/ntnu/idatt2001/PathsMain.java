@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class PathsMain extends Application {
   
-  private Stage primaryStage;
+  //private Stage primaryStage;
   private GameManager gameManager;
   
   

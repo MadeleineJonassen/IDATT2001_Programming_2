@@ -12,8 +12,10 @@ public class Player {
   private int gold;
   private List<String> inventory = new ArrayList<>();
   private StringProperty nameProperty;
+  Builder builder;
 
   public Player(Builder builder) {
+    this.builder = builder;
     this.name = builder.name;
     this.health = builder.health;
     this.score = builder.score;
@@ -26,26 +28,27 @@ public class Player {
   public int getHealth() {
     return health;
   }
-  public void addHealth(int health){
-    this.health += health;
-  }
-
   public int getScore() {
     return score;
+  }
+  public int getGold() {
+    return gold;
+  }
+  public List<String> getInventory() {
+    return inventory;
+  }
+  
+  public void addHealth(int health){
+    this.health += health;
   }
   public void addScore(int score){
     this.score += score;
   }
-
-  public int getGold() {
-    return gold;
-  }
   public void addGold(int gold){
+    //Player player = new Builder("Name").health(this.health).score(this.score).gold(this.gold).inventory(this.inventory).build();
+    //Player player = builder.gold(newGold).build();
+    
     this.gold += gold;
-  }
-
-  public List<String> getInventory() {
-    return inventory;
   }
   public void addToInventory(String item){
     inventory.add(item);
@@ -60,11 +63,17 @@ public class Player {
    * A builder class
    */
   public static class Builder {
-    private String name;
-    private int health;
-    private int score;
-    private int gold;
+    //TODO: restrict to builder
+    private /*final*/ String name;
+    
+    private int health = 0;
+    private int score = 0;
+    private int gold = 0;
     private List<String> inventory = new ArrayList<>();
+    
+    public Builder(String name){
+      this.name = name;
+    }
 
     public Builder(String name, int health, int score, int gold, List<String> inventory){
       this.name = name;
@@ -78,6 +87,7 @@ public class Player {
       this.name = name;
       return this;
     }
+    
     public Builder health (int health){
       this.health = health;
       return this;

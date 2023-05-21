@@ -45,7 +45,12 @@ public class CreatePlayerController {
     int score = Integer.parseInt(scoreInput);
     int gold = Integer.parseInt(goldInput);
     List<String> inventory = List.of(inventoryItems);
-    Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
+    /*Player.Builder playerBuilder = new Player.Builder(name, health, score, gold, inventory);
+    Player player = playerBuilder.build();*/
+    
+    Player player = new Player.Builder(name).health(health).score(score).gold(gold).inventory(inventory).build();
+    
+    
     gameManager.setPlayer(player);
     createGame();
   }
