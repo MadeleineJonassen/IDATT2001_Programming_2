@@ -17,32 +17,56 @@ import java.util.List;
 
 import static edu.ntnu.idatt2001.GUI.MainMenu.playerErrorIcon;
 
+/**
+ * The type Create player controller.
+ */
 public class CreatePlayerController {
-  private GameManager gameManager;
+  private final GameManager gameManager;
   private final Stage stage;
-  private CreatePlayerView view;
-  private SceneController sceneController = new SceneController();
-  //TODO: getPlayer functionality
-
-
+  private final SceneController sceneController = new SceneController();
+  
+  /**
+   * Instantiates a new Create player controller.
+   *
+   * @param stage       the stage
+   * @param gameManager the game manager
+   */
   public CreatePlayerController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
     this.stage = stage;
-    view = new CreatePlayerView(this);
+    CreatePlayerView view = new CreatePlayerView(this);
     stage.setScene(view.setup());
     stage.show();
   }
   
+  /**
+   * Get player info observable list.
+   *
+   * @return the observable list
+   */
   public ObservableList<String> getPlayerInfo(){
     return gameManager.getPlayerInfo();
   }
   
-  public void createGame() throws Exception {
+  /**
+   * Create game.
+   *
+   */
+  public void createGame() {
     sceneController.switchScene(stage, 2, gameManager);
   }
   
   
-  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String inventoryInput) throws Exception {
+  /**
+   * Submit player.
+   *
+   * @param name           the name
+   * @param healthInput    the health input
+   * @param scoreInput     the score input
+   * @param goldInput      the gold input
+   * @param inventoryInput the inventory input
+   */
+  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String inventoryInput) {
     if(name.isBlank()){
       throw new IllegalArgumentException("Name must be filled out");
     }
@@ -52,7 +76,6 @@ public class CreatePlayerController {
     if(goldInput.isBlank()){
       throw new IllegalArgumentException("Gold amount must be filled out");
     }
-    //TODO: error handling, taking no input as 0
     int health = Integer.parseInt(healthInput);
     int gold = Integer.parseInt(goldInput);
     int score = 0;
@@ -63,66 +86,18 @@ public class CreatePlayerController {
     if(!inventoryInput.isBlank()){
       inventory = Arrays.stream(inventoryInput.split(", ")).toList();
     }
-    
-    //Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
-    //Player player = new Player.Builder(name).health(health).score(score).gold(gold).inventory(inventory).build();
+ 
     Player player = new Player.Builder(name, health, gold).score(score).inventory(inventory).build();
     gameManager.setPlayer(player);
     createGame();
   }
   
-/*
-  public void createGame() {
-    CreateGameController controller = new CreateGameController(stage, this);
-    controller.initialize();
-  }
-
-
-
-  /*
-  private GameManager gameManager;
-
-  private Player player;
-  private List<String> inventory = new ArrayList<>();
+  /**
+   * Sets string.
+   *
+   * @return the string
+   */
   
-  public CreatePlayerController(GameManager gameManager) {
-    this.gameManager = gameManager;
-    //this.player = new Player.Builder();
-    //player.inventory(inventory);
-    //if (gameManager.getPlayer.getInventory != null) {this.inventory = gameManager.getPlayer.getInventory}
-    //^^ to sync inventory items for builder
-  }
-  
-  //attach listeners in view?
-  
-  public void setName(int name){
-    player.name(name);
-  }
-  
-  public void setHealth(int health){
-    player.health(health);
-  }
-  
-  public void setScore(int score){
-    player.score(score);
-  }
-  
-  public void setGold(int gold){
-    player.gold(gold);
-  }
-  
-  public void setInventory(String inventoryItem){
-    this.inventory.add(inventoryItem);
-  }
-  
-  public void build(){
-    //build player, send to model. Use method in view, when user presses button
-    //error handling here!!
-
-    gameManager.setPlayer(player.build);
-  }
-  
-  */
   public static boolean isString(){
     try{
      /* .\\d+. */
@@ -134,7 +109,12 @@ public class CreatePlayerController {
       return false;
     }
   }
-
+  
+  /**
+   * Is int boolean.
+   *
+   * @return the boolean
+   */
   public static boolean isInt() {
     try{
       int health = Integer.parseInt(MainMenu.playerHealth.getText());

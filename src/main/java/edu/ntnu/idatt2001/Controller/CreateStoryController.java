@@ -18,13 +18,25 @@ import java.util.stream.Stream;
 //import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
 //import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
 
+/**
+ * The type Create story controller.
+ */
 public class CreateStoryController {
   
   private GameManager gameManager;
   private final Stage stage;
   private SceneController sceneController = new SceneController();
+  /**
+   * The Selected file.
+   */
   public File selectedFile;
   
+  /**
+   * Instantiates a new Create story controller.
+   *
+   * @param stage       the stage
+   * @param gameManager the game manager
+   */
   public CreateStoryController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
     this.stage = stage;
@@ -32,43 +44,53 @@ public class CreateStoryController {
     stage.setScene(view.setup());
     stage.show();
   }
-
-  public void createGame() throws Exception {
-    System.out.println("goToCreateGame");
+  
+  /**
+   * Create game.
+   *
+   */
+  public void createGame() {
     sceneController.switchScene(stage, 2, gameManager);
   }
   
-  public void chooseStory(){
+  /**
+   * Choose story.
+   */
+  public void chooseStory() throws FileNotFoundException{
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select a story");
-    fileChooser.setInitialDirectory(new File("src/resources/Stories"));
+    fileChooser.setInitialDirectory(new File("src/main/resources/Stories"));
     selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);
     if (selectedFile != null) {
-      try {
-        ScanStory scan = new ScanStory();
-        //storyListView.getItems().add(scan.nextLine() + "\n");
-        //displayStoryPath.setPromptText(selectedFile.getPath());
-        gameManager.setStory(scan.scanStory(selectedFile));
-      } catch (FileNotFoundException e) {
-        throw new RuntimeException(e);
-      }
+      ScanStory scan = new ScanStory();
+      gameManager.setStory(scan.scanStory(selectedFile));
     }
   }
-
-  public String getDirectory() {
-     String directory = selectedFile.getPath();
-     return directory;
-  }
-
   
+  /**
+   * Gets directory.
+   *
+   * @return the directory
+   */
+  public String getDirectory() {
+    return selectedFile.getPath();
+  }
+  
+  
+  /**
+   * Get story passage names collection.
+   *
+   * @return the collection
+   */
   public Collection<String> getStoryPassageNames(){
     return gameManager.getStoryPassageNames();
   }
   
-  /** Lists all files in the resources' folder. Returns a set of strings
+  /**
+   * Lists all files in the resources' folder. Returns a set of strings
    *
-   * @return files
-   **/
+   * @return files set
+   */
   public Set<String> listFiles() {
     //TODO: add exceptions if path is invalid, or empty
     //TODO: filter or sort by file type (se filechooser)
@@ -79,48 +101,21 @@ public class CreateStoryController {
             .map(File::getName)
             .collect(Collectors.toSet());
   }
-
-  public String getBrokenLinks() {
-    String brokenLinks = gameManager.getBrokenLinks().toString();
-    return brokenLinks;
-  }
   
-  public void deleteBrokenLinks(){
-    gameManager.deleteBrokenLinks();
-  }
-  
-  /*
-  public void scanStory(String fileName) throws FileNotFoundException {
-    //TODO: exception handling
-    File file = new File("src/main/resources" + fileName);
-    scanStory(file);
-  }
-  
-  //Used if user is presented with the files
-  public void scanStory(File file) throws FileNotFoundException {
-    //TODO: handle FileNotFoundException
-    try{
-      ScanStory scan = new ScanStory();
-      gameManager.setStory(scan.scanStory(file));
-    }catch (FileNotFoundException e){
-      throw new FileNotFoundException("Finner ikke den angitte filen ");
-    }
-  }
-  
-  public void deleteBrokenLinks(){
-    gameManager.deleteBrokenLinks();
-  }
-  
-  public void deletePassage(String passageName){
-    //remove passage from story
-    //return passages that link to this passage, so that user may delete these?
-    //Alternatively, add possibility to edit passages (separate window)
-  }
-  
-  public void editPassage(String passageName){
-    //Open popup window
-  }
-
-
+  /**
+   * Gets broken links.
+   *
+   * @return the broken links
    */
+  public String getBrokenLinks() {
+    return gameManager.getBrokenLinks().toString();
+  }
+  
+  /**
+   * Delete broken links.
+   */
+  public void deleteBrokenLinks(){
+    gameManager.deleteBrokenLinks();
+  }
+  
 }

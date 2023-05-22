@@ -15,35 +15,58 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Create goals controller.
+ */
 public class CreateGoalsController {
-  private GameManager gameManager;
+  private final GameManager gameManager;
   private final Stage stage;
-  private CreateGoalsView view;
-  private SceneController sceneController = new SceneController();
-
-
+  private final SceneController sceneController = new SceneController();
+  
+  
+  /**
+   * Instantiates a new Create goals controller.
+   *
+   * @param stage       the stage
+   * @param gameManager the game manager
+   */
   public CreateGoalsController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
     this.stage = stage;
-    view = new CreateGoalsView(this);
+    CreateGoalsView view = new CreateGoalsView(this);
     stage.setScene(view.setup());
     stage.show();
   }
   
-  public void createGame() throws Exception {
+  /**
+   * Create game.
+   *
+   */
+  public void createGame() {
     sceneController.switchScene(stage, 2, gameManager);
   }
   
+  /**
+   * Get goals list observable list.
+   *
+   * @return the observable list
+   */
   public ObservableList<Goal> getGoalsList(){
     return gameManager.getGoals();
   }
   
+  /**
+   * Add single goal.
+   */
   public void addSingleGoal(){
     Stage addGoalWindow = new Stage();
     //addGoalWindow.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
     AddGoalController addGoalController = new AddGoalController(gameManager, addGoalWindow);
   }
   
+  /**
+   * Clear goals.
+   */
   public void clearGoals(){
     gameManager.clearGoals();
   }

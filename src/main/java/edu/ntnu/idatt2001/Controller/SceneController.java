@@ -3,9 +3,19 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.Model.GameManager;
 import javafx.stage.Stage;
 
+/**
+ * The type Scene controller.
+ */
 public class SceneController {
   
   
+  /**
+   * Switch scene.
+   *
+   * @param stage       the stage
+   * @param sceneChoice the scene choice
+   * @param gameManager the game manager
+   */
   public void switchScene(Stage stage, int sceneChoice, GameManager gameManager) {
     //set gameManager for each controller/scene
     switch (sceneChoice){

@@ -9,40 +9,70 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Add goal controller.
+ */
 public class AddGoalController {
-  private GameManager gameManager;
+  private final GameManager gameManager;
   private final Stage stage;
-  private AddGoalView view;
-  private Goal goal;
   
+  /**
+   * Instantiates a new Add goal controller.
+   *
+   * @param gameManager the game manager
+   * @param stage       the stage
+   */
   public AddGoalController(GameManager gameManager, Stage stage) {
     this.gameManager = gameManager;
     this.stage = stage;
     stage.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
-    view = new AddGoalView(this);
+    AddGoalView view = new AddGoalView(this);
     stage.setScene(view.setup());
     stage.showAndWait();
   }
   
+  /**
+   * Close window.
+   */
   public void closeWindow(){
     stage.close();
   }
   
+  /**
+   * Add gold goal.
+   *
+   * @param amount the amount
+   */
   public void addGoldGoal(int amount){
     Goal goldGoal = new GoldGoal(amount);
     gameManager.addGoal(goldGoal);
   }
   
+  /**
+   * Add score goal.
+   *
+   * @param amount the amount
+   */
   public void addScoreGoal(int amount){
     Goal scoreGoal = new ScoreGoal(amount);
     gameManager.addGoal(scoreGoal);
   }
   
+  /**
+   * Add health goal.
+   *
+   * @param amount the amount
+   */
   public void addHealthGoal(int amount){
     Goal healthGoal = new HealthGoal(amount);
     gameManager.addGoal(healthGoal);
   }
   
+  /**
+   * Add inventory goal.
+   *
+   * @param item the item
+   */
   public void addInventoryGoal(String item){
     List<String> items = new ArrayList<>();
     items.add(item);
