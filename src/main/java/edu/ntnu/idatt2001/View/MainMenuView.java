@@ -46,7 +46,6 @@ public class MainMenuView  {
      createGameBtn.setOnAction(e -> {
        try {
          controller.createGame();
-         System.out.println("success");
        } catch (Exception ex) {
          //throw new RuntimeException(ex);
          errorVisible(ex.getMessage());
@@ -59,7 +58,6 @@ public class MainMenuView  {
       try {
         controller.playGame();
       } catch (Exception ex) {
-        //throw new RuntimeException(ex);
         errorVisible(ex.getMessage());
       }
     });
@@ -83,7 +81,6 @@ public class MainMenuView  {
 
   public void errorVisible(String message){
     errorText.getStyleClass().add("errorText");
-    //errorText.setText("Something went wrong, try again later...");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
   }

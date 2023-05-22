@@ -8,14 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class CreateGameView {
   private final CreateGameController controller;
+
+
   
   public CreateGameView(CreateGameController controller){
     this.controller = controller;
@@ -23,71 +22,80 @@ public class CreateGameView {
   public Scene setup(){
     // **************************** CREATE GAME LAYOUT ****************************
     // Top create game layout
-    //TODO: exception handling
     BorderPane layoutCreateGameTop = new BorderPane();
     layoutCreateGameTop.setId("boxes");
     Button goHomeMenu = new Button(" ");
-    goHomeMenu.getStyleClass().add("homeButton");
-    goHomeMenu.setOnAction(e -> {
-      try {
-        controller.mainMenu();
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
+      goHomeMenu.getStyleClass().add("homeButton");
+      goHomeMenu.setOnAction(e -> {
+        try {
+          controller.mainMenu();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
     VBox createGameTopMid = new VBox();
     createGameTopMid.setId("boxes");
-    Label createGameTitle = new Label("Create game");
-    createGameTitle.setId("title");
-    Label createGameUnderTitle = new Label("Create your own game!");
-    createGameUnderTitle.setId("underTitle");
+      Label createGameTitle = new Label("Create game");
+      createGameTitle.setId("title");
+      Label createGameUnderTitle = new Label("Create your own game!");
+      createGameUnderTitle.setId("underTitle");
     createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);
+
     layoutCreateGameTop.setLeft(goHomeMenu);
     layoutCreateGameTop.setCenter(createGameTopMid);
-    
+
     // Mid create game layout
     VBox createGameLayout = new VBox();
     createGameLayout.setId("boxes");
+    createGameLayout.setPrefWidth(1000);
     HBox menuStoryLayout = new HBox();
     menuStoryLayout.setId("boxes");
-    Button createStoryBtn = new Button("Story");
-    createStoryBtn.setOnAction(e -> {
-      try {
-        controller.createStory();
-        System.out.println("Story");
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
-    TextField storySelectedDisplay = new TextField();
-    storySelectedDisplay.setPromptText(controller.getStoryName());
+      Button createStoryBtn = new Button("Story");
+      createStoryBtn.setOnAction(e -> {
+        try {
+          controller.createStory();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
+      TextField storySelectedDisplay = new TextField();
+      storySelectedDisplay.setText(controller.getStoryName());
+      storySelectedDisplay.setEditable(false);
+      storySelectedDisplay.setMinWidth(300);
     //TODO: display selected story
     menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);
     HBox menuPlayerLayout = new HBox();
     menuPlayerLayout.setId("boxes");
+    menuPlayerLayout.setPrefWidth(700);
+
     Button createPlayerBtn = new Button("Player");
-    createPlayerBtn.setOnAction(e -> {
-      try {
-        controller.createPlayer();
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
-    TextField playerSelectedDisplay = new TextField();
-    playerSelectedDisplay.setPromptText(controller.getPlayerName());
+      createPlayerBtn.setOnAction(e -> {
+        try {
+          controller.createPlayer();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
+      TextField playerSelectedDisplay = new TextField();
+      playerSelectedDisplay.setText(controller.getPlayerName());
+      playerSelectedDisplay.setEditable(false);
+      playerSelectedDisplay.setMinWidth(300);
     menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);
     HBox menuGoalsLayout = new HBox();
-    menuGoalsLayout.setId("boxes");
-    Button createGoalBtn = new Button("Goals");
-    createGoalBtn.setOnAction(e -> {
-      try {
-        controller.createGoals();
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
-      }
-    });
-    ListView goalsSelectedDisplay = new ListView<>();
-    goalsSelectedDisplay.setItems(controller.getGoalsList());
+      menuGoalsLayout.setId("boxes");
+      Button createGoalBtn = new Button("Goals");
+      createGoalBtn.setOnAction(e -> {
+        try {
+          controller.createGoals();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
+      ListView goalsSelectedDisplay = new ListView<>();
+      goalsSelectedDisplay.setEditable(false);
+      goalsSelectedDisplay.setMinWidth(300);
+      goalsSelectedDisplay.setMinHeight(100);
+      goalsSelectedDisplay.setItems(controller.getGoalsList());
     menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);
     createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);
     
@@ -105,7 +113,7 @@ public class CreateGameView {
       try {
         controller.playGame();
       } catch (Exception ex) {
-        System.out.println(ex.getMessage());
+        throw new RuntimeException(ex);
       }
     });
     Region space = new Region();
@@ -118,13 +126,10 @@ public class CreateGameView {
     layoutCreateGame.setTop(layoutCreateGameTop);
     layoutCreateGame.setCenter(createGameLayout);
     layoutCreateGame.setBottom(layoutBottom);
-    //layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
-    
+
     Scene scene = new Scene(layoutCreateGame, 1300, 700);
     scene.getStylesheets().add("StyleSheets/createGameStyle.css");
     return scene;
-    //stage.setScene(scene);
-    //stage.show();
   }
 
 }

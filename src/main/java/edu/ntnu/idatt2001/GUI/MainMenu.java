@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.GUI;
 
 import edu.ntnu.idatt2001.Controller.CreatePlayerController;
 import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
+import edu.ntnu.idatt2001.View.createGoals;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -296,7 +297,6 @@ public class MainMenu extends Application {
       createGoalsBtn.setId("boxes");
       Button goalBox = new Button("Create Goal");
       goalBox.setOnAction(e -> createGoals.display());
-        //TODO: add ability to create goals based on "category" -> gold, health, inventory or score.
       Button clearAllGoals = new Button("Clear All");
         //TODO: create a delete option for the listview
     createGoalsBtn.getChildren().addAll(goalBox, clearAllGoals);
