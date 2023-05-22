@@ -5,13 +5,11 @@ import edu.ntnu.idatt2001.Goal.Goal;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class PlayGameView {
   private final PlayGameController controller;
@@ -128,30 +126,35 @@ public class PlayGameView {
   private void updatePassageView(){
     layoutPlayGameMid = new HBox();
     layoutPlayGameMid.setId("boxes");
+
     VBox layoutPlayGameMidLeft = new VBox();
-    layoutPlayGameMidLeft.setId("big-boxes");
-    ListView playerListView = new ListView<>();
-    //playerListView.getItems().add(controller.getPlayerInfo());
-    playerListView.setItems(controller.getCurrentPlayer());
-    //TODO: set selected player;
-    ListView storyListView = new ListView<>();
-    storyListView.setId("big-list-view");
-    storyListView.setItems(controller.getPassageText());
-    //TODO: set selected story
-    layoutPlayGameMidLeft.getChildren().addAll(playerListView, storyListView);
+      layoutPlayGameMidLeft.setId("boxes");
+      Label playerTitle = new Label("Player");
+      playerTitle.setId("underTitle");
+      ListView playerListView = new ListView<>();
+      //playerListView.getItems().add(controller.getPlayerInfo());
+      playerListView.setItems(controller.getCurrentPlayer());
+    layoutPlayGameMidLeft.getChildren().addAll(playerTitle, playerListView);
+
+    VBox layoutMid = new VBox();
+    layoutMid.setId("big-boxes");
+    Label storyTitle = new Label("Story");
+    storyTitle.setId("underTitle");
+    storyTitle.setFont(Font.font(30));
+      ListView storyListView = new ListView<>();
+      storyListView.setId("storyListView");
+      storyListView.setItems(controller.getPassageText());
+    layoutMid.getChildren().addAll(storyTitle, storyListView);
+
     VBox rightInfoBox = new VBox();
-    rightInfoBox.setId("boxes");
-    /*ComboBox setGoals = new ComboBox<>();
-    setGoals.setPromptText("View Goals");*/
-    ListView<Goal> setGoals = new ListView<>();
-    //setGoals.getItems().addAll(controller.getNoncompletedGoals());
-    setGoals.setItems(controller.getNoncompletedGoals());
-    
-    //TODO: add selected goals in box and add function "crossed out" when finished a goal
-    Button options = new Button("options?");
-    Button other = new Button("other?");
-    rightInfoBox.getChildren().addAll(setGoals,options,other);
-    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, rightInfoBox);
+    rightInfoBox.setId("rightBox");
+    Label goalsTitle = new Label("Goals");
+    goalsTitle.setId("underTitle");
+      ListView<Goal> setGoals = new ListView<>();
+      //setGoals.getItems().addAll(controller.getNoncompletedGoals());
+      setGoals.setItems(controller.getNoncompletedGoals());
+    rightInfoBox.getChildren().addAll(goalsTitle, setGoals);
+    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, rightInfoBox);
   }
   
   private Button endGameButton(){
