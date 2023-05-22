@@ -43,7 +43,7 @@ public class CreateStoryView {
       try {
         controller.createGame();
       } catch (Exception ex) {
-        System.out.println("error");
+        throw new RuntimeException(ex);
       }
     });
     VBox creatStoryTopMid = new VBox();
@@ -121,12 +121,10 @@ public class CreateStoryView {
     return createStoryScene;
   }
 
-
   public void errorInvisible(){
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-
   public void errorVisable(){
     errorText.getStyleClass().add("errorText");
     errorText.setText("Could not resolve file, try again...");
