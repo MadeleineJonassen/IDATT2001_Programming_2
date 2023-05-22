@@ -134,8 +134,6 @@ public class CreatePlayerView {
       errorText.getStyleClass().addAll("invincible");
     Button submitPlayerBtn = new Button("Submit player");
     submitPlayerBtn.setOnAction(e -> {
-      //CreatePlayerController.isString();
-      //CreatePlayerController.isInt();
       submit();
     });
     
@@ -156,7 +154,6 @@ public class CreatePlayerView {
     try {
       controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());
     } catch (Exception ex) {
-      System.out.println(ex.getMessage());
       errorIcon.getStyleClass().add("errorImage");
       errorText.getStyleClass().add("errorText");
       errorText.setText("Please enter a value in the missing text-fields");
