@@ -47,7 +47,6 @@ public class MainMenuView  {
        try {
          controller.createGame();
        } catch (Exception ex) {
-         //throw new RuntimeException(ex);
          errorVisible(ex.getMessage());
        }
      });
