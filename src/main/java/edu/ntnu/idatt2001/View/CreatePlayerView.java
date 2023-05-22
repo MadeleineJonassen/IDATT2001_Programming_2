@@ -157,6 +157,18 @@ public class CreatePlayerView {
       errorIcon.getStyleClass().add("errorImage");
       errorText.getStyleClass().add("errorText");
       errorText.setText("Please enter a value in the missing text-fields");
+      if (playerName.getText() != null) {
+        playerName.setId("errorPlayerTextFields");
+        playerName.setPromptText("Please enter a name");
+      }
+      if (playerHealth.getText() != null) {
+        playerHealth.setId("errorPlayerTextFields");
+        playerHealth.setPromptText("Please enter your health");
+      }
+      if (playerGold.getText() != null) {
+        playerGold.setId("errorPlayerTextFields");
+        playerGold.setPromptText("Please enter your gold");
+      }
     }
   }
 }
