@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -84,8 +85,8 @@ public class CreateStoryView {
       Button selectStory = new Button("Select Story");
       selectStory.setOnAction(actionEvent -> {
         try {
-          //errorInvisible();       Doesn't work
           controller.chooseStory();
+          errorInvisible();
           observableList.addAll(controller.getStoryPassageNames());
           displayStoryPath.setText(controller.getDirectory());
           displayBrokenLinks.setText(controller.getBrokenLinks());
@@ -102,7 +103,6 @@ public class CreateStoryView {
       Button submit = new Button("Submit");
       submit.setOnAction(e -> {
           try {
-            //TODO: save input
             controller.createGame();
           } catch (Exception ex) {
             errorVisable();
@@ -123,14 +123,13 @@ public class CreateStoryView {
 
 
   public void errorInvisible(){
-    errorText.getStyleClass().add("invincible");
-    errorIcon.getStyleClass().add("invincible");
+    errorText.setText("");
+    errorIcon.setBackground(Background.EMPTY);
   }
 
   public void errorVisable(){
     errorText.getStyleClass().add("errorText");
     errorText.setText("Could not resolve file, try again...");
-    //TODO: print error message to user
     errorIcon.getStyleClass().add("errorImage");
   }
 }

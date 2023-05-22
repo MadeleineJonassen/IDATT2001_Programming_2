@@ -22,6 +22,8 @@ public class CreatePlayerView {
   private TextField playerGold = new TextField();
   private TextField playerScore = new TextField();
   private TextField playerInventory = new TextField();
+  public Button errorIcon;
+  public Label errorText;
 
   public CreatePlayerView(CreatePlayerController controller){
     this.controller = controller;
@@ -33,11 +35,15 @@ public class CreatePlayerView {
     // Top create player layout
     BorderPane createPlayerTop = new BorderPane();
     Button goToCreateHomePlayer = new Button(" ");
-    goToCreateHomePlayer.getStyleClass().add("backButton");
-    //goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
-    goToCreateHomePlayer.setOnAction(e -> {
-      submit();
-    });
+      goToCreateHomePlayer.getStyleClass().add("backButton");
+      goToCreateHomePlayer.setOnAction(e -> {
+        try {
+          controller.createGame();
+        } catch (Exception ex) {
+          errorIcon.getStyleClass().add("errorImage");
+          ;
+        }
+      });
     VBox creatPlayerTopMid = new VBox();
     creatPlayerTopMid.setId("boxes");
     Label createPlayerTitle = new Label("Create Player");
@@ -122,8 +128,10 @@ public class CreatePlayerView {
     // Bottom create player layout
     VBox createPlayerBottom = new VBox();
     createPlayerBottom.setId("boxes");
-    Button playerErrorIcon = new Button("");
-    playerErrorIcon.getStyleClass().add("invincible");
+    errorIcon = new Button("");
+      errorIcon.getStyleClass().add("invincible");
+    errorText = new Label();
+      errorText.getStyleClass().addAll("invincible");
     Button submitPlayerBtn = new Button("Submit player");
     submitPlayerBtn.setOnAction(e -> {
       //CreatePlayerController.isString();
@@ -131,7 +139,7 @@ public class CreatePlayerView {
       submit();
     });
     
-    createPlayerBottom.getChildren().addAll( playerErrorIcon, submitPlayerBtn);
+    createPlayerBottom.getChildren().addAll( errorIcon, errorText, submitPlayerBtn);
     
     // * Overall Create Player Layout *
     BorderPane createPlayerLayout = new BorderPane();
@@ -149,7 +157,9 @@ public class CreatePlayerView {
       controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());
     } catch (Exception ex) {
       System.out.println(ex.getMessage());
-      //TODO: print error message to user
+      errorIcon.getStyleClass().add("errorImage");
+      errorText.getStyleClass().add("errorText");
+      errorText.setText("Please enter a value in the missing text-fields");
     }
   }
 }
