@@ -18,10 +18,6 @@ public class AddGoalController {
   public AddGoalController(GameManager gameManager, Stage stage) {
     this.gameManager = gameManager;
     this.stage = stage;
-    stage.setMinWidth(350);
-    stage.setMaxHeight(350);
-    stage.setMinHeight(50);
-    stage.setMaxHeight(200);
     stage.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
     view = new AddGoalView(this);
     stage.setScene(view.setup());

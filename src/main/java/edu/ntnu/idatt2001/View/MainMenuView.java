@@ -54,15 +54,17 @@ public class MainMenuView  {
      });
     Button playGameBtn = new Button("Play game");
     playGameBtn.setId("menuButton");
-     playGameBtn.setOnAction(e -> {
-       try {
-         controller.playGame();
-       } catch (Exception ex) {
-         //throw new RuntimeException(ex);
-         errorVisible(ex.getMessage());
-       }
-     });
+    //TODO: grey out button when game is not added
+    playGameBtn.setOnAction(e -> {
+      try {
+        controller.playGame();
+      } catch (Exception ex) {
+        //throw new RuntimeException(ex);
+        errorVisible(ex.getMessage());
+      }
+    });
     layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn, errorIcon, errorText);
+    //TODO: add "try a sample game"-button
 
     // * Overall Main Menu Layout *
     BorderPane layoutMenu = new BorderPane();

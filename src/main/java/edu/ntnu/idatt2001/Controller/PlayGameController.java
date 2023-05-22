@@ -54,77 +54,9 @@ public class PlayGameController {
     return model.getLinksText();
   }
   
-  
-  public void updateCurrentLinks(){
-    //TODO: sort links by title (to keep order consistent)
-    currentLinks = currentPassage.getLinks();
-  }
-  
-  public List<String> getCurrentPassage(){
-    List<String> passageInformation = new ArrayList<>();
-    passageInformation.add(currentPassage.getTitle());
-    passageInformation.add(currentPassage.getContent());
-    
-    return passageInformation;
-  }
-  
-  /*public List<String> getLinkTitles(){
-    List<String> linkTitles = new ArrayList<>();
-    
-    for (Link l : currentLinks){
-      linkTitles.add(l.getText());
-    }
-    
-    return linkTitles;
-  }*/
-  
   public void nextPassage(String linkTitle){
     model.nextPassage(linkTitle);
-    /*Link link = null;
-    
-    for (Link l : currentLinks){
-      if(l.getText().equals(linkTitle)){
-        link = l;
-      }
-    }
-    
-    if(link == null){
-      throw new IllegalArgumentException("Cannot find the matching link");
-    }
-    
-    try{
-      currentPassage = gameManager.nextPassage(link);
-    } catch (Exception ex){
-      System.out.println("Something wrong with nextPassage in GameManager");
-      System.out.println(link.getText() + " | " + link.getReference());
-      System.out.println(link.getActions().toString());
-    }
-    
-    updateObservableLists();*/
-    
-    //updateCurrentLinks();
   }
-  private void updateObservableLists(){
-    currentPassageText.clear();
-    currentPassageText.addAll(currentPassage.getTitle(), currentPassage.getContent());
-    
-    //updateCurrentLinks();
-    currentLinkTitles.clear();
-    for(Link l : currentLinks){
-      currentLinkTitles.add(l.getText());
-    }
-    
-    //TODO: update player more cleanly
-    currentPlayerInfo.clear();
-    currentPlayerInfo.addAll(
-            gameManager.getGame().getPlayer().getName(),
-            Integer.toString(gameManager.getGame().getPlayer().getGold()),
-            Integer.toString(gameManager.getGame().getPlayer().getHealth()),
-            Integer.toString(gameManager.getGame().getPlayer().getScore()),
-            gameManager.getGame().getPlayer().getInventory().toString()
-    );
-  }
-  
   
   public ObservableList<Goal> getNoncompletedGoals(){
     return model.getNonCompletedGoals();

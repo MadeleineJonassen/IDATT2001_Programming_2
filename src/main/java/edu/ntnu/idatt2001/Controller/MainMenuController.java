@@ -9,19 +9,22 @@ import javafx.stage.Stage;
 public class MainMenuController {
 
   private GameManager gameManager;
-  private MainMenuView view;
   private final Stage stage;
-  private SceneController sceneController = new SceneController();
-  private boolean gameExists;
+  private final SceneController sceneController = new SceneController();
+  private final boolean gameExists;
 
   public MainMenuController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
     gameExists = !(gameManager.getGame() == null);
     this.stage = stage;
-    view = new MainMenuView(this);
+    MainMenuView view = new MainMenuView(this);
     stage.setScene(view.setup());
     stage.show();
     
+  }
+  
+  public boolean doesGameExist(){
+    return gameExists;
   }
 
   public void createGame() {

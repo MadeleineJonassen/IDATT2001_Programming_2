@@ -31,4 +31,9 @@ public class EndSceneController {
     return gameManager.getGoals().stream().filter(g -> !g.isFulfilled(gameManager.getPlayer())).toList();
   }
   
+  public void mainMenu() {
+    SceneController sceneController = new SceneController();
+    sceneController.switchScene(stage, 1, gameManager);
+  }
+  
 }

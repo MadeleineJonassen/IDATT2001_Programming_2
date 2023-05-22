@@ -8,17 +8,16 @@ import javafx.stage.Stage;
 
 public class CreateGameController {
   private final Stage stage;
-  private CreateGameView view;
   private GameManager gameManager;
   SceneController sceneController = new SceneController();
-  private boolean gameIsConstructed;
+  private final boolean gameIsConstructed;
 
   public CreateGameController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
     constructGame();
     gameIsConstructed = !(gameManager.getGame() == null);
     this.stage = stage;
-    view = new CreateGameView(this);
+    CreateGameView view = new CreateGameView(this);
     stage.setScene(view.setup());
     stage.show();
   }
