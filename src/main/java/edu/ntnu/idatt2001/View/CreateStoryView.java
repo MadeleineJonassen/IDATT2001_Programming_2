@@ -130,6 +130,7 @@ public class CreateStoryView {
   public void errorVisable(){
     errorText.getStyleClass().add("errorText");
     errorText.setText("Could not resolve file, try again...");
+    //TODO: print error message to user
     errorIcon.getStyleClass().add("errorImage");
   }
 }

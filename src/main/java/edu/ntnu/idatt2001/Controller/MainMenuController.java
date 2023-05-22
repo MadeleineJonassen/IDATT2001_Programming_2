@@ -12,9 +12,11 @@ public class MainMenuController {
   private MainMenuView view;
   private final Stage stage;
   private SceneController sceneController = new SceneController();
+  private boolean gameExists;
 
   public MainMenuController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
+    gameExists = !(gameManager.getGame() == null);
     this.stage = stage;
     view = new MainMenuView(this);
     stage.setScene(view.setup());
@@ -27,6 +29,9 @@ public class MainMenuController {
   }
 
   public void playGame() {
+    if (!gameExists) {
+      throw new IllegalArgumentException("The game has not been constructed");
+    }
     sceneController.switchScene(stage, 6, gameManager);
   }
   

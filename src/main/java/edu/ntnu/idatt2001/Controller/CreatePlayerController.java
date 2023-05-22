@@ -7,6 +7,7 @@ import edu.ntnu.idatt2001.View.CreateGameView;
 import edu.ntnu.idatt2001.View.CreatePlayerView;
 import edu.ntnu.idatt2001.View.CreateStoryView;
 import edu.ntnu.idatt2001.View.MainMenuView;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,11 +27,14 @@ public class CreatePlayerController {
 
   public CreatePlayerController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
-    
     this.stage = stage;
     view = new CreatePlayerView(this);
     stage.setScene(view.setup());
     stage.show();
+  }
+  
+  public ObservableList<String> getPlayerInfo(){
+    return gameManager.getPlayerInfo();
   }
   
   public void createGame() throws Exception {
@@ -38,14 +42,31 @@ public class CreatePlayerController {
   }
   
   
-  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String ... inventoryItems) throws Exception {
+  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String inventoryInput) throws Exception {
+    if(name.isBlank()){
+      throw new IllegalArgumentException("Name must be filled out");
+    }
+    if(healthInput.isBlank()){
+      throw new IllegalArgumentException("Health must be filled out");
+    }
+    if(goldInput.isBlank()){
+      throw new IllegalArgumentException("Gold amount must be filled out");
+    }
     //TODO: error handling, taking no input as 0
     int health = Integer.parseInt(healthInput);
-    int score = Integer.parseInt(scoreInput);
     int gold = Integer.parseInt(goldInput);
-    List<String> inventory = List.of(inventoryItems);
+    int score = 0;
+    if(!scoreInput.isBlank()){
+      score = Integer.parseInt(scoreInput);
+    }
+    List<String> inventory = new ArrayList<>();
+    if(!inventoryInput.isBlank()){
+      inventory = Arrays.stream(inventoryInput.split(", ")).toList();
+    }
+    
     //Player player = new Player(new Player.Builder(name, health, score, gold, inventory));
-    Player player = new Player.Builder(name).health(health).score(score).gold(gold).inventory(inventory).build();
+    //Player player = new Player.Builder(name).health(health).score(score).gold(gold).inventory(inventory).build();
+    Player player = new Player.Builder(name, health, gold).score(score).inventory(inventory).build();
     gameManager.setPlayer(player);
     createGame();
   }

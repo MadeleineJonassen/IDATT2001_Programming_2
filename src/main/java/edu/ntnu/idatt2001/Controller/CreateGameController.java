@@ -21,7 +21,6 @@ public class CreateGameController {
     view = new CreateGameView(this);
     stage.setScene(view.setup());
     stage.show();
-    
   }
   
   public String getStoryName(){
@@ -46,34 +45,39 @@ public class CreateGameController {
     return gameManager.getGoals();
   }
   
-  public void mainMenu() throws Exception {
+  public void mainMenu() {
     sceneController.switchScene(stage, 1, gameManager);
   }
   
-  public void createStory() throws Exception {
+  public void createStory() {
     sceneController.switchScene(stage, 3, gameManager);
   }
   
-  public void createPlayer() throws Exception {
+  public void createPlayer() {
     sceneController.switchScene(stage, 4, gameManager);
   }
   
-  public void createGoals() throws Exception {
+  public void createGoals() {
     sceneController.switchScene(stage, 5, gameManager);
   }
   
-  public void playGame() throws Exception {
+  public void playGame() {
     sceneController.switchScene(stage, 6, gameManager);
   }
   
   private void constructGame(){
-    boolean player = gameManager.playerHasBeenAdded();
-    boolean story = gameManager.storyHasBeenAdded();
-    boolean goals = !gameManager.getGoals().isEmpty();
-    
-    if(!gameIsConstructed && player && story && goals){
-      gameManager.createGame();
+    try {
+      boolean player = gameManager.playerHasBeenAdded();
+      boolean story = gameManager.storyHasBeenAdded();
+      boolean goals = !gameManager.getGoals().isEmpty();
+      
+      if(!gameIsConstructed && player && story && goals){
+        gameManager.createGame();
+      }
+    }catch (Exception ex){
+      System.out.println(ex.getMessage());
     }
+    
   }
   
   public boolean isGameConstructed(){

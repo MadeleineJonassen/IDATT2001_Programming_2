@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.Model;
 
 import edu.ntnu.idatt2001.Goal.Goal;
+import edu.ntnu.idatt2001.Goal.InventoryGoal;
 import edu.ntnu.idatt2001.Players.Player;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,11 +10,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class GameManager {
-  private Game game; //Assumes user will only edit/run 1 game at a time. Final?
-  private Story story; //current story. Is stored in game-object, superfluous to store here?
+  private Game game;
+  private PlayGameModel startedGame;
+  private Story story;
   private Player player;
-  private List<Goal> goals = new ArrayList<>();
   private ObservableList<Goal> goalsList = FXCollections.observableList(new ArrayList<>());
+  private ObservableList<Goal> completedGoalsList = FXCollections.observableList(new ArrayList<>());
+  private ObservableList<Goal> nonCompletedGoalsList = FXCollections.observableList(new ArrayList<>());
+  private ObservableList<String> playerList = FXCollections.observableList(new ArrayList<>());
   
   public void setStory(Story story){
     //TODO: check for broken links
@@ -22,6 +26,12 @@ public class GameManager {
   
   public void setPlayer(Player player){
     this.player = player;
+    playerList.clear();
+    playerList.addAll(player.getName(),
+            Integer.toString(player.getHealth()),
+            Integer.toString(player.getGold()),
+            Integer.toString(player.getScore()),
+            player.getInventory().toString().replace("[", "").replace("]", ""));
   }
   
   public void addGoal(Goal goal){
@@ -33,6 +43,18 @@ public class GameManager {
   
   public ObservableList<Goal> getGoals(){
     return goalsList;
+  }
+  
+  public ObservableList<Goal> getNonCompletedGoals(){
+    return nonCompletedGoalsList;
+  }
+  
+  public ObservableList<Goal> getCompletedGoals(){
+    return completedGoalsList;
+  }
+  
+  public ObservableList<String> getPlayerInfo(){
+    return playerList;
   }
   
   public void clearGoals(){
@@ -50,15 +72,15 @@ public class GameManager {
   public void createGame(){
     //This method is run when user clicks "run game"-button
     if(this.story == null){
-      throw new NullPointerException("Spillet har ingen story, dette må legges til før du oppretter et spill.");
+      throw new NullPointerException("Story has not been added");
     }
     if(this.player == null){
-      throw new NullPointerException("Spillet har ingen player, dette må legges til før du oppretter et spill.");
+      throw new NullPointerException("Player has not been added");
     }
-    if(this.goals.isEmpty()){
-      throw new NullPointerException("Spillet har ingen goals, dette må legges til før du oppretter et spill.");
+    if(this.goalsList.isEmpty()){
+      throw new NullPointerException("Goals have not been added");
     }
-    this.game = new Game(this.player, this.story, this.goals);
+    this.game = new Game(this.player, this.story, this.goalsList.stream().toList());
   }
   
   public Game getGame(){
@@ -70,6 +92,14 @@ public class GameManager {
     }
     
     return new Game(game);
+  }
+  
+  public void setGameInProgress(PlayGameModel gameInProgress){
+    this.startedGame = gameInProgress;
+  }
+  
+  public PlayGameModel getGameInProgress(){
+    return startedGame;
   }
   
   public String getPlayerName(){
@@ -136,8 +166,28 @@ public class GameManager {
     if (this.game == null){
       throw new NullPointerException("The game has not been created");
     }
-    
-    return this.game.go(link);
+    Passage newPassage = this.game.go(link);
+    //checkGoalCompletion();
+    return newPassage;
+  }
+  
+  private void checkGoalCompletion(){
+    for(Goal g : nonCompletedGoalsList){
+      if(g.isFulfilled(this.game.getPlayer())){
+        if(nonCompletedGoalsList.size()>1){
+          nonCompletedGoalsList.remove(g);
+        } else if(nonCompletedGoalsList.size() == 1) {
+          System.out.println(nonCompletedGoalsList);
+          nonCompletedGoalsList.clear();
+          System.out.println(nonCompletedGoalsList);
+        }
+        
+        //List<String> placeHolder = new ArrayList<>();
+        //placeHolder.add("Placeholder");
+        //nonCompletedGoalsList.add(new InventoryGoal(placeHolder));
+        //completedGoalsList.add(g);
+      }
+    }
   }
   
 }

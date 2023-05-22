@@ -70,6 +70,13 @@ public class CreateGoalsView {
     // Bottom create goal layout
     HBox createGoalsBottom = new HBox();
     Button submitGoalBtn = new Button("Submit goal(s)");
+    submitGoalBtn.setOnAction(e -> {
+      try {
+        controller.createGame();
+      } catch (Exception ex) {
+        throw new RuntimeException(ex);
+      }
+    });
     createGoalsBottom.getChildren().addAll(submitGoalBtn);
     
     // * Overall Create Goal Layout *

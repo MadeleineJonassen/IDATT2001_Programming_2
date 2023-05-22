@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Model.Link;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.PlayGameModel;
 import edu.ntnu.idatt2001.Players.Player;
 import edu.ntnu.idatt2001.View.PlayGameView;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 public class PlayGameController {
   private GameManager gameManager;
+  private PlayGameModel model;
   private final Stage stage;
   private PlayGameView view;
   private SceneController sceneController = new SceneController();
@@ -24,48 +26,32 @@ public class PlayGameController {
   private ObservableList<String> currentPassageText = FXCollections.observableArrayList();
   private ObservableList<String> currentLinkTitles = FXCollections.observableArrayList();
   private ObservableList<String> currentPlayerInfo = FXCollections.observableArrayList();
-  private ObservableList<Goal> noncompletedGoals = FXCollections.observableArrayList();
-  private ObservableList<Goal> completedGoals = FXCollections.observableArrayList();
-  
   
   //TODO: exception handling
 
   public PlayGameController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
-    currentPassage = gameManager.getOpeningPassage();
-    updateObservableLists();
-    updateCurrentLinks();
     this.stage = stage;
     view = new PlayGameView(this);
+    model = new PlayGameModel(gameManager.getGame());
     stage.setScene(view.setup());
     stage.show();
   }
   
-  //if new passage has no links -> endGame button/method (return "endGame"-link??)
-  //Sort links by title, to keep order consistent?
-  
   public String getStoryName(){
-    return gameManager.getStoryTitle();
-  }
-  
-  public String getPlayerInfo(){
-    //use getGame.getPlayer, or getPlayer?
-    //return string list, to be formatted in view?
-    //TODO: update playerInfo on changes
-    Player player = gameManager.getPlayer();
-    return player.toString();
+    return model.getStoryTitle();
   }
   
   public ObservableList<String> getCurrentPlayer(){
-    return currentPlayerInfo;
+    return model.getPlayerInfo();
   }
   
   public ObservableList<String> getPassageText(){
-    return currentPassageText;
+    return model.getPassageText();
   }
   
   public ObservableList<String> getLinkTitles(){
-    return currentLinkTitles;
+    return model.getLinksText();
   }
   
   
@@ -93,7 +79,8 @@ public class PlayGameController {
   }*/
   
   public void nextPassage(String linkTitle){
-    Link link = null;
+    model.nextPassage(linkTitle);
+    /*Link link = null;
     
     for (Link l : currentLinks){
       if(l.getText().equals(linkTitle)){
@@ -113,7 +100,7 @@ public class PlayGameController {
       System.out.println(link.getActions().toString());
     }
     
-    updateObservableLists();
+    updateObservableLists();*/
     
     //updateCurrentLinks();
   }
@@ -121,7 +108,7 @@ public class PlayGameController {
     currentPassageText.clear();
     currentPassageText.addAll(currentPassage.getTitle(), currentPassage.getContent());
     
-    updateCurrentLinks();
+    //updateCurrentLinks();
     currentLinkTitles.clear();
     for(Link l : currentLinks){
       currentLinkTitles.add(l.getText());
@@ -136,27 +123,22 @@ public class PlayGameController {
             Integer.toString(gameManager.getGame().getPlayer().getScore()),
             gameManager.getGame().getPlayer().getInventory().toString()
     );
-    
-    //goals
-    noncompletedGoals.clear();
-    noncompletedGoals = gameManager.getGoals().stream().filter(g -> !g.isFulfilled(gameManager.getPlayer())).collect(Collectors.toCollection(FXCollections::observableArrayList));
-    
-    completedGoals.clear();
-    completedGoals = gameManager.getGoals().stream().filter(g -> g.isFulfilled(gameManager.getPlayer())).collect(Collectors.toCollection(FXCollections::observableArrayList));
   }
   
   
   public ObservableList<Goal> getNoncompletedGoals(){
-    return noncompletedGoals;
+    return model.getNonCompletedGoals();
   }
   
   
   public ObservableList<Goal> getCompletedGoals(){
-    return completedGoals;
+    return model.getCompletedGoals();
   }
   
   
   public void mainMenu() {
+    //TODO: save game progress
+    gameManager.setGameInProgress(model);
     sceneController.switchScene(stage, 1, gameManager);
   }
   

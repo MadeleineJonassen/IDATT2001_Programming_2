@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.PlayGameController;
+import edu.ntnu.idatt2001.Goal.Goal;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -140,10 +141,12 @@ public class PlayGameView {
     layoutPlayGameMidLeft.getChildren().addAll(playerListView, storyListView);
     VBox rightInfoBox = new VBox();
     rightInfoBox.setId("boxes");
-    ComboBox setGoals = new ComboBox<>();
-    setGoals.setPromptText("View Goals");
+    /*ComboBox setGoals = new ComboBox<>();
+    setGoals.setPromptText("View Goals");*/
+    ListView<Goal> setGoals = new ListView<>();
     //setGoals.getItems().addAll(controller.getNoncompletedGoals());
     setGoals.setItems(controller.getNoncompletedGoals());
+    
     //TODO: add selected goals in box and add function "crossed out" when finished a goal
     Button options = new Button("options?");
     Button other = new Button("other?");

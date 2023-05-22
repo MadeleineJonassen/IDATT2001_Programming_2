@@ -78,6 +78,12 @@ public class Player {
       this.name = name;
     }
     
+    public Builder(String name, int health, int gold){
+      this.name = name;
+      this.health = health;
+      this.gold = gold;
+    }
+    
     
     public Builder name (String name){
       this.name = name;

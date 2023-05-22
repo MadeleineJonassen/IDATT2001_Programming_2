@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.View;
 
 
 import edu.ntnu.idatt2001.Controller.CreatePlayerController;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,23 +16,27 @@ import javafx.scene.layout.VBox;
 public class CreatePlayerView {
 
   private final CreatePlayerController controller;
+  
+  private TextField playerName = new TextField();
+  private TextField playerHealth = new TextField();
+  private TextField playerGold = new TextField();
+  private TextField playerScore = new TextField();
+  private TextField playerInventory = new TextField();
 
   public CreatePlayerView(CreatePlayerController controller){
     this.controller = controller;
   }
   public Scene setup(){
     // -------------------- CREATE PLAYER SCENE --------------------
+    
+    ObservableList<String> playerInfo = controller.getPlayerInfo();
     // Top create player layout
     BorderPane createPlayerTop = new BorderPane();
     Button goToCreateHomePlayer = new Button(" ");
     goToCreateHomePlayer.getStyleClass().add("backButton");
     //goToCreateHomePlayer.setOnAction(e -> openWindow.setScene(createGameScene));
     goToCreateHomePlayer.setOnAction(e -> {
-      try {
-        controller.createGame();
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
-      }
+      submit();
     });
     VBox creatPlayerTopMid = new VBox();
     creatPlayerTopMid.setId("boxes");
@@ -47,8 +52,11 @@ public class CreatePlayerView {
     VBox createPlayerMid = new VBox();
     HBox playerNameLayout = new HBox();
     playerNameLayout.setId("boxes");
-    TextField playerName = new TextField();
+    
     playerName.setPromptText("Enter Name * ");
+    if(!playerInfo.isEmpty()){
+      playerName.setText(playerInfo.get(0));
+    }
     playerName.setId("#playerTextFields");
     Image nameIcon = new Image("photos/Icons/PlayerIcons/person-simple.png");
     ImageView nameIconView = new ImageView();
@@ -58,8 +66,11 @@ public class CreatePlayerView {
     playerNameLayout.getChildren().addAll(playerName,nameIconView);
     HBox playerHealthLayout = new HBox();
     playerHealthLayout.setId("boxes");
-    TextField playerHealth = new TextField();
+    
     playerHealth.setPromptText("Enter Health *");
+    if(!playerInfo.isEmpty()){
+      playerHealth.setText(playerInfo.get(1));
+    }
     Image healthIcon = new Image("photos/Icons/PlayerIcons/pharmacy (1).png");
     ImageView healthIconView = new ImageView();
     healthIconView.setImage(healthIcon);
@@ -68,8 +79,11 @@ public class CreatePlayerView {
     playerHealthLayout.getChildren().addAll(playerHealth, healthIconView);
     HBox playerGoldLayout = new HBox();
     playerGoldLayout.setId("boxes");
-    TextField playerGold = new TextField();
+    
     playerGold.setPromptText("Enter Gold *");
+    if(!playerInfo.isEmpty()){
+      playerGold.setText(playerInfo.get(2));
+    }
     Image goldIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
     ImageView goldIconView = new ImageView();
     goldIconView.setImage(goldIcon);
@@ -78,8 +92,11 @@ public class CreatePlayerView {
     playerGoldLayout.getChildren().addAll(playerGold, goldIconView);
     HBox playerScoreLayout = new HBox();
     playerScoreLayout.setId("boxes");
-    TextField playerScore = new TextField();
+    
     playerScore.setPromptText("Enter Score");
+    if(playerInfo.size() > 3){
+      playerScore.setText(playerInfo.get(3));
+    }
     Image scoreIcon = new Image("photos/Icons/PlayerIcons/star-sharp-half-stroke.png");
     ImageView scoreIconView = new ImageView();
     scoreIconView.setImage(scoreIcon);
@@ -88,8 +105,11 @@ public class CreatePlayerView {
     playerScoreLayout.getChildren().addAll(playerScore, scoreIconView);
     HBox playerInventoryLayout = new HBox();
     playerInventoryLayout.setId("boxes");
-    TextField playerInventory = new TextField();
+    
     playerInventory.setPromptText("Enter Inventory ");
+    if(playerInfo.size() > 4){
+      playerInventory.setText(playerInfo.get(4));
+    }
     playerInventory.setMinHeight(40);
     Image inventoryIcon = new Image("photos/Icons/PlayerIcons/apps.png");
     ImageView InventoryIconView = new ImageView();
@@ -97,7 +117,7 @@ public class CreatePlayerView {
     InventoryIconView.setFitWidth(30);
     InventoryIconView.setFitHeight(30);
     playerInventoryLayout.getChildren().addAll(playerInventory, InventoryIconView);
-    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout ,playerGoldLayout,playerScoreLayout,playerInventoryLayout);
+    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout, playerGoldLayout, playerScoreLayout, playerInventoryLayout);
     
     // Bottom create player layout
     VBox createPlayerBottom = new VBox();
@@ -108,14 +128,9 @@ public class CreatePlayerView {
     submitPlayerBtn.setOnAction(e -> {
       //CreatePlayerController.isString();
       //CreatePlayerController.isInt();
-      
-      try {
-        controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
-      }
+      submit();
     });
-    //TODO: make submit work
+    
     createPlayerBottom.getChildren().addAll( playerErrorIcon, submitPlayerBtn);
     
     // * Overall Create Player Layout *
@@ -127,6 +142,15 @@ public class CreatePlayerView {
     Scene createPlayerScene = new Scene(createPlayerLayout, 1300, 700);
     createPlayerScene.getStylesheets().add("StyleSheets/createGameStyle.css");
     return createPlayerScene;
+  }
+  
+  private void submit(){
+    try {
+      controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      //TODO: print error message to user
+    }
   }
 }
 

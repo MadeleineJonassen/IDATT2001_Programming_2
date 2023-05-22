@@ -16,7 +16,7 @@ public class PlayerTest {
   
   @Nested
   class BuilderTesting {
-    Player player = new Player.Builder("Name").health(10).score(20).gold(30).inventory(new ArrayList<>()).build();
+    Player player = new Player.Builder("Name", 10, 30).score(20).inventory(new ArrayList<>()).build();
     
     @Test
     public void addGoldTest(){

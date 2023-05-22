@@ -15,13 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CreateGameView {
-  //private final Stage stage;
   private final CreateGameController controller;
-
-  /*public CreateGameView(Stage stage, CreateGameController controller){
-    this.stage = stage;
-    this.controller = controller;
-  }*/
   
   public CreateGameView(CreateGameController controller){
     this.controller = controller;
