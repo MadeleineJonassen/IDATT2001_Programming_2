@@ -44,12 +44,12 @@
 
 #menuButton:hover {
     -fx-background-color: linear-gradient(to top, rgb(184, 196, 193) 0%, rgba(0,0,0,0) 100%);
-    -fx-effect: dropshadow(gaussian,white , 5, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian,rgb(243, 243, 235) , 5, 0, 0, 2);
     -fx-text-fill: "2F4858";
 }
 #menuButton:pressed {
     -fx-background-color: linear-gradient(to top, rgb(100, 124, 135) 0%, rgba(0,0,0,0) 100%);
-    -fx-effect: dropshadow(gaussian,slategray , 5, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgb(184, 196, 193) , 5, 0, 0, 2);
     -fx-text-fill: "2F4858";}
 
 .invincible {

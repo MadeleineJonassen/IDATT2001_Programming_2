@@ -35,41 +35,60 @@
 
 
 .button {
-    -fx-background-color: "B2DAF0";
+    -fx-background-color: "B8C4C1";
     -fx-pref-width: 150px;
     -fx-font-family: "Constantia";
-    -fx-text-fill: "2F4858";
+    -fx-text-fill: "2B333F";
     -fx-font-size: 18px;
     -fx-padding: 5;
 }
 .button:hover {
-    -fx-background-color: "33658A";
+    -fx-background-color: "647C87";
 }
 .button:pressed {
-    -fx-background-color: "2F4858";
+    -fx-background-color: "49515C";
 }
 
 
 .list-view {
-    -fx-background-color: "B2DAF0";
-    -fx-font-family: "Constantia";
+    -fx-background-color: "B8C4C1";
     -fx-pref-width: 200;
     -fx-pref-height: 50;
+    -fx-background-radius: 15px;
+    -fx-padding: 5;
+}
+.list-cell{
+    -fx-background-color: transparent, -fx-background;
+    -fx-font-family: "Constantia";
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0px, 2px ;
+    -fx-padding: 2px ;
+}
+.list-cell:empty {
+    -fx-padding: 2px ;
+    -fx-background-color: transparent ;
+    -fx-background-insets: 0 ;
 }
 #big-list-view {
     -fx-pref-width: 400;
     -fx-pref-height: 250;
 }
 
-
 .textField {
-    -fx-pref-width: 300;
-    -fx-pref-height: 10;
+    -fx-pref-width: 500;
+    -fx-pref-height: 20;
     -fx-font-family: "Constantia";
+    -fx-background-color: "B8C4C1";
+    -fx-background-radius: 15px;
+}
+.text-field{
+    -fx-background-color: "F3F3EB";
+    -fx-font-family: "Constantia";
+    -fx-background-radius: 10px;
 }
 #playerTextFields{
     -fx-pref-width: 300;
-    -fx-pref-height: 10;
+    -fx-pref-height: 50;
     -fx-font-family: "Constantia";
 }
 
@@ -126,20 +145,22 @@
 }
 
 #finalButton {
-    -fx-background-color: transparent;
     -fx-pref-width: 250px;
     -fx-font-family: "Constantia";
-    -fx-text-fill: "6B9CBB";
     -fx-font-size: 32px;
-}
-#finalButton:hover {
-    -fx-background-color: linear-gradient(to top, rgb(134, 187, 216) 0%, rgba(0,0,0,0) 100%);
+    -fx-background-color: linear-gradient(to top, rgb(243, 243, 235) 0%, rgba(0,0,0,0) 100%);
     -fx-effect: dropshadow(gaussian,white , 5, 0, 0, 2);
     -fx-text-fill: "2F4858";
 }
+#finalButton:hover {
+    -fx-background-color: linear-gradient(to top, rgb(184, 196, 193) 0%, rgba(0,0,0,0) 100%);
+    -fx-effect: dropshadow(gaussian,rgb(243, 243, 235) , 5, 0, 0, 2);
+    -fx-text-fill: "2F4858";
+}
+
 #finalButton:pressed {
-    -fx-background-color: linear-gradient(to top, rgb(49, 87, 113) 0%, rgba(0,0,0,0) 100%);
-    -fx-effect: dropshadow(gaussian,slategray , 5, 0, 0, 2);
+    -fx-background-color: linear-gradient(to top, rgb(100, 124, 135) 0%, rgba(0,0,0,0) 100%);
+    -fx-effect: dropshadow(gaussian, rgb(184, 196, 193) , 5, 0, 0, 2);
     -fx-text-fill: "2F4858";
 }
 

@@ -48,46 +48,56 @@ public class CreateGameView {
     // Mid create game layout
     VBox createGameLayout = new VBox();
     createGameLayout.setId("boxes");
+    createGameLayout.setPrefWidth(1000);
     HBox menuStoryLayout = new HBox();
     menuStoryLayout.setId("boxes");
-    Button createStoryBtn = new Button("Story");
-    createStoryBtn.setOnAction(e -> {
-      try {
-        controller.createStory();
-        System.out.println("Story");
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
-    TextField storySelectedDisplay = new TextField();
-    storySelectedDisplay.setPromptText(controller.getStoryName());
+      Button createStoryBtn = new Button("Story");
+      createStoryBtn.setOnAction(e -> {
+        try {
+          controller.createStory();
+          System.out.println("Story");
+        } catch (Exception ex) {
+          System.out.println("error");
+        }
+      });
+      TextField storySelectedDisplay = new TextField();
+      storySelectedDisplay.setText(controller.getStoryName());
+      storySelectedDisplay.setEditable(false);
+      storySelectedDisplay.setMinWidth(300);
     //TODO: display selected story
     menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);
     HBox menuPlayerLayout = new HBox();
     menuPlayerLayout.setId("boxes");
+    menuPlayerLayout.setPrefWidth(700);
+
     Button createPlayerBtn = new Button("Player");
-    createPlayerBtn.setOnAction(e -> {
-      try {
-        controller.createPlayer();
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
-    TextField playerSelectedDisplay = new TextField();
-    playerSelectedDisplay.setPromptText(controller.getPlayerName());
+      createPlayerBtn.setOnAction(e -> {
+        try {
+          controller.createPlayer();
+        } catch (Exception ex) {
+          System.out.println("error");
+        }
+      });
+      TextField playerSelectedDisplay = new TextField();
+      playerSelectedDisplay.setText(controller.getPlayerName());
+      playerSelectedDisplay.setEditable(false);
+      playerSelectedDisplay.setMinWidth(300);
     menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);
     HBox menuGoalsLayout = new HBox();
-    menuGoalsLayout.setId("boxes");
-    Button createGoalBtn = new Button("Goals");
-    createGoalBtn.setOnAction(e -> {
-      try {
-        controller.createGoals();
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
-      }
-    });
-    ListView goalsSelectedDisplay = new ListView<>();
-    goalsSelectedDisplay.setItems(controller.getGoalsList());
+      menuGoalsLayout.setId("boxes");
+      Button createGoalBtn = new Button("Goals");
+      createGoalBtn.setOnAction(e -> {
+        try {
+          controller.createGoals();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
+      ListView goalsSelectedDisplay = new ListView<>();
+      goalsSelectedDisplay.setEditable(false);
+      goalsSelectedDisplay.setMinWidth(300);
+      goalsSelectedDisplay.setMinHeight(100);
+      goalsSelectedDisplay.setItems(controller.getGoalsList());
     menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);
     createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);
     
