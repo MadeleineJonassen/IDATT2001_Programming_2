@@ -1,9 +1,7 @@
 package edu.ntnu.idatt2001.Model;
 
-import edu.ntnu.idatt2001.Action.Action;
-import edu.ntnu.idatt2001.Action.GoldAction;
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.action.Action;
+import edu.ntnu.idatt2001.action.GoldAction;
 import edu.ntnu.idatt2001.Players.Player;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

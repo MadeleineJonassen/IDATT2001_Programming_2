@@ -10,6 +10,9 @@ import javafx.util.Callback;
 
 import javax.imageio.plugins.tiff.BaselineTIFFTagSet;
 
+/**
+ * The type Create player.
+ */
 public class createPlayer extends Dialog<Player> {
 
   private Player player;
@@ -19,7 +22,12 @@ public class createPlayer extends Dialog<Player> {
   private TextField playerGold;
   private TextField playerScore;
   private TextField playerInventory;
-
+  
+  /**
+   * Instantiates a new Create player.
+   *
+   * @param player the player
+   */
   public createPlayer(Player player) {
     super();
     this.setTitle("Create Player");
@@ -70,8 +78,13 @@ public class createPlayer extends Dialog<Player> {
     };
     setResultConverter(playerResultConverter);
   }
-
-
+  
+  
+  /**
+   * Create player pane pane.
+   *
+   * @return the pane
+   */
   public Pane createPlayerPane() {
 
     VBox createPlayerLayout = new VBox(10);

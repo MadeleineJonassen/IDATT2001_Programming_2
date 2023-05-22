@@ -10,8 +10,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * The type Help create player.
+ */
 public class helpCreatePlayer {
-
+  
+  /**
+   * Display.
+   */
   public static void display() {
     Stage window = new Stage();
 

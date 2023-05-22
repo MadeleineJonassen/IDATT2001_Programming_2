@@ -1,10 +1,10 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Action.*;
-import edu.ntnu.idatt2001.FileHandler.ScanStory;
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Passage;
-import edu.ntnu.idatt2001.Model.Story;
+import edu.ntnu.idatt2001.action.*;
+import edu.ntnu.idatt2001.fileHandler.ScanStory;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Passage;
+import edu.ntnu.idatt2001.model.Story;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

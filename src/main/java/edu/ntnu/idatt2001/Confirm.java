@@ -11,13 +11,13 @@ public class Confirm {
   private static boolean Testing = true;
 
   private static final Scanner in = new Scanner(System.in);
-
+  
   /**
    * A method of which verifies the input from the user, with limitations.
    *
    * @param prompt The input
-   * @param exc The output if the input is invalid
-   * @param lower A limiter,the lowest allowed value
+   * @param exc    The output if the input is invalid
+   * @param lower  A limiter,the lowest allowed value
    * @param higher A limiter,the highest allowed value
    * @return The input from the user
    */
@@ -39,12 +39,12 @@ public class Confirm {
     }
     return choice;
   }
-
+  
   /**
    * A method of which verifies the integer-input from the user.
    *
    * @param prompt The input
-   * @param exc The output if the input is invalid
+   * @param exc    The output if the input is invalid
    * @return The input from the user
    */
   public static int intConfirm(String prompt, String exc) {
@@ -61,12 +61,12 @@ public class Confirm {
     }
     return testingInt;
   }
-
+  
   /**
    * A method of which verifies the String-input from the user.
    *
    * @param prompt The input
-   * @param exc The output if the input is invalid
+   * @param exc    The output if the input is invalid
    * @return The input from the user
    */
   public static String stringConfirm(String prompt, String exc) {
