@@ -4,7 +4,6 @@ import edu.ntnu.idatt2001.Action.*;
 import edu.ntnu.idatt2001.Model.Link;
 import edu.ntnu.idatt2001.Model.Passage;
 import edu.ntnu.idatt2001.Model.Story;
-import org.apache.maven.shared.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,7 +55,13 @@ public class ScanStory {
     String reference = line.substring(line.indexOf('(') + 1, line.indexOf(')'));
     
     Link link = new Link(text, reference);
-    int actionCount = StringUtils.countMatches(line, "{");
+    int actionCount = 0;
+    //StringUtils.countMatches(line, "{");
+    for (int i = 0; i < line.length(); i++) {
+      if (line.charAt(i) == '{') {
+        actionCount++;
+      }
+    }
     String[] actionStrings = line.split("[{]");
     //TODO: seperate out scanAction method
     for(int i = 1; i < actionStrings.length; i++){

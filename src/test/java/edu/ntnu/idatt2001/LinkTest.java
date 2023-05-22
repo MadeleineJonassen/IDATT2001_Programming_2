@@ -67,7 +67,7 @@ public class LinkTest {
     
     @Test
     public void testToString(){
-      assertEquals(link.toString(), "LinkText" + ", next: " + "LinkReference");
+      assertEquals(link.toString(), "LinkText" + ", next: " + "LinkReference" + ". Actions: [" + "]");
     }
   }
   

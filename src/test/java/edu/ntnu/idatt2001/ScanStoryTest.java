@@ -17,7 +17,7 @@ class ScanStoryTest {
   @Test
   void scanStory() throws FileNotFoundException {
     ScanStory scan = new ScanStory();
-    Story scanStory = scan.scanStory(new File("src/resources/Stories/Stories.paths"));
+    Story scanStory = scan.scanStory(new File("src/main/resources/Stories/Stories.paths"));
     
     Passage openingPassage = new Passage("Beginnings", "You are in a small, dimly lit room. There is a door in front of you.");
     openingPassage.addLink(new Link("Try to open the door","Another room"));
