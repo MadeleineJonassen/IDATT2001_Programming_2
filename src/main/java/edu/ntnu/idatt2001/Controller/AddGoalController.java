@@ -14,12 +14,10 @@ public class AddGoalController {
   private final Stage stage;
   private AddGoalView view;
   private Goal goal;
-  private CreateGoalsController createGoalsController;
   
-  public AddGoalController(GameManager gameManager, Stage stage, CreateGoalsController createGoalsController) {
+  public AddGoalController(GameManager gameManager, Stage stage) {
     this.gameManager = gameManager;
     this.stage = stage;
-    this.createGoalsController = createGoalsController;
     stage.setMinWidth(350);
     stage.setMaxHeight(350);
     stage.setMinHeight(50);
@@ -31,7 +29,6 @@ public class AddGoalController {
   }
   
   public void closeWindow(){
-    createGoalsController.updateGoalsList();
     stage.close();
   }
   

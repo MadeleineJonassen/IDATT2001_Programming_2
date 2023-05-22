@@ -2,6 +2,8 @@ package edu.ntnu.idatt2001.Model;
 
 import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Players.Player;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,6 +13,7 @@ public class GameManager {
   private Story story; //current story. Is stored in game-object, superfluous to store here?
   private Player player;
   private List<Goal> goals = new ArrayList<>();
+  private ObservableList<Goal> goalsList = FXCollections.observableList(new ArrayList<>());
   
   public void setStory(Story story){
     //TODO: check for broken links
@@ -22,18 +25,18 @@ public class GameManager {
   }
   
   public void addGoal(Goal goal){
-    if(goals.contains(goal)){
+    if(goalsList.contains(goal)){
       throw new IllegalArgumentException("Goal has already been added.");
     }
-    goals.add(goal);
+    goalsList.add(goal);
   }
   
-  public List<Goal> getGoals(){
-    return goals;
+  public ObservableList<Goal> getGoals(){
+    return goalsList;
   }
   
   public void clearGoals(){
-    goals.clear();
+    goalsList.clear();
   }
   
   public boolean storyHasBeenAdded(){

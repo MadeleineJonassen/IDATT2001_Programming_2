@@ -33,8 +33,6 @@ public class CreateStoryController {
     stage.show();
   }
 
-
-
   public void createGame() throws Exception {
     System.out.println("goToCreateGame");
     sceneController.switchScene(stage, 2, gameManager);
@@ -85,6 +83,10 @@ public class CreateStoryController {
   public String getBrokenLinks() {
     String brokenLinks = gameManager.getBrokenLinks().toString();
     return brokenLinks;
+  }
+  
+  public void deleteBrokenLinks(){
+    gameManager.deleteBrokenLinks();
   }
   
   /*

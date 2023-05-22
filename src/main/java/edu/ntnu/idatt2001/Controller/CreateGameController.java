@@ -1,7 +1,9 @@
 package edu.ntnu.idatt2001.Controller;
 
+import edu.ntnu.idatt2001.Goal.Goal;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.View.CreateGameView;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 public class CreateGameController {
@@ -38,6 +40,10 @@ public class CreateGameController {
       System.out.println(e.getMessage());
       return "The player has not been added";
     }
+  }
+  
+  public ObservableList<Goal> getGoalsList(){
+    return gameManager.getGoals();
   }
   
   public void mainMenu() throws Exception {

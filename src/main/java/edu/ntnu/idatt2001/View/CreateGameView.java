@@ -93,6 +93,7 @@ public class CreateGameView {
       }
     });
     ListView goalsSelectedDisplay = new ListView<>();
+    goalsSelectedDisplay.setItems(controller.getGoalsList());
     menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);
     createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);
     

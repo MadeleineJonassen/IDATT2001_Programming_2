@@ -20,12 +20,10 @@ public class CreateGoalsController {
   private final Stage stage;
   private CreateGoalsView view;
   private SceneController sceneController = new SceneController();
-  private ObservableList<Goal> goalsList;
 
 
   public CreateGoalsController(Stage stage, GameManager gameManager){
     this.gameManager = gameManager;
-    updateGoalsList();
     this.stage = stage;
     view = new CreateGoalsView(this);
     stage.setScene(view.setup());
@@ -37,17 +35,13 @@ public class CreateGoalsController {
   }
   
   public ObservableList<Goal> getGoalsList(){
-    return goalsList;
-  }
-  
-  public void updateGoalsList(){
-    goalsList = FXCollections.observableList(gameManager.getGoals());
+    return gameManager.getGoals();
   }
   
   public void addSingleGoal(){
     Stage addGoalWindow = new Stage();
     //addGoalWindow.initModality(Modality.APPLICATION_MODAL);  //makes the user take care of the window in front of them
-    AddGoalController addGoalController = new AddGoalController(gameManager, addGoalWindow, this);
+    AddGoalController addGoalController = new AddGoalController(gameManager, addGoalWindow);
   }
   
   public void clearGoals(){

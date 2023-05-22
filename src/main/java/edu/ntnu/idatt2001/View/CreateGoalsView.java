@@ -60,7 +60,6 @@ public class CreateGoalsView {
     Button goalBox = new Button("Create Goal");
     goalBox.setOnAction(e -> {
       controller.addSingleGoal();
-      controller.updateGoalsList();
     });
     //TODO: attach listener to observableList, update on changes
     Button clearAllGoals = new Button("Clear All");
