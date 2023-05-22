@@ -8,14 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class CreateGameView {
   private final CreateGameController controller;
+
+
   
   public CreateGameView(CreateGameController controller){
     this.controller = controller;
@@ -23,28 +22,28 @@ public class CreateGameView {
   public Scene setup(){
     // **************************** CREATE GAME LAYOUT ****************************
     // Top create game layout
-    //TODO: exception handling
     BorderPane layoutCreateGameTop = new BorderPane();
     layoutCreateGameTop.setId("boxes");
     Button goHomeMenu = new Button(" ");
-    goHomeMenu.getStyleClass().add("homeButton");
-    goHomeMenu.setOnAction(e -> {
-      try {
-        controller.mainMenu();
-      } catch (Exception ex) {
-        System.out.println("error");
-      }
-    });
+      goHomeMenu.getStyleClass().add("homeButton");
+      goHomeMenu.setOnAction(e -> {
+        try {
+          controller.mainMenu();
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+      });
     VBox createGameTopMid = new VBox();
     createGameTopMid.setId("boxes");
-    Label createGameTitle = new Label("Create game");
-    createGameTitle.setId("title");
-    Label createGameUnderTitle = new Label("Create your own game!");
-    createGameUnderTitle.setId("underTitle");
+      Label createGameTitle = new Label("Create game");
+      createGameTitle.setId("title");
+      Label createGameUnderTitle = new Label("Create your own game!");
+      createGameUnderTitle.setId("underTitle");
     createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);
+
     layoutCreateGameTop.setLeft(goHomeMenu);
     layoutCreateGameTop.setCenter(createGameTopMid);
-    
+
     // Mid create game layout
     VBox createGameLayout = new VBox();
     createGameLayout.setId("boxes");
@@ -55,9 +54,8 @@ public class CreateGameView {
       createStoryBtn.setOnAction(e -> {
         try {
           controller.createStory();
-          System.out.println("Story");
         } catch (Exception ex) {
-          System.out.println("error");
+          throw new RuntimeException(ex);
         }
       });
       TextField storySelectedDisplay = new TextField();
@@ -75,7 +73,7 @@ public class CreateGameView {
         try {
           controller.createPlayer();
         } catch (Exception ex) {
-          System.out.println("error");
+          throw new RuntimeException(ex);
         }
       });
       TextField playerSelectedDisplay = new TextField();
@@ -115,7 +113,7 @@ public class CreateGameView {
       try {
         controller.playGame();
       } catch (Exception ex) {
-        System.out.println(ex.getMessage());
+        throw new RuntimeException(ex);
       }
     });
     Region space = new Region();
@@ -128,13 +126,10 @@ public class CreateGameView {
     layoutCreateGame.setTop(layoutCreateGameTop);
     layoutCreateGame.setCenter(createGameLayout);
     layoutCreateGame.setBottom(layoutBottom);
-    //layoutCreateGame.getStylesheets().add("StyleSheets/createGameStyle.css");
-    
+
     Scene scene = new Scene(layoutCreateGame, 1300, 700);
     scene.getStylesheets().add("StyleSheets/createGameStyle.css");
     return scene;
-    //stage.setScene(scene);
-    //stage.show();
   }
 
 }
