@@ -1,22 +1,11 @@
 package edu.ntnu.idatt2001.View;
 
-import edu.ntnu.idatt2001.Controller.CreateGameController;
 import edu.ntnu.idatt2001.Controller.CreateGoalsController;
-import edu.ntnu.idatt2001.GUI.createGoals;
-import edu.ntnu.idatt2001.Goal.Goal;
-import edu.ntnu.idatt2001.InputValidation.IntInput;
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateGoalsView {
   private final CreateGoalsController controller;
@@ -59,7 +48,11 @@ public class CreateGoalsView {
     createGoalsBtn.setId("boxes");
     Button goalBox = new Button("Create Goal");
     goalBox.setOnAction(e -> {
+      try {
       controller.addSingleGoal();
+      } catch (Exception ex) {
+        throw new RuntimeException(ex);
+      }
     });
     //TODO: attach listener to observableList, update on changes
     Button clearAllGoals = new Button("Clear All");

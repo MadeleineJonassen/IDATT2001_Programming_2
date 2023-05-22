@@ -192,9 +192,7 @@
 }
 #errorPlayerTextFields{
     -fx-border-color: "EF666E";
-    -fx-text-fill: red;
     -fx-background-radius: 10px;
-
 }
 
 
