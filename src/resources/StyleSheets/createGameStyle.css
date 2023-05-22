@@ -14,15 +14,19 @@
 
 #title {
     -fx-font-size: 65px;
-    -fx-text-fill: "190B28";
+    -fx-text-fill: "B8C4C1";
     -fx-font-family: "Constantia";
+    -fx-effect: dropshadow(gaussian,rgb(43, 51, 63) , 8, 2, 0, 0);
+    -fx-background-insets: 500;
 }
 #underTitle {
-    -fx-background-color: "86BBD8";
     -fx-font-size: 18px;
-    -fx-text-fill: "190B28";
+    -fx-text-fill: "B8C4C1";
     -fx-font-family: "Constantia";
+    -fx-effect: dropshadow(gaussian,rgb(43, 51, 63) , 3, 2, 0, 0);
+    -fx-background-insets: 200;
 }
+
 #createTitles {
     -fx-font-size: 50px;
     -fx-text-fill: "190B28";
