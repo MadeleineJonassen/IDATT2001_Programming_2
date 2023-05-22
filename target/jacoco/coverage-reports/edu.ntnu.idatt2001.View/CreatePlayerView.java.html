@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreatePlayerView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.View</a> &gt; <span class="el_source">CreatePlayerView.java</span></div><h1>CreatePlayerView.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.View;
+
+
+import edu.ntnu.idatt2001.Controller.CreatePlayerController;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+public class CreatePlayerView {
+
+  private final CreatePlayerController controller;
+  
+<span class="nc" id="L20">  private TextField playerName = new TextField();</span>
+<span class="nc" id="L21">  private TextField playerHealth = new TextField();</span>
+<span class="nc" id="L22">  private TextField playerGold = new TextField();</span>
+<span class="nc" id="L23">  private TextField playerScore = new TextField();</span>
+<span class="nc" id="L24">  private TextField playerInventory = new TextField();</span>
+  public Button errorIcon;
+  public Label errorText;
+
+<span class="nc" id="L28">  public CreatePlayerView(CreatePlayerController controller){</span>
+<span class="nc" id="L29">    this.controller = controller;</span>
+<span class="nc" id="L30">  }</span>
+  public Scene setup(){
+    // -------------------- CREATE PLAYER SCENE --------------------
+    
+<span class="nc" id="L34">    ObservableList&lt;String&gt; playerInfo = controller.getPlayerInfo();</span>
+    // Top create player layout
+<span class="nc" id="L36">    BorderPane createPlayerTop = new BorderPane();</span>
+<span class="nc" id="L37">    Button goToCreateHomePlayer = new Button(&quot; &quot;);</span>
+<span class="nc" id="L38">      goToCreateHomePlayer.getStyleClass().add(&quot;backButton&quot;);</span>
+<span class="nc" id="L39">      goToCreateHomePlayer.setOnAction(e -&gt; {</span>
+        try {
+<span class="nc" id="L41">          controller.createGame();</span>
+<span class="nc" id="L42">        } catch (Exception ex) {</span>
+<span class="nc" id="L43">          errorIcon.getStyleClass().add(&quot;errorImage&quot;);</span>
+          ;
+<span class="nc" id="L45">        }</span>
+<span class="nc" id="L46">      });</span>
+<span class="nc" id="L47">    VBox creatPlayerTopMid = new VBox();</span>
+<span class="nc" id="L48">    creatPlayerTopMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L49">    Label createPlayerTitle = new Label(&quot;Create Player&quot;);</span>
+<span class="nc" id="L50">    createPlayerTitle.setId(&quot;createTitles&quot;);</span>
+<span class="nc" id="L51">    Label createPlayerUnderTitle = new Label(&quot;Create your own player&quot;);</span>
+<span class="nc" id="L52">    createPlayerUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L53">    creatPlayerTopMid.getChildren().addAll(createPlayerTitle, createPlayerUnderTitle);</span>
+<span class="nc" id="L54">    createPlayerTop.setLeft(goToCreateHomePlayer);</span>
+<span class="nc" id="L55">    createPlayerTop.setCenter(creatPlayerTopMid);</span>
+    
+    // Mid create player layout
+<span class="nc" id="L58">    VBox createPlayerMid = new VBox();</span>
+<span class="nc" id="L59">    HBox playerNameLayout = new HBox();</span>
+<span class="nc" id="L60">    playerNameLayout.setId(&quot;boxes&quot;);</span>
+    
+<span class="nc" id="L62">    playerName.setPromptText(&quot;Enter Name * &quot;);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">    if(!playerInfo.isEmpty()){</span>
+<span class="nc" id="L64">      playerName.setText(playerInfo.get(0));</span>
+    }
+<span class="nc" id="L66">    playerName.setId(&quot;#playerTextFields&quot;);</span>
+<span class="nc" id="L67">    Image nameIcon = new Image(&quot;photos/Icons/PlayerIcons/person-simple.png&quot;);</span>
+<span class="nc" id="L68">    ImageView nameIconView = new ImageView();</span>
+<span class="nc" id="L69">    nameIconView.setImage(nameIcon);</span>
+<span class="nc" id="L70">    nameIconView.setFitWidth(30);</span>
+<span class="nc" id="L71">    nameIconView.setFitHeight(30);</span>
+<span class="nc" id="L72">    playerNameLayout.getChildren().addAll(playerName,nameIconView);</span>
+<span class="nc" id="L73">    HBox playerHealthLayout = new HBox();</span>
+<span class="nc" id="L74">    playerHealthLayout.setId(&quot;boxes&quot;);</span>
+    
+<span class="nc" id="L76">    playerHealth.setPromptText(&quot;Enter Health *&quot;);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    if(!playerInfo.isEmpty()){</span>
+<span class="nc" id="L78">      playerHealth.setText(playerInfo.get(1));</span>
+    }
+<span class="nc" id="L80">    Image healthIcon = new Image(&quot;photos/Icons/PlayerIcons/pharmacy (1).png&quot;);</span>
+<span class="nc" id="L81">    ImageView healthIconView = new ImageView();</span>
+<span class="nc" id="L82">    healthIconView.setImage(healthIcon);</span>
+<span class="nc" id="L83">    healthIconView.setFitWidth(30);</span>
+<span class="nc" id="L84">    healthIconView.setFitHeight(30);</span>
+<span class="nc" id="L85">    playerHealthLayout.getChildren().addAll(playerHealth, healthIconView);</span>
+<span class="nc" id="L86">    HBox playerGoldLayout = new HBox();</span>
+<span class="nc" id="L87">    playerGoldLayout.setId(&quot;boxes&quot;);</span>
+    
+<span class="nc" id="L89">    playerGold.setPromptText(&quot;Enter Gold *&quot;);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">    if(!playerInfo.isEmpty()){</span>
+<span class="nc" id="L91">      playerGold.setText(playerInfo.get(2));</span>
+    }
+<span class="nc" id="L93">    Image goldIcon = new Image(&quot;photos/Icons/PlayerIcons/treasure-chest.png&quot;);</span>
+<span class="nc" id="L94">    ImageView goldIconView = new ImageView();</span>
+<span class="nc" id="L95">    goldIconView.setImage(goldIcon);</span>
+<span class="nc" id="L96">    goldIconView.setFitWidth(30);</span>
+<span class="nc" id="L97">    goldIconView.setFitHeight(30);</span>
+<span class="nc" id="L98">    playerGoldLayout.getChildren().addAll(playerGold, goldIconView);</span>
+<span class="nc" id="L99">    HBox playerScoreLayout = new HBox();</span>
+<span class="nc" id="L100">    playerScoreLayout.setId(&quot;boxes&quot;);</span>
+    
+<span class="nc" id="L102">    playerScore.setPromptText(&quot;Enter Score&quot;);</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">    if(playerInfo.size() &gt; 3){</span>
+<span class="nc" id="L104">      playerScore.setText(playerInfo.get(3));</span>
+    }
+<span class="nc" id="L106">    Image scoreIcon = new Image(&quot;photos/Icons/PlayerIcons/star-sharp-half-stroke.png&quot;);</span>
+<span class="nc" id="L107">    ImageView scoreIconView = new ImageView();</span>
+<span class="nc" id="L108">    scoreIconView.setImage(scoreIcon);</span>
+<span class="nc" id="L109">    scoreIconView.setFitWidth(30);</span>
+<span class="nc" id="L110">    scoreIconView.setFitHeight(30);</span>
+<span class="nc" id="L111">    playerScoreLayout.getChildren().addAll(playerScore, scoreIconView);</span>
+<span class="nc" id="L112">    HBox playerInventoryLayout = new HBox();</span>
+<span class="nc" id="L113">    playerInventoryLayout.setId(&quot;boxes&quot;);</span>
+    
+<span class="nc" id="L115">    playerInventory.setPromptText(&quot;Enter Inventory &quot;);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    if(playerInfo.size() &gt; 4){</span>
+<span class="nc" id="L117">      playerInventory.setText(playerInfo.get(4));</span>
+    }
+<span class="nc" id="L119">    playerInventory.setMinHeight(40);</span>
+<span class="nc" id="L120">    Image inventoryIcon = new Image(&quot;photos/Icons/PlayerIcons/apps.png&quot;);</span>
+<span class="nc" id="L121">    ImageView InventoryIconView = new ImageView();</span>
+<span class="nc" id="L122">    InventoryIconView.setImage(inventoryIcon);</span>
+<span class="nc" id="L123">    InventoryIconView.setFitWidth(30);</span>
+<span class="nc" id="L124">    InventoryIconView.setFitHeight(30);</span>
+<span class="nc" id="L125">    playerInventoryLayout.getChildren().addAll(playerInventory, InventoryIconView);</span>
+<span class="nc" id="L126">    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout, playerGoldLayout, playerScoreLayout, playerInventoryLayout);</span>
+    
+    // Bottom create player layout
+<span class="nc" id="L129">    VBox createPlayerBottom = new VBox();</span>
+<span class="nc" id="L130">    createPlayerBottom.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L131">    errorIcon = new Button(&quot;&quot;);</span>
+<span class="nc" id="L132">      errorIcon.getStyleClass().add(&quot;invincible&quot;);</span>
+<span class="nc" id="L133">    errorText = new Label();</span>
+<span class="nc" id="L134">      errorText.getStyleClass().addAll(&quot;invincible&quot;);</span>
+<span class="nc" id="L135">    Button submitPlayerBtn = new Button(&quot;Submit player&quot;);</span>
+<span class="nc" id="L136">    submitPlayerBtn.setOnAction(e -&gt; {</span>
+<span class="nc" id="L137">      submit();</span>
+<span class="nc" id="L138">    });</span>
+    
+<span class="nc" id="L140">    createPlayerBottom.getChildren().addAll( errorIcon, errorText, submitPlayerBtn);</span>
+    
+    // * Overall Create Player Layout *
+<span class="nc" id="L143">    BorderPane createPlayerLayout = new BorderPane();</span>
+<span class="nc" id="L144">    createPlayerLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L145">    createPlayerLayout.setTop(createPlayerTop);</span>
+<span class="nc" id="L146">    createPlayerLayout.setCenter(createPlayerMid);</span>
+<span class="nc" id="L147">    createPlayerLayout.setBottom(createPlayerBottom);</span>
+<span class="nc" id="L148">    Scene createPlayerScene = new Scene(createPlayerLayout, 1300, 700);</span>
+<span class="nc" id="L149">    createPlayerScene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</span>
+<span class="nc" id="L150">    return createPlayerScene;</span>
+  }
+  
+  private void submit(){
+    try {
+<span class="nc" id="L155">      controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());</span>
+<span class="nc" id="L156">    } catch (Exception ex) {</span>
+<span class="nc" id="L157">      errorIcon.getStyleClass().add(&quot;errorImage&quot;);</span>
+<span class="nc" id="L158">      errorText.getStyleClass().add(&quot;errorText&quot;);</span>
+<span class="nc" id="L159">      errorText.setText(&quot;Please enter a value in the missing text-fields&quot;);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">      if (playerName.getText() != null) {</span>
+<span class="nc" id="L161">        playerName.setId(&quot;errorPlayerTextFields&quot;);</span>
+<span class="nc" id="L162">        playerName.setPromptText(&quot;Please enter a name&quot;);</span>
+      }
+<span class="nc bnc" id="L164" title="All 2 branches missed.">      if (playerHealth.getText() != null) {</span>
+<span class="nc" id="L165">        playerHealth.setId(&quot;errorPlayerTextFields&quot;);</span>
+<span class="nc" id="L166">        playerHealth.setPromptText(&quot;Please enter your health&quot;);</span>
+      }
+<span class="nc bnc" id="L168" title="All 2 branches missed.">      if (playerGold.getText() != null) {</span>
+<span class="nc" id="L169">        playerGold.setId(&quot;errorPlayerTextFields&quot;);</span>
+<span class="nc" id="L170">        playerGold.setPromptText(&quot;Please enter your gold&quot;);</span>
+      }
+<span class="nc" id="L172">    }</span>
+<span class="nc" id="L173">  }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

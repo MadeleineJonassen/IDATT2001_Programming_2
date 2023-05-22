@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainMenuView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.View</a> &gt; <span class="el_source">MainMenuView.java</span></div><h1>MainMenuView.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.View;
+
+import edu.ntnu.idatt2001.Controller.MainMenuController;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+public class MainMenuView  {
+
+  //private final Stage stage;
+  private final MainMenuController controller;
+
+  /*public MainMenuView(Stage stage, MainMenuController controller){
+    this.stage = stage;
+    this.controller = controller;
+  }*/
+  public Button errorIcon;
+  public Label errorText;
+  
+<span class="nc" id="L22">  public MainMenuView(MainMenuController controller){</span>
+<span class="nc" id="L23">    this.controller = controller;</span>
+<span class="nc" id="L24">  }</span>
+  
+  public Scene setup(){
+
+    // **************************** MENU ****************************
+    // Top menu layout
+<span class="nc" id="L30">    VBox layoutMenuTitle = new VBox();</span>
+<span class="nc" id="L31">    layoutMenuTitle.setId(&quot;titleBox&quot;);</span>
+<span class="nc" id="L32">    Label menuTitle = new Label(&quot;PATHS&quot;);</span>
+<span class="nc" id="L33">    menuTitle.setId(&quot;title&quot;);</span>
+<span class="nc" id="L34">    Label menuUnderTitle = new Label(&quot;A story based game engine&quot;);</span>
+<span class="nc" id="L35">    menuUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L36">    layoutMenuTitle.getChildren().addAll(menuTitle, menuUnderTitle);</span>
+
+    // Mid menu layout
+<span class="nc" id="L39">    VBox layoutMenuOptions = new VBox();</span>
+<span class="nc" id="L40">    layoutMenuOptions.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L41">       errorIcon = new Button(&quot;&quot;);</span>
+<span class="nc" id="L42">      errorText = new Label(&quot;&quot;);</span>
+<span class="nc" id="L43">    errorInvisible();</span>
+<span class="nc" id="L44">    Button createGameBtn = new Button(&quot;Create Game&quot;);</span>
+<span class="nc" id="L45">    createGameBtn.setId(&quot;menuButton&quot;);</span>
+<span class="nc" id="L46">     createGameBtn.setOnAction(e -&gt; {</span>
+       try {
+<span class="nc" id="L48">         controller.createGame();</span>
+<span class="nc" id="L49">       } catch (Exception ex) {</span>
+<span class="nc" id="L50">         errorVisible(ex.getMessage());</span>
+<span class="nc" id="L51">       }</span>
+<span class="nc" id="L52">     });</span>
+<span class="nc" id="L53">    Button playGameBtn = new Button(&quot;Play game&quot;);</span>
+<span class="nc" id="L54">    playGameBtn.setId(&quot;menuButton&quot;);</span>
+    //TODO: grey out button when game is not added
+<span class="nc" id="L56">    playGameBtn.setOnAction(e -&gt; {</span>
+      try {
+<span class="nc" id="L58">        controller.playGame();</span>
+<span class="nc" id="L59">      } catch (Exception ex) {</span>
+<span class="nc" id="L60">        errorVisible(ex.getMessage());</span>
+<span class="nc" id="L61">      }</span>
+<span class="nc" id="L62">    });</span>
+<span class="nc" id="L63">    layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn, errorIcon, errorText);</span>
+    //TODO: add &quot;try a sample game&quot;-button
+
+    // * Overall Main Menu Layout *
+<span class="nc" id="L67">    BorderPane layoutMenu = new BorderPane();</span>
+<span class="nc" id="L68">    layoutMenu.setCenter(layoutMenuTitle);</span>
+<span class="nc" id="L69">    layoutMenu.setLeft(layoutMenuOptions);</span>
+
+<span class="nc" id="L71">    Scene scene = new Scene(layoutMenu, 1300, 700);</span>
+<span class="nc" id="L72">    scene.getStylesheets().add(&quot;StyleSheets/menuStyle.css&quot;);</span>
+<span class="nc" id="L73">    return scene;</span>
+    
+  }
+  public void errorInvisible(){
+<span class="nc" id="L77">    errorText.getStyleClass().add(&quot;invincible&quot;);</span>
+<span class="nc" id="L78">    errorIcon.getStyleClass().add(&quot;invincible&quot;);</span>
+<span class="nc" id="L79">  }</span>
+
+  public void errorVisible(String message){
+<span class="nc" id="L82">    errorText.getStyleClass().add(&quot;errorText&quot;);</span>
+<span class="nc" id="L83">    errorText.setText(message);</span>
+<span class="nc" id="L84">    errorIcon.getStyleClass().add(&quot;errorImage&quot;);</span>
+<span class="nc" id="L85">  }</span>
+
+
+  //TODO: make getters here, as well as private variables above
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

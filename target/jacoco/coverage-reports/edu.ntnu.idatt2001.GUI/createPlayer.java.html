@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>createPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.GUI</a> &gt; <span class="el_source">createPlayer.java</span></div><h1>createPlayer.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.GUI;
+
+import edu.ntnu.idatt2001.Players.Player;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+
+import javax.imageio.plugins.tiff.BaselineTIFFTagSet;
+
+public class createPlayer extends Dialog&lt;Player&gt; {
+
+  private Player player;
+
+  private TextField playerName;
+  private TextField playerHealth;
+  private TextField playerGold;
+  private TextField playerScore;
+  private TextField playerInventory;
+
+  public createPlayer(Player player) {
+<span class="nc" id="L24">    super();</span>
+<span class="nc" id="L25">    this.setTitle(&quot;Create Player&quot;);</span>
+<span class="nc" id="L26">    this.player = player;</span>
+<span class="nc" id="L27">    buildUI();</span>
+<span class="nc" id="L28">    setPropertyBindings();</span>
+<span class="nc" id="L29">    setResultConverter();</span>
+<span class="nc" id="L30">  }</span>
+
+  private void buildUI() {
+<span class="nc" id="L33">    Pane createPlayer = createPlayerPane();</span>
+<span class="nc" id="L34">    getDialogPane().setContent(createPlayer);</span>
+<span class="nc" id="L35">    getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);</span>
+
+<span class="nc" id="L37">    Button button = (Button) getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="nc" id="L38">    button.addEventFilter(ActionEvent.ACTION, new EventHandler&lt;ActionEvent&gt;() {</span>
+      @Override
+      public void handle(ActionEvent actionEvent) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (! validateDialog()){</span>
+<span class="nc" id="L42">          actionEvent.consume();</span>
+        }
+<span class="nc" id="L44">      }</span>
+      private boolean validateDialog() {
+<span class="nc bnc" id="L46" title="All 10 branches missed.">        if ((playerName.getText().isEmpty() || playerHealth.getText().isEmpty() || playerGold.getText().isEmpty() ||playerScore.getText().isEmpty() || playerInventory.getText().isEmpty())) {</span>
+<span class="nc" id="L47">          return false;</span>
+        }
+<span class="nc" id="L49">        return true;</span>
+      }
+    });
+<span class="nc" id="L52">    getDialogPane().expandableContentProperty().set(new Label(&quot;Here, you can add a player given the specified text fields&quot;));</span>
+<span class="nc" id="L53">  }</span>
+
+  private void setPropertyBindings() {
+    //playerName.textProperty().bindBidirectional(player.getName());
+    //TO DO: Figure out properties and
+<span class="nc" id="L58">  }</span>
+
+  private void setResultConverter() {
+<span class="nc" id="L61">    Callback&lt;ButtonType, Player&gt; playerResultConverter = new Callback&lt;ButtonType, Player&gt;() {</span>
+      @Override
+              public Player call(ButtonType param) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (param == ButtonType.OK) {</span>
+<span class="nc" id="L65">          return player;</span>
+        } else {
+<span class="nc" id="L67">          return null;</span>
+        }
+      }
+    };
+<span class="nc" id="L71">    setResultConverter(playerResultConverter);</span>
+<span class="nc" id="L72">  }</span>
+
+
+  public Pane createPlayerPane() {
+
+<span class="nc" id="L77">    VBox createPlayerLayout = new VBox(10);</span>
+<span class="nc" id="L78">      createPlayerLayout.setId(&quot;boxes&quot;);</span>
+
+<span class="nc" id="L80">    Label createPlayerTitle = new Label(&quot;Create Player&quot;);</span>
+<span class="nc" id="L81">    this.playerName = new TextField();</span>
+<span class="nc" id="L82">      playerName.setPromptText(&quot;Player name&quot;);</span>
+<span class="nc" id="L83">    this.playerHealth = new TextField();</span>
+<span class="nc" id="L84">      playerHealth.setPromptText(&quot;Player health&quot;);</span>
+<span class="nc" id="L85">    this.playerGold = new TextField();</span>
+<span class="nc" id="L86">      playerGold.setPromptText(&quot;Player gold&quot;);</span>
+<span class="nc" id="L87">    this.playerScore = new TextField();</span>
+<span class="nc" id="L88">      playerScore.setPromptText(&quot;Player score&quot;);</span>
+<span class="nc" id="L89">    this.playerInventory = new TextField(); //May change later based on the ability to add/ edit inventory</span>
+<span class="nc" id="L90">      playerInventory.setPromptText(&quot;Player Inventory&quot;);</span>
+
+<span class="nc" id="L92">    createPlayerLayout.getChildren().addAll(createPlayerTitle, playerName, playerHealth, playerGold, playerScore, playerInventory);</span>
+
+<span class="nc" id="L94">    return createPlayerLayout;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

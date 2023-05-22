@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.Controller;
 import edu.ntnu.idatt2001.Model.GameManager;
 import edu.ntnu.idatt2001.FileHandler.ScanStory;
 import edu.ntnu.idatt2001.PathsLauncher;
+import edu.ntnu.idatt2001.PathsMain;
 import edu.ntnu.idatt2001.View.CreateStoryView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

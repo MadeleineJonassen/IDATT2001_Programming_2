@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGameController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.Controller</a> &gt; <span class="el_source">PlayGameController.java</span></div><h1>PlayGameController.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.Controller;
+
+import edu.ntnu.idatt2001.Goal.Goal;
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.GameManager;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.PlayGameModel;
+import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.View.PlayGameView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * The type Play game controller.
+ */
+public class PlayGameController {
+  private final GameManager gameManager;
+  private final PlayGameModel model;
+  private final Stage stage;
+<span class="nc" id="L25">  private final SceneController sceneController = new SceneController();</span>
+  
+  //TODO: exception handling
+  
+  /**
+   * Instantiates a new Play game controller.
+   *
+   * @param stage       the stage
+   * @param gameManager the game manager
+   */
+<span class="nc" id="L35">  public PlayGameController(Stage stage, GameManager gameManager){</span>
+<span class="nc" id="L36">    this.gameManager = gameManager;</span>
+<span class="nc" id="L37">    this.stage = stage;</span>
+<span class="nc" id="L38">    PlayGameView view = new PlayGameView(this);</span>
+<span class="nc" id="L39">    model = new PlayGameModel(gameManager.getGame());</span>
+<span class="nc" id="L40">    stage.setScene(view.setup());</span>
+<span class="nc" id="L41">    stage.show();</span>
+<span class="nc" id="L42">  }</span>
+  
+  /**
+   * Get story name string.
+   *
+   * @return the string
+   */
+  public String getStoryName(){
+<span class="nc" id="L50">    return model.getStoryTitle();</span>
+  }
+  
+  /**
+   * Get current player observable list.
+   *
+   * @return the observable list
+   */
+  public ObservableList&lt;String&gt; getCurrentPlayer(){
+<span class="nc" id="L59">    return model.getPlayerInfo();</span>
+  }
+  
+  /**
+   * Get passage text observable list.
+   *
+   * @return the observable list
+   */
+  public ObservableList&lt;String&gt; getPassageText(){
+<span class="nc" id="L68">    return model.getPassageText();</span>
+  }
+  
+  /**
+   * Get link titles observable list.
+   *
+   * @return the observable list
+   */
+  public ObservableList&lt;String&gt; getLinkTitles(){
+<span class="nc" id="L77">    return model.getLinksText();</span>
+  }
+  
+  /**
+   * Next passage.
+   *
+   * @param linkTitle the link title
+   */
+  public void nextPassage(String linkTitle){
+<span class="nc" id="L86">    model.nextPassage(linkTitle);</span>
+<span class="nc" id="L87">  }</span>
+  
+  /**
+   * Get noncompleted goals observable list.
+   *
+   * @return the observable list
+   */
+  public ObservableList&lt;Goal&gt; getNoncompletedGoals(){
+<span class="nc" id="L95">    return model.getNonCompletedGoals();</span>
+  }
+  
+  
+  /**
+   * Get completed goals observable list.
+   *
+   * @return the observable list
+   */
+  public ObservableList&lt;Goal&gt; getCompletedGoals(){
+<span class="nc" id="L105">    return model.getCompletedGoals();</span>
+  }
+  
+  
+  /**
+   * Main menu.
+   */
+  public void mainMenu() {
+<span class="nc" id="L113">    gameManager.setGameInProgress(model);</span>
+<span class="nc" id="L114">    sceneController.switchScene(stage, 1, gameManager);</span>
+<span class="nc" id="L115">  }</span>
+  
+  /**
+   * End game.
+   */
+  public void endGame() {
+<span class="nc" id="L121">    sceneController.switchScene(stage, 7, gameManager);</span>
+<span class="nc" id="L122">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

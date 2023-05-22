@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Confirm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001</a> &gt; <span class="el_source">Confirm.java</span></div><h1>Confirm.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001;
+
+import java.util.Scanner;
+
+/**
+ * A class that verifies the input from the user
+ * and runs the method again if the user has made an error.
+ */
+<span class="nc" id="L9">public class Confirm {</span>
+
+<span class="nc" id="L11">  private static boolean Testing = true;</span>
+
+<span class="nc" id="L13">  private static final Scanner in = new Scanner(System.in);</span>
+
+  /**
+   * A method of which verifies the input from the user, with limitations.
+   *
+   * @param prompt The input
+   * @param exc The output if the input is invalid
+   * @param lower A limiter,the lowest allowed value
+   * @param higher A limiter,the highest allowed value
+   * @return The input from the user
+   */
+  public static int choiceConfirm(String prompt, String exc, int lower, int higher) {
+<span class="nc" id="L25">    Testing = true;</span>
+<span class="nc" id="L26">    int choice = 0;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">    while (Testing)  {</span>
+      try {
+<span class="nc" id="L29">        System.out.print(&quot;\n&quot; + prompt);</span>
+<span class="nc" id="L30">        choice = Integer.parseInt(in.nextLine());</span>
+<span class="nc bnc" id="L31" title="All 4 branches missed.">        if (lower &lt;= choice &amp;&amp; higher &gt;= choice) {</span>
+<span class="nc" id="L32">          Testing = false;</span>
+        } else {
+<span class="nc" id="L34">          System.out.println(exc);</span>
+        }
+<span class="nc" id="L36">      } catch (NumberFormatException e) {</span>
+<span class="nc" id="L37">        System.out.println(&quot;\n ~ Could not understand your input. Try again...&quot;);</span>
+<span class="nc" id="L38">      }</span>
+    }
+<span class="nc" id="L40">    return choice;</span>
+  }
+
+  /**
+   * A method of which verifies the integer-input from the user.
+   *
+   * @param prompt The input
+   * @param exc The output if the input is invalid
+   * @return The input from the user
+   */
+  public static int intConfirm(String prompt, String exc) {
+<span class="nc" id="L51">    Testing = true;</span>
+<span class="nc" id="L52">    int testingInt = 0;</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">    while (Testing) {</span>
+      try {
+<span class="nc" id="L55">        System.out.print(prompt);</span>
+<span class="nc" id="L56">        testingInt = Integer.parseInt(in.nextLine());</span>
+<span class="nc" id="L57">        Testing = false;</span>
+<span class="nc" id="L58">      } catch (NumberFormatException e) {</span>
+<span class="nc" id="L59">        System.out.print(exc);</span>
+<span class="nc" id="L60">      }</span>
+    }
+<span class="nc" id="L62">    return testingInt;</span>
+  }
+
+  /**
+   * A method of which verifies the String-input from the user.
+   *
+   * @param prompt The input
+   * @param exc The output if the input is invalid
+   * @return The input from the user
+   */
+  public static String stringConfirm(String prompt, String exc) {
+<span class="nc" id="L73">    Testing = true;</span>
+<span class="nc" id="L74">    String testingString = &quot;&quot;;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    while (Testing) {</span>
+      try {
+<span class="nc" id="L77">        System.out.print(prompt);</span>
+<span class="nc" id="L78">        testingString = in.nextLine();</span>
+<span class="nc" id="L79">        Testing = false;</span>
+<span class="nc" id="L80">      } catch (NumberFormatException e) {</span>
+<span class="nc" id="L81">        System.out.print(exc);</span>
+<span class="nc" id="L82">      }</span>
+    }
+<span class="nc" id="L84">    return testingString;</span>
+  }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

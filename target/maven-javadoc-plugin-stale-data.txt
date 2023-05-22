@@ -1,0 +1,116 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/krist/.m2/repository/org/openjfx/javafx-controls/20-ea+9/javafx-controls-20-ea+9.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-controls/20-ea+9/javafx-controls-20-ea+9-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-base/20-ea+9/javafx-base-20-ea+9.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-base/20-ea+9/javafx-base-20-ea+9-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-graphics/20-ea+9/javafx-graphics-20-ea+9.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-graphics/20-ea+9/javafx-graphics-20-ea+9-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-web/11.0.2/javafx-web-11.0.2.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-web/11.0.2/javafx-web-11.0.2-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-media/11.0.2/javafx-media-11.0.2.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-media/11.0.2/javafx-media-11.0.2-win.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-swing/11.0.2/javafx-swing-11.0.2.jar;C:/Users/krist/.m2/repository/org/openjfx/javafx-swing/11.0.2/javafx-swing-11.0.2-win.jar'
+-encoding
+'UTF-8'
+-public
+-source
+'17'
+-sourcepath
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java;C:/Users/krist/Desktop/Progg2/paths/paths3/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/krist/Desktop/Progg2/paths/paths3/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'paths 1.0-SNAPSHOT API'
+-nohelp
+-use
+-version
+-windowtitle
+'paths 1.0-SNAPSHOT API'
+edu.ntnu.idatt2001.Action
+edu.ntnu.idatt2001
+edu.ntnu.idatt2001.Controller
+edu.ntnu.idatt2001.FileHandler
+edu.ntnu.idatt2001.Goal
+edu.ntnu.idatt2001.GUI
+edu.ntnu.idatt2001.GUI.HelpScenes
+edu.ntnu.idatt2001.InputValidation
+edu.ntnu.idatt2001.Model
+edu.ntnu.idatt2001.Players
+edu.ntnu.idatt2001.View
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Action/Action.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Action/GoldAction.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Action/HealthAction.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Action/InventoryAction.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Action/ScoreAction.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Confirm.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/AddGoalController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/CreateGameController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/CreateGoalsController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/CreatePlayerController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/CreateStoryController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/EndSceneController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/MainMenuController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/PlayGameController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Controller/SceneController.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/FileHandler/ScanStory.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/FileHandler/WriteStory.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Goal/Goal.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Goal/GoldGoal.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Goal/HealthGoal.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Goal/InventoryGoal.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Goal/ScoreGoal.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/GUI/createPlayer.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/GUI/HelpScenes/helpCreatePlayer.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/GUI/MainMenu.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/InputValidation/IntInput.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/Game.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/GameManager.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/Link.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/Passage.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/PlayGameModel.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Model/Story.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/PathsLauncher.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/PathsMain.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Players/Player.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/Players/PlayerData.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/AddGoalView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/CreateGameView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/createGoals.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/CreateGoalsView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/CreatePlayerView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/CreateStoryView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/EndView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/MainMenuView.java'
+'C:/Users/krist/Desktop/Progg2/paths/paths3/src/main/java/edu/ntnu/idatt2001/View/PlayGameView.java'
+C:\Users\krist\.m2\repository\org\openjfx\javafx-controls\20-ea+9\javafx-controls-20-ea+9.jar = 1679253237496
+C:\Users\krist\.m2\repository\org\openjfx\javafx-controls\20-ea+9\javafx-controls-20-ea+9-win.jar = 1679253238089
+C:\Users\krist\.m2\repository\org\openjfx\javafx-fxml\17.0.1\javafx-fxml-17.0.1.jar = 1682421336202
+C:\Users\krist\.m2\repository\org\openjfx\javafx-fxml\17.0.1\javafx-fxml-17.0.1-win.jar = 1682421336297
+C:\Users\krist\.m2\repository\org\openjfx\javafx-base\20-ea+9\javafx-base-20-ea+9.jar = 1679253237565
+C:\Users\krist\.m2\repository\org\openjfx\javafx-base\20-ea+9\javafx-base-20-ea+9-win.jar = 1679253238227
+C:\Users\krist\.m2\repository\org\openjfx\javafx-graphics\20-ea+9\javafx-graphics-20-ea+9.jar = 1679253237554
+C:\Users\krist\.m2\repository\org\openjfx\javafx-graphics\20-ea+9\javafx-graphics-20-ea+9-win.jar = 1679253238462
+C:\Users\krist\.m2\repository\org\openjfx\javafx-web\11.0.2\javafx-web-11.0.2.jar = 1682421336432
+C:\Users\krist\.m2\repository\org\openjfx\javafx-web\11.0.2\javafx-web-11.0.2-win.jar = 1682421339603
+C:\Users\krist\.m2\repository\org\openjfx\javafx-media\11.0.2\javafx-media-11.0.2.jar = 1682421336504
+C:\Users\krist\.m2\repository\org\openjfx\javafx-media\11.0.2\javafx-media-11.0.2-win.jar = 1682421336819
+C:\Users\krist\.m2\repository\org\openjfx\javafx-swing\11.0.2\javafx-swing-11.0.2.jar = 1682421336763
+C:\Users\krist\.m2\repository\org\openjfx\javafx-swing\11.0.2\javafx-swing-11.0.2-win.jar = 1682421336829
+C:\Users\krist\Desktop\Progg2\paths\paths3\src\main\java = 1684785685654
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\generated-sources\annotations = 1684788379867
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\allclasses-index.html = 1684788397573
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\allpackages-index.html = 1684788397576
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\element-list = 1684788397331
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\index-all.html = 1684788397608
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\index.html = 1684788397549
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\jquery-ui.overrides.css = 1684788397625
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\member-search-index.js = 1684788397582
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\module-search-index.js = 1684788397578
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\overview-summary.html = 1684788397611
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\overview-tree.html = 1684788397546
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\package-search-index.js = 1684788397579
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\script.js = 1684788397614
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\search.js = 1684788397616
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\stylesheet.css = 1684788397613
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\tag-search-index.js = 1684788397582
+C:\Users\krist\Desktop\Progg2\paths\paths3\target\site\apidocs\type-search-index.js = 1684788397580

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScanStory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.FileHandler</a> &gt; <span class="el_source">ScanStory.java</span></div><h1>ScanStory.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.FileHandler;
+
+import edu.ntnu.idatt2001.Action.*;
+import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.Model.Story;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+<span class="fc" id="L12">public class ScanStory {</span>
+  
+  //Scans a story from a text-file, returns the story
+  public Story scanStory(File file) throws FileNotFoundException {
+    //TODO: check file type, throw exceptions
+    
+<span class="fc" id="L18">    Scanner scan = new Scanner(file);</span>
+<span class="fc" id="L19">    String storyTitle = scan.nextLine();</span>
+<span class="fc" id="L20">    scan.nextLine();</span>
+<span class="fc" id="L21">    Passage openingPassage = scanPassage(scan);</span>
+    
+<span class="fc" id="L23">    Story story = new Story(storyTitle, openingPassage);</span>
+    
+<span class="fc bfc" id="L25" title="All 2 branches covered.">    while(scan.hasNext()){</span>
+<span class="fc" id="L26">      story.addPassage(scanPassage(scan));</span>
+    }
+<span class="fc" id="L28">    scan.close();</span>
+<span class="fc" id="L29">    return story;</span>
+  }
+  
+  //help method, scans an undividual passage in the story
+  private Passage scanPassage(Scanner scan){
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">    if(!scan.hasNext()){</span>
+<span class="nc" id="L35">      throw new IllegalArgumentException();</span>
+    }
+    
+<span class="fc" id="L38">    String title = scan.nextLine().substring(2);</span>
+<span class="fc" id="L39">    Passage passage = new Passage(title, scan.nextLine());</span>
+    
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">    if(scan.hasNext()){</span>
+      String line;
+<span class="fc bfc" id="L43" title="All 2 branches covered.">      while(!(line = scan.nextLine()).isBlank()){</span>
+<span class="fc" id="L44">        passage.addLink(scanLink(line));</span>
+      }
+    }
+    
+<span class="fc" id="L48">    return passage;</span>
+  }
+  
+  public Link scanLink(String line){
+    //TODO: add support for actions
+    //TODO: check for multiple occurences of [](){}
+<span class="fc" id="L54">    String text = line.substring(1,line.indexOf(']'));</span>
+<span class="fc" id="L55">    String reference = line.substring(line.indexOf('(') + 1, line.indexOf(')'));</span>
+    
+<span class="fc" id="L57">    Link link = new Link(text, reference);</span>
+<span class="fc" id="L58">    int actionCount = 0;</span>
+    //StringUtils.countMatches(line, &quot;{&quot;);
+<span class="fc bfc" id="L60" title="All 2 branches covered.">    for (int i = 0; i &lt; line.length(); i++) {</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">      if (line.charAt(i) == '{') {</span>
+<span class="fc" id="L62">        actionCount++;</span>
+      }
+    }
+<span class="fc" id="L65">    String[] actionStrings = line.split(&quot;[{]&quot;);</span>
+    //TODO: seperate out scanAction method
+<span class="fc bfc" id="L67" title="All 2 branches covered.">    for(int i = 1; i &lt; actionStrings.length; i++){</span>
+<span class="fc" id="L68">      String actionString = actionStrings[i];</span>
+<span class="fc" id="L69">      String s = actionString.replace(&quot;[{}]&quot;, &quot;&quot;);</span>
+<span class="fc" id="L70">      String actionType = s.substring(0, s.indexOf('('));</span>
+<span class="fc" id="L71">      String actionContent = s.substring(s.indexOf('(') + 1, s.indexOf(')'));</span>
+      
+<span class="fc bfc" id="L73" title="All 2 branches covered.">      if(actionType.equalsIgnoreCase(&quot;gold&quot;)){</span>
+<span class="fc" id="L74">        Action goldAction = new GoldAction(Integer.parseInt(actionContent));</span>
+<span class="fc" id="L75">        link.addAction(goldAction);</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">      }else if(actionType.equalsIgnoreCase(&quot;health&quot;)){</span>
+<span class="nc" id="L77">        Action healthAction = new HealthAction(Integer.parseInt(actionContent));</span>
+<span class="nc" id="L78">        link.addAction(healthAction);</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">      }else if(actionType.equalsIgnoreCase(&quot;score&quot;)){</span>
+<span class="nc" id="L80">        Action scoreAction = new ScoreAction(Integer.parseInt(actionContent));</span>
+<span class="nc" id="L81">        link.addAction(scoreAction);</span>
+<span class="nc" id="L82">      }else{</span>
+<span class="fc" id="L83">        Action inventoryAction = new InventoryAction(actionContent);</span>
+<span class="fc" id="L84">        link.addAction(inventoryAction);</span>
+      }
+    }
+    
+<span class="fc" id="L88">    return link;</span>
+  }
+  
+  private void scanAction(String substring){
+  
+<span class="nc" id="L93">  }</span>
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

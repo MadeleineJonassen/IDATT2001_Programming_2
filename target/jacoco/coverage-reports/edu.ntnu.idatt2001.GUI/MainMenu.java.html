@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainMenu.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">paths</a> &gt; <a href="index.source.html" class="el_package">edu.ntnu.idatt2001.GUI</a> &gt; <span class="el_source">MainMenu.java</span></div><h1>MainMenu.java</h1><pre class="source lang-java linenums">package edu.ntnu.idatt2001.GUI;
+
+import edu.ntnu.idatt2001.Controller.CreatePlayerController;
+import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
+import edu.ntnu.idatt2001.View.createGoals;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+
+<span class="nc" id="L17">public class MainMenu extends Application {</span>
+  public static Stage openWindow;
+  Scene mainMenuScene, createGameScene, createStoryScene, createPlayerScene, createGoalScene, playGameScene;
+
+  public static TextField displayStoryPath, displayBrokenLinks;
+  public static ListView &lt;String&gt; storyListView; //TODO: Change from string to story?
+  public static ListView&lt;String&gt; playerListView;
+  public static TextField  playerName, playerHealth, playerGold, playerScore, playerInventory;
+  public static Button submitPlayerBtn, playerErrorIcon;
+
+
+
+  //TODO:             *** Overall thoughts ***   P.S Look for &quot;TODO:&quot; within the application
+  //TODO: add customized help-buttons to all scenes
+  //TODO: add menubar? depending on what options we would like to have in the application
+  //TODO: error handling!
+  //TODO: transfer info from scene to scene
+  //TODO: look closer at GUI later for better design; button size, layout, ect.
+  
+  
+
+
+  public static void main(String[] args) {
+<span class="nc" id="L40">    launch();</span>
+<span class="nc" id="L41">  }</span>
+
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+
+<span class="nc" id="L46">    openWindow = primaryStage;</span>
+
+
+    // **************************** CREATE GAME LAYOUT ****************************
+    // Top create game layout
+<span class="nc" id="L51">    BorderPane layoutCreateGameTop = new BorderPane();</span>
+<span class="nc" id="L52">    layoutCreateGameTop.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L53">    Button goHomeMenu = new Button(&quot; &quot;);</span>
+<span class="nc" id="L54">    goHomeMenu.getStyleClass().add(&quot;homeButton&quot;);</span>
+      //goHomeMenu.setOnAction(e -&gt; controller.mainMenu());
+<span class="nc" id="L56">    VBox createGameTopMid = new VBox();</span>
+<span class="nc" id="L57">    createGameTopMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L58">    Label createGameTitle = new Label(&quot;Create game&quot;);</span>
+<span class="nc" id="L59">    createGameTitle.setId(&quot;title&quot;);</span>
+<span class="nc" id="L60">    Label createGameUnderTitle = new Label(&quot;Create your own game!&quot;);</span>
+<span class="nc" id="L61">    createGameUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L62">    createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);</span>
+<span class="nc" id="L63">    layoutCreateGameTop.setLeft(goHomeMenu);</span>
+<span class="nc" id="L64">    layoutCreateGameTop.setCenter(createGameTopMid);</span>
+
+    // Mid create game layout
+<span class="nc" id="L67">    VBox createGameLayout = new VBox();</span>
+<span class="nc" id="L68">    createGameLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L69">    HBox menuStoryLayout = new HBox();</span>
+<span class="nc" id="L70">    menuStoryLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L71">    Button createStoryBtn = new Button(&quot;Story&quot;);</span>
+      //createStoryBtn.setOnAction(e -&gt; controller.createStory());
+<span class="nc" id="L73">    TextField storySelectedDisplay = new TextField();</span>
+<span class="nc" id="L74">    storySelectedDisplay.setPromptText(&quot;Story not selected yet...&quot;);</span>
+    //TODO: display selected story
+<span class="nc" id="L76">    menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);</span>
+<span class="nc" id="L77">    HBox menuPlayerLayout = new HBox();</span>
+<span class="nc" id="L78">    menuPlayerLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L79">    Button createPlayerBtn = new Button(&quot;Player&quot;);</span>
+      //createPlayerBtn.setOnAction(e -&gt; controller.createPlayer());
+<span class="nc" id="L81">    TextField playerSelectedDisplay = new TextField();</span>
+<span class="nc" id="L82">    playerSelectedDisplay.setPromptText(&quot;Player not selected yet&quot;);</span>
+<span class="nc" id="L83">    menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);</span>
+<span class="nc" id="L84">    HBox menuGoalsLayout = new HBox();</span>
+<span class="nc" id="L85">    menuGoalsLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L86">    Button createGoalBtn = new Button(&quot;Goals&quot;);</span>
+      //createGoalBtn.setOnAction(e -&gt; controller.createGoals());
+<span class="nc" id="L88">    ListView goalsSelectedDisplay = new ListView&lt;&gt;();</span>
+<span class="nc" id="L89">    menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);</span>
+<span class="nc" id="L90">    createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);</span>
+
+
+    // Bottom create game layer
+<span class="nc" id="L94">    BorderPane layoutBottom = new BorderPane();</span>
+<span class="nc" id="L95">    layoutBottom.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L96">    Button helpBtn = new Button(&quot; &quot;);</span>
+<span class="nc" id="L97">    helpBtn.getStyleClass().add(&quot;helpButton&quot;);</span>
+<span class="nc" id="L98">    helpBtn.setOnAction(e -&gt; helpCreatePlayer.display());</span>
+<span class="nc" id="L99">    Button submitNewGame = new Button(&quot;Submit&quot;);</span>
+<span class="nc" id="L100">    submitNewGame.setId(&quot;finalButton&quot;);</span>
+<span class="nc bnc" id="L101" title="All 6 branches missed.">    submitNewGame.setDisable(!storySelectedDisplay.hasProperties() &amp;&amp; !playerSelectedDisplay.hasProperties() &amp;&amp; !goalsSelectedDisplay.hasProperties());</span>
+<span class="nc" id="L102">    submitNewGame.setOnAction(e -&gt; {</span>
+      //TODO: Save selected info and error handling
+    //  stage.setScene(controller.playGame());
+<span class="nc" id="L105">    });</span>
+<span class="nc" id="L106">    Region space = new Region();</span>
+<span class="nc" id="L107">    layoutBottom.setLeft(helpBtn);</span>
+<span class="nc" id="L108">    layoutBottom.setCenter(submitNewGame);</span>
+<span class="nc" id="L109">    layoutBottom.setRight(space);</span>
+
+    // * Overall Create Game Layout *
+<span class="nc" id="L112">    BorderPane layoutCreateGame = new BorderPane();</span>
+<span class="nc" id="L113">    layoutCreateGame.setTop(layoutCreateGameTop);</span>
+<span class="nc" id="L114">    layoutCreateGame.setCenter(createGameLayout);</span>
+<span class="nc" id="L115">    layoutCreateGame.setBottom(layoutBottom);</span>
+    //layoutCreateGame.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);
+
+<span class="nc" id="L118">    Scene scene = new Scene(layoutCreateGame, 1300, 700);</span>
+<span class="nc" id="L119">    scene.getStylesheets().add(&quot;StyleSheets/createGame  Style.css&quot;);</span>
+    //stage.setScene(scene);
+    //stage.show();
+
+
+    // -------------------- CREATE STORY SCENE --------------------
+    // Top create story layout
+<span class="nc" id="L126">    BorderPane createStoryTop = new BorderPane();</span>
+<span class="nc" id="L127">    createStoryTop.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L128">    Button goToCreateHomeStory = new Button(&quot; &quot;);</span>
+<span class="nc" id="L129">      goToCreateHomeStory.getStyleClass().add(&quot;backButton&quot;);</span>
+<span class="nc" id="L130">      goToCreateHomeStory.setOnAction(e -&gt; openWindow.setScene(createGameScene));</span>
+<span class="nc" id="L131">    VBox creatStoryTopMid = new VBox();</span>
+<span class="nc" id="L132">    creatStoryTopMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L133">      Label createStoryTitle = new Label(&quot;Create Story&quot;);</span>
+<span class="nc" id="L134">      createStoryTitle.setId(&quot;createTitles&quot;);</span>
+<span class="nc" id="L135">      Label createStoryUnderTitle = new Label(&quot;Select, edit or add your story to the library&quot;);</span>
+<span class="nc" id="L136">      createStoryUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L137">    creatStoryTopMid.getChildren().addAll(createStoryTitle, createStoryUnderTitle);</span>
+<span class="nc" id="L138">    createStoryTop.setLeft(goToCreateHomeStory);</span>
+<span class="nc" id="L139">    createStoryTop.setCenter(creatStoryTopMid);</span>
+
+    // Mid create story layout
+<span class="nc" id="L142">    HBox createStoryMid = new HBox();</span>
+<span class="nc" id="L143">    createStoryMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L144">      VBox createStoryMidDisplay = new VBox();</span>
+<span class="nc" id="L145">      createStoryMidDisplay.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L146">        displayStoryPath = new TextField();</span>
+<span class="nc" id="L147">          displayStoryPath.setPromptText(&quot;Path for display&quot;);</span>
+<span class="nc" id="L148">        storyListView = new ListView&lt;&gt;();</span>
+<span class="nc" id="L149">          storyListView.setId(&quot;big-list-view&quot;);</span>
+<span class="nc" id="L150">        displayBrokenLinks = new TextField();</span>
+<span class="nc" id="L151">      createStoryMidDisplay.getChildren().addAll(displayStoryPath, storyListView, displayBrokenLinks);</span>
+<span class="nc" id="L152">      VBox createStoryMidBtn = new VBox();</span>
+<span class="nc" id="L153">      createStoryMidBtn.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L154">        Button selectStory = new Button(&quot;Select &quot;);</span>
+<span class="nc" id="L155">          selectStory.setOnAction(actionEvent -&gt; {</span>
+            //  CreateStoryController.chooseStory();
+            //Story.getBrokenLinks();
+            //TODO: fileDisplay-functionality; broken links, ect.
+<span class="nc" id="L159">          });</span>
+<span class="nc" id="L160">        Button addStory = new Button(&quot;Add&quot;);</span>
+          //TODO: add functionality
+<span class="nc" id="L162">        Button editStory = new Button(&quot;Edit&quot;);</span>
+          //TODO: add functionality
+<span class="nc" id="L164">    createStoryMidBtn.getChildren().addAll(selectStory,addStory,editStory);</span>
+<span class="nc" id="L165">    createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);</span>
+
+
+    // * Overall Create Story layout *
+<span class="nc" id="L169">    BorderPane createStoryLayout = new BorderPane();</span>
+<span class="nc" id="L170">    createStoryLayout.setTop(createStoryTop);</span>
+<span class="nc" id="L171">    createStoryLayout.setCenter(createStoryMid);</span>
+<span class="nc" id="L172">    createStoryScene = new Scene(createStoryLayout, 1300, 700);</span>
+<span class="nc" id="L173">    createStoryScene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</span>
+
+
+
+    // -------------------- CREATE PLAYER SCENE --------------------
+    // Top create player layout
+<span class="nc" id="L179">    BorderPane createPlayerTop = new BorderPane();</span>
+<span class="nc" id="L180">    Button goToCreateHomePlayer = new Button(&quot; &quot;);</span>
+<span class="nc" id="L181">      goToCreateHomePlayer.getStyleClass().add(&quot;backButton&quot;);</span>
+<span class="nc" id="L182">      goToCreateHomePlayer.setOnAction(e -&gt; openWindow.setScene(createGameScene));</span>
+<span class="nc" id="L183">    VBox creatPlayerTopMid = new VBox();</span>
+<span class="nc" id="L184">    creatPlayerTopMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L185">      Label createPlayerTitle = new Label(&quot;Create Player&quot;);</span>
+<span class="nc" id="L186">      createPlayerTitle.setId(&quot;createTitles&quot;);</span>
+<span class="nc" id="L187">     Label createPlayerUnderTitle = new Label(&quot;Create your own player&quot;);</span>
+<span class="nc" id="L188">      createPlayerUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L189">    creatPlayerTopMid.getChildren().addAll(createPlayerTitle, createPlayerUnderTitle);</span>
+<span class="nc" id="L190">    createPlayerTop.setLeft(goToCreateHomePlayer);</span>
+<span class="nc" id="L191">    createPlayerTop.setCenter(creatPlayerTopMid);</span>
+
+    // Mid create player layout
+<span class="nc" id="L194">    VBox createPlayerMid = new VBox();</span>
+<span class="nc" id="L195">    HBox playerNameLayout = new HBox();</span>
+<span class="nc" id="L196">    playerNameLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L197">      playerName = new TextField();</span>
+<span class="nc" id="L198">        playerName.setPromptText(&quot;Enter Name * &quot;);</span>
+<span class="nc" id="L199">        playerName.setId(&quot;#playerTextFields&quot;);</span>
+<span class="nc" id="L200">      Image nameIcon = new Image(&quot;photos/Icons/PlayerIcons/person-simple.png&quot;);</span>
+<span class="nc" id="L201">      ImageView nameIconView = new ImageView();</span>
+<span class="nc" id="L202">        nameIconView.setImage(nameIcon);</span>
+<span class="nc" id="L203">        nameIconView.setFitWidth(30);</span>
+<span class="nc" id="L204">        nameIconView.setFitHeight(30);</span>
+<span class="nc" id="L205">    playerNameLayout.getChildren().addAll(playerName,nameIconView);</span>
+<span class="nc" id="L206">    HBox playerHealthLayout = new HBox();</span>
+<span class="nc" id="L207">    playerHealthLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L208">      playerHealth = new TextField();</span>
+<span class="nc" id="L209">        playerHealth.setPromptText(&quot;Enter Health *&quot;);</span>
+<span class="nc" id="L210">      Image healthIcon = new Image(&quot;photos/Icons/PlayerIcons/pharmacy (1).png&quot;);</span>
+<span class="nc" id="L211">      ImageView healthIconView = new ImageView();</span>
+<span class="nc" id="L212">      healthIconView.setImage(healthIcon);</span>
+<span class="nc" id="L213">      healthIconView.setFitWidth(30);</span>
+<span class="nc" id="L214">      healthIconView.setFitHeight(30);</span>
+<span class="nc" id="L215">    playerHealthLayout.getChildren().addAll(playerHealth, healthIconView);</span>
+<span class="nc" id="L216">    HBox playerGoldLayout = new HBox();</span>
+<span class="nc" id="L217">    playerGoldLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L218">      playerGold = new TextField();</span>
+<span class="nc" id="L219">        playerGold.setPromptText(&quot;Enter Gold *&quot;);</span>
+<span class="nc" id="L220">      Image goldIcon = new Image(&quot;photos/Icons/PlayerIcons/treasure-chest.png&quot;);</span>
+<span class="nc" id="L221">      ImageView goldIconView = new ImageView();</span>
+<span class="nc" id="L222">      goldIconView.setImage(goldIcon);</span>
+<span class="nc" id="L223">      goldIconView.setFitWidth(30);</span>
+<span class="nc" id="L224">      goldIconView.setFitHeight(30);</span>
+<span class="nc" id="L225">      playerGoldLayout.getChildren().addAll(playerGold, goldIconView);</span>
+<span class="nc" id="L226">    HBox playerScoreLayout = new HBox();</span>
+<span class="nc" id="L227">    playerScoreLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L228">      playerScore = new TextField();</span>
+<span class="nc" id="L229">        playerScore.setPromptText(&quot;Enter Score&quot;);</span>
+<span class="nc" id="L230">      Image scoreIcon = new Image(&quot;photos/Icons/PlayerIcons/star-sharp-half-stroke.png&quot;);</span>
+<span class="nc" id="L231">      ImageView scoreIconView = new ImageView();</span>
+<span class="nc" id="L232">        scoreIconView.setImage(scoreIcon);</span>
+<span class="nc" id="L233">        scoreIconView.setFitWidth(30);</span>
+<span class="nc" id="L234">        scoreIconView.setFitHeight(30);</span>
+<span class="nc" id="L235">    playerScoreLayout.getChildren().addAll(playerScore, scoreIconView);</span>
+<span class="nc" id="L236">    HBox playerInventoryLayout = new HBox();</span>
+<span class="nc" id="L237">    playerInventoryLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L238">    playerInventory = new TextField();</span>
+<span class="nc" id="L239">        playerInventory.setPromptText(&quot;Enter Inventory &quot;);</span>
+<span class="nc" id="L240">        playerInventory.setMinHeight(40);</span>
+<span class="nc" id="L241">      Image inventoryIcon = new Image(&quot;photos/Icons/PlayerIcons/apps.png&quot;);</span>
+<span class="nc" id="L242">      ImageView InventoryIconView = new ImageView();</span>
+<span class="nc" id="L243">        InventoryIconView.setImage(inventoryIcon);</span>
+<span class="nc" id="L244">        InventoryIconView.setFitWidth(30);</span>
+<span class="nc" id="L245">        InventoryIconView.setFitHeight(30);</span>
+<span class="nc" id="L246">    playerInventoryLayout.getChildren().addAll(playerInventory, InventoryIconView);</span>
+<span class="nc" id="L247">    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout ,playerGoldLayout,playerScoreLayout,playerInventoryLayout);</span>
+
+    // Bottom create player layout
+<span class="nc" id="L250">    VBox createPlayerBottom = new VBox();</span>
+<span class="nc" id="L251">      createPlayerBottom.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L252">    playerErrorIcon = new Button(&quot;&quot;);</span>
+<span class="nc" id="L253">      playerErrorIcon.getStyleClass().add(&quot;invincible&quot;);</span>
+<span class="nc" id="L254">    submitPlayerBtn = new Button(&quot;Submit player&quot;);</span>
+<span class="nc" id="L255">      submitPlayerBtn.setOnAction(e -&gt; {</span>
+<span class="nc" id="L256">        CreatePlayerController.isString();</span>
+<span class="nc" id="L257">        CreatePlayerController.isInt();</span>
+<span class="nc" id="L258">      });</span>
+    //TODO: make submit work
+<span class="nc" id="L260">    createPlayerBottom.getChildren().addAll( playerErrorIcon, submitPlayerBtn);</span>
+
+    // * Overall Create Player Layout *
+<span class="nc" id="L263">    BorderPane createPlayerLayout = new BorderPane();</span>
+<span class="nc" id="L264">    createPlayerLayout.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L265">    createPlayerLayout.setTop(createPlayerTop);</span>
+<span class="nc" id="L266">    createPlayerLayout.setCenter(createPlayerMid);</span>
+<span class="nc" id="L267">    createPlayerLayout.setBottom(createPlayerBottom);</span>
+<span class="nc" id="L268">    createPlayerScene = new Scene(createPlayerLayout, 1300, 700);</span>
+<span class="nc" id="L269">    createPlayerScene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</span>
+
+
+
+    // -------------------- CREATE GOALS SCENE --------------------
+    // Top create goals layout
+<span class="nc" id="L275">    BorderPane createGoalTop = new BorderPane();</span>
+<span class="nc" id="L276">    createGoalTop.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L277">    Button goToCreateHomeGoals = new Button(&quot; &quot;);</span>
+<span class="nc" id="L278">    goToCreateHomeGoals.getStyleClass().add(&quot;backButton&quot;);</span>
+<span class="nc" id="L279">    goToCreateHomeGoals.setOnAction(e -&gt; openWindow.setScene(createGameScene));</span>
+<span class="nc" id="L280">    VBox creatGoalTopMid = new VBox();</span>
+<span class="nc" id="L281">    creatGoalTopMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L282">      Label createGoalTitle = new Label(&quot;Create Goal&quot;);</span>
+<span class="nc" id="L283">      createGoalTitle.setId(&quot;createTitles&quot;);</span>
+<span class="nc" id="L284">      Label createGoalUnderTitle = new Label(&quot;Select one or multiple goal for your character&quot;);</span>
+<span class="nc" id="L285">      createGoalUnderTitle.setId(&quot;underTitle&quot;);</span>
+<span class="nc" id="L286">    creatGoalTopMid.getChildren().addAll(createGoalTitle, createGoalUnderTitle);</span>
+
+<span class="nc" id="L288">    createGoalTop.setLeft(goToCreateHomeGoals);</span>
+<span class="nc" id="L289">    createGoalTop.setCenter(creatGoalTopMid);</span>
+
+    // Mid create goal layout
+<span class="nc" id="L292">    HBox createGoalMid = new HBox();</span>
+<span class="nc" id="L293">    createGoalMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L294">      ListView selectedGoals = new ListView&lt;&gt;();</span>
+<span class="nc" id="L295">      selectedGoals.setId(&quot;big-list-view&quot;);</span>
+<span class="nc" id="L296">    VBox createGoalsBtn = new VBox();</span>
+<span class="nc" id="L297">      createGoalsBtn.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L298">      Button goalBox = new Button(&quot;Create Goal&quot;);</span>
+<span class="nc" id="L299">      goalBox.setOnAction(e -&gt; createGoals.display());</span>
+<span class="nc" id="L300">      Button clearAllGoals = new Button(&quot;Clear All&quot;);</span>
+        //TODO: create a delete option for the listview
+<span class="nc" id="L302">    createGoalsBtn.getChildren().addAll(goalBox, clearAllGoals);</span>
+<span class="nc" id="L303">    createGoalMid.getChildren().addAll(selectedGoals, createGoalsBtn);</span>
+
+    // Bottom create gal layout
+<span class="nc" id="L306">    HBox createGoalsBottom = new HBox();</span>
+<span class="nc" id="L307">    Button submitGoalBtn = new Button(&quot;Submit goal(s)&quot;);</span>
+<span class="nc" id="L308">    createGoalsBottom.getChildren().addAll(submitGoalBtn);</span>
+
+    // * Overall Create Goal Layout *
+<span class="nc" id="L311">    BorderPane createGoalLayout = new BorderPane();</span>
+<span class="nc" id="L312">    createGoalLayout.setTop(createGoalTop);</span>
+<span class="nc" id="L313">    createGoalLayout.setCenter(createGoalMid);</span>
+<span class="nc" id="L314">    createGoalLayout.setBottom(createGoalsBottom);</span>
+<span class="nc" id="L315">    createGoalScene = new Scene(createGoalLayout, 1300, 700);</span>
+<span class="nc" id="L316">    createGoalScene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</span>
+
+
+
+
+
+    // **************************** PLAY GAME LAYOUT ****************************
+    // Top play game layout
+<span class="nc" id="L324">    HBox layoutPlayGameTop = new HBox();</span>
+<span class="nc" id="L325">      layoutPlayGameTop.setId(&quot;topBoxes&quot;);</span>
+<span class="nc" id="L326">    Button goHomePlayGame = new Button(&quot; &quot;);</span>
+<span class="nc" id="L327">      goHomePlayGame.getStyleClass().add(&quot;homeButton&quot;);</span>
+<span class="nc" id="L328">      goHomePlayGame.setOnAction(e -&gt; openWindow.setScene(mainMenuScene));</span>
+<span class="nc" id="L329">    Label playGameTitle = new Label(&quot;Play game&quot;);</span>
+<span class="nc" id="L330">      playGameTitle.setId(&quot;title&quot;);</span>
+<span class="nc" id="L331">    layoutPlayGameTop.getChildren().addAll(goHomePlayGame,playGameTitle);</span>
+
+    // Mid play game layout
+<span class="nc" id="L334">    HBox layoutPlayGameMid = new HBox();</span>
+<span class="nc" id="L335">      layoutPlayGameMid.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L336">    VBox layoutPlayGameMidLeft = new VBox();</span>
+<span class="nc" id="L337">    layoutPlayGameMidLeft.setId(&quot;big-boxes&quot;);</span>
+<span class="nc" id="L338">      playerListView = new ListView&lt;&gt;();</span>
+<span class="nc" id="L339">        playerListView.getItems().addAll(&quot;Player here&quot;);</span>
+        //TODO: set selected player;
+<span class="nc" id="L341">      storyListView = new ListView&lt;&gt;();</span>
+<span class="nc" id="L342">        storyListView.setId(&quot;big-list-view&quot;);</span>
+<span class="nc" id="L343">        storyListView.getItems().addAll(&quot;Story here&quot;);</span>
+       //TODO: set selected story
+<span class="nc" id="L345">    layoutPlayGameMidLeft.getChildren().addAll(playerListView, storyListView);</span>
+<span class="nc" id="L346">    VBox rightInfoBox = new VBox();</span>
+<span class="nc" id="L347">      rightInfoBox.setId(&quot;boxes&quot;);</span>
+<span class="nc" id="L348">      ComboBox setGoals = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L349">        setGoals.setPromptText(&quot;View Goals&quot;);</span>
+          //TODO: add selected goals in box and add function &quot;crossed out&quot; when finished a goal
+<span class="nc" id="L351">      Button options = new Button(&quot;options?&quot;);</span>
+<span class="nc" id="L352">      Button other = new Button(&quot;other?&quot;);</span>
+<span class="nc" id="L353">    rightInfoBox.getChildren().addAll(setGoals,options,other);</span>
+<span class="nc" id="L354">    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, rightInfoBox);</span>
+
+    // Bottom play game layout
+<span class="nc" id="L357">    HBox userOptions = new HBox();</span>
+<span class="nc" id="L358">    userOptions.setId(&quot;boxes&quot;);</span>
+      //TODO: make HBox create buttons based on number of passages
+<span class="nc" id="L360">      Button testButton1 = new Button(&quot;test button 1&quot;);</span>
+<span class="nc" id="L361">      Button testButton2 = new Button(&quot;test button 2&quot;);</span>
+<span class="nc" id="L362">    userOptions.getChildren().addAll(testButton1,testButton2);</span>
+
+    // * Overall Playing Game Layout *
+<span class="nc" id="L365">    BorderPane layoutPlayGame = new BorderPane();</span>
+<span class="nc" id="L366">    layoutPlayGame.setTop(layoutPlayGameTop);</span>
+<span class="nc" id="L367">    layoutPlayGame.setCenter(layoutPlayGameMid);</span>
+<span class="nc" id="L368">    layoutPlayGame.setBottom(userOptions);</span>
+<span class="nc" id="L369">    layoutPlayGame.getStylesheets().add(&quot;StyleSheets/playGameStyle.css&quot;);</span>
+<span class="nc" id="L370">    playGameScene = new Scene(layoutPlayGame, 1300, 700);</span>
+
+
+
+
+    // ***** END SCENE *****
+      //TODO: create end scene
+
+
+
+    // ~~~ Opening Window ~~~
+<span class="nc" id="L381">    primaryStage.setResizable(false);</span>
+<span class="nc" id="L382">    primaryStage.setScene(mainMenuScene);</span>
+<span class="nc" id="L383">    primaryStage.show();</span>
+<span class="nc" id="L384">  }</span>
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
