@@ -20,54 +20,65 @@
     -fx-padding: 20px;
     -fx-alignment: Center;
     -fx-spacing: 20;
-    -fx-pref-width: 700;
+    -fx-pref-width: 600;
 }
-
+#rightBox{
+    -fx-padding: 20px;
+    -fx-alignment: Center;
+    -fx-spacing: 20;
+    -fx-pref-width: 300;
+}
 
 #title {
     -fx-font-size: 40px;
-    -fx-text-fill: "190B28";
+    -fx-text-fill: "B8C4C1";
     -fx-font-family: "Constantia";
+    -fx-effect: dropshadow(gaussian,rgb(43, 51, 63) , 8, 2, 0, 0);
+    -fx-background-insets: 500;
+}
+#underTitle {
+    -fx-font-size: 20px;
+    -fx-text-fill: "B8C4C1";
+    -fx-font-family: "Constantia";
+    -fx-effect: dropshadow(gaussian,rgb(43, 51, 63) , 3, 2, 0, 0);
+    -fx-background-insets: 200;
 }
 
-
 .button {
-    -fx-background-color: "B2DAF0";
-    -fx-pref-width: 150px;
+    -fx-background-color: "B8C4C1";
     -fx-font-family: "Constantia";
-    -fx-text-fill: "2F4858";
+    -fx-text-fill: "2B333F";
     -fx-font-size: 18px;
     -fx-padding: 5;
 }
 .button:hover {
-    -fx-background-color: "33658A";
+    -fx-background-color: "647C87";
 }
 .button:pressed {
-    -fx-background-color: "2F4858";
+    -fx-background-color: "49515C";
 }
 
 
 .list-view {
-    -fx-background-color: "B2DAF0";
-    -fx-font-family: "Constantia";
+    -fx-background-color: "B8C4C1";
     -fx-pref-width: 100;
-    -fx-pref-height: 70;
-    -fx-font-size: 20;
+    -fx-pref-height: 300;
+    -fx-background-radius: 15px;
+    -fx-padding: 5;
 }
-
-#big-list-view {
-    -fx-pref-height: 400;
-    -fx-font-size: 15;
-
-}
-
-.combo-box {
-    -fx-pref-width: 200;
+.list-cell{
+    -fx-background-color: transparent, -fx-background;
     -fx-font-family: "Constantia";
-    -fx-font-size: 20;
-    -fx-background-color: "86BBD8";
+    -fx-font-size: 15;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0px, 2px ;
+    -fx-padding: 2px ;
+}
 
-
+#storyListView {
+    -fx-pref-height: 500;
+    -fx-background-color: transparent, -fx-background;
+    -fx-background-radius: 0;
 }
 
 
@@ -120,27 +131,5 @@
     -fx-alignment: center;
     -fx-pref-width: 40;
     -fx-pref-height: 40;
-}
-
-
-.invincible {
-    -fx-background-color: transparent;
-    -fx-background-size: stretch;
-    -fx-alignment: center;
-}
-.invincible:hover {
-    -fx-background-color: transparent;
-}
-
-.errorImage {
-    -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/triangle-warning.png");
-    -fx-background-size: stretch;
-    -fx-alignment: center;
-    -fx-pref-width: 40;
-    -fx-pref-height: 30;
-}
-.errorText {
-    -fx-border-color: "DD5050";
 }
 
