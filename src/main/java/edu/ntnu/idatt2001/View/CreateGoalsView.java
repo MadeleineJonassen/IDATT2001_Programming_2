@@ -62,6 +62,7 @@ public class CreateGoalsView {
     
     // Bottom create goal layout
     HBox createGoalsBottom = new HBox();
+    createGoalsBottom.setId("boxes");
     Button submitGoalBtn = new Button("Submit goal(s)");
     submitGoalBtn.setOnAction(e -> {
       try {

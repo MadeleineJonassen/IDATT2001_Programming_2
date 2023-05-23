@@ -50,30 +50,6 @@
 }
 
 
-.list-view {
-    -fx-background-color: "B8C4C1";
-    -fx-pref-width: 200;
-    -fx-pref-height: 50;
-    -fx-background-radius: 15px;
-    -fx-padding: 5;
-}
-.list-cell{
-    -fx-background-color: transparent, -fx-background;
-    -fx-font-family: "Constantia";
-    -fx-background-radius: 10px;
-    -fx-background-insets: 0px, 2px ;
-    -fx-padding: 2px ;
-}
-.list-cell:empty {
-    -fx-padding: 2px ;
-    -fx-background-color: transparent ;
-    -fx-background-insets: 0 ;
-}
-#big-list-view {
-    -fx-pref-width: 400;
-    -fx-pref-height: 250;
-}
-
 .textField {
     -fx-pref-width: 500;
     -fx-pref-height: 20;
