@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > createPlayer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.GUI</a>
+</div>
+
+<h1>Coverage Summary for Class: createPlayer (edu.ntnu.idatt2001.GUI)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">createPlayer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">createPlayer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">createPlayer$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.GUI;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.model.Player;
+&nbsp;import javafx.event.ActionEvent;
+&nbsp;import javafx.event.EventHandler;
+&nbsp;import javafx.scene.control.*;
+&nbsp;import javafx.scene.layout.Pane;
+&nbsp;import javafx.scene.layout.VBox;
+&nbsp;import javafx.util.Callback;
+&nbsp;
+&nbsp;import javax.imageio.plugins.tiff.BaselineTIFFTagSet;
+&nbsp;
+&nbsp;public class createPlayer extends Dialog&lt;Player&gt; {
+&nbsp;
+&nbsp;  private Player player;
+&nbsp;
+&nbsp;  private TextField playerName;
+&nbsp;  private TextField playerHealth;
+&nbsp;  private TextField playerGold;
+&nbsp;  private TextField playerScore;
+&nbsp;  private TextField playerInventory;
+&nbsp;
+&nbsp;  public createPlayer(Player player) {
+<b class="nc">&nbsp;    super();</b>
+<b class="nc">&nbsp;    this.setTitle(&quot;Create Player&quot;);</b>
+<b class="nc">&nbsp;    this.player = player;</b>
+<b class="nc">&nbsp;    buildUI();</b>
+<b class="nc">&nbsp;    setPropertyBindings();</b>
+<b class="nc">&nbsp;    setResultConverter();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private void buildUI() {
+<b class="nc">&nbsp;    Pane createPlayer = createPlayerPane();</b>
+<b class="nc">&nbsp;    getDialogPane().setContent(createPlayer);</b>
+<b class="nc">&nbsp;    getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);</b>
+&nbsp;
+<b class="nc">&nbsp;    Button button = (Button) getDialogPane().lookupButton(ButtonType.OK);</b>
+<b class="nc">&nbsp;    button.addEventFilter(ActionEvent.ACTION, new EventHandler&lt;ActionEvent&gt;() {</b>
+&nbsp;      @Override
+&nbsp;      public void handle(ActionEvent actionEvent) {
+<b class="nc">&nbsp;        if (! validateDialog()){</b>
+<b class="nc">&nbsp;          actionEvent.consume();</b>
+&nbsp;        }
+&nbsp;      }
+&nbsp;      private boolean validateDialog() {
+<b class="nc">&nbsp;        if ((playerName.getText().isEmpty() || playerHealth.getText().isEmpty() || playerGold.getText().isEmpty() ||playerScore.getText().isEmpty() || playerInventory.getText().isEmpty())) {</b>
+<b class="nc">&nbsp;          return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;      }
+&nbsp;    });
+<b class="nc">&nbsp;    getDialogPane().expandableContentProperty().set(new Label(&quot;Here, you can add a player given the specified text fields&quot;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  private void setPropertyBindings() {
+&nbsp;    //playerName.textProperty().bindBidirectional(player.getName());
+&nbsp;    //TO DO: Figure out properties and
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+&nbsp;  private void setResultConverter() {
+<b class="nc">&nbsp;    Callback&lt;ButtonType, Player&gt; playerResultConverter = new Callback&lt;ButtonType, Player&gt;() {</b>
+&nbsp;      @Override
+&nbsp;              public Player call(ButtonType param) {
+<b class="nc">&nbsp;        if (param == ButtonType.OK) {</b>
+<b class="nc">&nbsp;          return player;</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;          return null;</b>
+&nbsp;        }
+&nbsp;      }
+&nbsp;    };
+<b class="nc">&nbsp;    setResultConverter(playerResultConverter);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public Pane createPlayerPane() {
+&nbsp;
+<b class="nc">&nbsp;    VBox createPlayerLayout = new VBox(10);</b>
+<b class="nc">&nbsp;      createPlayerLayout.setId(&quot;boxes&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    Label createPlayerTitle = new Label(&quot;Create Player&quot;);</b>
+<b class="nc">&nbsp;    this.playerName = new TextField();</b>
+<b class="nc">&nbsp;      playerName.setPromptText(&quot;Player name&quot;);</b>
+<b class="nc">&nbsp;    this.playerHealth = new TextField();</b>
+<b class="nc">&nbsp;      playerHealth.setPromptText(&quot;Player health&quot;);</b>
+<b class="nc">&nbsp;    this.playerGold = new TextField();</b>
+<b class="nc">&nbsp;      playerGold.setPromptText(&quot;Player gold&quot;);</b>
+<b class="nc">&nbsp;    this.playerScore = new TextField();</b>
+<b class="nc">&nbsp;      playerScore.setPromptText(&quot;Player score&quot;);</b>
+<b class="nc">&nbsp;    this.playerInventory = new TextField(); //May change later based on the ability to add/ edit inventory</b>
+<b class="nc">&nbsp;      playerInventory.setPromptText(&quot;Player Inventory&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    createPlayerLayout.getChildren().addAll(createPlayerTitle, playerName, playerHealth, playerGold, playerScore, playerInventory);</b>
+&nbsp;
+<b class="nc">&nbsp;    return createPlayerLayout;</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 11:35</div>
+</div>
+</body>
+</html>

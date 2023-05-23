@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.model.Player;
 
 public class GoldAction implements  Action{
   private final int gold;
@@ -16,6 +16,6 @@ public class GoldAction implements  Action{
   
   @Override
   public String toString(){
-    return "Gold: " + gold;
+    return "Gold(" + gold + ")";
   }
 }

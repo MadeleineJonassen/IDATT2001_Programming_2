@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.model.Player;
 
 public class ScoreAction implements Action {
   private final int points;
@@ -16,6 +16,6 @@ public class ScoreAction implements Action {
   
   @Override
   public String toString(){
-    return "Points: " + points;
+    return "Points(" + points + ")";
   }
 }

@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreateGameView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.view</a>
+</div>
+
+<h1>Coverage Summary for Class: CreateGameView (edu.ntnu.idatt2001.View)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreateGameView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/89)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.view;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.controller.CreateGameController;
+&nbsp;import edu.ntnu.idatt2001.controller.MainMenuController;
+&nbsp;import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.control.ListView;
+&nbsp;import javafx.scene.control.TextField;
+&nbsp;import javafx.scene.layout.*;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;public class CreateGameView {
+&nbsp;  private final CreateGameController controller;
+&nbsp;
+&nbsp;
+&nbsp;  
+<b class="nc">&nbsp;  public CreateGameView(CreateGameController controller){</b>
+<b class="nc">&nbsp;    this.controller = controller;</b>
+&nbsp;  }
+&nbsp;  public Scene setup(){
+&nbsp;    // **************************** CREATE GAME LAYOUT ****************************
+&nbsp;    // Top create game layout
+<b class="nc">&nbsp;    BorderPane layoutCreateGameTop = new BorderPane();</b>
+<b class="nc">&nbsp;    layoutCreateGameTop.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    Button goHomeMenu = new Button(&quot; &quot;);</b>
+<b class="nc">&nbsp;      goHomeMenu.getStyleClass().add(&quot;homeButton&quot;);</b>
+<b class="nc">&nbsp;      goHomeMenu.setOnAction(e -&gt; {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          controller.mainMenu();</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;          throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      });
+<b class="nc">&nbsp;    VBox createGameTopMid = new VBox();</b>
+<b class="nc">&nbsp;    createGameTopMid.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Label createGameTitle = new Label(&quot;Create game&quot;);</b>
+<b class="nc">&nbsp;      createGameTitle.setId(&quot;title&quot;);</b>
+<b class="nc">&nbsp;      Label createGameUnderTitle = new Label(&quot;Create your own game!&quot;);</b>
+<b class="nc">&nbsp;      createGameUnderTitle.setId(&quot;underTitle&quot;);</b>
+<b class="nc">&nbsp;    createGameTopMid.getChildren().addAll(createGameTitle, createGameUnderTitle);</b>
+&nbsp;
+<b class="nc">&nbsp;    layoutCreateGameTop.setLeft(goHomeMenu);</b>
+<b class="nc">&nbsp;    layoutCreateGameTop.setCenter(createGameTopMid);</b>
+&nbsp;
+&nbsp;    // Mid create game layout
+<b class="nc">&nbsp;    VBox createGameLayout = new VBox();</b>
+<b class="nc">&nbsp;    createGameLayout.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    createGameLayout.setPrefWidth(1000);</b>
+<b class="nc">&nbsp;    HBox menuStoryLayout = new HBox();</b>
+<b class="nc">&nbsp;    menuStoryLayout.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Button createStoryBtn = new Button(&quot;Story&quot;);</b>
+<b class="nc">&nbsp;      createStoryBtn.setOnAction(e -&gt; {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          controller.createStory();</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;          throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      });
+<b class="nc">&nbsp;      TextField storySelectedDisplay = new TextField();</b>
+<b class="nc">&nbsp;      storySelectedDisplay.setText(controller.getStoryName());</b>
+<b class="nc">&nbsp;      storySelectedDisplay.setEditable(false);</b>
+<b class="nc">&nbsp;      storySelectedDisplay.setMinWidth(300);</b>
+&nbsp;    //TODO: display selected story
+<b class="nc">&nbsp;    menuStoryLayout.getChildren().addAll(createStoryBtn, storySelectedDisplay);</b>
+<b class="nc">&nbsp;    HBox menuPlayerLayout = new HBox();</b>
+<b class="nc">&nbsp;    menuPlayerLayout.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    menuPlayerLayout.setPrefWidth(700);</b>
+&nbsp;
+<b class="nc">&nbsp;    Button createPlayerBtn = new Button(&quot;Player&quot;);</b>
+<b class="nc">&nbsp;      createPlayerBtn.setOnAction(e -&gt; {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          controller.createPlayer();</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;          throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      });
+<b class="nc">&nbsp;      TextField playerSelectedDisplay = new TextField();</b>
+<b class="nc">&nbsp;      playerSelectedDisplay.setText(controller.getPlayerName());</b>
+<b class="nc">&nbsp;      playerSelectedDisplay.setEditable(false);</b>
+<b class="nc">&nbsp;      playerSelectedDisplay.setMinWidth(300);</b>
+<b class="nc">&nbsp;    menuPlayerLayout.getChildren().addAll(createPlayerBtn,playerSelectedDisplay);</b>
+<b class="nc">&nbsp;    HBox menuGoalsLayout = new HBox();</b>
+<b class="nc">&nbsp;      menuGoalsLayout.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Button createGoalBtn = new Button(&quot;Goals&quot;);</b>
+<b class="nc">&nbsp;      createGoalBtn.setOnAction(e -&gt; {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          controller.createGoals();</b>
+<b class="nc">&nbsp;        } catch (Exception ex) {</b>
+<b class="nc">&nbsp;          throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      });
+<b class="nc">&nbsp;      ListView goalsSelectedDisplay = new ListView&lt;&gt;();</b>
+<b class="nc">&nbsp;      goalsSelectedDisplay.setEditable(false);</b>
+<b class="nc">&nbsp;      goalsSelectedDisplay.setMinWidth(300);</b>
+<b class="nc">&nbsp;      goalsSelectedDisplay.setMinHeight(100);</b>
+<b class="nc">&nbsp;      goalsSelectedDisplay.setItems(controller.getGoalsList());</b>
+<b class="nc">&nbsp;    menuGoalsLayout.getChildren().addAll(createGoalBtn, goalsSelectedDisplay);</b>
+<b class="nc">&nbsp;    createGameLayout.getChildren().addAll(menuStoryLayout, menuPlayerLayout, menuGoalsLayout);</b>
+&nbsp;    
+&nbsp;    
+&nbsp;    // Bottom create game layer
+<b class="nc">&nbsp;    BorderPane layoutBottom = new BorderPane();</b>
+<b class="nc">&nbsp;    layoutBottom.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    Button helpBtn = new Button(&quot; &quot;);</b>
+<b class="nc">&nbsp;    helpBtn.getStyleClass().add(&quot;helpButton&quot;);</b>
+<b class="nc">&nbsp;    helpBtn.setOnAction(e -&gt; helpCreatePlayer.display());</b>
+<b class="nc">&nbsp;    Button submitNewGame = new Button(&quot;Submit&quot;);</b>
+<b class="nc">&nbsp;    submitNewGame.setId(&quot;finalButton&quot;);</b>
+<b class="nc">&nbsp;    submitNewGame.setDisable(!controller.isGameConstructed());</b>
+<b class="nc">&nbsp;    submitNewGame.setOnAction(e -&gt; {</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        controller.playGame();</b>
+<b class="nc">&nbsp;      } catch (Exception ex) {</b>
+<b class="nc">&nbsp;        throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    });
+<b class="nc">&nbsp;    Region space = new Region();</b>
+<b class="nc">&nbsp;    layoutBottom.setLeft(helpBtn);</b>
+<b class="nc">&nbsp;    layoutBottom.setCenter(submitNewGame);</b>
+<b class="nc">&nbsp;    layoutBottom.setRight(space);</b>
+&nbsp;    
+&nbsp;    // * Overall Create Game Layout *
+<b class="nc">&nbsp;    BorderPane layoutCreateGame = new BorderPane();</b>
+<b class="nc">&nbsp;    layoutCreateGame.setTop(layoutCreateGameTop);</b>
+<b class="nc">&nbsp;    layoutCreateGame.setCenter(createGameLayout);</b>
+<b class="nc">&nbsp;    layoutCreateGame.setBottom(layoutBottom);</b>
+&nbsp;
+<b class="nc">&nbsp;    Scene scene = new Scene(layoutCreateGame, 1300, 700);</b>
+<b class="nc">&nbsp;    scene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</b>
+<b class="nc">&nbsp;    return scene;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 11:35</div>
+</div>
+</body>
+</html>

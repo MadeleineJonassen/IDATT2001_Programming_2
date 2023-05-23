@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.Action;
 
-import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.model.Player;
 
 public class InventoryAction implements Action {
   private final String inventory;
@@ -16,6 +16,6 @@ public class InventoryAction implements Action {
   
   @Override
   public String toString(){
-    return "Inventory: " + inventory.toString();
+    return "Inventory(" + inventory + ")";
   }
 }

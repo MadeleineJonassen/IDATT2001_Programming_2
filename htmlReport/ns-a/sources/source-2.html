@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > WriteStory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.fileHandler</a>
+</div>
+
+<h1>Coverage Summary for Class: WriteStory (edu.ntnu.idatt2001.fileHandler)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WriteStory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83,3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67,4%
+  </span>
+  <span class="absValue">
+    (29/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.fileHandler;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.Action.Action;
+&nbsp;import edu.ntnu.idatt2001.model.Link;
+&nbsp;import edu.ntnu.idatt2001.model.Passage;
+&nbsp;import edu.ntnu.idatt2001.model.Story;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileWriter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
+&nbsp;
+<b class="fc">&nbsp;public class WriteStory {</b>
+&nbsp;  public void write(Story story, File file){
+<b class="nc">&nbsp;    try (FileWriter fileWriter = new FileWriter(file)) {</b>
+&nbsp;      
+<b class="nc">&nbsp;      fileWriter.write(story.getTitle() + &quot;\n&quot;);</b>
+&nbsp;      
+<b class="nc">&nbsp;      Passage openingPassage = story.getOpeningPassage();</b>
+&nbsp;      
+<b class="nc">&nbsp;      fileWriter.write(writePassage(openingPassage));</b>
+&nbsp;      
+&nbsp;      //need to start with opening passage, OR skip opening passage below
+&nbsp;      //alternatively, modify getPassages to make sure opening passage is first?
+&nbsp;      
+<b class="nc">&nbsp;      Collection&lt;Passage&gt; passages = story.getPassages();</b>
+&nbsp;      
+<b class="nc">&nbsp;      for(Passage passage : passages){</b>
+<b class="nc">&nbsp;        if (passage != openingPassage){</b>
+<b class="nc">&nbsp;          fileWriter.write(writePassage(passage));</b>
+&nbsp;        }
+<b class="nc">&nbsp;      }</b>
+&nbsp;      
+<b class="nc">&nbsp;    } catch (IOException e) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;Cannot write to this file&quot;);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;  
+&nbsp;    
+&nbsp;    //write opening passage and link
+&nbsp;    //write remaining passages
+&nbsp;    
+&nbsp;  }
+&nbsp;  
+&nbsp;  public void write(Story story) {
+<b class="fc">&nbsp;    String dir = &quot;src/main/resources/Stories/&quot; + story.getTitle().replace(&quot; &quot;, &quot;&quot;) + &quot;.paths&quot;;</b>
+<b class="fc">&nbsp;    File file = new File(dir);</b>
+<b class="fc">&nbsp;    try (FileWriter fileWriter = new FileWriter(file)) {</b>
+&nbsp;      
+<b class="fc">&nbsp;      fileWriter.write(story.getTitle() + &quot;\n&quot;);</b>
+&nbsp;      
+<b class="fc">&nbsp;      Passage openingPassage = story.getOpeningPassage();</b>
+&nbsp;      
+<b class="fc">&nbsp;      fileWriter.write(writePassage(openingPassage));</b>
+&nbsp;      
+<b class="fc">&nbsp;      Collection&lt;Passage&gt; passages = story.getPassages();</b>
+&nbsp;      
+<b class="fc">&nbsp;      for(Passage passage : passages){</b>
+<b class="fc">&nbsp;        if (passage != openingPassage){</b>
+<b class="nc">&nbsp;          fileWriter.write(writePassage(passage));</b>
+&nbsp;        }
+<b class="fc">&nbsp;      }</b>
+&nbsp;      
+<b class="fc">&nbsp;    } catch (IOException e) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;Cannot write the file&quot;);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private String writePassage(Passage passage){
+<b class="fc">&nbsp;    StringBuilder passageString = new StringBuilder(&quot;\n::&quot;);</b>
+&nbsp;    
+<b class="fc">&nbsp;    passageString.append(passage.getTitle()).append(&quot;\n&quot;);</b>
+<b class="fc">&nbsp;    passageString.append(passage.getContent()).append(&quot;\n&quot;);</b>
+&nbsp;    
+<b class="fc">&nbsp;    for(Link link : passage.getLinks()){</b>
+<b class="fc">&nbsp;      passageString.append(writeLink(link));</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;    
+<b class="fc">&nbsp;    return passageString.toString();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private String writeLink (Link link) {
+<b class="fc">&nbsp;    StringBuilder linkString = new StringBuilder(&quot;[&quot;);</b>
+<b class="fc">&nbsp;    linkString.append(link.getText()).append(&quot;]&quot;);</b>
+<b class="fc">&nbsp;    linkString.append(&quot;(&quot;).append(link.getReference()).append(&quot;)&quot;);</b>
+<b class="fc">&nbsp;    for(Action a : link.getActions()) {</b>
+<b class="fc">&nbsp;      linkString.append(writeAction(a));</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    linkString.append(&quot;\n&quot;);</b>
+<b class="fc">&nbsp;    return linkString.toString();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private String writeAction (Action action) {
+<b class="fc">&nbsp;    return &quot;{&quot; + action.toString() + &quot;}&quot;;</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 11:35</div>
+</div>
+</body>
+</html>

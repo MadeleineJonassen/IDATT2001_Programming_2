@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreateStoryController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: CreateStoryController (edu.ntnu.idatt2001.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreateStoryController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.controller;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.PathsLauncher;
+&nbsp;import edu.ntnu.idatt2001.fileHandler.ScanStory;
+&nbsp;import edu.ntnu.idatt2001.model.GameManager;
+&nbsp;import edu.ntnu.idatt2001.view.CreateStoryView;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileNotFoundException;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.util.stream.Stream;
+&nbsp;import javafx.stage.FileChooser;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;//import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
+&nbsp;//import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
+&nbsp;
+&nbsp;/**
+&nbsp; * The type Create story controller.
+&nbsp; */
+&nbsp;public class CreateStoryController {
+&nbsp;  
+&nbsp;  private GameManager gameManager;
+&nbsp;  private final Stage stage;
+<b class="nc">&nbsp;  private SceneController sceneController = new SceneController();</b>
+&nbsp;  /**
+&nbsp;   * The Selected file.
+&nbsp;   */
+&nbsp;  public File selectedFile;
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Instantiates a new Create story controller.
+&nbsp;   *
+&nbsp;   * @param stage       the stage
+&nbsp;   * @param gameManager the game manager
+&nbsp;   */
+<b class="nc">&nbsp;  public CreateStoryController(Stage stage, GameManager gameManager) {</b>
+<b class="nc">&nbsp;    this.gameManager = gameManager;</b>
+<b class="nc">&nbsp;    this.stage = stage;</b>
+<b class="nc">&nbsp;    CreateStoryView view = new CreateStoryView(this);</b>
+<b class="nc">&nbsp;    stage.setScene(view.setup());</b>
+<b class="nc">&nbsp;    stage.show();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Create game.
+&nbsp;   *
+&nbsp;   */
+&nbsp;  public void createGame() {
+<b class="nc">&nbsp;    sceneController.switchScene(stage, 2, gameManager);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Choose story.
+&nbsp;   */
+&nbsp;  public void chooseStory() throws FileNotFoundException {
+<b class="nc">&nbsp;    FileChooser fileChooser = new FileChooser();</b>
+<b class="nc">&nbsp;    fileChooser.setTitle(&quot;Select a story&quot;);</b>
+<b class="nc">&nbsp;    fileChooser.setInitialDirectory(new File(&quot;src/main/resources/Stories&quot;));</b>
+<b class="nc">&nbsp;    selectedFile = fileChooser.showOpenDialog(PathsLauncher.openWindow);</b>
+<b class="nc">&nbsp;    if (selectedFile != null) {</b>
+<b class="nc">&nbsp;      ScanStory scan = new ScanStory();</b>
+<b class="nc">&nbsp;      gameManager.setStory(scan.scanStory(selectedFile));</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Gets directory.
+&nbsp;   *
+&nbsp;   * @return the directory
+&nbsp;   */
+&nbsp;  public String getDirectory() {
+<b class="nc">&nbsp;    return selectedFile.getPath();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Get story passage names collection.
+&nbsp;   *
+&nbsp;   * @return the collection
+&nbsp;   */
+&nbsp;  public Collection&lt;String&gt; getStoryPassageNames() {
+<b class="nc">&nbsp;    return gameManager.getStoryPassageNames();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Lists all files in the resources&#39; folder. Returns a set of strings
+&nbsp;   *
+&nbsp;   * @return files set
+&nbsp;   */
+&nbsp;  public Set&lt;String&gt; listFiles() {
+<b class="nc">&nbsp;    String dir = &quot;src/main/resources&quot;;</b>
+<b class="nc">&nbsp;    return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))</b>
+<b class="nc">&nbsp;            .filter(file -&gt; !file.isDirectory())</b>
+<b class="nc">&nbsp;            .map(File::getName)</b>
+<b class="nc">&nbsp;            .collect(Collectors.toSet());</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Gets broken links.
+&nbsp;   *
+&nbsp;   * @return the broken links
+&nbsp;   */
+&nbsp;  public String getBrokenLinks() {
+<b class="nc">&nbsp;    return gameManager.getBrokenLinks().toString();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Delete broken links.
+&nbsp;   */
+&nbsp;  public void deleteBrokenLinks() {
+<b class="nc">&nbsp;    gameManager.deleteBrokenLinks();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 12:06</div>
+</div>
+</body>
+</html>

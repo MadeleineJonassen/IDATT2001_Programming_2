@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreatePlayerController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: CreatePlayerController (edu.ntnu.idatt2001.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreatePlayerController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.controller;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.model.GameManager;
+&nbsp;import edu.ntnu.idatt2001.model.Player;
+&nbsp;import edu.ntnu.idatt2001.view.CreatePlayerView;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * The type Create player controller.
+&nbsp; */
+&nbsp;public class CreatePlayerController {
+&nbsp;  private final GameManager gameManager;
+&nbsp;  private final Stage stage;
+<b class="nc">&nbsp;  private final SceneController sceneController = new SceneController();</b>
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Instantiates a new Create player controller.
+&nbsp;   *
+&nbsp;   * @param stage       the stage
+&nbsp;   * @param gameManager the game manager
+&nbsp;   */
+<b class="nc">&nbsp;  public CreatePlayerController(Stage stage, GameManager gameManager) {</b>
+<b class="nc">&nbsp;    this.gameManager = gameManager;</b>
+<b class="nc">&nbsp;    this.stage = stage;</b>
+<b class="nc">&nbsp;    CreatePlayerView view = new CreatePlayerView(this);</b>
+<b class="nc">&nbsp;    stage.setScene(view.setup());</b>
+<b class="nc">&nbsp;    stage.show();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Get player info observable list.
+&nbsp;   *
+&nbsp;   * @return the observable list
+&nbsp;   */
+&nbsp;  public ObservableList&lt;String&gt; getPlayerInfo() {
+<b class="nc">&nbsp;    return gameManager.getPlayerInfo();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Create game.
+&nbsp;   *
+&nbsp;   */
+&nbsp;  public void createGame() {
+<b class="nc">&nbsp;    sceneController.switchScene(stage, 2, gameManager);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  
+&nbsp;  /**
+&nbsp;   * Submit player.
+&nbsp;   *
+&nbsp;   * @param name           the name
+&nbsp;   * @param healthInput    the health input
+&nbsp;   * @param scoreInput     the score input
+&nbsp;   * @param goldInput      the gold input
+&nbsp;   * @param inventoryInput the inventory input
+&nbsp;   */
+&nbsp;  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String inventoryInput) {
+<b class="nc">&nbsp;    if (name.isBlank()) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;Name must be filled out&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    if (healthInput.isBlank()) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;Health must be filled out&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    if (goldInput.isBlank()) {</b>
+<b class="nc">&nbsp;      throw new IllegalArgumentException(&quot;Gold amount must be filled out&quot;);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    int health = Integer.parseInt(healthInput);</b>
+<b class="nc">&nbsp;    int gold = Integer.parseInt(goldInput);</b>
+<b class="nc">&nbsp;    int score = 0;</b>
+<b class="nc">&nbsp;    if (!scoreInput.isBlank()) {</b>
+<b class="nc">&nbsp;      score = Integer.parseInt(scoreInput);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    List&lt;String&gt; inventory = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    if (!inventoryInput.isBlank()) {</b>
+<b class="nc">&nbsp;      inventory = Arrays.stream(inventoryInput.split(&quot;, &quot;)).toList();</b>
+&nbsp;    }
+&nbsp; 
+<b class="nc">&nbsp;    Player player = new Player.Builder(name, health, gold).score(score).inventory(inventory).build();</b>
+<b class="nc">&nbsp;    gameManager.setPlayer(player);</b>
+<b class="nc">&nbsp;    createGame();</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  
+&nbsp;  
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 12:06</div>
+</div>
+</body>
+</html>

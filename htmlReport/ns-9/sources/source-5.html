@@ -1,0 +1,236 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreateStoryView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.view</a>
+</div>
+
+<h1>Coverage Summary for Class: CreateStoryView (edu.ntnu.idatt2001.View)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreateStoryView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/78)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.view;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.controller.CreateStoryController;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.control.ListView;
+&nbsp;import javafx.scene.control.TextField;
+&nbsp;import javafx.scene.layout.Background;
+&nbsp;import javafx.scene.layout.BorderPane;
+&nbsp;import javafx.scene.layout.HBox;
+&nbsp;import javafx.scene.layout.VBox;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public class CreateStoryView {
+&nbsp;  //private final Stage stage;
+&nbsp;  private final CreateStoryController controller;
+&nbsp;
+&nbsp;  /*public CreateStoryView(Stage stage, CreateStoryController controller){
+&nbsp;    this.stage = stage;
+&nbsp;    this.controller = controller;
+&nbsp;  }*/
+&nbsp;  public Button errorIcon;
+&nbsp;  public Label errorText;
+&nbsp;  
+<b class="nc">&nbsp;  public CreateStoryView(CreateStoryController controller) {</b>
+<b class="nc">&nbsp;    this.controller = controller;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  public Scene setup(){
+&nbsp;    
+&nbsp;    // -------------------- CREATE STORY SCENE --------------------
+&nbsp;    // Top create story layout
+<b class="nc">&nbsp;    BorderPane createStoryTop = new BorderPane();</b>
+<b class="nc">&nbsp;    createStoryTop.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    Button goToCreateHomeStory = new Button(&quot; &quot;);</b>
+<b class="nc">&nbsp;    goToCreateHomeStory.getStyleClass().add(&quot;backButton&quot;);</b>
+&nbsp;    //goToCreateHomeStory.setOnAction(e -&gt; openWindow.setScene(createGameScene));
+<b class="nc">&nbsp;    goToCreateHomeStory.setOnAction(e -&gt; {</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        controller.createGame();</b>
+<b class="nc">&nbsp;      } catch (Exception ex) {</b>
+<b class="nc">&nbsp;        throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    });
+<b class="nc">&nbsp;    VBox creatStoryTopMid = new VBox();</b>
+<b class="nc">&nbsp;    creatStoryTopMid.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Label createStoryTitle = new Label(&quot;Create Story&quot;);</b>
+<b class="nc">&nbsp;      createStoryTitle.setId(&quot;createTitles&quot;);</b>
+<b class="nc">&nbsp;      Label createStoryUnderTitle = new Label(&quot;Select, edit or add your story to the library&quot;);</b>
+<b class="nc">&nbsp;      createStoryUnderTitle.setId(&quot;underTitle&quot;);</b>
+<b class="nc">&nbsp;    creatStoryTopMid.getChildren().addAll(createStoryTitle, createStoryUnderTitle);</b>
+<b class="nc">&nbsp;    createStoryTop.setLeft(goToCreateHomeStory);</b>
+<b class="nc">&nbsp;    createStoryTop.setCenter(creatStoryTopMid);</b>
+&nbsp;    
+&nbsp;    // Mid create story layout
+<b class="nc">&nbsp;    HBox createStoryMid = new HBox();</b>
+<b class="nc">&nbsp;    createStoryMid.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    VBox createStoryMidDisplay = new VBox();</b>
+<b class="nc">&nbsp;      createStoryMidDisplay.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      TextField displayStoryPath = new TextField();</b>
+<b class="nc">&nbsp;      displayStoryPath.setPromptText(&quot;Directory for story&quot;);</b>
+<b class="nc">&nbsp;      displayStoryPath.setMinHeight(20);</b>
+<b class="nc">&nbsp;      displayStoryPath.setEditable(false);</b>
+<b class="nc">&nbsp;      TextField displayBrokenLinks = new TextField();</b>
+<b class="nc">&nbsp;        displayBrokenLinks.setPromptText(&quot;Broken links&quot;);</b>
+<b class="nc">&nbsp;        displayBrokenLinks.setEditable(false);</b>
+<b class="nc">&nbsp;      ListView storyListView = new ListView&lt;&gt;();</b>
+<b class="nc">&nbsp;        ObservableList&lt;String&gt; observableList = FXCollections.observableList(new ArrayList&lt;String&gt;());</b>
+<b class="nc">&nbsp;        storyListView.setItems(observableList);</b>
+<b class="nc">&nbsp;        storyListView.setId(&quot;big-list-view&quot;);</b>
+<b class="nc">&nbsp;    createStoryMidDisplay.getChildren().addAll(displayStoryPath, displayBrokenLinks, storyListView);</b>
+<b class="nc">&nbsp;    VBox createStoryMidBtn = new VBox();</b>
+<b class="nc">&nbsp;    createStoryMidBtn.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      HBox errorBox = new HBox();</b>
+<b class="nc">&nbsp;      errorBox.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;         errorIcon = new Button();</b>
+<b class="nc">&nbsp;          errorIcon.getStyleClass().add(&quot;invincible&quot;);</b>
+<b class="nc">&nbsp;         errorText = new Label(&quot;&quot;);</b>
+<b class="nc">&nbsp;          errorText.getStyleClass().add(&quot;invincible&quot;);</b>
+<b class="nc">&nbsp;    errorBox.getChildren().addAll(errorIcon, errorText);</b>
+<b class="nc">&nbsp;      Button selectStory = new Button(&quot;Select Story&quot;);</b>
+<b class="nc">&nbsp;      selectStory.setOnAction(actionEvent -&gt; {</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          controller.chooseStory();</b>
+<b class="nc">&nbsp;          errorInvisible();</b>
+<b class="nc">&nbsp;          observableList.addAll(controller.getStoryPassageNames());</b>
+<b class="nc">&nbsp;          displayStoryPath.setText(controller.getDirectory());</b>
+<b class="nc">&nbsp;          displayBrokenLinks.setText(controller.getBrokenLinks());</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;          errorVisable();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      });
+<b class="nc">&nbsp;    createStoryMidBtn.getChildren().addAll(selectStory, errorBox);</b>
+<b class="nc">&nbsp;    createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);</b>
+&nbsp;
+&nbsp;    // Bottom create story layout
+<b class="nc">&nbsp;    HBox createStoryBottom = new HBox();</b>
+<b class="nc">&nbsp;    createStoryBottom.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Button submit = new Button(&quot;Submit&quot;);</b>
+<b class="nc">&nbsp;      submit.setOnAction(e -&gt; {</b>
+&nbsp;          try {
+<b class="nc">&nbsp;            controller.createGame();</b>
+<b class="nc">&nbsp;          } catch (Exception ex) {</b>
+<b class="nc">&nbsp;            errorVisable();</b>
+<b class="nc">&nbsp;          }</b>
+&nbsp;      });
+<b class="nc">&nbsp;    createStoryBottom.getChildren().addAll(submit);</b>
+&nbsp;
+&nbsp;    
+&nbsp;    // * Overall Create Story layout *
+<b class="nc">&nbsp;    BorderPane createStoryLayout = new BorderPane();</b>
+<b class="nc">&nbsp;    createStoryLayout.setTop(createStoryTop);</b>
+<b class="nc">&nbsp;    createStoryLayout.setCenter(createStoryMid);</b>
+<b class="nc">&nbsp;    createStoryLayout.setBottom(createStoryBottom);</b>
+<b class="nc">&nbsp;    Scene createStoryScene = new Scene(createStoryLayout, 1300, 700);</b>
+<b class="nc">&nbsp;    createStoryScene.getStylesheets().add(&quot;StyleSheets/createGameStyle.css&quot;);</b>
+<b class="nc">&nbsp;    return createStoryScene;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  public void errorInvisible(){
+<b class="nc">&nbsp;    errorText.setText(&quot;&quot;);</b>
+<b class="nc">&nbsp;    errorIcon.setBackground(Background.EMPTY);</b>
+&nbsp;  }
+&nbsp;  public void errorVisable(){
+<b class="nc">&nbsp;    errorText.getStyleClass().add(&quot;errorText&quot;);</b>
+<b class="nc">&nbsp;    errorText.setText(&quot;Could not resolve file, try again...&quot;);</b>
+<b class="nc">&nbsp;    errorIcon.getStyleClass().add(&quot;errorImage&quot;);</b>
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 11:35</div>
+</div>
+</body>
+</html>

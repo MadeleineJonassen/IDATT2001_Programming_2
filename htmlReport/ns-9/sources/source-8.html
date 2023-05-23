@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PlayGameView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idatt2001.view</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayGameView (edu.ntnu.idatt2001.View)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayGameView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/73)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PlayGameView$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idatt2001.view;
+&nbsp;
+&nbsp;import edu.ntnu.idatt2001.controller.PlayGameController;
+&nbsp;import edu.ntnu.idatt2001.Goal.Goal;
+&nbsp;import javafx.collections.ListChangeListener;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.*;
+&nbsp;import javafx.scene.layout.BorderPane;
+&nbsp;import javafx.scene.layout.HBox;
+&nbsp;import javafx.scene.layout.VBox;
+&nbsp;import javafx.scene.text.Font;
+&nbsp;
+&nbsp;public class PlayGameView {
+&nbsp;  private final PlayGameController controller;
+&nbsp;  private HBox layoutPlayGameMid;
+&nbsp;  private ObservableList&lt;String&gt; linkTitles;
+<b class="nc">&nbsp;  private HBox userOptions = new HBox();</b>
+&nbsp;  
+&nbsp;  
+<b class="nc">&nbsp;  public PlayGameView(PlayGameController controller){</b>
+<b class="nc">&nbsp;    this.controller = controller;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;  public Scene setup() {
+&nbsp;    // **************************** PLAY GAME LAYOUT ****************************
+&nbsp;    // Top play game layout
+<b class="nc">&nbsp;    HBox layoutPlayGameTop = new HBox();</b>
+<b class="nc">&nbsp;    layoutPlayGameTop.setId(&quot;topBoxes&quot;);</b>
+<b class="nc">&nbsp;    Button goHomePlayGame = new Button(&quot; &quot;);</b>
+<b class="nc">&nbsp;    goHomePlayGame.getStyleClass().add(&quot;homeButton&quot;);</b>
+<b class="nc">&nbsp;    goHomePlayGame.setOnAction(e -&gt; {</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        controller.mainMenu();</b>
+<b class="nc">&nbsp;      } catch (Exception ex) {</b>
+<b class="nc">&nbsp;        throw new RuntimeException(ex);</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    });
+<b class="nc">&nbsp;    Label playGameTitle = new Label(&quot;Play game&quot;);</b>
+<b class="nc">&nbsp;    playGameTitle.setId(&quot;title&quot;);</b>
+<b class="nc">&nbsp;    layoutPlayGameTop.getChildren().addAll(goHomePlayGame,playGameTitle);</b>
+&nbsp;    
+&nbsp;    /*
+&nbsp;    // Mid play game layout
+&nbsp;    HBox layoutPlayGameMid = new HBox();
+&nbsp;    layoutPlayGameMid.setId(&quot;boxes&quot;);
+&nbsp;    VBox layoutPlayGameMidLeft = new VBox();
+&nbsp;    layoutPlayGameMidLeft.setId(&quot;big-boxes&quot;);
+&nbsp;    ListView playerListView = new ListView&lt;&gt;();
+&nbsp;    playerListView.getItems().add(controller.getPlayerInfo());
+&nbsp;    //TODO: set selected player;
+&nbsp;    ListView storyListView = new ListView&lt;&gt;();
+&nbsp;    storyListView.setId(&quot;big-list-view&quot;);
+&nbsp;    storyListView.getItems().addAll(controller.getCurrentPassage());
+&nbsp;    //TODO: set selected story
+&nbsp;    layoutPlayGameMidLeft.getChildren().addAll(playerListView, storyListView);
+&nbsp;    VBox rightInfoBox = new VBox();
+&nbsp;    rightInfoBox.setId(&quot;boxes&quot;);
+&nbsp;    ComboBox setGoals = new ComboBox&lt;&gt;();
+&nbsp;    setGoals.setPromptText(&quot;View Goals&quot;);
+&nbsp;    setGoals.getItems().addAll(controller.getNonCompletedGoals());
+&nbsp;    //TODO: add selected goals in box and add function &quot;crossed out&quot; when finished a goal
+&nbsp;    Button options = new Button(&quot;options?&quot;);
+&nbsp;    Button other = new Button(&quot;other?&quot;);
+&nbsp;    rightInfoBox.getChildren().addAll(setGoals,options,other);
+&nbsp;    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, rightInfoBox);*/
+<b class="nc">&nbsp;    updatePassageView();</b>
+&nbsp;    
+&nbsp;    // Bottom play game layout
+&nbsp;    /*HBox userOptions = new HBox();
+&nbsp;    userOptions.setId(&quot;boxes&quot;);
+&nbsp;    //TODO: make HBox create buttons based on number of links. Extract separate method?
+&nbsp;    Button testButton1 = new Button(&quot;Link 1&quot;);
+&nbsp;    Button testButton2 = new Button(&quot;Link 2&quot;);
+&nbsp;    userOptions.getChildren().addAll(testButton1,testButton2);*/
+<b class="nc">&nbsp;    userOptions.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    linkTitles = controller.getLinkTitles();</b>
+<b class="nc">&nbsp;    populateLinks();</b>
+<b class="nc">&nbsp;    linkTitles.addListener(new ListChangeListener&lt;String&gt;() {</b>
+&nbsp;      @Override
+&nbsp;      public void onChanged(Change&lt;? extends String&gt; change) {
+<b class="nc">&nbsp;        populateLinks();</b>
+&nbsp;      }
+&nbsp;    });
+&nbsp;    
+&nbsp;    
+&nbsp;    // * Overall Playing Game Layout *
+<b class="nc">&nbsp;    BorderPane layoutPlayGame = new BorderPane();</b>
+<b class="nc">&nbsp;    layoutPlayGame.setTop(layoutPlayGameTop);</b>
+<b class="nc">&nbsp;    layoutPlayGame.setCenter(layoutPlayGameMid);</b>
+<b class="nc">&nbsp;    layoutPlayGame.setBottom(userOptions);</b>
+<b class="nc">&nbsp;    layoutPlayGame.getStylesheets().add(&quot;StyleSheets/playGameStyle.css&quot;);</b>
+<b class="nc">&nbsp;    Scene playGameScene = new Scene(layoutPlayGame, 1300, 700);</b>
+&nbsp;    
+&nbsp;    
+<b class="nc">&nbsp;    return playGameScene;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private void populateLinks(){
+<b class="nc">&nbsp;    userOptions.getChildren().clear();</b>
+<b class="nc">&nbsp;    for(String linkTitle : linkTitles){</b>
+<b class="nc">&nbsp;      userOptions.getChildren().add(linkButton(linkTitle));</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;    
+<b class="nc">&nbsp;    if(userOptions.getChildren().isEmpty()){</b>
+<b class="nc">&nbsp;      userOptions.getChildren().add(endGameButton());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;  
+&nbsp;  private Button linkButton(String linkTitle){
+<b class="nc">&nbsp;    Button newButton = new Button(linkTitle);</b>
+<b class="nc">&nbsp;    newButton.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    newButton.setOnAction(e -&gt; {</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        controller.nextPassage(linkTitle);</b>
+<b class="nc">&nbsp;      } catch (Exception ex){</b>
+&nbsp;        //set error message visible
+<b class="nc">&nbsp;        System.out.println(&quot;something wrong with link button&quot;);</b>
+<b class="nc">&nbsp;        System.out.println(ex.getMessage());</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    });
+<b class="nc">&nbsp;    return newButton;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private void updatePassageView(){
+<b class="nc">&nbsp;    layoutPlayGameMid = new HBox();</b>
+<b class="nc">&nbsp;    layoutPlayGameMid.setId(&quot;boxes&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;    VBox layoutPlayGameMidLeft = new VBox();</b>
+<b class="nc">&nbsp;      layoutPlayGameMidLeft.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;      Label playerTitle = new Label(&quot;Player&quot;);</b>
+<b class="nc">&nbsp;      playerTitle.setId(&quot;underTitle&quot;);</b>
+<b class="nc">&nbsp;      ListView playerListView = new ListView&lt;&gt;();</b>
+&nbsp;      //playerListView.getItems().add(controller.getPlayerInfo());
+<b class="nc">&nbsp;      playerListView.setItems(controller.getCurrentPlayer());</b>
+<b class="nc">&nbsp;    layoutPlayGameMidLeft.getChildren().addAll(playerTitle, playerListView);</b>
+&nbsp;
+<b class="nc">&nbsp;    VBox layoutMid = new VBox();</b>
+<b class="nc">&nbsp;    layoutMid.setId(&quot;big-boxes&quot;);</b>
+<b class="nc">&nbsp;    Label storyTitle = new Label(&quot;Story&quot;);</b>
+<b class="nc">&nbsp;    storyTitle.setId(&quot;underTitle&quot;);</b>
+<b class="nc">&nbsp;    storyTitle.setFont(Font.font(30));</b>
+<b class="nc">&nbsp;      ListView storyListView = new ListView&lt;&gt;();</b>
+<b class="nc">&nbsp;      storyListView.setId(&quot;storyListView&quot;);</b>
+<b class="nc">&nbsp;      storyListView.setItems(controller.getPassageText());</b>
+<b class="nc">&nbsp;    layoutMid.getChildren().addAll(storyTitle, storyListView);</b>
+&nbsp;
+<b class="nc">&nbsp;    VBox rightInfoBox = new VBox();</b>
+<b class="nc">&nbsp;    rightInfoBox.setId(&quot;rightBox&quot;);</b>
+<b class="nc">&nbsp;    Label goalsTitle = new Label(&quot;Goals&quot;);</b>
+<b class="nc">&nbsp;    goalsTitle.setId(&quot;underTitle&quot;);</b>
+<b class="nc">&nbsp;      ListView&lt;Goal&gt; setGoals = new ListView&lt;&gt;();</b>
+&nbsp;      //setGoals.getItems().addAll(controller.getNoncompletedGoals());
+<b class="nc">&nbsp;      setGoals.setItems(controller.getNoncompletedGoals());</b>
+<b class="nc">&nbsp;    rightInfoBox.getChildren().addAll(goalsTitle, setGoals);</b>
+<b class="nc">&nbsp;    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, rightInfoBox);</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;  private Button endGameButton(){
+<b class="nc">&nbsp;    Button endButton = new Button(&quot;Finish game&quot;);</b>
+<b class="nc">&nbsp;    endButton.setId(&quot;boxes&quot;);</b>
+<b class="nc">&nbsp;    endButton.setOnAction(e -&gt; {</b>
+<b class="nc">&nbsp;      controller.endGame();</b>
+&nbsp;    });
+&nbsp;    
+<b class="nc">&nbsp;    return endButton;</b>
+&nbsp;  }
+&nbsp;  
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-23 11:35</div>
+</div>
+</body>
+</html>

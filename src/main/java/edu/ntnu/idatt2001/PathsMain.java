@@ -1,10 +1,9 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Controller.SceneController;
-import edu.ntnu.idatt2001.Model.GameManager;
+import edu.ntnu.idatt2001.controller.SceneController;
+import edu.ntnu.idatt2001.model.GameManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class PathsMain extends Application {
   
