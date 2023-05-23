@@ -1,9 +1,7 @@
 package edu.ntnu.idatt2001.model;
 
-import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Action.Action;
 import edu.ntnu.idatt2001.model.Goal.Goal;
-
 import java.util.List;
 
 

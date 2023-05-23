@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.controller;
 
-import edu.ntnu.idatt2001.model.Goal.*;
+
 import edu.ntnu.idatt2001.model.GameManager;
 import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.view.CreateGoalsView;
@@ -22,7 +22,7 @@ public class CreateGoalsController {
    * @param stage       the stage
    * @param gameManager the game manager
    */
-  public CreateGoalsController(Stage stage, GameManager gameManager){
+  public CreateGoalsController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
     this.stage = stage;
     CreateGoalsView view = new CreateGoalsView(this);
@@ -47,14 +47,14 @@ public class CreateGoalsController {
    *
    * @return the observable list
    */
-  public ObservableList<Goal> getGoalsList(){
+  public ObservableList<Goal> getGoalsList() {
     return gameManager.getGoals();
   }
   
   /**
    * Add single goal.
    */
-  public void addSingleGoal(){
+  public void addSingleGoal() {
     Stage addGoalWindow = new Stage();
     AddGoalController addGoalController = new AddGoalController(gameManager, addGoalWindow);
   }
@@ -62,7 +62,7 @@ public class CreateGoalsController {
   /**
    * Clear goals.
    */
-  public void clearGoals(){
+  public void clearGoals() {
     gameManager.clearGoals();
   }
 }

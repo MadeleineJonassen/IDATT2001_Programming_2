@@ -2,7 +2,10 @@ package edu.ntnu.idatt2001.model.Action;
 
 import edu.ntnu.idatt2001.model.Player;
 
-public class GoldAction implements  Action{
+/**
+ * An action for gold.
+ */
+public class GoldAction implements  Action {
   private final int gold;
   
   public GoldAction(int gold) {
@@ -15,7 +18,7 @@ public class GoldAction implements  Action{
   }
   
   @Override
-  public String toString(){
+  public String toString() {
     return "Gold(" + gold + ")";
   }
 }

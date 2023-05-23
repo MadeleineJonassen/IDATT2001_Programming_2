@@ -2,6 +2,9 @@ package edu.ntnu.idatt2001.model.Action;
 
 import edu.ntnu.idatt2001.model.Player;
 
+/**
+ * An action for health.
+ */
 public class HealthAction implements Action {
   private final int health;
   
@@ -15,7 +18,7 @@ public class HealthAction implements Action {
   }
   
   @Override
-  public String toString(){
+  public String toString() {
     return "Health(" + health + ")";
   }
 }

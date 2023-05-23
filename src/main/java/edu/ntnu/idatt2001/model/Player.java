@@ -1,9 +1,9 @@
 package edu.ntnu.idatt2001.model;
 
-import javafx.beans.property.StringProperty;
-
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.StringProperty;
+
 
 /**
  * The type Player.
@@ -52,7 +52,7 @@ public class Player {
    *
    * @param health the health
    */
-  public void addHealth(int health){
+  public void addHealth(int health) {
     this.health += health;
   }
   
@@ -70,7 +70,7 @@ public class Player {
    *
    * @param score the score
    */
-  public void addScore(int score){
+  public void addScore(int score) {
     this.score += score;
   }
   
@@ -88,7 +88,7 @@ public class Player {
    *
    * @param gold the gold
    */
-  public void addGold(int gold){
+  public void addGold(int gold) {
     this.gold += gold;
   }
   
@@ -106,17 +106,18 @@ public class Player {
    *
    * @param item the item
    */
-  public void addToInventory(String item){
+  public void addToInventory(String item) {
     inventory.add(item);
   }
 
 
   public String toString() {
-    return "Name: " + this.name + " | " + this.health + " HP | " + this.score + " score | " + this.gold + " gold || Inventory: " + this.inventory;
+    return "Name: " + this.name + " | " + this.health + " HP | "
+            + this.score + " score | " + this.gold + " gold || Inventory: " + this.inventory;
   }
   
   /**
-   * A builder class
+   * A builder class.
    */
   public static class Builder {
     private final String name;
@@ -134,7 +135,7 @@ public class Player {
      * @param gold      the gold
      * @param inventory the inventory
      */
-    public Builder(String name, int health, int score, int gold, List<String> inventory){
+    public Builder(String name, int health, int score, int gold, List<String> inventory) {
       this.name = name;
       this.health = health;
       this.score = score;
@@ -147,7 +148,7 @@ public class Player {
      *
      * @param name the name
      */
-    public Builder(String name){
+    public Builder(String name) {
       this.name = name;
     }
     
@@ -158,7 +159,7 @@ public class Player {
      * @param health the health
      * @param gold   the gold
      */
-    public Builder(String name, int health, int gold){
+    public Builder(String name, int health, int gold) {
       this.name = name;
       this.health = health;
       this.gold = gold;
@@ -170,7 +171,7 @@ public class Player {
      * @param health the health
      * @return the builder
      */
-    public Builder health (int health){
+    public Builder health(int health) {
       this.health = health;
       return this;
     }
@@ -181,7 +182,7 @@ public class Player {
      * @param score the score
      * @return the builder
      */
-    public Builder score (int score){
+    public Builder score(int score) {
       this.score = score;
       return this;
     }
@@ -192,7 +193,7 @@ public class Player {
      * @param gold the gold
      * @return the builder
      */
-    public Builder gold (int gold){
+    public Builder gold(int gold) {
       this.gold = gold;
       return this;
     }
@@ -203,7 +204,7 @@ public class Player {
      * @param inventory the inventory
      * @return the builder
      */
-    public Builder inventory (List <String> inventory){
+    public Builder inventory(List<String> inventory) {
       this.inventory = inventory;
       return this;
     }
@@ -213,7 +214,7 @@ public class Player {
      *
      * @return the player
      */
-    public Player build(){
+    public Player build() {
       return new Player(this);
     }
   }

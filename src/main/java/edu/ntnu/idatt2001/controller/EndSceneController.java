@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.controller;
 
-import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.model.GameManager;
+import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.view.EndView;
 import java.util.List;
 import javafx.stage.Stage;

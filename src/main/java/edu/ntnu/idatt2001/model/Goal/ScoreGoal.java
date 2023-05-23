@@ -2,6 +2,9 @@ package edu.ntnu.idatt2001.model.Goal;
 
 import edu.ntnu.idatt2001.model.Player;
 
+/**
+ * A goal for score.
+ */
 public class ScoreGoal implements Goal {
   private final int minimumPoints;
   
@@ -16,7 +19,7 @@ public class ScoreGoal implements Goal {
   
   @Override
   public String toString() {
-    return "Score Goal: " + minimumPoints +
-            " points";
+    return "Score Goal: " + minimumPoints
+            + " points";
   }
 }
