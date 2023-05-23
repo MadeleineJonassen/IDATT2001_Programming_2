@@ -26,7 +26,7 @@ public class EndView {
     VBox endGoals = new VBox();
       Label completedGoals = new Label("Completed: " + controller.getCompletedGoals().toString());
       Label unacomplisedGoals = new Label("Unacomplised Goals: " + controller.getNonCompletedGoals().toString());
-    Button returnButton = new Button();
+    Button returnButton = new Button("Back to main menu");
       returnButton.setOnAction(e -> {
         try {
           controller.mainMenu();
