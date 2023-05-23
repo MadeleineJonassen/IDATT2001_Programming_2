@@ -3,12 +3,13 @@ package edu.ntnu.idatt2001.controller;
 import edu.ntnu.idatt2001.model.GameManager;
 import edu.ntnu.idatt2001.model.Player;
 import edu.ntnu.idatt2001.view.CreatePlayerView;
-import javafx.collections.ObservableList;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.stage.Stage;
+
+
 
 /**
  * The type Create player controller.
@@ -59,7 +60,9 @@ public class CreatePlayerController {
    * @param goldInput      the gold input
    * @param inventoryInput the inventory input
    */
-  public void submitPlayer(String name, String healthInput, String scoreInput, String goldInput, String inventoryInput) {
+  public void submitPlayer(
+          String name, String healthInput, String scoreInput,
+          String goldInput, String inventoryInput) {
     if (name.isBlank()) {
       throw new IllegalArgumentException("Name must be filled out");
     }
@@ -80,7 +83,8 @@ public class CreatePlayerController {
       inventory = Arrays.stream(inventoryInput.split(", ")).toList();
     }
  
-    Player player = new Player.Builder(name, health, gold).score(score).inventory(inventory).build();
+    Player player = new Player.Builder(name, health, gold)
+            .score(score).inventory(inventory).build();
     gameManager.setPlayer(player);
     createGame();
   }
