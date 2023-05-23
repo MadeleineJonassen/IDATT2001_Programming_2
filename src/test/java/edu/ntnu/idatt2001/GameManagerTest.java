@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2001;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import edu.ntnu.idatt2001.model.*;
 import edu.ntnu.idatt2001.model.Action.Action;
 import edu.ntnu.idatt2001.model.Action.GoldAction;
 import edu.ntnu.idatt2001.model.Action.InventoryAction;
@@ -7,20 +10,21 @@ import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.model.Goal.GoldGoal;
 import edu.ntnu.idatt2001.model.Goal.HealthGoal;
 import edu.ntnu.idatt2001.model.Player;
-import edu.ntnu.idatt2001.model.*;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
+/**
+ * Test for the unit GameManager.
+ */
 public class GameManagerTest {
   GameManager gameManager = new GameManager();
   Player player1 = new Player(new Player.Builder("Name", 0, 0, 0, new ArrayList<>()));
   Goal goal1 = new HealthGoal(20);
   Goal goal2 = new GoldGoal(10);
-  Passage openingPassage = new Passage("Opening passage","Opening passage");
+
+  Passage openingPassage = new Passage("Opening passage", "Opening passage");
   Story story = new Story("Story title", openingPassage);
   Link link1 = new Link("PassageTitle1", "PassageTitle1");
   Link link2 = new Link("PassageTitle2", "PassageTitle2");
@@ -30,7 +34,7 @@ public class GameManagerTest {
   @Nested
   class AddPrerequisites {
     @Test
-    void setStory () {
+    void setStory() {
       assertFalse(gameManager.storyHasBeenAdded());
       gameManager.setStory(story);
       assertTrue(gameManager.storyHasBeenAdded());
@@ -51,6 +55,7 @@ public class GameManagerTest {
       assertFalse(gameManager.getGoals().isEmpty());
     }
   }
+
   @Nested
   class ConstructGame {
     @Test
@@ -100,11 +105,16 @@ public class GameManagerTest {
     
     @Test
     void getMethods() {
-      assertThrows(IllegalArgumentException.class, () -> gameManager.getPlayer(), "Player has not been added.");
-      assertThrows(IllegalArgumentException.class, () -> gameManager.getPlayerName(), "Player has not been added.");
-      assertThrows(IllegalArgumentException.class, () -> gameManager.getBrokenLinks(), "The story is not defined");
-      assertThrows(NullPointerException.class, () -> gameManager.getStoryTitle(), "Story must be added first");
-      assertThrows(NullPointerException.class, () -> gameManager.getStoryPassageNames(), "Story must be added first");
+      assertThrows(IllegalArgumentException.class, () ->
+              gameManager.getPlayer(), "Player has not been added.");
+      assertThrows(IllegalArgumentException.class, () ->
+              gameManager.getPlayerName(), "Player has not been added.");
+      assertThrows(IllegalArgumentException.class, () ->
+              gameManager.getBrokenLinks(), "The story is not defined");
+      assertThrows(NullPointerException.class, () ->
+              gameManager.getStoryTitle(), "Story must be added first");
+      assertThrows(NullPointerException.class, () ->
+              gameManager.getStoryPassageNames(), "Story must be added first");
       
       gameManager.setPlayer(player1);
       gameManager.setStory(story);

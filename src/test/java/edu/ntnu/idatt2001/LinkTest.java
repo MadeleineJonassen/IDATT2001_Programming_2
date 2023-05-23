@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.model.Action.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Action.Action;
 import edu.ntnu.idatt2001.model.Action.GoldAction;
 import edu.ntnu.idatt2001.model.Action.HealthAction;
@@ -8,39 +9,41 @@ import edu.ntnu.idatt2001.model.Link;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test for the unit Link.
+ */
 public class LinkTest {
   
   @Nested
   class ConstructLinks {
     @Test
-    public void constructCorrectly(){
-      Link link = new Link("LinkText","LinkReference");
+    public void constructCorrectly() {
+      Link link = new Link("LinkText", "LinkReference");
       assertEquals(link.getText(), "LinkText");
       assertEquals(link.getReference(), "LinkReference");
     }
     
     @Test
-    public void constructEmptyText(){
+    public void constructEmptyText() {
       IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-        Link link = new Link("","LinkReference");
+        Link link = new Link("", "LinkReference");
       }, "Text cannot be empty");
     }
     
     @Test
-    public void constructEmptyReference(){
+    public void constructEmptyReference() {
       assertThrows(IllegalArgumentException.class, () -> {
-        Link link = new Link("LinkText","");
+        Link link = new Link("LinkText", "");
       }, "Reference cannot be empty");
     }
   }
   
   @Nested
   class AddActions {
-    Link link = new Link("LinkText","LinkReference");
+    Link link = new Link("LinkText", "LinkReference");
+
     @Test
-    public void addCorrectly(){
+    public void addCorrectly() {
       Action goldAction = new GoldAction(10);
       link.addAction(goldAction);
       Action healthAction = new HealthAction(20);
@@ -50,12 +53,12 @@ public class LinkTest {
     }
     
     @Test
-    public void addNoActions(){
+    public void addNoActions() {
       assertTrue(link.getActions().isEmpty());
     }
     
     @Test
-    public void addDuplicates(){
+    public void addDuplicates() {
       Action goldAction = new GoldAction(10);
       link.addAction(goldAction);
       assertThrows(IllegalArgumentException.class, () -> {
@@ -67,36 +70,37 @@ public class LinkTest {
   
   @Nested
   class ToString {
-    Link link = new Link("LinkText","LinkReference");
+    Link link = new Link("LinkText", "LinkReference");
     
     @Test
-    public void testToString(){
-      assertEquals(link.toString(), "LinkText" + ", next: " + "LinkReference" + ". Actions: [" + "]");
+    public void testToString() {
+      assertEquals(link.toString(),
+              "LinkText" + ", next: " + "LinkReference" + ". Actions: [" + "]");
     }
   }
   
   @Nested
   class Equals {
-    Link link = new Link("LinkText","LinkReference");
+    Link link = new Link("LinkText", "LinkReference");
     
     
     @Test
-    public void equalTextAndReference(){
-      Link newLink = new Link("LinkText","LinkReference");
+    public void equalTextAndReference() {
+      Link newLink = new Link("LinkText", "LinkReference");
       
       assertEquals(link, newLink);
     }
     
     @Test
-    public void equalText(){
-      Link newLink = new Link("LinkText","UnEqual LinkReference");
+    public void equalText() {
+      Link newLink = new Link("LinkText", "UnEqual LinkReference");
       
       assertNotEquals(newLink, link);
     }
     
     @Test
-    public void equalReference(){
-      Link newLink = new Link("UnEqual LinkText","LinkReference");
+    public void equalReference() {
+      Link newLink = new Link("UnEqual LinkText",  "LinkReference");
       
       assertEquals(newLink, link);
     }

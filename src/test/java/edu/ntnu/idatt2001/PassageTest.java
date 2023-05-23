@@ -1,27 +1,31 @@
 package edu.ntnu.idatt2001;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for the unit Passage.
+ */
 public class PassageTest {
   
   @Nested
   class ConstructPassages {
     
     @Test
-    void constructSimplePassage(){
+    void constructSimplePassage() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
       assertEquals(passage.getTitle(), "PassageTitle");
       assertEquals(passage.getContent(), "PassageContent");
     }
     
     @Test
-    void constructPassageWithLinks(){
-      Link link1 = new Link("LinkText1","LinkReference1");
-      Link link2 = new Link("LinkText2","LinkReference2");
+    void constructPassageWithLinks() {
+      Link link1 = new Link("LinkText1", "LinkReference1");
+      Link link2 = new Link("LinkText2", "LinkReference2");
       Passage passage = new Passage("PassageTitle", "PassageContent", link1, link2);
       assertEquals(passage.getTitle(), "PassageTitle");
       assertEquals(passage.getContent(), "PassageContent");
@@ -34,10 +38,10 @@ public class PassageTest {
   class AddLinksToPassage {
     
     @Test
-    void addLinks(){
+    void addLinks() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
-      Link link1 = new Link("LinkText1","LinkReference1");
-      Link link2 = new Link("LinkText2","LinkReference2");
+      Link link1 = new Link("LinkText1", "LinkReference1");
+      Link link2 = new Link("LinkText2", "LinkReference2");
       passage.addLink(link1);
       passage.addLink(link2);
       assertTrue(passage.hasLinks());
@@ -46,11 +50,11 @@ public class PassageTest {
     }
     
     @Test
-    void removeLinks(){
+    void removeLinks() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
-      Link link1 = new Link("LinkText1","LinkReference1");
-      Link link2 = new Link("LinkText2","LinkReference2");
-      Link link3 = new Link("LinkText3","LinkReference3");
+      Link link1 = new Link("LinkText1", "LinkReference1");
+      Link link2 = new Link("LinkText2", "LinkReference2");
+      Link link3 = new Link("LinkText3", "LinkReference3");
       passage.addLink(link1);
       passage.addLink(link2);
       passage.addLink(link3);
@@ -60,9 +64,9 @@ public class PassageTest {
     }
     
     @Test
-    void addDuplicateLinks(){
+    void addDuplicateLinks() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
-      Link link1 = new Link("LinkText1","LinkReference1");
+      Link link1 = new Link("LinkText1", "LinkReference1");
       passage.addLink(link1);
       
       assertThrows(IllegalArgumentException.class, () -> {
@@ -76,7 +80,7 @@ public class PassageTest {
   class PassageToString {
     
     @Test
-    public void passageToString(){
+    public void passageToString() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
       assertEquals(passage.toString(), "Passage: PassageTitle, content: PassageContent.");
     }
@@ -85,21 +89,21 @@ public class PassageTest {
   @Nested
   class Equals {
     @Test
-    public void equalReferenceAndText(){
+    public void equalReferenceAndText() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Passage passage2 = new Passage("PassageTitle", "PassageContent");
       assertEquals(passage, passage2);
     }
     
     @Test
-    public void equalTitle(){
+    public void equalTitle() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Passage passage2 = new Passage("PassageTitle", "Unequal PassageContent");
       assertEquals(passage, passage2);
     }
     
     @Test
-    public void equalContent(){
+    public void equalContent() {
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Passage passage2 = new Passage("Unequal PassageTitle", "PassageContent");
       assertNotEquals(passage, passage2);

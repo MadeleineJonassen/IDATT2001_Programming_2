@@ -8,15 +8,24 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * View for Create Goals.
+ */
 public class CreateGoalsView {
   private final CreateGoalsController controller;
   public Button errorIcon;
   public Label errorText;
 
-  public CreateGoalsView(CreateGoalsController controller){
+  public CreateGoalsView(CreateGoalsController controller) {
     this.controller = controller;
   }
-  public Scene setup(){
+
+  /**
+   * Setup for the create goal view.
+   *
+   * @return the view
+   */
+  public Scene setup() {
     // -------------------- CREATE GOALS SCENE --------------------
     // Top create goals layout
     
@@ -53,7 +62,7 @@ public class CreateGoalsView {
     Button goalBox = new Button("Create Goal");
     goalBox.setOnAction(e -> {
       try {
-      controller.addSingleGoal();
+        controller.addSingleGoal();
       } catch (Exception ex) {
         throw new RuntimeException(ex);
       }
@@ -76,10 +85,10 @@ public class CreateGoalsView {
     createGoalsBottom.setId("boxes");
     Button submitGoalBtn = new Button("Submit goal(s)");
     submitGoalBtn.setOnAction(e -> {
-      if (controller.goalsHaveBeenAdded()){
+      if (controller.goalsHaveBeenAdded()) {
         controller.createGame();
       } else {
-        errorVisable("Goals have not been added");
+        errorVisible("Goals have not been added");
       }
     });
     createGoalsBottom.getChildren().addAll(submitGoalBtn, errorBox);
@@ -94,12 +103,21 @@ public class CreateGoalsView {
     
     return createGoalScene;
   }
-  
-  public void errorInvisible(){
+
+  /**
+   * Makes the error invisible for the user.
+   */
+  public void errorInvisible() {
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-  public void errorVisable(String message){
+
+  /**
+   * Makes the error visible for the user.
+   *
+   * @param message the error message
+   */
+  public void errorVisible(String message) {
     errorText.getStyleClass().add("errorText");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");

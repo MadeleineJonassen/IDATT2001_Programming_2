@@ -57,7 +57,7 @@ Choosing caution over immediate exploration, you remain outside the hidden chamb
 ::The Cryptic Path
 With a mix of trepidation and excitement, you continue deeper into the jungle, following a winding path that leads you closer to the heart of the temple. Shadows dance among the trees, and whispers of forgotten voices fill the air.
 [Press forward](The Enigmatic Chamber)
-[Take a moment to rest and contemplate](Quiet Reflection)
+[Take a moment to rest and contemplate](Rest and Recuperate){score(75)}
 
 ::Rest and Recuperate
 Feeling the strain of the nerve-wracking traverse, you find a serene spot amidst the jungle to rest and recuperate. The sounds of nature provide a soothing backdrop as you reflect on your journey so far and prepare for what lies ahead.

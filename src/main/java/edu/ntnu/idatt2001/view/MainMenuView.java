@@ -4,20 +4,29 @@ import edu.ntnu.idatt2001.controller.MainMenuController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * View for Main Menu..
+ */
 public class MainMenuView  {
   private final MainMenuController controller;
 
   public Button errorIcon;
   public Label errorText;
   
-  public MainMenuView(MainMenuController controller){
+  public MainMenuView(MainMenuController controller) {
     this.controller = controller;
   }
-  
-  public Scene setup(){
+
+  /**
+   * Setup for the main menu view.
+   *
+   * @return the view
+   */
+  public Scene setup() {
 
     // **************************** MENU ****************************
     // Top menu layout
@@ -32,18 +41,18 @@ public class MainMenuView  {
     // Mid menu layout
     VBox layoutMenuOptions = new VBox();
     layoutMenuOptions.setId("boxes");
-       errorIcon = new Button("");
-      errorText = new Label("");
+    errorIcon = new Button("");
+    errorText = new Label("");
     errorInvisible();
     Button createGameBtn = new Button("Create Game");
     createGameBtn.setId("menuButton");
-     createGameBtn.setOnAction(e -> {
-       try {
-         controller.createGame();
-       } catch (Exception ex) {
-         errorVisible(ex.getMessage());
-       }
-     });
+    createGameBtn.setOnAction(e -> {
+      try {
+        controller.createGame();
+      } catch (Exception ex) {
+        errorVisible(ex.getMessage());
+      }
+    });
     Button playGameBtn = new Button("Play game");
     playGameBtn.setId("menuButton");
     playGameBtn.setOnAction(e -> {
@@ -65,12 +74,21 @@ public class MainMenuView  {
     return scene;
     
   }
-  public void errorInvisible(){
-    errorText.getStyleClass().add("invincible");
-    errorIcon.getStyleClass().add("invincible");
+
+  /**
+   * Makes the error invisible for the user.
+   */
+  public void errorInvisible() {
+    errorText.setText("");
+    errorIcon.setBackground(Background.EMPTY);
   }
 
-  public void errorVisible(String message){
+  /**
+   * Makes the error visible for the user.
+   *
+   * @param message the error message
+   */
+  public void errorVisible(String message) {
     errorText.getStyleClass().add("errorText");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
