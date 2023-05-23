@@ -7,6 +7,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +18,8 @@ public class PlayGameView {
   private HBox layoutPlayGameMid;
   private ObservableList<String> linkTitles;
   private HBox userOptions = new HBox();
+  public Button errorIcon;
+  public Label errorText;
   
   
   public PlayGameView(PlayGameController controller){
@@ -91,7 +94,7 @@ public class PlayGameView {
       try {
         controller.nextPassage(linkTitle);
       } catch (Exception ex){
-        System.out.println(ex.getMessage());
+        errorVisible(ex.getMessage());
       }
     });
     return newButton;
@@ -119,7 +122,16 @@ public class PlayGameView {
       storyListView.setId("storyListView");
       storyListView.setItems(controller.getPassageText());
     layoutMid.getChildren().addAll(storyTitle, storyListView);
-
+    
+    HBox errorBox = new HBox();
+    errorBox.setId("boxes");
+    errorIcon = new Button();
+    errorIcon.getStyleClass().add("invincible");
+    errorText = new Label("");
+    errorText.getStyleClass().add("invincible");
+    errorInvisible();
+    errorBox.getChildren().addAll(errorIcon, errorText);
+    
     VBox rightInfoBox = new VBox();
     rightInfoBox.setId("rightBox");
     Label goalsTitle = new Label("Goals");
@@ -128,7 +140,7 @@ public class PlayGameView {
       //setGoals.getItems().addAll(controller.getNoncompletedGoals());
       setGoals.setItems(controller.getNoncompletedGoals());
     rightInfoBox.getChildren().addAll(goalsTitle, setGoals);
-    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, rightInfoBox);
+    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, errorBox, rightInfoBox);
   }
   
   private Button endGameButton(){
@@ -139,6 +151,16 @@ public class PlayGameView {
     });
     
     return endButton;
+  }
+  
+  public void errorInvisible(){
+    errorText.setText("");
+    errorIcon.setBackground(Background.EMPTY);
+  }
+  public void errorVisible(String message){
+    errorText.getStyleClass().add("errorText");
+    errorText.setText(message);
+    errorIcon.getStyleClass().add("errorImage");
   }
   
 }

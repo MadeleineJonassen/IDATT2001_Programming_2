@@ -37,7 +37,7 @@ public class CreateStoryView {
       try {
         controller.createGame();
       } catch (Exception ex) {
-        errorVisable(ex.getMessage());
+        errorVisible(ex.getMessage());
       }
     });
     VBox creatStoryTopMid = new VBox();
@@ -85,7 +85,7 @@ public class CreateStoryView {
           displayStoryPath.setText(controller.getDirectory());
           displayBrokenLinks.setText(controller.getBrokenLinks());
         } catch (Exception e) {
-          errorVisable(e.getMessage());
+          errorVisible(e.getMessage());
         }
       });
     createStoryMidBtn.getChildren().addAll(selectStory, errorBox);
@@ -99,7 +99,7 @@ public class CreateStoryView {
         if (controller.storyIsAdded()){
           controller.createGame();
         } else {
-          errorVisable("The story has not been chosen");
+          errorVisible("The story has not been chosen");
         }
       });
     createStoryBottom.getChildren().addAll(submit);
@@ -119,7 +119,7 @@ public class CreateStoryView {
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-  public void errorVisable(String message){
+  public void errorVisible(String message){
     errorText.getStyleClass().add("errorText");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
