@@ -67,6 +67,7 @@ public class CreateStoryView {
         storyListView.setItems(observableList);
         storyListView.setId("big-list-view");
     createStoryMidDisplay.getChildren().addAll(displayStoryPath, displayBrokenLinks, storyListView);
+
     VBox createStoryMidBtn = new VBox();
     createStoryMidBtn.setId("boxes");
       HBox errorBox = new HBox();
@@ -76,7 +77,15 @@ public class CreateStoryView {
          errorText = new Label("");
           errorText.getStyleClass().add("invincible");
     errorBox.getChildren().addAll(errorIcon, errorText);
-      Button selectStory = new Button("Select Story");
+    Button deleteBrokenLinks = new Button("Delete broken links");
+    deleteBrokenLinks.setDisable(true);
+    deleteBrokenLinks.setOnAction(e -> {
+      try{
+        controller.deleteBrokenLinks();
+        displayBrokenLinks.clear();
+      } catch (Exception exception) {
+        errorVisible(exception.getMessage());}});
+    Button selectStory = new Button("Select Story");
       selectStory.setOnAction(actionEvent -> {
         try {
           controller.chooseStory();
@@ -84,11 +93,14 @@ public class CreateStoryView {
           observableList.addAll(controller.getStoryPassageNames());
           displayStoryPath.setText(controller.getDirectory());
           displayBrokenLinks.setText(controller.getBrokenLinks());
+          deleteBrokenLinks.setDisable(false);
         } catch (Exception e) {
           errorVisible(e.getMessage());
         }
       });
-    createStoryMidBtn.getChildren().addAll(selectStory, errorBox);
+
+
+    createStoryMidBtn.getChildren().addAll(selectStory,deleteBrokenLinks, errorBox);
     createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);
 
     // Bottom create story layout

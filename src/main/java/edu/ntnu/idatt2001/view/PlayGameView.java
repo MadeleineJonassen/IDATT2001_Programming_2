@@ -108,7 +108,7 @@ public class PlayGameView {
       try {
         controller.nextPassage(linkTitle);
       } catch (Exception ex) {
-        errorVisible("This is a broken link, restart and select a new story");
+        errorVisible(ex.getMessage());
       }
     });
     return newButton;

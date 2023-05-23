@@ -2,7 +2,7 @@ The Forgotten Temple
 
 ::The Ancient Map
 In your grandfather's attic, you stumble upon an old map that reveals the existence of a forgotten temple deep within an uncharted jungle. Intrigued by the promise of hidden treasures and ancient secrets, you decide to embark on an expedition to uncover the mysteries of the temple.
-[Begin the expedition](Into the Jungle){action}
+[Begin the expedition](Into the Jungle)
 [Dismiss the map and continue with your daily life](Ignore the Call)
 
 ::Into the Jungle
