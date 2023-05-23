@@ -1,81 +1,84 @@
 package edu.ntnu.idatt2001;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import edu.ntnu.idatt2001.model.Story;
+import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test for the unit Story.
+ */
 public class StoryTest {
   
   @Nested
   class ConstructStory {
     
     @Test
-    public void constructCorrectly(){
-      Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
+    public void constructCorrectly() {
+      Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
       
-      Story story = new Story("Title",openingPassage);
+      Story story = new Story("Title", openingPassage);
       
       assertEquals(story.getOpeningPassage(), openingPassage);
       assertEquals(story.getTitle(), "Title");
     }
     
     @Test
-    public void emptyTitle(){
-      Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
+    public void emptyTitle() {
+      Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
       
       
       assertThrows(IllegalArgumentException.class, () -> {
-        Story story = new Story("",openingPassage);
+        Story story = new Story("", openingPassage);
       }, "Title cannot be empty");
     }
   }
   
   @Nested
   class GetMethods {
-    Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
-    Story story = new Story("Title",openingPassage);
+    Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
+    Story story = new Story("Title", openingPassage);
     
     Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
     Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
     Passage passage3 = new Passage("PassageTitle3", "PassageContent3");
     
     @Test
-    public void getSinglePassage(){
+    public void getSinglePassage() {
       story.addPassage(passage1);
       
-      assertEquals(passage1, story.getPassage(new Link("PassageTitle1","PassageTitle1")));
+      assertEquals(passage1, story.getPassage(new Link("PassageTitle1", "PassageTitle1")));
     }
     
     @Test
-    public void getNonExistingPassage(){
+    public void getNonExistingPassage() {
       story.addPassage(passage1);
       
       assertFalse(story.getPassages().contains(passage2));
       
       assertThrows(IllegalArgumentException.class, () -> {
-        story.getPassage(new Link("PassageTitle2","PassageTitle2"));
+        story.getPassage(new Link("PassageTitle2", "PassageTitle2"));
       }, "No such link in the story.");
     }
     
     @Test
-    public void getMultiplePassages(){
+    public void getMultiplePassages() {
       story.addPassage(passage1);
       story.addPassage(passage2);
       
-      Story story2 = new Story("Title" ,openingPassage);
+      Story story2 = new Story("Title", openingPassage);
       story2.addPassage(passage1);
       story2.addPassage(passage2);
       
       
       assertEquals(story.getPassages(), story2.getPassages());
       
-      Story story3 = new Story("Title" ,openingPassage);
+      Story story3 = new Story("Title", openingPassage);
       story3.addPassage(passage1);
       story3.addPassage(passage3);
       
@@ -86,11 +89,11 @@ public class StoryTest {
   
   @Nested
   class ChangePassages {
-    Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
-    Story story = new Story("Title",openingPassage);
+    Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
+    Story story = new Story("Title", openingPassage);
     
     @Test
-    public void addPassages(){
+    public void addPassages() {
       Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
       Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
       Passage passage3 = new Passage("PassageTitle3", "PassageContent3");
@@ -103,7 +106,7 @@ public class StoryTest {
     }
     
     @Test
-    public void addDuplicatePassages(){
+    public void addDuplicatePassages() {
       Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
       Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
       
@@ -116,7 +119,7 @@ public class StoryTest {
     }
     
     @Test
-    public void removePassages(){
+    public void removePassages() {
       Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
       Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
       Passage passage3 = new Passage("PassageTitle3", "PassageContent3");
@@ -135,7 +138,7 @@ public class StoryTest {
     }
     
     @Test
-    public void removeNonExistingPassage(){
+    public void removeNonExistingPassage() {
       Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
       Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
       story.addPassage(passage1);
@@ -150,7 +153,7 @@ public class StoryTest {
     }
     
     @Test
-    public void replacePassages(){
+    public void replacePassages() {
       Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
       Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
       Passage passage3 = new Passage("PassageTitle3", "PassageContent3");
@@ -175,17 +178,17 @@ public class StoryTest {
   
   @Nested
   class Equals {
-    Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
-    Story story = new Story("Title",openingPassage);
+    Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
+    Story story = new Story("Title", openingPassage);
     Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
     Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
     
-    Passage openingPassage2 = new Passage("Opening Passage","Opening Passage Content");
-    Story story2 = new Story("Title" ,openingPassage2);
+    Passage openingPassage2 = new Passage("Opening Passage", "Opening Passage Content");
+    Story story2 = new Story("Title", openingPassage2);
     
     
     @Test
-    public void testEquals(){
+    public void testEquals() {
       story.addPassage(passage1);
       
       story2.addPassage(passage1);
@@ -198,7 +201,7 @@ public class StoryTest {
     }
     
     @Test
-    public void equalsDifferentPassages(){
+    public void equalsDifferentPassages() {
       Passage passage3 = new Passage("PassageTitle3", "PassageContent3");
       
       story.addPassage(passage1);
@@ -212,7 +215,7 @@ public class StoryTest {
       story.addPassage(passage3);
       story2.addPassage(passage2);
       
-      assertEquals(story,story2);
+      assertEquals(story, story2);
       
     }
     
@@ -220,18 +223,18 @@ public class StoryTest {
   
   @Nested
   class BrokenLinks {
-    Passage openingPassage = new Passage("Opening Passage","Opening Passage Content");
-    Story story = new Story("Title",openingPassage);
+    Passage openingPassage = new Passage("Opening Passage", "Opening Passage Content");
+    Story story = new Story("Title", openingPassage);
     
     Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
     Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
     
     @Test
-    public void getStoryBrokenLinks(){
-      Link brokenLink1 = new Link("Link3","PassageTitle3");
-      openingPassage.addLink(new Link("Link1","PassageTitle1"));
-      openingPassage.addLink(new Link("Link2","PassageTitle2"));
-      passage1.addLink(new Link("Link3","PassageTitle2"));
+    public void getStoryBrokenLinks() {
+      Link brokenLink1 = new Link("Link3", "PassageTitle3");
+      openingPassage.addLink(new Link("Link1", "PassageTitle1"));
+      openingPassage.addLink(new Link("Link2", "PassageTitle2"));
+      passage1.addLink(new Link("Link3", "PassageTitle2"));
       passage1.addLink(brokenLink1);
       
       story.addPassage(passage1);
@@ -243,11 +246,11 @@ public class StoryTest {
     }
     
     @Test
-    public void noBrokenLinks(){
-      Link brokenLink1 = new Link("Link3","PassageTitle3");
-      openingPassage.addLink(new Link("Link1","PassageTitle1"));
-      openingPassage.addLink(new Link("Link2","PassageTitle2"));
-      passage1.addLink(new Link("Link3","PassageTitle2"));
+    public void noBrokenLinks() {
+      Link brokenLink1 = new Link("Link3", "PassageTitle3");
+      openingPassage.addLink(new Link("Link1", "PassageTitle1"));
+      openingPassage.addLink(new Link("Link2", "PassageTitle2"));
+      passage1.addLink(new Link("Link3", "PassageTitle2"));
       
       story.addPassage(passage1);
       story.addPassage(passage2);
@@ -256,11 +259,11 @@ public class StoryTest {
     }
     
     @Test
-    public void testDeleteBrokenLinks(){
-      Link brokenLink1 = new Link("Link3","PassageTitle3");
-      openingPassage.addLink(new Link("Link1","PassageTitle1"));
-      openingPassage.addLink(new Link("Link2","PassageTitle2"));
-      passage1.addLink(new Link("Link3","PassageTitle2"));
+    public void testDeleteBrokenLinks() {
+      Link brokenLink1 = new Link("Link3", "PassageTitle3");
+      openingPassage.addLink(new Link("Link1", "PassageTitle1"));
+      openingPassage.addLink(new Link("Link2", "PassageTitle2"));
+      passage1.addLink(new Link("Link3", "PassageTitle2"));
       passage1.addLink(brokenLink1);
       
       story.addPassage(passage1);
