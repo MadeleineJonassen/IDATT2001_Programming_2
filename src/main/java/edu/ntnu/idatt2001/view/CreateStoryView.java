@@ -51,57 +51,58 @@ public class CreateStoryView {
     createStoryTop.setCenter(creatStoryTopMid);
     
     // Mid create story layout
+    VBox createWholeMid = new VBox();
+    createWholeMid.setId("boxes");
+    createWholeMid.setMaxWidth(1000);
     HBox createStoryMid = new HBox();
     createStoryMid.setId("boxes");
-    VBox createStoryMidDisplay = new VBox();
-      createStoryMidDisplay.setId("boxes");
-      TextField displayStoryPath = new TextField();
+    TextField displayStoryPath = new TextField();
       displayStoryPath.setPromptText("Directory for story");
-      displayStoryPath.setMinHeight(20);
       displayStoryPath.setEditable(false);
-      TextField displayBrokenLinks = new TextField();
-        displayBrokenLinks.setPromptText("Broken links");
-        displayBrokenLinks.setEditable(false);
-      ListView storyListView = new ListView<>();
-        ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
-        storyListView.setItems(observableList);
-        storyListView.setId("big-list-view");
-    createStoryMidDisplay.getChildren().addAll(displayStoryPath, displayBrokenLinks, storyListView);
-
-    VBox createStoryMidBtn = new VBox();
-    createStoryMidBtn.setId("boxes");
-      HBox errorBox = new HBox();
-      errorBox.setId("boxes");
-         errorIcon = new Button();
-          errorIcon.getStyleClass().add("invincible");
-         errorText = new Label("");
-          errorText.getStyleClass().add("invincible");
-    errorBox.getChildren().addAll(errorIcon, errorText);
-    Button deleteBrokenLinks = new Button("Delete broken links");
-    deleteBrokenLinks.setDisable(true);
-    deleteBrokenLinks.setOnAction(e -> {
-      try{
-        controller.deleteBrokenLinks();
-        displayBrokenLinks.clear();
-      } catch (Exception exception) {
-        errorVisible(exception.getMessage());}});
-    Button selectStory = new Button("Select Story");
-      selectStory.setOnAction(actionEvent -> {
-        try {
-          controller.chooseStory();
-          errorInvisible();
-          observableList.addAll(controller.getStoryPassageNames());
-          displayStoryPath.setText(controller.getDirectory());
-          displayBrokenLinks.setText(controller.getBrokenLinks());
-          deleteBrokenLinks.setDisable(false);
-        } catch (Exception e) {
-          errorVisible(e.getMessage());
-        }
-      });
-
-
-    createStoryMidBtn.getChildren().addAll(selectStory,deleteBrokenLinks, errorBox);
-    createStoryMid.getChildren().addAll(createStoryMidDisplay, createStoryMidBtn);
+      VBox createStoryMidDisplay = new VBox();
+        createStoryMidDisplay.setId("boxes");
+        TextField displayBrokenLinks = new TextField();
+          displayBrokenLinks.setPromptText("Broken links");
+          displayBrokenLinks.setEditable(false);
+        ListView storyListView = new ListView<>();
+          ObservableList<String> observableList = FXCollections.observableList(new ArrayList<String>());
+          storyListView.setItems(observableList);
+          storyListView.setId("big-list-view");
+      createStoryMidDisplay.getChildren().addAll( displayBrokenLinks, storyListView);
+      VBox createStoryMidBtn = new VBox();
+      createStoryMidBtn.setId("boxes");
+        HBox errorBox = new HBox();
+        errorBox.setId("boxes");
+           errorIcon = new Button();
+            errorIcon.getStyleClass().add("invincible");
+           errorText = new Label("");
+            errorText.getStyleClass().add("invincible");
+      errorBox.getChildren().addAll(errorIcon, errorText);
+      Button deleteBrokenLinks = new Button("Delete broken links");
+      deleteBrokenLinks.setDisable(true);
+      deleteBrokenLinks.setMaxWidth(300);
+      deleteBrokenLinks.setOnAction(e -> {
+        try{
+          controller.deleteBrokenLinks();
+          displayBrokenLinks.clear();
+        } catch (Exception exception) {
+          errorVisible(exception.getMessage());}});
+      Button selectStory = new Button("Select Story");
+        selectStory.setOnAction(actionEvent -> {
+          try {
+            controller.chooseStory();
+            errorInvisible();
+            observableList.addAll(controller.getStoryPassageNames());
+            displayStoryPath.setText(controller.getDirectory());
+            displayBrokenLinks.setText(controller.getBrokenLinks());
+            deleteBrokenLinks.setDisable(false);
+          } catch (Exception e) {
+            errorVisible(e.getMessage());
+          }
+        });
+      createStoryMidBtn.getChildren().addAll(selectStory,deleteBrokenLinks, errorBox);
+    createStoryMid.getChildren().addAll(createStoryMidDisplay,createStoryMidBtn);
+    createWholeMid.getChildren().addAll(displayStoryPath, createStoryMid);
 
     // Bottom create story layout
     HBox createStoryBottom = new HBox();
@@ -120,7 +121,7 @@ public class CreateStoryView {
     // * Overall Create Story layout *
     BorderPane createStoryLayout = new BorderPane();
     createStoryLayout.setTop(createStoryTop);
-    createStoryLayout.setCenter(createStoryMid);
+    createStoryLayout.setCenter(createWholeMid);
     createStoryLayout.setBottom(createStoryBottom);
     Scene createStoryScene = new Scene(createStoryLayout, 1300, 700);
     createStoryScene.getStylesheets().add("StyleSheets/createGameStyle.css");
