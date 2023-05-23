@@ -1,7 +1,10 @@
 package edu.ntnu.idatt2001;
 
 import edu.ntnu.idatt2001.Action.*;
-import edu.ntnu.idatt2001.Model.Link;
+import edu.ntnu.idatt2001.model.Action.Action;
+import edu.ntnu.idatt2001.model.Action.GoldAction;
+import edu.ntnu.idatt2001.model.Action.HealthAction;
+import edu.ntnu.idatt2001.model.Link;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

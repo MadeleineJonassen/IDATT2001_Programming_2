@@ -1,11 +1,12 @@
 package edu.ntnu.idatt2001;
 
 import edu.ntnu.idatt2001.Goal.*;
-import edu.ntnu.idatt2001.Model.Game;
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Passage;
-import edu.ntnu.idatt2001.Model.Story;
-import edu.ntnu.idatt2001.Players.Player;
+import edu.ntnu.idatt2001.model.Game;
+import edu.ntnu.idatt2001.model.Goal.*;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Passage;
+import edu.ntnu.idatt2001.model.Story;
+import edu.ntnu.idatt2001.model.Player;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

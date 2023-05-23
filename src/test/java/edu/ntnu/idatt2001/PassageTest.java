@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Model.Link;
-import edu.ntnu.idatt2001.Model.Passage;
+import edu.ntnu.idatt2001.model.Link;
+import edu.ntnu.idatt2001.model.Passage;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,14 +12,14 @@ public class PassageTest {
   class ConstructPassages {
     
     @Test
-    public void constructSimplePassage(){
+    void constructSimplePassage(){
       Passage passage = new Passage("PassageTitle", "PassageContent");
       assertEquals(passage.getTitle(), "PassageTitle");
       assertEquals(passage.getContent(), "PassageContent");
     }
     
     @Test
-    public void constructPassageWithLinks(){
+    void constructPassageWithLinks(){
       Link link1 = new Link("LinkText1","LinkReference1");
       Link link2 = new Link("LinkText2","LinkReference2");
       Passage passage = new Passage("PassageTitle", "PassageContent", link1, link2);
@@ -34,7 +34,7 @@ public class PassageTest {
   class AddLinksToPassage {
     
     @Test
-    public void addLinks(){
+    void addLinks(){
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Link link1 = new Link("LinkText1","LinkReference1");
       Link link2 = new Link("LinkText2","LinkReference2");
@@ -46,7 +46,7 @@ public class PassageTest {
     }
     
     @Test
-    public void removeLinks(){
+    void removeLinks(){
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Link link1 = new Link("LinkText1","LinkReference1");
       Link link2 = new Link("LinkText2","LinkReference2");
@@ -60,7 +60,7 @@ public class PassageTest {
     }
     
     @Test
-    public void addDuplicateLinks(){
+    void addDuplicateLinks(){
       Passage passage = new Passage("PassageTitle", "PassageContent");
       Link link1 = new Link("LinkText1","LinkReference1");
       passage.addLink(link1);
