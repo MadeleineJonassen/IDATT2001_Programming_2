@@ -28,6 +28,8 @@ public class helpCreatePlayer {
       Button closeButton = new Button(("Okay"));
        closeButton.setOnAction(e -> window.close());
     helpLayout.getChildren().addAll(helpTitle, helpText1, helpText2, closeButton);
+    helpLayout.getChildren().addAll(helpTitle, helpText1, helpText2, closeButton);
+
 
     Scene scene = new Scene(helpLayout, 300,300);
 
