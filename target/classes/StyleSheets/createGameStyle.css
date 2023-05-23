@@ -9,7 +9,7 @@
 #boxes{
     -fx-padding: 20px;
     -fx-alignment: Center;
-    -fx-spacing: 20;
+    -fx-spacing: 10;
 }
 
 #title {
@@ -36,11 +36,10 @@
 
 .button {
     -fx-background-color: "B8C4C1";
-    -fx-pref-width: 150px;
+    -fx-pref-width: 200px;
     -fx-font-family: "Constantia";
     -fx-text-fill: "2B333F";
-    -fx-font-size: 18px;
-    -fx-padding: 5;
+    -fx-font-size: 22px;
 }
 .button:hover {
     -fx-background-color: "647C87";
@@ -60,6 +59,7 @@
 .list-cell{
     -fx-background-color: transparent, -fx-background;
     -fx-font-family: "Constantia";
+    -fx-font-size: 14 ;
     -fx-background-radius: 10px;
     -fx-background-insets: 0px, 2px ;
     -fx-padding: 2px ;
@@ -77,25 +77,23 @@
 .textField {
     -fx-pref-width: 500;
     -fx-pref-height: 20;
-    -fx-font-family: "Constantia";
-    -fx-background-color: "B8C4C1";
-    -fx-background-radius: 15px;
+    -fx-background-radius: 12px;
 }
 .text-field{
     -fx-background-color: "F3F3EB";
     -fx-font-family: "Constantia";
     -fx-background-radius: 10px;
+    -fx-font-size: 18;
 }
 #playerTextFields{
     -fx-pref-width: 300;
-    -fx-pref-height: 50;
-    -fx-font-family: "Constantia";
+    -fx-pref-height: 70;
 }
 
 
 .helpButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/lightHelp.png");
+    -fx-background-image: url("/photos/Icons/help.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -103,7 +101,7 @@
 }
 .helpButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/darkHelpFull.png");
+    -fx-background-image: url("/photos/Icons/helpHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -112,7 +110,7 @@
 
 .homeButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/lightHome.png");
+    -fx-background-image: url("/photos/Icons/home.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -120,7 +118,7 @@
 }
 .homeButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/darkHomeFull.png");
+    -fx-background-image: url("/photos/Icons/homeHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -129,7 +127,7 @@
 
 .backButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/arrow-small-left.png");
+    -fx-background-image: url("/photos/Icons/back.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -137,7 +135,7 @@
 }
 .backButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/arrow-left.png");
+    -fx-background-image: url("/photos/Icons/backHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
