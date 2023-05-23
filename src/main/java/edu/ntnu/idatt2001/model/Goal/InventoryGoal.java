@@ -1,9 +1,11 @@
 package edu.ntnu.idatt2001.model.Goal;
 
 import edu.ntnu.idatt2001.model.Player;
-
 import java.util.List;
 
+/**
+ * A goal for inventory.
+ */
 public class InventoryGoal implements Goal {
   private final List<String> mandatoryItems;
   
@@ -16,9 +18,9 @@ public class InventoryGoal implements Goal {
     List<String> playerInventory = player.getInventory();
     
     int numOfItemsInInventory = 0;
-    for (String s : mandatoryItems){
-      for (String i : playerInventory){
-        if (playerInventory.contains(i)){
+    for (String s : mandatoryItems) {
+      for (String i : playerInventory) {
+        if (playerInventory.contains(i)) {
           numOfItemsInInventory++;
         }
       }

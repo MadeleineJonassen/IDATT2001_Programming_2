@@ -33,7 +33,8 @@ public class SceneController {
         break;
       case 4:
         //create player
-        CreatePlayerController createPlayerController = new CreatePlayerController(stage, gameManager);
+        CreatePlayerController createPlayerController
+                = new CreatePlayerController(stage, gameManager);
         break;
       case 5:
         //create goals

@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.controller;
 
-import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.model.GameManager;
+import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.view.CreateGameView;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -24,7 +24,7 @@ public class CreateGameController {
    * @param stage       the stage
    * @param gameManager the game manager
    */
-  public CreateGameController(Stage stage, GameManager gameManager){
+  public CreateGameController(Stage stage, GameManager gameManager) {
     this.gameManager = gameManager;
     constructGame();
     gameIsConstructed = gameManager.getGame() != null;
@@ -39,10 +39,10 @@ public class CreateGameController {
    *
    * @return the string
    */
-  public String getStoryName(){
+  public String getStoryName() {
     try {
       return gameManager.getStoryTitle();
-    } catch (Exception e){
+    } catch (Exception e) {
       return "The story has not been added";
     }
   }
@@ -52,10 +52,10 @@ public class CreateGameController {
    *
    * @return the string
    */
-  public String getPlayerName(){
+  public String getPlayerName() {
     try {
       return gameManager.getPlayerName();
-    } catch (Exception e){
+    } catch (Exception e) {
       return "The player has not been added";
     }
   }
@@ -65,7 +65,7 @@ public class CreateGameController {
    *
    * @return the observable list
    */
-  public ObservableList<Goal> getGoalsList(){
+  public ObservableList<Goal> getGoalsList() {
     return gameManager.getGoals();
   }
   
@@ -104,12 +104,12 @@ public class CreateGameController {
     sceneController.switchScene(stage, 6, gameManager);
   }
   
-  private void constructGame(){
+  private void constructGame() {
     boolean player = gameManager.playerHasBeenAdded();
     boolean story = gameManager.storyHasBeenAdded();
     boolean goals = !gameManager.getGoals().isEmpty();
     
-    if(!gameIsConstructed && player && story && goals){
+    if (!gameIsConstructed && player && story && goals) {
       gameManager.createGame();
     }
   }
@@ -119,7 +119,7 @@ public class CreateGameController {
    *
    * @return the boolean
    */
-  public boolean isGameConstructed(){
+  public boolean isGameConstructed() {
     return gameIsConstructed;
   }
 
