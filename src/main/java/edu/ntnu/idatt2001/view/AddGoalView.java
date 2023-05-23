@@ -2,6 +2,8 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.controller.AddGoalController;
 import edu.ntnu.idatt2001.inputValidation.IntInput;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,9 +15,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * View for Goal.
+ */
 public class AddGoalView {
   private final AddGoalController controller;
   public Button errorIcon;
@@ -23,12 +25,21 @@ public class AddGoalView {
   public TextField inputValueGoal;
 
 
-
+  /**
+   * Adds controller to the view.
+   *
+   * @param controller AddGoalController
+   */
   public AddGoalView(AddGoalController controller) {
     this.controller = controller;
   }
-  
-  public Scene setup(){
+
+  /**
+   * Sets up the scene for add goal.
+   *
+   * @return the view
+   */
+  public Scene setup() {
     VBox helpLayout;
     String[] goalChoices = {"Health", "Score", "Gold", "Inventory"};
     List<String> goalTypes = new ArrayList<>();
@@ -49,49 +60,59 @@ public class AddGoalView {
     selectGoal.setPromptText("Select goal");
     inputValueGoal = new TextField();
     inputValueGoal.setPromptText("Amount/Item");
-    optionsGoal.getChildren().addAll(selectGoal,inputValueGoal);
+    optionsGoal.getChildren().addAll(selectGoal, inputValueGoal);
 
     HBox errorBox = new HBox();
-      errorIcon = new Button();
-        errorIcon.getStyleClass().add("invincible");
-      errorText = new Label();
-        errorText.getStyleClass().add("invincible");
-    errorBox.getChildren().addAll(errorIcon,errorText);
+    errorIcon = new Button();
+    errorIcon.getStyleClass().add("invincible");
+    errorText = new Label();
+    errorText.getStyleClass().add("invincible");
+    errorBox.getChildren().addAll(errorIcon, errorText);
 
     Button closeButton = new Button(("Submit"));
     closeButton.setOnAction(e -> {
-      try{
+      try {
         errorInvisible();
-      String input = inputValueGoal.getText();
+        String input = inputValueGoal.getText();
 
-      int goalSelection = selectGoal.getSelectionModel().getSelectedIndex();
+        int goalSelection = selectGoal.getSelectionModel().getSelectedIndex();
 
-      switch (goalSelection) {
-        case 0 -> controller.addHealthGoal(Integer.parseInt(input));
-        case 1 -> controller.addScoreGoal(IntInput.result(input));
-        case 2 -> controller.addGoldGoal(IntInput.result(input));
-        case 3 -> controller.addInventoryGoal(input);
-        default -> throw new IllegalArgumentException("Choice out of bounds");
-      }
+        switch (goalSelection) {
+          case 0 -> controller.addHealthGoal(Integer.parseInt(input));
+          case 1 -> controller.addScoreGoal(IntInput.result(input));
+          case 2 -> controller.addGoldGoal(IntInput.result(input));
+          case 3 -> controller.addInventoryGoal(input);
+          default -> throw new IllegalArgumentException("Choice out of bounds");
+        }
 
-      controller.closeWindow();
-      }catch(Exception ignored){
+        controller.closeWindow();
+      } catch (Exception ignored) {
         errorVisible("Select a category and amount");
       }
 
     });
-    helpLayout.getChildren().addAll(createGoalTitle, optionsGoal,errorBox, closeButton);
+    helpLayout.getChildren().addAll(createGoalTitle, optionsGoal, errorBox, closeButton);
 
     Scene scene = new Scene(helpLayout, 300, 300);
     scene.getStylesheets().add("/StyleSheets/popUpWindows.css");
     
     return scene;
   }
-  public void errorInvisible(){
+
+  /**
+   * Makes the errors invisible for the user.
+   */
+  public void errorInvisible() {
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-  public void errorVisible(String message){
+
+  /**
+   * Makes the error visible for the user.
+   *
+   * @param message the error message
+   */
+  public void errorVisible(String message) {
     errorText.getStyleClass().add("errorText");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
