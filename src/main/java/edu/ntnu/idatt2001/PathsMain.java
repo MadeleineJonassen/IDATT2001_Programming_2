@@ -5,6 +5,9 @@ import edu.ntnu.idatt2001.model.GameManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Set up of the application.
+ */
 public class PathsMain extends Application {
   
   private Stage primaryStage;
