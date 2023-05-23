@@ -14,7 +14,7 @@ Undeterred by the warnings, you enter the Forest of Misery alone. The air is thi
 You take the left path, leading you to a dense grove. Strange apparitions flicker amidst the trees, and a chilling mist fills the air. Ahead, you spot an ancient shrine, emanating an otherworldly glow.
 [Investigate the shrine](Gold digger){gold(250)}
 
-:: Gold digger
+::Gold digger
 You find jewellery and golden coins in the ancient shrine. You collect all the gold your arms can carry and decide to head out of the Forest of Misery.
 
 ::The Enchanted Pool
