@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
- *  * Test for the unit Passage.
+ * Test for the unit Passage.
  */
 public class PassageTest {
   

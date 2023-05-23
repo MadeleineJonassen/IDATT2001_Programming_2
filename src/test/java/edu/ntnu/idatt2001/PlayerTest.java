@@ -1,22 +1,27 @@
 package edu.ntnu.idatt2001;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.idatt2001.model.Action.Action;
 import edu.ntnu.idatt2001.model.Action.GoldAction;
 import edu.ntnu.idatt2001.model.Player;
+import java.util.ArrayList;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test for the unit Player.
+ */
 public class PlayerTest {
   Player player = new Player.Builder("Name", 10, 30).score(20).inventory(new ArrayList<>()).build();
+
   @Nested
   class BuilderConstruction {
     @Test
     void buildBarebones() {
-      player = new Player.Builder("Name").health(10).gold(20).score(30).inventory(new ArrayList<>()).build();
+      player = new Player.Builder("Name")
+              .health(10).gold(20).score(30).inventory(new ArrayList<>()).build();
       assertEquals(10, player.getHealth());
     }
     
@@ -30,7 +35,7 @@ public class PlayerTest {
   @Nested
   class PlayerMethods {
     @Test
-    void goldActionTest(){
+    void goldActionTest() {
       Action goldaction = new GoldAction(15);
       goldaction.execute(player);
       
@@ -38,7 +43,7 @@ public class PlayerTest {
     }
     
     @Test
-    void addGoldTest(){
+    void addGoldTest() {
       int goldAmount = 15;
       player.addGold(goldAmount);
       
