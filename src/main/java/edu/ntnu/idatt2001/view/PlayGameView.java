@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+/**
+ * The view for playing game scene
+ */
 public class PlayGameView {
   private final PlayGameController controller;
   private HBox layoutPlayGameMid;
@@ -22,35 +25,48 @@ public class PlayGameView {
   public Label errorText;
   
   
-  public PlayGameView(PlayGameController controller){
+  public PlayGameView(PlayGameController controller) {
     this.controller = controller;
   }
 
-
+  /**
+   * Sets the playing game scene.
+   * @return the stage.
+   */
   public Scene setup() {
     // **************************** PLAY GAME LAYOUT ****************************
-    // Top play game layout
+    // Top layout
     BorderPane playGameTopLayout = new BorderPane();
-      HBox playGameLayoutTopLeft = new HBox();
-      playGameLayoutTopLeft.setId("topBoxes");
+    HBox playGameLayoutTopLeft = new HBox();
+    playGameLayoutTopLeft.setId("boxes");
       Button goHomePlayGame = new Button("Restart");
-      //goHomePlayGame.getStyleClass().add("homeButton");
-      goHomePlayGame.setOnAction(e -> {
-        try {
-          controller.mainMenu();
-        } catch (Exception ex) {
-          throw new RuntimeException(ex);
-        }
-      });
-      Label playGameTitle = new Label("Play Game");
-      playGameTitle.setId("title");
+      goHomePlayGame.setId("restartButton");
+       goHomePlayGame.setOnAction(e -> {
+          try {
+            controller.mainMenu();
+          } catch (Exception ex) {
+            throw new RuntimeException(ex);
+          }
+        });
+       Label playGameTitle = new Label("Play Game");
+        playGameTitle.setId("title");
+    playGameLayoutTopLeft.getChildren().addAll(goHomePlayGame, playGameTitle);
+    HBox topRightLayout = new HBox();
+    topRightLayout.setId("boxes");
+      errorIcon = new Button();
+      errorIcon.getStyleClass().add("invincible");
+      errorText = new Label("");
+      errorText.getStyleClass().add("invincible");
       Button helpBtn = new Button(" ");
-        helpBtn.getStyleClass().add("helpButton");
-        helpBtn.setOnAction(e -> helpPlayGame.display());
-      playGameLayoutTopLeft.getChildren().addAll(goHomePlayGame, playGameTitle, helpBtn);
-    playGameTopLayout.setLeft(playGameLayoutTopLeft);
+      helpBtn.getStyleClass().add("helpButton");
+      helpBtn.setOnAction(e -> helpPlayGame.display());
+    topRightLayout.getChildren().addAll(errorIcon, errorText, helpBtn);
 
-    // Mid Play Game layout
+
+    playGameTopLayout.setLeft(playGameLayoutTopLeft);
+    playGameTopLayout.setRight(topRightLayout);
+
+    // Mid layout
     updatePassageView();
 
     userOptions.setId("boxes");
@@ -66,7 +82,7 @@ public class PlayGameView {
 
     // * Overall Playing Game Layout *
     BorderPane layoutPlayGame = new BorderPane();
-    layoutPlayGame.setTop(playGameLayoutTopLeft);
+    layoutPlayGame.setTop(playGameTopLayout);
     layoutPlayGame.setCenter(layoutPlayGameMid);
     layoutPlayGame.setBottom(userOptions);
     layoutPlayGame.getStylesheets().add("StyleSheets/playGameStyle.css");
@@ -75,14 +91,12 @@ public class PlayGameView {
     
     return playGameScene;
   }
-  
-  private void populateLinks(){
+  private void populateLinks() {
     userOptions.getChildren().clear();
     for(String linkTitle : linkTitles){
       userOptions.getChildren().add(linkButton(linkTitle));
     }
-    
-    if(userOptions.getChildren().isEmpty()){
+    if(userOptions.getChildren().isEmpty()) {
       userOptions.getChildren().add(endGameButton());
     }
   }
@@ -93,14 +107,14 @@ public class PlayGameView {
     newButton.setOnAction(e -> {
       try {
         controller.nextPassage(linkTitle);
-      } catch (Exception ex){
-        errorVisible(ex.getMessage());
+      } catch (Exception ex) {
+        errorVisible("This is a broken link, restart and select a new story");
       }
     });
     return newButton;
   }
   
-  private void updatePassageView(){
+  private void updatePassageView() {
     layoutPlayGameMid = new HBox();
     layoutPlayGameMid.setId("boxes");
 
@@ -122,15 +136,7 @@ public class PlayGameView {
       storyListView.setId("storyListView");
       storyListView.setItems(controller.getPassageText());
     layoutMid.getChildren().addAll(storyTitle, storyListView);
-    
-    HBox errorBox = new HBox();
-    errorBox.setId("boxes");
-    errorIcon = new Button();
-    errorIcon.getStyleClass().add("invincible");
-    errorText = new Label("");
-    errorText.getStyleClass().add("invincible");
-    errorInvisible();
-    errorBox.getChildren().addAll(errorIcon, errorText);
+
     
     VBox rightInfoBox = new VBox();
     rightInfoBox.setId("rightBox");
@@ -140,10 +146,10 @@ public class PlayGameView {
       //setGoals.getItems().addAll(controller.getNoncompletedGoals());
       setGoals.setItems(controller.getNoncompletedGoals());
     rightInfoBox.getChildren().addAll(goalsTitle, setGoals);
-    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, errorBox, rightInfoBox);
+    layoutPlayGameMid.getChildren().addAll(layoutPlayGameMidLeft, layoutMid, rightInfoBox);
   }
   
-  private Button endGameButton(){
+  private Button endGameButton() {
     Button endButton = new Button("End Game");
     endButton.setId("boxes");
     endButton.setOnAction(e -> {
@@ -152,12 +158,18 @@ public class PlayGameView {
     
     return endButton;
   }
-  
-  public void errorInvisible(){
+
+  /**
+   * Makes the error invisible for the user.
+   */
+  public void errorInvisible() {
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-  public void errorVisible(String message){
+  /**
+   * Makes the error visible for the user.
+   */
+  public void errorVisible(String message) {
     errorText.getStyleClass().add("errorText");
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");

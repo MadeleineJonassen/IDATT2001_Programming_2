@@ -42,9 +42,9 @@ public class CreateStoryView {
     });
     VBox creatStoryTopMid = new VBox();
     creatStoryTopMid.setId("boxes");
-      Label createStoryTitle = new Label("Create Story");
+      Label createStoryTitle = new Label("Select Story");
       createStoryTitle.setId("createTitles");
-      Label createStoryUnderTitle = new Label("Select, edit or add your story to the library");
+      Label createStoryUnderTitle = new Label("Select your story");
       createStoryUnderTitle.setId("underTitle");
     creatStoryTopMid.getChildren().addAll(createStoryTitle, createStoryUnderTitle);
     createStoryTop.setLeft(goToCreateHomeStory);
