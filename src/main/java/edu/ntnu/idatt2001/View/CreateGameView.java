@@ -1,15 +1,12 @@
 package edu.ntnu.idatt2001.View;
 
 import edu.ntnu.idatt2001.Controller.CreateGameController;
-import edu.ntnu.idatt2001.Controller.MainMenuController;
-import edu.ntnu.idatt2001.GUI.HelpScenes.helpCreatePlayer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class CreateGameView {
   private final CreateGameController controller;
@@ -103,9 +100,7 @@ public class CreateGameView {
     // Bottom create game layer
     BorderPane layoutBottom = new BorderPane();
     layoutBottom.setId("boxes");
-    Button helpBtn = new Button(" ");
-    helpBtn.getStyleClass().add("helpButton");
-    helpBtn.setOnAction(e -> helpCreatePlayer.display());
+
     Button submitNewGame = new Button("Submit");
     submitNewGame.setId("finalButton");
     submitNewGame.setDisable(!controller.isGameConstructed());
@@ -116,11 +111,8 @@ public class CreateGameView {
         throw new RuntimeException(ex);
       }
     });
-    Region space = new Region();
-    layoutBottom.setLeft(helpBtn);
     layoutBottom.setCenter(submitNewGame);
-    layoutBottom.setRight(space);
-    
+
     // * Overall Create Game Layout *
     BorderPane layoutCreateGame = new BorderPane();
     layoutCreateGame.setTop(layoutCreateGameTop);
