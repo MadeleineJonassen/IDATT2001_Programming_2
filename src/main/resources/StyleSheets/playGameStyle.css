@@ -57,7 +57,10 @@
 #restartButton{
     -fx-background-color: "2B333F";
     -fx-text-fill: "B8C4C1";
-    -fx-padding: 2;
+}
+#restartButton:hover{
+    -fx-background-color: "0D0F13";
+
 }
 
 .helpButton {
@@ -71,7 +74,6 @@
 .helpButton:hover {
     -fx-background-image: url("/photos/Icons/darkHelpFull.png");
 }
-
 
 
 .list-view {

@@ -35,7 +35,7 @@ public class CreateGoalsView {
     creatGoalTopMid.setId("boxes");
     Label createGoalTitle = new Label("Create Goal");
     createGoalTitle.setId("createTitles");
-    Label createGoalUnderTitle = new Label("Select one or multiple goal for your character");
+    Label createGoalUnderTitle = new Label("Select one or multiple goal(s) for your character");
     createGoalUnderTitle.setId("underTitle");
     creatGoalTopMid.getChildren().addAll(createGoalTitle, createGoalUnderTitle);
     
