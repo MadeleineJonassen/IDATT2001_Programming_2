@@ -14,11 +14,6 @@ import java.util.stream.Stream;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
-
-//import static edu.ntnu.idatt2001.GUI.MainMenu.displayStoryPath;
-//import static edu.ntnu.idatt2001.GUI.MainMenu.storyListView;
-
 /**
  * The type Create story controller.
  */
@@ -26,7 +21,7 @@ public class CreateStoryController {
   
   private GameManager gameManager;
   private final Stage stage;
-  private SceneController sceneController = new SceneController();
+  private final SceneController sceneController = new SceneController();
   /**
    * The Selected file.
    */

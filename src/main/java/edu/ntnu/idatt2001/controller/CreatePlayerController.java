@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.controller;
 
+import edu.ntnu.idatt2001.inputValidation.IntInput;
 import edu.ntnu.idatt2001.model.GameManager;
 import edu.ntnu.idatt2001.model.Player;
 import edu.ntnu.idatt2001.view.CreatePlayerView;
@@ -72,8 +73,8 @@ public class CreatePlayerController {
     if (goldInput.isBlank()) {
       throw new IllegalArgumentException("Gold amount must be filled out");
     }
-    int health = Integer.parseInt(healthInput);
-    int gold = Integer.parseInt(goldInput);
+    int health = IntInput.result(healthInput);
+    int gold = IntInput.result(goldInput);
     int score = 0;
     if (!scoreInput.isBlank()) {
       score = Integer.parseInt(scoreInput);

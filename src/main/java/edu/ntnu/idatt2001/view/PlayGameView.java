@@ -111,6 +111,7 @@ public class PlayGameView {
     newButton.setId("boxes");
     newButton.setOnAction(e -> {
       try {
+        errorInvisible();
         controller.nextPassage(linkTitle);
       } catch (Exception ex) {
         errorVisible(ex.getMessage());

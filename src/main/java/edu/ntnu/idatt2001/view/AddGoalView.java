@@ -82,10 +82,12 @@ public class AddGoalView {
           case 1 -> controller.addScoreGoal(IntInput.result(input));
           case 2 -> controller.addGoldGoal(IntInput.result(input));
           case 3 -> controller.addInventoryGoal(input);
-          default -> throw new IllegalArgumentException("Choice out of bounds");
+          default -> throw new IllegalArgumentException("Choose a category");
         }
 
         controller.closeWindow();
+      } catch (IllegalArgumentException ie) {
+        errorVisible(ie.getMessage());
       } catch (Exception ignored) {
         errorVisible("Select a category and amount");
       }

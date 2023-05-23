@@ -163,26 +163,34 @@ public class CreatePlayerView {
     try {
       controller.submitPlayer(playerName.getText(), playerHealth.getText(),
               playerScore.getText(), playerGold.getText(), playerInventory.getText());
+    } catch (IllegalArgumentException ex) {
+      errorMessage(ex.getMessage());
     } catch (Exception ex) {
       errorIcon.getStyleClass().add("errorImage");
       errorText.getStyleClass().add("errorText");
       errorText.setText("Please enter a value in the missing text-fields");
-      if (playerName.getText() != null) {
+      if (playerName.getText() == null) {
         playerName.setId("errorPlayerTextFields");
         playerName.setPromptText("Please enter a name");
         errorText.setText("Please enter a name");
       }
-      if (playerHealth.getText() != null) {
+      if (playerHealth.getText() == null) {
         playerHealth.setId("errorPlayerTextFields");
         playerHealth.setPromptText("Please enter your health");
         errorText.setText("Please enter your health");
       }
-      if (playerGold.getText() != null) {
+      if (playerGold.getText() == null) {
         playerGold.setId("errorPlayerTextFields");
         playerGold.setPromptText("Please enter your gold");
         errorText.setText("Please enter your gold");
       }
     }
+  }
+  
+  private void errorMessage(String message) {
+    errorIcon.getStyleClass().add("errorImage");
+    errorText.getStyleClass().add("errorText");
+    errorText.setText(message);
   }
 }
 
