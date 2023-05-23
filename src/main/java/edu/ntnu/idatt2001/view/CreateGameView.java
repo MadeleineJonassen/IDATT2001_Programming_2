@@ -21,7 +21,7 @@ public class CreateGameView {
   }
 
   /**
-   * Set up the scene for Create Game.
+   * Setup for create game.
    *
    * @return the view
    */
@@ -121,6 +121,7 @@ public class CreateGameView {
       }
     });
     layoutBottom.setCenter(submitNewGame);
+    layoutBottom.setLeft(helpBtn);
 
 
     // * Overall Create Game Layout *

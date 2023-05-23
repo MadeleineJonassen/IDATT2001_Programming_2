@@ -9,27 +9,36 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The view for the end scene.
+ */
 public class EndView {
   private final EndSceneController controller;
   
-  public EndView(EndSceneController controller){
+  public EndView(EndSceneController controller) {
     this.controller = controller;
   }
-  
-  public Scene setup(){
+
+  /**
+   * Setup for the end view.
+   *
+   * @return the view.
+   */
+  public Scene setup() {
 
     BorderPane endSceneLayout = new BorderPane();
 
     HBox titleBox = new HBox();
     titleBox.setId("boxes");
-      Label endTitle = new Label("THE END");
-        endTitle.setId("title");
+    Label endTitle = new Label("THE END");
+    endTitle.setId("title");
     titleBox.getChildren().add(endTitle);
 
     VBox endGoals = new VBox();
     endGoals.setId("boxes");
-      Label completedGoals = new Label("Completed: " + controller.getCompletedGoals().toString());
-      Label unacomplisedGoals = new Label("Unacomplised Goals: " + controller.getNonCompletedGoals().toString());
+    Label completedGoals = new Label("Completed: " + controller.getCompletedGoals().toString());
+    Label unacomplisedGoals = new Label("Unacomplised Goals: "
+            + controller.getNonCompletedGoals().toString());
     endGoals.getChildren().addAll(completedGoals, unacomplisedGoals);
 
     HBox bottomBox = new HBox();

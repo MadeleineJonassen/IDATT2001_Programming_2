@@ -13,6 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * The view for create player.
+ */
 public class CreatePlayerView {
 
   private final CreatePlayerController controller;
@@ -25,24 +28,30 @@ public class CreatePlayerView {
   public Button errorIcon;
   public Label errorText;
 
-  public CreatePlayerView(CreatePlayerController controller){
+  public CreatePlayerView(CreatePlayerController controller) {
     this.controller = controller;
   }
-  public Scene setup(){
+
+  /**
+   * Setup of the create player view.
+   *
+   * @return the view
+   */
+  public Scene setup() {
     // -------------------- CREATE PLAYER SCENE --------------------
     
     ObservableList<String> playerInfo = controller.getPlayerInfo();
     // Top create player layout
     BorderPane createPlayerTop = new BorderPane();
     Button goToCreateHomePlayer = new Button(" ");
-      goToCreateHomePlayer.getStyleClass().add("backButton");
-      goToCreateHomePlayer.setOnAction(e -> {
-        try {
-          controller.createGame();
-        } catch (Exception ex) {
-          errorIcon.getStyleClass().add("errorImage");
-        }
-      });
+    goToCreateHomePlayer.getStyleClass().add("backButton");
+    goToCreateHomePlayer.setOnAction(e -> {
+      try {
+        controller.createGame();
+      } catch (Exception ex) {
+        errorIcon.getStyleClass().add("errorImage");
+      }
+    });
     VBox creatPlayerTopMid = new VBox();
     creatPlayerTopMid.setId("boxes");
     Label createPlayerTitle = new Label("Create Player");
@@ -59,7 +68,7 @@ public class CreatePlayerView {
     playerNameLayout.setId("boxes");
     
     playerName.setPromptText("Enter Name * ");
-    if(!playerInfo.isEmpty()){
+    if (!playerInfo.isEmpty()) {
       playerName.setText(playerInfo.get(0));
     }
     playerName.setId("#playerTextFields");
@@ -68,12 +77,12 @@ public class CreatePlayerView {
     nameIconView.setImage(nameIcon);
     nameIconView.setFitWidth(30);
     nameIconView.setFitHeight(30);
-    playerNameLayout.getChildren().addAll(playerName,nameIconView);
+    playerNameLayout.getChildren().addAll(playerName, nameIconView);
     HBox playerHealthLayout = new HBox();
     playerHealthLayout.setId("boxes");
     
     playerHealth.setPromptText("Enter Health *");
-    if(!playerInfo.isEmpty()){
+    if (!playerInfo.isEmpty()) {
       playerHealth.setText(playerInfo.get(1));
     }
     Image healthIcon = new Image("photos/Icons/PlayerIcons/smile-plus.png");
@@ -86,7 +95,7 @@ public class CreatePlayerView {
     playerGoldLayout.setId("boxes");
     
     playerGold.setPromptText("Enter Gold *");
-    if(!playerInfo.isEmpty()){
+    if (!playerInfo.isEmpty()) {
       playerGold.setText(playerInfo.get(2));
     }
     Image goldIcon = new Image("photos/Icons/PlayerIcons/donate.png");
@@ -99,7 +108,7 @@ public class CreatePlayerView {
     playerScoreLayout.setId("boxes");
     
     playerScore.setPromptText("Enter Score");
-    if(playerInfo.size() > 3){
+    if (playerInfo.size() > 3) {
       playerScore.setText(playerInfo.get(3));
     }
     Image scoreIcon = new Image("photos/Icons/PlayerIcons/star-sharp-half-stroke.png");
@@ -112,31 +121,32 @@ public class CreatePlayerView {
     playerInventoryLayout.setId("boxes");
     
     playerInventory.setPromptText("Enter Inventory ");
-    if(playerInfo.size() > 4){
+    if (playerInfo.size() > 4) {
       playerInventory.setText(playerInfo.get(4));
     }
     playerInventory.setMinHeight(40);
     Image inventoryIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
-    ImageView InventoryIconView = new ImageView();
-    InventoryIconView.setImage(inventoryIcon);
-    InventoryIconView.setFitWidth(30);
-    InventoryIconView.setFitHeight(30);
-    playerInventoryLayout.getChildren().addAll(playerInventory, InventoryIconView);
-    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout, playerGoldLayout, playerScoreLayout, playerInventoryLayout);
+    ImageView inventoryIconView = new ImageView();
+    inventoryIconView.setImage(inventoryIcon);
+    inventoryIconView.setFitWidth(30);
+    inventoryIconView.setFitHeight(30);
+    playerInventoryLayout.getChildren().addAll(playerInventory, inventoryIconView);
+    createPlayerMid.getChildren().addAll(playerNameLayout, playerHealthLayout,
+            playerGoldLayout, playerScoreLayout, playerInventoryLayout);
     
     // Bottom create player layout
     VBox createPlayerBottom = new VBox();
     createPlayerBottom.setId("boxes");
     errorIcon = new Button("");
-      errorIcon.getStyleClass().add("invincible");
+    errorIcon.getStyleClass().add("invincible");
     errorText = new Label();
-      errorText.getStyleClass().addAll("invincible");
+    errorText.getStyleClass().addAll("invincible");
     Button submitPlayerBtn = new Button("Submit player");
     submitPlayerBtn.setOnAction(e -> {
       submit();
     });
     
-    createPlayerBottom.getChildren().addAll( errorIcon, errorText, submitPlayerBtn);
+    createPlayerBottom.getChildren().addAll(errorIcon, errorText, submitPlayerBtn);
     
     // * Overall Create Player Layout *
     BorderPane createPlayerLayout = new BorderPane();
@@ -149,9 +159,10 @@ public class CreatePlayerView {
     return createPlayerScene;
   }
   
-  private void submit(){
+  private void submit() {
     try {
-      controller.submitPlayer(playerName.getText(), playerHealth.getText(), playerScore.getText(), playerGold.getText(), playerInventory.getText());
+      controller.submitPlayer(playerName.getText(), playerHealth.getText(),
+              playerScore.getText(), playerGold.getText(), playerInventory.getText());
     } catch (Exception ex) {
       errorIcon.getStyleClass().add("errorImage");
       errorText.getStyleClass().add("errorText");
