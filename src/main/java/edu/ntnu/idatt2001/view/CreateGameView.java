@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.controller.CreateGameController;
-import edu.ntnu.idatt2001.view.HelpScenes.helpCreatePlayer;
+import edu.ntnu.idatt2001.view.HelpScenes.HelpCreatePlayer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -103,7 +103,7 @@ public class CreateGameView {
     layoutBottom.setId("boxes");
     Button helpBtn = new Button(" ");
     helpBtn.getStyleClass().add("helpButton");
-    helpBtn.setOnAction(e -> helpCreatePlayer.display());
+    helpBtn.setOnAction(e -> HelpCreatePlayer.display());
     Button submitNewGame = new Button("Submit");
     submitNewGame.setId("finalButton");
     submitNewGame.setDisable(!controller.isGameConstructed());

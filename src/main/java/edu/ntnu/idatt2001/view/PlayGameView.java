@@ -2,7 +2,7 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.controller.PlayGameController;
 import edu.ntnu.idatt2001.model.Goal.Goal;
-import edu.ntnu.idatt2001.view.HelpScenes.helpPlayGame;
+import edu.ntnu.idatt2001.view.HelpScenes.HelpPlayGame;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -59,7 +59,7 @@ public class PlayGameView {
       errorText.getStyleClass().add("invincible");
       Button helpBtn = new Button(" ");
       helpBtn.getStyleClass().add("helpButton");
-      helpBtn.setOnAction(e -> helpPlayGame.display());
+      helpBtn.setOnAction(e -> HelpPlayGame.display());
     topRightLayout.getChildren().addAll(errorIcon, errorText, helpBtn);
 
 
