@@ -1,14 +1,14 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.fileHandler.WriteStory;
 import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import edu.ntnu.idatt2001.model.Story;
-import edu.ntnu.idatt2001.fileHandler.WriteStory;
 import org.junit.jupiter.api.Test;
 
 class WriteStoryTest {
-  Passage openingPassage = new Passage("Opening passage","Opening passage");
+  Passage openingPassage = new Passage("Opening passage", "Opening passage");
   Story story = new Story("Test Story title", openingPassage);
   Passage passage1 = new Passage("PassageTitle1", "PassageContent1");
   Passage passage2 = new Passage("PassageTitle2", "PassageContent2");
