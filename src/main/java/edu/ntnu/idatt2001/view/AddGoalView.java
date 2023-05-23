@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -17,24 +18,25 @@ import java.util.List;
 
 public class AddGoalView {
   private final AddGoalController controller;
-  
+  public Button errorIcon;
+  public Label errorText;
+  public TextField inputValueGoal;
+
+
+
   public AddGoalView(AddGoalController controller) {
     this.controller = controller;
   }
   
   public Scene setup(){
     VBox helpLayout;
-    TextField inputValueGoal;
-    Button iconView;
     String[] goalChoices = {"Health", "Score", "Gold", "Inventory"};
     List<String> goalTypes = new ArrayList<>();
     goalTypes.add("Health");
     goalTypes.add("Score");
     goalTypes.add("Gold");
     goalTypes.add("Inventory");
-    
-    
-    
+
     
     helpLayout = new VBox();
     helpLayout.setAlignment((Pos.CENTER));
@@ -47,17 +49,23 @@ public class AddGoalView {
     selectGoal.setPromptText("Select goal");
     inputValueGoal = new TextField();
     inputValueGoal.setPromptText("Amount/Item");
-    iconView = new Button();
-    iconView.getStyleClass().add("invincible");
-    optionsGoal.getChildren().addAll(selectGoal,inputValueGoal, iconView);
+    optionsGoal.getChildren().addAll(selectGoal,inputValueGoal);
+
+    HBox errorBox = new HBox();
+      errorIcon = new Button();
+        errorIcon.getStyleClass().add("invincible");
+      errorText = new Label();
+        errorText.getStyleClass().add("invincible");
+    errorBox.getChildren().addAll(errorIcon,errorText);
+
     Button closeButton = new Button(("Submit"));
-    //TODO: error handling (empty input, wrong input (handle exception))
     closeButton.setOnAction(e -> {
-      
+      try{
+        errorInvisible();
       String input = inputValueGoal.getText();
-      
+
       int goalSelection = selectGoal.getSelectionModel().getSelectedIndex();
-      
+
       switch (goalSelection) {
         case 0 -> controller.addHealthGoal(Integer.parseInt(input));
         case 1 -> controller.addScoreGoal(IntInput.result(input));
@@ -65,14 +73,28 @@ public class AddGoalView {
         case 3 -> controller.addInventoryGoal(input);
         default -> throw new IllegalArgumentException("Choice out of bounds");
       }
-      
+
       controller.closeWindow();
+      }catch(Exception ignored){
+        errorVisible("Select a category and amount");
+      }
+
     });
-    helpLayout.getChildren().addAll(createGoalTitle, optionsGoal, closeButton);
-    
+    helpLayout.getChildren().addAll(createGoalTitle, optionsGoal,errorBox, closeButton);
+
     Scene scene = new Scene(helpLayout, 300, 300);
     scene.getStylesheets().add("/StyleSheets/popUpWindows.css");
     
     return scene;
+  }
+  public void errorInvisible(){
+    errorText.setText("");
+    errorIcon.setBackground(Background.EMPTY);
+  }
+  public void errorVisible(String message){
+    errorText.getStyleClass().add("errorText");
+    errorText.setText(message);
+    errorIcon.getStyleClass().add("errorImage");
+    inputValueGoal.getStylesheets().add("errorTextFields");
   }
 }

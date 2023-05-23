@@ -1,0 +1,14 @@
+Test Story
+
+::First passage
+First description
+[A link](Second Passage)
+[Another link](Another room)
+
+::Second Passage
+The door opens to another room. You see a desk with a large, dusty book.
+[Open the book](Final Passage)
+[Go back](First passage)
+
+::Final Passage
+You have reached the end!
