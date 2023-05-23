@@ -14,7 +14,7 @@
 #topBoxes{
     -fx-padding: 20px;
     -fx-alignment: Center-Left;
-    -fx-spacing: 20;
+    -fx-spacing: 40;
 }
 #big-boxes{
     -fx-padding: 20px;

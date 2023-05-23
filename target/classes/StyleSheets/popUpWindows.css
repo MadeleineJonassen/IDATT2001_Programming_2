@@ -2,6 +2,12 @@
     -fx-background-color: "B8C4C1";
 }
 
+#boxes{
+    -fx-padding: 20px;
+    -fx-alignment: Center;
+    -fx-spacing: 20;
+}
+
 .textField {
     -fx-pref-width: 100;
     -fx-pref-height: 20;

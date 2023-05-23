@@ -29,8 +29,8 @@ public class PlayGameView {
     BorderPane playGameTopLayout = new BorderPane();
       HBox playGameLayoutTopLeft = new HBox();
       playGameLayoutTopLeft.setId("topBoxes");
-      Button goHomePlayGame = new Button(" ");
-      goHomePlayGame.getStyleClass().add("homeButton");
+      Button goHomePlayGame = new Button("Restart");
+      //goHomePlayGame.getStyleClass().add("homeButton");
       goHomePlayGame.setOnAction(e -> {
         try {
           controller.mainMenu();
@@ -40,13 +40,11 @@ public class PlayGameView {
       });
       Label playGameTitle = new Label("Play Game");
       playGameTitle.setId("title");
-      playGameLayoutTopLeft.getChildren().addAll(goHomePlayGame, playGameTitle);
-    Button endButton = new Button("End Game");
-      endButton.setOnAction(e -> {
-        controller.endGame();
-      });
+      Button helpBtn = new Button(" ");
+        helpBtn.getStyleClass().add("helpButton");
+        helpBtn.setOnAction(e -> helpPlayGame.display());
+      playGameLayoutTopLeft.getChildren().addAll(goHomePlayGame, playGameTitle, helpBtn);
     playGameTopLayout.setLeft(playGameLayoutTopLeft);
-    playGameTopLayout.setRight(endButton);
 
     // Mid Play Game layout
     updatePassageView();
