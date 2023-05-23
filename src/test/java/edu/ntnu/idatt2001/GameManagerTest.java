@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test for the unit GameManager
+ * Test for the unit GameManager.
  */
 public class GameManagerTest {
   GameManager gameManager = new GameManager();

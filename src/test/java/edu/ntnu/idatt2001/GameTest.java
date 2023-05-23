@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
- * A test for the unit game
+ * Test for the unit Game.
  */
 public class GameTest {
   Player player1 = new Player(new Player.Builder("Name", 0, 0, 0, new ArrayList<>()));
