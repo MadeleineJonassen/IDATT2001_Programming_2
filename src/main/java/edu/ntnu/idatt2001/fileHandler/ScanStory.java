@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.fileHandler;
 
-import edu.ntnu.idatt2001.Action.*;
+import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;

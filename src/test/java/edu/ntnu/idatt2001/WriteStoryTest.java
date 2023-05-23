@@ -1,8 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.model.Action.Action;
-import edu.ntnu.idatt2001.model.Action.GoldAction;
-import edu.ntnu.idatt2001.model.Action.InventoryAction;
+import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Link;
 import edu.ntnu.idatt2001.model.Passage;
 import edu.ntnu.idatt2001.model.Story;
@@ -18,18 +16,22 @@ class WriteStoryTest {
   Link link2 = new Link("PassageTitle2", "PassageTitle2");
   Action goldAction = new GoldAction(10);
   Action inventoryAction = new InventoryAction("Inventory");
+  Action scoreAction = new ScoreAction(30);
+  Action healthAction = new HealthAction(10);
   
   
   @Test
-  public void writeShortStory() {
+  void writeShortStory() {
     WriteStory write = new WriteStory();
     write.write(story);
   }
   
   @Test
-  public void writeStoryWithPassages() {
+  void writeStoryWithPassages() {
     link1.addAction(goldAction);
     link1.addAction(inventoryAction);
+    link1.addAction(scoreAction);
+    link1.addAction(healthAction);
     openingPassage.addLink(link1);
     openingPassage.addLink(link2);
     WriteStory write = new WriteStory();

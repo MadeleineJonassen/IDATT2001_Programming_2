@@ -87,6 +87,10 @@ public class CreateStoryController {
     return gameManager.getStoryPassageNames();
   }
   
+  public boolean storyIsAdded() {
+    return gameManager.storyHasBeenAdded();
+  }
+  
   /**
    * Lists all files in the resources' folder. Returns a set of strings
    *

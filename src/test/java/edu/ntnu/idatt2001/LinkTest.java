@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Action.*;
+import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.model.Action.Action;
 import edu.ntnu.idatt2001.model.Action.GoldAction;
 import edu.ntnu.idatt2001.model.Action.HealthAction;
@@ -62,6 +62,7 @@ public class LinkTest {
         link.addAction(goldAction);
       }, "Action has already been added to the link");
     }
+    
   }
   
   @Nested

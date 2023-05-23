@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.controller.PlayGameController;
 import edu.ntnu.idatt2001.model.Goal.Goal;
+import edu.ntnu.idatt2001.view.HelpScenes.helpPlayGame;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -90,8 +91,6 @@ public class PlayGameView {
       try {
         controller.nextPassage(linkTitle);
       } catch (Exception ex){
-        //set error message visible
-        System.out.println("something wrong with the link button");
         System.out.println(ex.getMessage());
       }
     });

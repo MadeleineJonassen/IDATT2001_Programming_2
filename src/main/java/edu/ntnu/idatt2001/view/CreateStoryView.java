@@ -16,13 +16,8 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class CreateStoryView {
-  //private final Stage stage;
   private final CreateStoryController controller;
 
-  /*public CreateStoryView(Stage stage, CreateStoryController controller){
-    this.stage = stage;
-    this.controller = controller;
-  }*/
   public Button errorIcon;
   public Label errorText;
   
@@ -38,12 +33,11 @@ public class CreateStoryView {
     createStoryTop.setId("boxes");
     Button goToCreateHomeStory = new Button(" ");
     goToCreateHomeStory.getStyleClass().add("backButton");
-    //goToCreateHomeStory.setOnAction(e -> openWindow.setScene(createGameScene));
     goToCreateHomeStory.setOnAction(e -> {
       try {
         controller.createGame();
       } catch (Exception ex) {
-        throw new RuntimeException(ex);
+        errorVisable(ex.getMessage());
       }
     });
     VBox creatStoryTopMid = new VBox();
@@ -91,7 +85,7 @@ public class CreateStoryView {
           displayStoryPath.setText(controller.getDirectory());
           displayBrokenLinks.setText(controller.getBrokenLinks());
         } catch (Exception e) {
-          errorVisable();
+          errorVisable(e.getMessage());
         }
       });
     createStoryMidBtn.getChildren().addAll(selectStory, errorBox);
@@ -102,11 +96,11 @@ public class CreateStoryView {
     createStoryBottom.setId("boxes");
       Button submit = new Button("Submit");
       submit.setOnAction(e -> {
-          try {
-            controller.createGame();
-          } catch (Exception ex) {
-            errorVisable();
-          }
+        if (controller.storyIsAdded()){
+          controller.createGame();
+        } else {
+          errorVisable("The story has not been chosen");
+        }
       });
     createStoryBottom.getChildren().addAll(submit);
 
@@ -125,9 +119,9 @@ public class CreateStoryView {
     errorText.setText("");
     errorIcon.setBackground(Background.EMPTY);
   }
-  public void errorVisable(){
+  public void errorVisable(String message){
     errorText.getStyleClass().add("errorText");
-    errorText.setText("Could not resolve file, try again...");
+    errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
   }
 }

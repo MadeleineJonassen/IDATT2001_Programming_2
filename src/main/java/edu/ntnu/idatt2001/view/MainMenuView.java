@@ -8,14 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class MainMenuView  {
-
-  //private final Stage stage;
   private final MainMenuController controller;
 
-  /*public MainMenuView(Stage stage, MainMenuController controller){
-    this.stage = stage;
-    this.controller = controller;
-  }*/
   public Button errorIcon;
   public Label errorText;
   
@@ -52,7 +46,6 @@ public class MainMenuView  {
      });
     Button playGameBtn = new Button("Play game");
     playGameBtn.setId("menuButton");
-    //TODO: grey out button when game is not added
     playGameBtn.setOnAction(e -> {
       try {
         controller.playGame();
@@ -61,7 +54,6 @@ public class MainMenuView  {
       }
     });
     layoutMenuOptions.getChildren().addAll(createGameBtn, playGameBtn, errorIcon, errorText);
-    //TODO: add "try a sample game"-button
 
     // * Overall Main Menu Layout *
     BorderPane layoutMenu = new BorderPane();
@@ -83,7 +75,5 @@ public class MainMenuView  {
     errorText.setText(message);
     errorIcon.getStyleClass().add("errorImage");
   }
-
-
-  //TODO: make getters here, as well as private variables above
+  
 }

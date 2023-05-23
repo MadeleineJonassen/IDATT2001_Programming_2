@@ -3,12 +3,15 @@ package edu.ntnu.idatt2001.view;
 import edu.ntnu.idatt2001.controller.CreateGoalsController;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class CreateGoalsView {
   private final CreateGoalsController controller;
+  public Button errorIcon;
+  public Label errorText;
 
   public CreateGoalsView(CreateGoalsController controller){
     this.controller = controller;
@@ -16,6 +19,7 @@ public class CreateGoalsView {
   public Scene setup(){
     // -------------------- CREATE GOALS SCENE --------------------
     // Top create goals layout
+    
     BorderPane createGoalTop = new BorderPane();
     createGoalTop.setId("boxes");
     Button goToCreateHomeGoals = new Button(" ");
@@ -54,24 +58,31 @@ public class CreateGoalsView {
         throw new RuntimeException(ex);
       }
     });
-    //TODO: attach listener to observableList, update on changes
     Button clearAllGoals = new Button("Clear All");
     clearAllGoals.setOnAction(e -> controller.clearGoals());
     createGoalsBtn.getChildren().addAll(goalBox, clearAllGoals);
     createGoalMid.getChildren().addAll(selectedGoals, createGoalsBtn);
     
     // Bottom create goal layout
+    HBox errorBox = new HBox();
+    errorBox.setId("boxes");
+    errorIcon = new Button();
+    errorIcon.getStyleClass().add("invincible");
+    errorText = new Label("");
+    errorText.getStyleClass().add("invincible");
+    errorBox.getChildren().addAll(errorIcon, errorText);
+    errorInvisible();
     HBox createGoalsBottom = new HBox();
     createGoalsBottom.setId("boxes");
     Button submitGoalBtn = new Button("Submit goal(s)");
     submitGoalBtn.setOnAction(e -> {
-      try {
+      if (controller.goalsHaveBeenAdded()){
         controller.createGame();
-      } catch (Exception ex) {
-        throw new RuntimeException(ex);
+      } else {
+        errorVisable("Goals have not been added");
       }
     });
-    createGoalsBottom.getChildren().addAll(submitGoalBtn);
+    createGoalsBottom.getChildren().addAll(submitGoalBtn, errorBox);
     
     // * Overall Create Goal Layout *
     BorderPane createGoalLayout = new BorderPane();
@@ -82,5 +93,15 @@ public class CreateGoalsView {
     createGoalScene.getStylesheets().add("StyleSheets/createGameStyle.css");
     
     return createGoalScene;
+  }
+  
+  public void errorInvisible(){
+    errorText.setText("");
+    errorIcon.setBackground(Background.EMPTY);
+  }
+  public void errorVisable(String message){
+    errorText.getStyleClass().add("errorText");
+    errorText.setText(message);
+    errorIcon.getStyleClass().add("errorImage");
   }
 }

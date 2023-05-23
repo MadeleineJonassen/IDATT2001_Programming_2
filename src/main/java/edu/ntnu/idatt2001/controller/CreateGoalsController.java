@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.controller;
 
-import edu.ntnu.idatt2001.Goal.*;
+import edu.ntnu.idatt2001.model.Goal.*;
 import edu.ntnu.idatt2001.model.GameManager;
 import edu.ntnu.idatt2001.model.Goal.Goal;
 import edu.ntnu.idatt2001.view.CreateGoalsView;
@@ -36,6 +36,10 @@ public class CreateGoalsController {
    */
   public void createGame() {
     sceneController.switchScene(stage, 2, gameManager);
+  }
+  
+  public boolean goalsHaveBeenAdded() {
+    return !gameManager.getGoals().isEmpty();
   }
   
   /**

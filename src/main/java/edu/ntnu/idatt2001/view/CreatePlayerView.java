@@ -41,7 +41,6 @@ public class CreatePlayerView {
           controller.createGame();
         } catch (Exception ex) {
           errorIcon.getStyleClass().add("errorImage");
-          ;
         }
       });
     VBox creatPlayerTopMid = new VBox();
@@ -160,14 +159,17 @@ public class CreatePlayerView {
       if (playerName.getText() != null) {
         playerName.setId("errorPlayerTextFields");
         playerName.setPromptText("Please enter a name");
+        errorText.setText("Please enter a name");
       }
       if (playerHealth.getText() != null) {
         playerHealth.setId("errorPlayerTextFields");
         playerHealth.setPromptText("Please enter your health");
+        errorText.setText("Please enter your health");
       }
       if (playerGold.getText() != null) {
         playerGold.setId("errorPlayerTextFields");
         playerGold.setPromptText("Please enter your gold");
+        errorText.setText("Please enter your gold");
       }
     }
   }

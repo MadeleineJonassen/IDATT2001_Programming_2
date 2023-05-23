@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Action.*;
+import edu.ntnu.idatt2001.model.Action.*;
 import edu.ntnu.idatt2001.fileHandler.ScanStory;
 import edu.ntnu.idatt2001.model.Action.GoldAction;
 import edu.ntnu.idatt2001.model.Action.InventoryAction;

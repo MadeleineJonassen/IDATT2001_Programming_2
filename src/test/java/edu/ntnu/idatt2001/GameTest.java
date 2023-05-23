@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.Goal.*;
+import edu.ntnu.idatt2001.model.Action.*;
+import edu.ntnu.idatt2001.model.Goal.*;
 import edu.ntnu.idatt2001.model.Game;
 import edu.ntnu.idatt2001.model.Goal.*;
 import edu.ntnu.idatt2001.model.Link;
@@ -160,6 +161,33 @@ public class GameTest {
       assertThrows(IllegalArgumentException.class, () -> {
         game.go(link2);
       }, "No such link in the story");
+    }
+    
+    @Test
+    void executeActions(){
+      Action goldAction = new GoldAction(10);
+      Action healthAction = new HealthAction(20);
+      Action scoreAction = new ScoreAction(20);
+      Action inventoryAction = new InventoryAction("Item");
+      
+      link1.addAction(goldAction);
+      link1.addAction(healthAction);
+      link1.addAction(scoreAction);
+      link1.addAction(inventoryAction);
+      
+      openingPassage.addLink(link1);
+      story.addPassage(passage1);
+      
+      Game game = new Game(player1, story, goals);
+      
+      game.go(link1);
+      
+      assertEquals(10, game.getPlayer().getGold());
+      assertEquals(20, game.getPlayer().getHealth());
+      assertEquals(20, game.getPlayer().getScore());
+      List<String> items = new ArrayList<>();
+      items.add("Item");
+      assertEquals(items, game.getPlayer().getInventory());
     }
   }
 }

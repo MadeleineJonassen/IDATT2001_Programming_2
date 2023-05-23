@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.controller;
 
-import edu.ntnu.idatt2001.Goal.*;
+import edu.ntnu.idatt2001.model.Goal.*;
 import edu.ntnu.idatt2001.model.GameManager;
 import edu.ntnu.idatt2001.model.Goal.*;
 import edu.ntnu.idatt2001.view.AddGoalView;

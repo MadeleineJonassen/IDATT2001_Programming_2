@@ -2,5 +2,5 @@ Test Story title
 
 ::Opening passage
 Opening passage
-[PassageTitle1](PassageTitle1){Gold(10)}{Inventory(Inventory)}
+[PassageTitle1](PassageTitle1){Gold(10)}{Inventory(Inventory)}{Points(30)}{Health(10)}
 [PassageTitle2](PassageTitle2)
