@@ -15,7 +15,9 @@ import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Test for the unit GameManager
+ */
 public class GameManagerTest {
   GameManager gameManager = new GameManager();
   Player player1 = new Player(new Player.Builder("Name", 0, 0, 0, new ArrayList<>()));
