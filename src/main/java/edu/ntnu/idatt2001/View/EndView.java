@@ -21,25 +21,34 @@ public class EndView {
 
     BorderPane endSceneLayout = new BorderPane();
 
-    Label endTitle = new Label("THE END");
+    HBox titleBox = new HBox();
+    titleBox.setId("boxes");
+      Label endTitle = new Label("THE END");
+        endTitle.setId("title");
+    titleBox.getChildren().add(endTitle);
 
     VBox endGoals = new VBox();
+    endGoals.setId("boxes");
       Label completedGoals = new Label("Completed: " + controller.getCompletedGoals().toString());
       Label unacomplisedGoals = new Label("Unacomplised Goals: " + controller.getNonCompletedGoals().toString());
+    endGoals.getChildren().addAll(completedGoals, unacomplisedGoals);
+
+    HBox bottomBox = new HBox();
+    bottomBox.setId("boxes");
     Button returnButton = new Button("Back to main menu");
-      returnButton.setOnAction(e -> {
-        try {
-          controller.mainMenu();
-        } catch (Exception ex) {
-          throw new RuntimeException(ex);
-        }
-      });
-    endGoals.getChildren().addAll(completedGoals, unacomplisedGoals, returnButton);
-    //HBox mainLayout = new HBox(new Label("completed: " + controller.getCompletedGoals().toString()), new Label(controller.getNonCompletedGoals().toString()));
+    returnButton.setOnAction(e -> {
+      try {
+        controller.mainMenu();
+      } catch (Exception ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+    bottomBox.getChildren().add(returnButton);
 
     //* Whole layout
-    endSceneLayout.setTop(endTitle);
+    endSceneLayout.setTop(titleBox);
     endSceneLayout.setCenter(endGoals);
+    endSceneLayout.setBottom(bottomBox);
 
     Scene scene = new Scene(endSceneLayout, 1300, 700);
     scene.getStylesheets().add("StyleSheets/endGameStyle.css");
