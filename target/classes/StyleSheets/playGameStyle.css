@@ -65,14 +65,16 @@
 
 .helpButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/lightHelp.png");
+    -fx-background-image: url("/photos/Icons/help.png");
     -fx-background-size: stretch;
     -fx-alignment: center-left;
     -fx-pref-width: 40;
     -fx-pref-height: 30;
 }
 .helpButton:hover {
-    -fx-background-image: url("/photos/Icons/darkHelpFull.png");
+    -fx-background-image: url("/photos/Icons/helpHover.png");
+    -fx-background-color: transparent;
+
 }
 
 

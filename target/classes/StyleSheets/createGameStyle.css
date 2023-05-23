@@ -88,14 +88,14 @@
 }
 #playerTextFields{
     -fx-pref-width: 300;
-    -fx-pref-height: 50;
+    -fx-pref-height: 70;
     -fx-font-family: "Constantia";
 }
 
 
 .helpButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/lightHelp.png");
+    -fx-background-image: url("/photos/Icons/help.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -103,7 +103,7 @@
 }
 .helpButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/darkHelpFull.png");
+    -fx-background-image: url("/photos/Icons/helpHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -112,7 +112,7 @@
 
 .homeButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/lightHome.png");
+    -fx-background-image: url("/photos/Icons/home.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -120,7 +120,7 @@
 }
 .homeButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/darkHomeFull.png");
+    -fx-background-image: url("/photos/Icons/homeHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -129,7 +129,7 @@
 
 .backButton {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/arrow-small-left.png");
+    -fx-background-image: url("/photos/Icons/back.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;
@@ -137,7 +137,7 @@
 }
 .backButton:hover {
     -fx-background-color: transparent;
-    -fx-background-image: url("/photos/Icons/arrow-left.png");
+    -fx-background-image: url("/photos/Icons/backHover.png");
     -fx-background-size: stretch;
     -fx-alignment: center;
     -fx-pref-width: 40;

@@ -76,7 +76,7 @@ public class CreatePlayerView {
     if(!playerInfo.isEmpty()){
       playerHealth.setText(playerInfo.get(1));
     }
-    Image healthIcon = new Image("photos/Icons/PlayerIcons/pharmacy (1).png");
+    Image healthIcon = new Image("photos/Icons/PlayerIcons/smile-plus.png");
     ImageView healthIconView = new ImageView();
     healthIconView.setImage(healthIcon);
     healthIconView.setFitWidth(30);
@@ -89,7 +89,7 @@ public class CreatePlayerView {
     if(!playerInfo.isEmpty()){
       playerGold.setText(playerInfo.get(2));
     }
-    Image goldIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
+    Image goldIcon = new Image("photos/Icons/PlayerIcons/donate.png");
     ImageView goldIconView = new ImageView();
     goldIconView.setImage(goldIcon);
     goldIconView.setFitWidth(30);
@@ -116,7 +116,7 @@ public class CreatePlayerView {
       playerInventory.setText(playerInfo.get(4));
     }
     playerInventory.setMinHeight(40);
-    Image inventoryIcon = new Image("photos/Icons/PlayerIcons/apps.png");
+    Image inventoryIcon = new Image("photos/Icons/PlayerIcons/treasure-chest.png");
     ImageView InventoryIconView = new ImageView();
     InventoryIconView.setImage(inventoryIcon);
     InventoryIconView.setFitWidth(30);
